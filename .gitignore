@@ -64,3 +64,6 @@ typings/
 actions/config.php
 actions/config2.php
 
+# Build folders
+dist/
+
