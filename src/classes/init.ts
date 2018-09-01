@@ -16,13 +16,13 @@ export default () => {
     renderer.setSize( WIDTH, HEIGHT );
     renderer.autoClear = false;
 
-    scene.add(new AmbientLight(0x333333));
+    scene.add(new AmbientLight(0xCCCCCC));
 
     const container = document.getElementById('mainview');
 	container.appendChild( (renderer as any).domElement );
 
     const camera =  new PerspectiveCamera( 25, WIDTH / HEIGHT, 0.01, 1000 );
-	camera.position.set(0, 40, 0);
+	camera.position.set(0, 20, 0);
     camera.lookAt(scene.position);
     camera.aspect = WIDTH / HEIGHT;
     camera.updateProjectionMatrix();
