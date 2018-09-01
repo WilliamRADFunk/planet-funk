@@ -49,6 +49,7 @@
   },
   "homepage": "https://github.com/WilliamRADFunk/planet-funk#readme",
   "devDependencies": {
+    "@types/three": "^0.92.18",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-preset-es2015": "^6.24.1",

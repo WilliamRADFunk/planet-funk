@@ -104,7 +104,8 @@ gulp.task('typescript', () => {
   gulp.src('src/**/*.ts')
   .pipe(typescript({
     noImplicitAny: true,
-    sourceMap: true
+    sourceMap: true,
+    module: "commonjs",
   }))
     .on('error', gutil.log)
   .pipe(uglify())
