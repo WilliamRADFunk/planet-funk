@@ -6,8 +6,17 @@ interface PlanetStatus {
     quadrantYellow: boolean;
 }
 export class Planet {
+    /**
+     * Controls size and shape of the planet
+     */
     circleGeo: CylinderGeometry;
+    /**
+     * Controls the color of the material
+     */
 	circleMat: MeshBasicMaterial;
+    /**
+     * Controls the overall rendering of the planet
+     */
 	circle: Mesh;
     /**
      * Constructor for the Planet class
@@ -18,7 +27,7 @@ export class Planet {
         this.circleMat = new MeshBasicMaterial({color: 0x00FFFF});
         this.circle = new Mesh(this.circleGeo, this.circleMat);
         this.circle.position.set(0, 0, 0);
-        this.circle.name = "Player";
+        this.circle.name = "Planet";
     }
     /**
      * Adds planet object to the three.js scene
@@ -39,9 +48,15 @@ export class Planet {
         };
     }
     /**
-     * Adds planet object from the three.js scene
+     * Removes planet object from the three.js scene
      */
     removeFromScene(scene: Scene): void {
         scene.remove(this.circle);
+    }
+    /**
+     * Spins planet at its set rate
+     */
+    rotate(): void {
+        this.circle.rotateY(0.005);
     }
 }

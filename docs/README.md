@@ -111,8 +111,8 @@ To remedy this, simply run `npm rebuild node-sass`
 
 ### External modules
 
-* ["init"](modules/_init_.md)
-* ["planet"](modules/_planet_.md)
+* ["classes/init"](modules/_classes_init_.md)
+* ["index"](modules/_index_.md)
 
 ---
 
