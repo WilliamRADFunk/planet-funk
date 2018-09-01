@@ -37,10 +37,8 @@ gulp.task('readme', () => {
       target: 'es5',
       excludeExternals: true,
       includeDeclarations: true,
-
       // Output options (see typedoc docs)
       out: './docs',
-
       // TypeDoc options (see typedoc docs)
       name: 'planet-funk',
       theme: 'markdown',
@@ -108,7 +106,7 @@ gulp.task('assets', () => {
  
 gulp.task('typescript', () => {
   gutil.log('== Transmogrifying ts to js ==');
-  gulp.src('src/**/*.ts')
+  return gulp.src('src/**/*.ts')
     .pipe(typescript({
       noImplicitAny: true,
       sourceMap: true,
@@ -120,7 +118,10 @@ gulp.task('typescript', () => {
  
 gulp.task('bundle', () => {
   gutil.log('== Bundling the js ==');
-  return browserify('./dist/js-pure/index.js').bundle()
+  return browserify('./dist/js-pure/index.js')
+      .on('error', gutil.log)
+    .bundle()
+      .on('error', gutil.log)
     .pipe(source('bundle.js'))
       .on('error', gutil.log)
     .pipe(gulp.dest('./dist/js-pure/'))

@@ -1,12 +1,13 @@
-import { AmbientLight, CanvasRenderer, Scene, WebGLRenderer, PerspectiveCamera } from 'three';
+import { AmbientLight, CanvasRenderer, Scene, WebGLRenderer, PerspectiveCamera, Raycaster, Vector2 } from 'three';
 
-import { Planet } from './Planet';
+import { Planet } from './planet';
+import { Shield } from './shield';
 /**
  * Placeholder function typically used to initiate the applications loop.
  */
 export default () => {
-    const WIDTH: number = (window as any).innerWidth * 0.99;
-    const HEIGHT: number = (window as any).innerHeight * 0.99;
+    let WIDTH: number = window.innerWidth * 0.99;
+    let HEIGHT: number = window.innerHeight * 0.99;
 
     const scene = new Scene();
 
@@ -24,18 +25,49 @@ export default () => {
     const camera =  new PerspectiveCamera( 25, WIDTH / HEIGHT, 0.01, 1000 );
 	camera.position.set(0, 20, 0);
     camera.lookAt(scene.position);
-    camera.aspect = WIDTH / HEIGHT;
-    camera.updateProjectionMatrix();
-    renderer.setSize( WIDTH, HEIGHT );
+
+    const onWindowResize = () => {
+        WIDTH = window.innerWidth * 0.99;
+        HEIGHT = window.innerHeight * 0.99;
+        camera.aspect = WIDTH / HEIGHT;
+        camera.updateProjectionMatrix();
+        renderer.setSize( WIDTH, HEIGHT );
+    };
+
+    onWindowResize();
+
+    window.addEventListener( 'resize', onWindowResize, false);
 
     const planet = new Planet;
     planet.addToScene(scene);
 
-    const render = function() {
+    const shield = new Shield();
+    shield.addToScene(scene);
+    shield.activate();
+
+    const raycaster = new Raycaster();
+
+    document.onclick = event => {
+        const mouse = new Vector2();
+        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+        mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
+        raycaster.setFromCamera( mouse.clone(), camera );
+        const thingsTouched = raycaster.intersectObjects(scene.children);
+        thingsTouched.forEach(el => {
+            if (el.object.name === 'Planet') {
+                if (shield.getIsActive()) shield.deactivate();
+                else shield.activate();
+                return;
+            }
+        });
+    };
+
+    const render = () => {
         planet.rotate();
+        shield.endCycle(planet.getPowerRegenRate());
         renderer.render( scene, camera );
 	    requestAnimationFrame( render );
-    }
+    };
 
     renderer.render( scene, camera );
 	requestAnimationFrame( render );

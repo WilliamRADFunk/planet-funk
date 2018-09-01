@@ -1,3 +1,5 @@
 import init from './classes/init';
-
-(window as any)['start'] = init;
+/**
+ * A place for the dom to launch the game.
+ */
+(window as any)['init'] = init;

@@ -112,6 +112,8 @@ To remedy this, simply run `npm rebuild node-sass`
 ### External modules
 
 * ["classes/init"](modules/_classes_init_.md)
+* ["classes/planet"](modules/_classes_planet_.md)
+* ["classes/shield"](modules/_classes_shield_.md)
 * ["index"](modules/_index_.md)
 
 ---
