@@ -33,7 +33,7 @@ export class Satellite {
     /**
      * Amount of energy at the satellite's disposal.
      */
-    private energyLevel: number = 1000;;
+    private energyLevel: number = 1000;
     /**
      * Controls size and shape of the satellite body
      */

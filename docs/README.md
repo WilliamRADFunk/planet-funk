@@ -117,6 +117,7 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 
 ### External modules
 
+* ["classes/base"](modules/_classes_base_.md)
 * ["classes/init"](modules/_classes_init_.md)
 * ["classes/planet"](modules/_classes_planet_.md)
 * ["classes/satellite"](modules/_classes_satellite_.md)

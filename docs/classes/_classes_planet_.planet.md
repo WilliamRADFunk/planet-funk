@@ -12,6 +12,10 @@
 
 ### Properties
 
+* [base1](_classes_planet_.planet.md#base1)
+* [base2](_classes_planet_.planet.md#base2)
+* [base3](_classes_planet_.planet.md#base3)
+* [base4](_classes_planet_.planet.md#base4)
 * [funk](_classes_planet_.planet.md#funk)
 * [funkGeometry](_classes_planet_.planet.md#funkgeometry)
 * [funkMaterial](_classes_planet_.planet.md#funkmaterial)
@@ -36,13 +40,57 @@
 
 ## Properties
 
+<a id="base1"></a>
+
+### `<Private>` base1
+
+**● base1**: *[Base](_classes_base_.base.md)*
+
+*Defined in [classes/planet.ts:22](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L22)*
+
+Base that starts at 1/2 o'clock
+
+___
+<a id="base2"></a>
+
+### `<Private>` base2
+
+**● base2**: *[Base](_classes_base_.base.md)*
+
+*Defined in [classes/planet.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L26)*
+
+Base that starts at 4/5 o'clock
+
+___
+<a id="base3"></a>
+
+### `<Private>` base3
+
+**● base3**: *[Base](_classes_base_.base.md)*
+
+*Defined in [classes/planet.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L30)*
+
+Base that starts at 7/8 o'clock
+
+___
+<a id="base4"></a>
+
+### `<Private>` base4
+
+**● base4**: *[Base](_classes_base_.base.md)*
+
+*Defined in [classes/planet.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L34)*
+
+Base that starts at 10/11 o'clock
+
+___
 <a id="funk"></a>
 
 ### `<Private>` funk
 
 **● funk**: *`Mesh`*
 
-*Defined in [classes/planet.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L29)*
+*Defined in [classes/planet.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L46)*
 
 Controls the overall rendering of the planet
 
@@ -53,7 +101,7 @@ ___
 
 **● funkGeometry**: *`SphereGeometry`*
 
-*Defined in [classes/planet.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L21)*
+*Defined in [classes/planet.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L38)*
 
 Controls size and shape of the planet
 
@@ -64,7 +112,7 @@ ___
 
 **● funkMaterial**: *`MeshPhongMaterial`*
 
-*Defined in [classes/planet.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L25)*
+*Defined in [classes/planet.ts:42](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L42)*
 
 Controls the color of the planet material
 
@@ -75,7 +123,7 @@ ___
 
 **● quadrantBlue**: *`boolean`* = true
 
-*Defined in [classes/planet.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L33)*
+*Defined in [classes/planet.ts:50](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L50)*
 
 Populated section of the planet. Once hit, false signifies inactive.
 
@@ -86,7 +134,7 @@ ___
 
 **● quadrantGreen**: *`boolean`* = true
 
-*Defined in [classes/planet.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L37)*
+*Defined in [classes/planet.ts:54](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L54)*
 
 Populated section of the planet. Once hit, false signifies inactive.
 
@@ -97,7 +145,7 @@ ___
 
 **● quadrantPurple**: *`boolean`* = true
 
-*Defined in [classes/planet.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L41)*
+*Defined in [classes/planet.ts:58](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L58)*
 
 Populated section of the planet. Once hit, false signifies inactive.
 
@@ -108,7 +156,7 @@ ___
 
 **● quadrantYellow**: *`boolean`* = true
 
-*Defined in [classes/planet.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L45)*
+*Defined in [classes/planet.ts:62](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L62)*
 
 Populated section of the planet. Once hit, false signifies inactive.
 
@@ -119,7 +167,7 @@ ___
 
 **● satellite1**: *[Satellite](_classes_satellite_.satellite.md)*
 
-*Defined in [classes/planet.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L49)*
+*Defined in [classes/planet.ts:66](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L66)*
 
 Satellite that starts at 12 o'clock
 
@@ -130,7 +178,7 @@ ___
 
 **● satellite2**: *[Satellite](_classes_satellite_.satellite.md)*
 
-*Defined in [classes/planet.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L53)*
+*Defined in [classes/planet.ts:70](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L70)*
 
 Satellite that starts at 3 o'clock
 
@@ -141,7 +189,7 @@ ___
 
 **● satellite3**: *[Satellite](_classes_satellite_.satellite.md)*
 
-*Defined in [classes/planet.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L57)*
+*Defined in [classes/planet.ts:74](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L74)*
 
 Satellite that starts at 6 o'clock
 
@@ -152,7 +200,7 @@ ___
 
 **● satellite4**: *[Satellite](_classes_satellite_.satellite.md)*
 
-*Defined in [classes/planet.ts:61](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L61)*
+*Defined in [classes/planet.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L78)*
 
 Satellite that starts at 9 o'clock
 
@@ -166,7 +214,7 @@ ___
 
 ▸ **addToScene**(scene: *`Scene`*): `void`
 
-*Defined in [classes/planet.ts:97](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L97)*
+*Defined in [classes/planet.ts:125](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L125)*
 
 Adds planet object to the three.js scene.
 
@@ -185,7 +233,7 @@ ___
 
 ▸ **getPowerRegenRate**(): `number`
 
-*Defined in [classes/planet.ts:104](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L104)*
+*Defined in [classes/planet.ts:132](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L132)*
 
 Getter for recharge of planet shield rate.
 
@@ -199,7 +247,7 @@ ___
 
 ▸ **getStatus**(): [PlanetStatus](../interfaces/_classes_planet_.planetstatus.md)
 
-*Defined in [classes/planet.ts:124](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L124)*
+*Defined in [classes/planet.ts:152](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L152)*
 
 Getter for status of the planet's four populated quadrants. True = Alive | False = Dead.
 
@@ -213,7 +261,7 @@ ___
 
 ▸ **removeFromScene**(scene: *`Scene`*): `void`
 
-*Defined in [classes/planet.ts:135](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L135)*
+*Defined in [classes/planet.ts:163](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L163)*
 
 Removes planet object from the three.js scene.
 
@@ -232,7 +280,7 @@ ___
 
 ▸ **rotate**(): `void`
 
-*Defined in [classes/planet.ts:141](https://github.com/WilliamRADFunk/planet-funk/blob/7ab3c98/src/classes/planet.ts#L141)*
+*Defined in [classes/planet.ts:169](https://github.com/WilliamRADFunk/planet-funk/blob/32890e5/src/classes/planet.ts#L169)*
 
 Spins planet at its set rate.
 

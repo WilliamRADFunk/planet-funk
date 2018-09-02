@@ -62,7 +62,7 @@ export class Shield {
         this.shieldMaterial = new MeshStandardMaterial({
             color: 0x05EDFF,
             envMap: envMap,
-            opacity: 0.75,
+            opacity: 0.65,
             roughness: 0,
             transparent: true
         });
@@ -119,7 +119,7 @@ export class Shield {
         if (!this.isActive) {
             this.energyLevel += percentRecharge;
         } else {
-            this.energyLevel -= 1;
+            this.energyLevel -= 1.5;
         }
         // Ensure energy level doesn't creep below min, or above max.
         if (this.energyLevel > 1000) {
