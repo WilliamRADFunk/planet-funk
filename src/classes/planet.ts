@@ -1,10 +1,19 @@
 import { Color, ImageUtils, LinearFilter, Mesh, MeshPhongMaterial, Scene, SphereGeometry } from 'three';
-interface PlanetStatus {
+
+import { Satellite } from './satellite';
+/**
+ * Simple type to represent status of all four populated areas. Cumulatively equals player's health.
+ */
+export interface PlanetStatus {
     quadrantBlue: boolean;
     quadrantGreen: boolean;
     quadrantPurple: boolean;
     quadrantYellow: boolean;
 }
+/**
+ * @class
+ * Planet that represents player's unit in the game. It dies, player loses.
+ */
 export class Planet {
     /**
      * Controls size and shape of the planet
@@ -54,6 +63,13 @@ export class Planet {
         this.funk = new Mesh(this.funkGeometry, this.funkMaterial);
         this.funk.position.set(0, 0, 0);
         this.funk.name = "Planet";
+    }
+    /**
+     * Adds planet object to the three.js scene.
+     * @param satellite satellite to add to planet's orbit. Makes orbit rotation management simpler.
+     */
+    addToOrbit(satellite: Satellite): void {
+        this.funk.add(satellite.getMesh());
     }
     /**
      * Adds planet object to the three.js scene.

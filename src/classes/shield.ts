@@ -1,5 +1,15 @@
-import { Mesh, MeshStandardMaterial, Scene, SphereGeometry, SphericalReflectionMapping, TextureLoader } from 'three';
+import {
+    Mesh,
+    MeshStandardMaterial,
+    Scene,
+    SphereGeometry,
+    SphericalReflectionMapping,
+    TextureLoader } from 'three';
 
+/**
+ * @class
+ * Transluscent shield that helps protect player's unit (planet)
+ */
 export class Shield {
     /**
      * Flag to determine if shield is active or not.
@@ -10,15 +20,15 @@ export class Shield {
      */
     private energyLevel: number = 1000;
     /**
-     * Controls size and shape of the planet
+     * Controls size and shape of the shield
      */
     private shieldGeometry: SphereGeometry;
     /**
-     * Controls the color of the planet material
+     * Controls the color of the shield material
      */
 	private shieldMaterial: MeshStandardMaterial;
     /**
-     * Controls the overall rendering of the planet
+     * Controls the overall rendering of the shield
      */
     private shield: Mesh;
     /**

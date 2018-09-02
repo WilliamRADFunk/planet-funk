@@ -2,6 +2,7 @@ import { AmbientLight, CanvasRenderer, Scene, WebGLRenderer, PerspectiveCamera, 
 
 import { Planet } from './planet';
 import { Shield } from './shield';
+import { Satellite } from './satellite';
 /**
  * Placeholder function typically used to initiate the applications loop.
  */
@@ -39,6 +40,14 @@ export default () => {
     window.addEventListener( 'resize', onWindowResize, false);
 
     const planet = new Planet;
+    const sat1 = new Satellite(1);
+    planet.addToOrbit(sat1);
+    const sat2 = new Satellite(2);
+    planet.addToOrbit(sat2);
+    const sat3 = new Satellite(3);
+    planet.addToOrbit(sat3);
+    const sat4 = new Satellite(4);
+    planet.addToOrbit(sat4);
     planet.addToScene(scene);
 
     const shield = new Shield();

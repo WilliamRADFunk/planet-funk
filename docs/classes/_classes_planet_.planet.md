@@ -2,6 +2,8 @@
 
 # Class: Planet
 
+*__class__*: Planet that represents player's unit in the game. It dies, player loses.
+
 ## Hierarchy
 
 **Planet**
@@ -20,6 +22,7 @@
 
 ### Methods
 
+* [addToOrbit](_classes_planet_.planet.md#addtoorbit)
 * [addToScene](_classes_planet_.planet.md#addtoscene)
 * [getPowerRegenRate](_classes_planet_.planet.md#getpowerregenrate)
 * [getStatus](_classes_planet_.planet.md#getstatus)
@@ -36,7 +39,7 @@
 
 **● funk**: *`Mesh`*
 
-*Defined in [classes/planet.ts:20](https://github.com/WilliamRADFunk/planet-funk/blob/8546a97/src/classes/planet.ts#L20)*
+*Defined in [classes/planet.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L29)*
 
 Controls the overall rendering of the planet
 
@@ -47,7 +50,7 @@ ___
 
 **● funkGeometry**: *`SphereGeometry`*
 
-*Defined in [classes/planet.ts:12](https://github.com/WilliamRADFunk/planet-funk/blob/8546a97/src/classes/planet.ts#L12)*
+*Defined in [classes/planet.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L21)*
 
 Controls size and shape of the planet
 
@@ -58,7 +61,7 @@ ___
 
 **● funkMaterial**: *`MeshPhongMaterial`*
 
-*Defined in [classes/planet.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/8546a97/src/classes/planet.ts#L16)*
+*Defined in [classes/planet.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L25)*
 
 Controls the color of the planet material
 
@@ -69,7 +72,7 @@ ___
 
 **● quadrantBlue**: *`boolean`* = true
 
-*Defined in [classes/planet.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/8546a97/src/classes/planet.ts#L24)*
+*Defined in [classes/planet.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L33)*
 
 Populated section of the planet. Once hit, false signifies inactive.
 
@@ -80,7 +83,7 @@ ___
 
 **● quadrantGreen**: *`boolean`* = true
 
-*Defined in [classes/planet.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/8546a97/src/classes/planet.ts#L28)*
+*Defined in [classes/planet.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L37)*
 
 Populated section of the planet. Once hit, false signifies inactive.
 
@@ -91,7 +94,7 @@ ___
 
 **● quadrantPurple**: *`boolean`* = true
 
-*Defined in [classes/planet.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/8546a97/src/classes/planet.ts#L32)*
+*Defined in [classes/planet.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L41)*
 
 Populated section of the planet. Once hit, false signifies inactive.
 
@@ -102,7 +105,7 @@ ___
 
 **● quadrantYellow**: *`boolean`* = true
 
-*Defined in [classes/planet.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/8546a97/src/classes/planet.ts#L36)*
+*Defined in [classes/planet.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L45)*
 
 Populated section of the planet. Once hit, false signifies inactive.
 
@@ -110,13 +113,32 @@ ___
 
 ## Methods
 
+<a id="addtoorbit"></a>
+
+###  addToOrbit
+
+▸ **addToOrbit**(satellite: *[Satellite](_classes_satellite_.satellite.md)*): `void`
+
+*Defined in [classes/planet.ts:71](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L71)*
+
+Adds planet object to the three.js scene.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| satellite | [Satellite](_classes_satellite_.satellite.md) |  satellite to add to planet's orbit. Makes orbit rotation management simpler. |
+
+**Returns:** `void`
+
+___
 <a id="addtoscene"></a>
 
 ###  addToScene
 
 ▸ **addToScene**(scene: *`Scene`*): `void`
 
-*Defined in [classes/planet.ts:62](https://github.com/WilliamRADFunk/planet-funk/blob/8546a97/src/classes/planet.ts#L62)*
+*Defined in [classes/planet.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L78)*
 
 Adds planet object to the three.js scene.
 
@@ -135,7 +157,7 @@ ___
 
 ▸ **getPowerRegenRate**(): `number`
 
-*Defined in [classes/planet.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/8546a97/src/classes/planet.ts#L69)*
+*Defined in [classes/planet.ts:85](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L85)*
 
 Getter for recharge of planet shield rate.
 
@@ -149,7 +171,7 @@ ___
 
 ▸ **getStatus**(): [PlanetStatus](../interfaces/_classes_planet_.planetstatus.md)
 
-*Defined in [classes/planet.ts:89](https://github.com/WilliamRADFunk/planet-funk/blob/8546a97/src/classes/planet.ts#L89)*
+*Defined in [classes/planet.ts:105](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L105)*
 
 Getter for status of the planet's four populated quadrants. True = Alive | False = Dead.
 
@@ -163,7 +185,7 @@ ___
 
 ▸ **removeFromScene**(scene: *`Scene`*): `void`
 
-*Defined in [classes/planet.ts:100](https://github.com/WilliamRADFunk/planet-funk/blob/8546a97/src/classes/planet.ts#L100)*
+*Defined in [classes/planet.ts:116](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L116)*
 
 Removes planet object from the three.js scene.
 
@@ -182,7 +204,7 @@ ___
 
 ▸ **rotate**(): `void`
 
-*Defined in [classes/planet.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/8546a97/src/classes/planet.ts#L106)*
+*Defined in [classes/planet.ts:122](https://github.com/WilliamRADFunk/planet-funk/blob/e290141/src/classes/planet.ts#L122)*
 
 Spins planet at its set rate.
 
