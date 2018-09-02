@@ -44,6 +44,22 @@ export class Planet {
      */
     private quadrantYellow: boolean = true;
     /**
+     * Satellite that starts at 12 o'clock
+     */
+    private satellite1: Satellite;
+    /**
+     * Satellite that starts at 3 o'clock
+     */
+    private satellite2: Satellite;
+    /**
+     * Satellite that starts at 6 o'clock
+     */
+    private satellite3: Satellite;
+    /**
+     * Satellite that starts at 9 o'clock
+     */
+    private satellite4: Satellite;
+    /**
      * Constructor for the Planet class
      * @hidden
      */
@@ -63,13 +79,16 @@ export class Planet {
         this.funk = new Mesh(this.funkGeometry, this.funkMaterial);
         this.funk.position.set(0, 0, 0);
         this.funk.name = "Planet";
-    }
-    /**
-     * Adds planet object to the three.js scene.
-     * @param satellite satellite to add to planet's orbit. Makes orbit rotation management simpler.
-     */
-    addToOrbit(satellite: Satellite): void {
-        this.funk.add(satellite.getMesh());
+        // Build the planet's four defensive satellite weapons, and
+        // attach the meshes to make orbit a simple thing.
+        this.satellite1 = new Satellite(1);
+        this.funk.add(this.satellite1.getMesh());
+        this.satellite2 = new Satellite(2);
+        this.funk.add(this.satellite2.getMesh());
+        this.satellite3 = new Satellite(3);
+        this.funk.add(this.satellite3.getMesh());
+        this.satellite4 = new Satellite(4);
+        this.funk.add(this.satellite4.getMesh());
     }
     /**
      * Adds planet object to the three.js scene.

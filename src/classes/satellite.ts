@@ -114,7 +114,7 @@ export class Satellite {
         });
         this.satelliteContainer = new Mesh(this.satelliteContainerGeometry, this.satelliteContainerMaterial);
         this.satelliteContainer.position.set(positionArray[index-1].xb, 0, positionArray[index-1].zb);
-        this.satelliteContainer.name = `Satellite ${index}`;
+        this.satelliteContainer.name = `satellite${index}`;
 
         this.satelliteContainer.add(this.satelliteBody);
     }
