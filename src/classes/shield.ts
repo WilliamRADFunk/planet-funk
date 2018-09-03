@@ -1,5 +1,4 @@
 import {
-    Color,
     CylinderGeometry,
     Mesh,
     MeshBasicMaterial,
@@ -173,9 +172,9 @@ export class Shield {
         }
         for (let i = 0; i < this.energyBars.children.length; i++) {
             if (i <= pelletsToShow) {
-                (this.energyBars.children[i] as any).material.visible = true;
+                this.energyBars.children[i].visible = true;
             } else {
-                (this.energyBars.children[i] as any).material.visible = false;
+                this.energyBars.children[i].visible = false;
                 continue;
             }
             if (color) {

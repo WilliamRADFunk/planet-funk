@@ -1,4 +1,11 @@
-import { Color, ImageUtils, LinearFilter, Mesh, MeshPhongMaterial, Scene, SphereGeometry } from 'three';
+import {
+    Color,
+    ImageUtils,
+    LinearFilter,
+    Mesh,
+    MeshPhongMaterial,
+    Scene,
+    SphereGeometry } from 'three';
 
 import { Satellite } from './satellite';
 import { Base } from './base';
@@ -107,16 +114,23 @@ export class Planet {
         this.satellite4 = new Satellite(4);
         this.funk.add(this.satellite4.getMesh());
         // Build the planet's four populated bases, and
-        // attach the meshes to make orbit a simple thing.
+        // attach the alive and dead meshes to make orbit a simple thing.
         this.base1 = new Base(1);
-        this.funk.add(this.base1.getMesh());
+        let meshes = this.base1.getMeshes();
+        this.funk.add(meshes[0]);
+        this.funk.add(meshes[1]);
         this.base2 = new Base(2);
-        this.funk.add(this.base2.getMesh());
+        meshes = this.base2.getMeshes();
+        this.funk.add(meshes[0]);
+        this.funk.add(meshes[1]);
         this.base3 = new Base(3);
-        this.funk.add(this.base3.getMesh());
+        meshes = this.base3.getMeshes();
+        this.funk.add(meshes[0]);
+        this.funk.add(meshes[1]);
         this.base4 = new Base(4);
-        this.funk.add(this.base4.getMesh());
-
+        meshes = this.base4.getMeshes();
+        this.funk.add(meshes[0]);
+        this.funk.add(meshes[1]);
     }
     /**
      * Adds planet object to the three.js scene.

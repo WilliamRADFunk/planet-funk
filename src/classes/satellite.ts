@@ -154,6 +154,16 @@ export class Satellite {
         return this.satelliteContainer;
     }
     /**
+     * Called when something collides with satellite, which destroys it.
+     */
+    impact() {
+        if (this.isActive) {
+            this.isActive = false;
+            (this.satelliteBody.material as any).color.setHex(0x333333);
+            this.satelliteEnergy.visible = false;
+        }
+    }
+    /**
      * Changes the size and color of the energy bar.
      */
     updateEnergyBar() {
