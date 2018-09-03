@@ -163,7 +163,7 @@ export class Satellite {
             new Vector3(x, y-0.2, z),
             new Vector3(point.x, point.y-0.2, point.z));
 
-        var line = new Line(geometry, new LineBasicMaterial({color: colorArray[this.index-1]}));
+        const line = new Line(geometry, new LineBasicMaterial({color: colorArray[this.index-1]}));
         scene.add(line);
 
         setTimeout(() => {

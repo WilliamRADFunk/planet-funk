@@ -66,7 +66,7 @@ export default () => {
             top: container.offsetTop
         };
         const scrollUp = document.getElementsByTagName('body')[0].scrollTop;
-        if (event.clientX != undefined) {
+        if (event.clientX !== undefined) {
             mouse.x = ((event.clientX - position.left) / container.clientWidth) * 2 - 1;
             mouse.y = - ((event.clientY - position.top + scrollUp) / container.clientHeight) * 2 + 1;
         }

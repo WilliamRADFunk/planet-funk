@@ -71,7 +71,7 @@ export class Shield {
         this.energyBars = new Object3D();
 		this.timeGeometry = new CylinderGeometry(0.03, 0.03, 0.001, 10, 10, false);
 		this.timeMaterial = new MeshBasicMaterial({color: 0x32BD15});
-		for(var i = 0; i < 60; i++)
+		for(let i = 0; i < 60; i++)
 		{
 			const minuteTick = new Mesh(this.timeGeometry, this.timeMaterial.clone());
 			const x_coord = 1 * Math.cos( i * (Math.PI / 30) );
