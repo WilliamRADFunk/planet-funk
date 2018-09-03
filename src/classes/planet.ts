@@ -5,7 +5,8 @@ import {
     Mesh,
     MeshPhongMaterial,
     Scene,
-    SphereGeometry } from 'three';
+    SphereGeometry, 
+    Vector3 } from 'three';
 
 import { Satellite } from './satellite';
 import { Base } from './base';
@@ -138,6 +139,20 @@ export class Planet {
      */
     addToScene(scene: Scene): void {
         scene.add(this.funk);
+    }
+    /**
+     * If it's determined that player wanted to fire a weapon, find closest charged satellite to click point,
+     * and instruct it to launch the projectile.
+     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param point point with x,z coordinates where player click mouse on game area.
+     */
+    fire(scene: Scene, point: Vector3) {
+        // TODO: Determine which of the charged sattelites is closest to click position, and fire that one.
+        this.satellite1.fire(scene, point, this.funk.rotation.y);
+        this.satellite2.fire(scene, point, this.funk.rotation.y);
+        this.satellite3.fire(scene, point, this.funk.rotation.y);
+        this.satellite4.fire(scene, point, this.funk.rotation.y);
+        console.log(this.funk.rotation.y);
     }
     /**
      * Getter for recharge of planet shield rate.

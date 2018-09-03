@@ -1,4 +1,4 @@
-import { AmbientLight, CanvasRenderer, Scene, WebGLRenderer, PerspectiveCamera, Raycaster, Vector2 } from 'three';
+import { AmbientLight, CanvasRenderer, Scene, WebGLRenderer, PerspectiveCamera, Raycaster, Vector2, PlaneGeometry, MeshBasicMaterial, DoubleSide, Mesh } from 'three';
 
 import { Planet } from './planet';
 import { Shield } from './shield';
@@ -47,21 +47,50 @@ export default () => {
     const shield = new Shield();
     shield.addToScene(scene);
     shield.activate();
-    // Click event listener that turns shield on or off if player clicks on planet.
+    // Create the click collision layer
+    const clickBarrierGeometry = new PlaneGeometry( 100, 100, 0, 0 );
+    const clickBarrierMaterial = new MeshBasicMaterial( {opacity: 0, transparent: true, side: DoubleSide} );
+    const clickBarrier = new Mesh( clickBarrierGeometry, clickBarrierMaterial );
+    clickBarrier.name = 'Click Barrier';
+    clickBarrier.position.set(0, 0, 0);
+    clickBarrier.rotation.set(1.5708, 0, 0);
+    scene.add(clickBarrier);
+    // Click event listener that turns shield on or off if player clicks on planet. Fire weapon otherwise.
     const raycaster = new Raycaster();
     document.onclick = event => {
         const mouse = new Vector2();
-        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-        mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
-        raycaster.setFromCamera( mouse.clone(), camera );
+        event.preventDefault();
+        // Gets accurate click positions using css and raycasting.
+        const position = {
+            left: container.offsetLeft,
+            top: container.offsetTop
+        };
+        const scrollUp = document.getElementsByTagName('body')[0].scrollTop;
+        if (event.clientX != undefined) {
+            mouse.x = ((event.clientX - position.left) / container.clientWidth) * 2 - 1;
+            mouse.y = - ((event.clientY - position.top + scrollUp) / container.clientHeight) * 2 + 1;
+        }
+        raycaster.setFromCamera(mouse, camera);
         const thingsTouched = raycaster.intersectObjects(scene.children);
+        let launchFlag = true;
+        // Detection for player clicked on planet for shield manipulation.
         thingsTouched.forEach(el => {
             if (el.object.name === 'Planet') {
                 if (shield.getIsActive()) shield.deactivate();
                 else shield.activate();
+                launchFlag = false;
                 return;
             }
         });
+        // Detection for where (if not planet) player clicked to fire satellite weapons.
+        if (launchFlag) {
+            thingsTouched.forEach(el => {
+                if (el.object.name === 'Click Barrier') {
+                    planet.fire(scene, el.point);
+                    return;
+                }
+            });
+        }
     };
     /**
      * The render loop. Everything that should be checked, called, or drawn in each animation frame.

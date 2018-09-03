@@ -1,4 +1,13 @@
-import { BoxGeometry, Color, Mesh, MeshBasicMaterial } from "three";
+import {
+    BoxGeometry,
+    Color,
+    Geometry,
+    Line,
+    LineBasicMaterial, 
+    Mesh, 
+    MeshBasicMaterial,
+    Scene,
+    Vector3 } from "three";
 /**
  * Makes instatiateing the satellite's color by index easier and cleaner to read.
  */
@@ -129,14 +138,37 @@ export class Satellite {
     }
     /**
      * If it's determined that this weapon is closest to click point, and it has the power,
-     * it will create the and launch the projectile, subtract the energy used, and call to update energy bar.
+     * it will create and launch the projectile, subtract the energy used, and call to update energy bar.
+     * @param scene     graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param point     point with x,z coordinates where player click mouse on game area.
+     * @param rotaion   parent rotation to calculate proper origin point.
      */
-    fire() {
+    fire(scene: Scene, point: Vector3, rotation: number) {
         if (this.isActive && this.energyLevel >= 250) {
             // TODO: Create projectile ane send it on its way.
             this.energyLevel -= 250;
             this.updateEnergyBar();
         }
+        // Get accurate origin point for projectile fire trail.
+        const x = (this.satelliteBody.position.x - positionArray[this.index-1].xb) * Math.cos(rotation) -
+            (this.satelliteBody.position.z - positionArray[this.index-1].zb) * Math.sin(rotation) +
+            positionArray[this.index-1].xb;
+        const y = this.satelliteBody.position.y;
+        const z = (this.satelliteBody.position.x - positionArray[this.index-1].xb) * Math.sin(rotation) +
+        (this.satelliteBody.position.z - (-positionArray[this.index-1].zb)) * Math.cos(rotation) +
+        positionArray[this.index-1].xb;
+        // TODO: Create projectile thing, passing origin and destination to its constructor.
+        const geometry = new Geometry();
+        geometry.vertices.push(
+            new Vector3(x, y-0.2, z),
+            new Vector3(point.x, point.y-0.2, point.z));
+
+        var line = new Line(geometry, new LineBasicMaterial({color: colorArray[this.index-1]}));
+        scene.add(line);
+
+        setTimeout(() => {
+            scene.remove(line);
+        }, 5000);
     }
     /**
      * Calculate distance "as the crow flies" from satellite to target.

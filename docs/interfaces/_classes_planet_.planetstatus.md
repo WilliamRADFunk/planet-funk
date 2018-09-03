@@ -27,7 +27,7 @@ Simple type to represent status of all four populated areas. Cumulatively equals
 
 **● quadrantBlue**: *`boolean`*
 
-*Defined in [classes/planet.ts:9](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/planet.ts#L9)*
+*Defined in [classes/planet.ts:17](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/planet.ts#L17)*
 
 ___
 <a id="quadrantgreen"></a>
@@ -36,7 +36,7 @@ ___
 
 **● quadrantGreen**: *`boolean`*
 
-*Defined in [classes/planet.ts:10](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/planet.ts#L10)*
+*Defined in [classes/planet.ts:18](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/planet.ts#L18)*
 
 ___
 <a id="quadrantpurple"></a>
@@ -45,7 +45,7 @@ ___
 
 **● quadrantPurple**: *`boolean`*
 
-*Defined in [classes/planet.ts:11](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/planet.ts#L11)*
+*Defined in [classes/planet.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/planet.ts#L19)*
 
 ___
 <a id="quadrantyellow"></a>
@@ -54,7 +54,7 @@ ___
 
 **● quadrantYellow**: *`boolean`*
 
-*Defined in [classes/planet.ts:12](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/planet.ts#L12)*
+*Defined in [classes/planet.ts:20](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/planet.ts#L20)*
 
 ___
 

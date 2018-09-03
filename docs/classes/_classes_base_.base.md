@@ -37,7 +37,7 @@
 
 **● building**: *`Mesh`*
 
-*Defined in [classes/base.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/base.ts#L52)*
+*Defined in [classes/base.ts:59](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/base.ts#L59)*
 
 Controls the overall rendering of the base
 
@@ -48,7 +48,7 @@ ___
 
 **● buildingDead**: *`Mesh`*
 
-*Defined in [classes/base.ts:56](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/base.ts#L56)*
+*Defined in [classes/base.ts:63](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/base.ts#L63)*
 
 Controls the overall rendering of the destroyed base
 
@@ -59,7 +59,7 @@ ___
 
 **● buildingDeadGeometry**: *`BoxGeometry`*
 
-*Defined in [classes/base.ts:40](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/base.ts#L40)*
+*Defined in [classes/base.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/base.ts#L47)*
 
 Controls size and shape of the destroyed base
 
@@ -70,7 +70,7 @@ ___
 
 **● buildingDeadMaterial**: *`MeshPhongMaterial`*
 
-*Defined in [classes/base.ts:48](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/base.ts#L48)*
+*Defined in [classes/base.ts:55](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/base.ts#L55)*
 
 Controls the color of the destroyed base material
 
@@ -81,7 +81,7 @@ ___
 
 **● buildingGeometry**: *`BoxGeometry`*
 
-*Defined in [classes/base.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/base.ts#L36)*
+*Defined in [classes/base.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/base.ts#L43)*
 
 Controls size and shape of the base
 
@@ -92,7 +92,7 @@ ___
 
 **● buildingMaterial**: *`MeshPhongMaterial`*
 
-*Defined in [classes/base.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/base.ts#L44)*
+*Defined in [classes/base.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/base.ts#L51)*
 
 Controls the color of the base material
 
@@ -103,7 +103,7 @@ ___
 
 **● index**: *`number`*
 
-*Defined in [classes/base.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/base.ts#L28)*
+*Defined in [classes/base.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/base.ts#L35)*
 
 Number in the creation order. Needed later to identify base.
 
@@ -114,7 +114,7 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in [classes/base.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/base.ts#L32)*
+*Defined in [classes/base.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/base.ts#L39)*
 
 Flag to signal if base has been destroyed or not. True = not destroyed. False = destroyed.
 
@@ -128,7 +128,7 @@ ___
 
 ▸ **addToScene**(scene: *`Scene`*): `void`
 
-*Defined in [classes/base.ts:94](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/base.ts#L94)*
+*Defined in [classes/base.ts:101](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/base.ts#L101)*
 
 Adds base object to the three.js scene
 
@@ -147,7 +147,7 @@ ___
 
 ▸ **getMeshes**(): `Mesh`[]
 
-*Defined in [classes/base.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/base.ts#L102)*
+*Defined in [classes/base.ts:109](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/base.ts#L109)*
 
 Provides the created mesh so it can be added to the mesh of a parent object like the planet.
 
@@ -161,7 +161,7 @@ ___
 
 ▸ **impact**(): `void`
 
-*Defined in [classes/base.ts:108](https://github.com/WilliamRADFunk/planet-funk/blob/0f96025/src/classes/base.ts#L108)*
+*Defined in [classes/base.ts:115](https://github.com/WilliamRADFunk/planet-funk/blob/7d5bd70/src/classes/base.ts#L115)*
 
 Called when something collides with base, which destroys it.
 
