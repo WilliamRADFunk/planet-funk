@@ -145,17 +145,18 @@ export class Satellite {
      */
     fire(scene: Scene, point: Vector3, rotation: number) {
         if (this.isActive && this.energyLevel >= 250) {
-            // TODO: Create projectile ane send it on its way.
+            // TODO: Create projectile and send it on its way.
             this.energyLevel -= 250;
             this.updateEnergyBar();
         }
         // Get accurate origin point for projectile fire trail.
-        const x = (this.satelliteBody.position.x - positionArray[this.index-1].xb) * Math.cos(rotation) -
-            (this.satelliteBody.position.z - positionArray[this.index-1].zb) * Math.sin(rotation) +
+        const rot = (rotation < 0 && rotation > -1.54) ? rotation : 1.57079644 - rotation;
+        const x = (this.satelliteBody.position.x - positionArray[this.index-1].xb) * Math.cos(rot) -
+            (this.satelliteBody.position.z - positionArray[this.index-1].zb) * Math.sin(rot) +
             positionArray[this.index-1].xb;
         const y = this.satelliteBody.position.y;
-        const z = (this.satelliteBody.position.x - positionArray[this.index-1].xb) * Math.sin(rotation) +
-        (this.satelliteBody.position.z - (-positionArray[this.index-1].zb)) * Math.cos(rotation) +
+        const z = (this.satelliteBody.position.x - positionArray[this.index-1].xb) * Math.sin(rot) +
+        (this.satelliteBody.position.z - (-positionArray[this.index-1].zb)) * Math.cos(rot) +
         positionArray[this.index-1].xb;
         // TODO: Create projectile thing, passing origin and destination to its constructor.
         const geometry = new Geometry();
