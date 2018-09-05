@@ -171,8 +171,12 @@ export class Satellite {
      * @param targetPoint   point with x,z coordinates where player click mouse on game area.
      */
     fire(scene: Scene, targetPoint: Vector3): void {
+        // Calculates click point from center of planet. If too close, prevent player from committing suicide.
+        const xNullStep = targetPoint.x * targetPoint.x;
+        const zNullStep = targetPoint.z * targetPoint.z;
+        const distFromPlanetCenter = Math.sqrt(xNullStep + zNullStep);
         // Only fire if sat is alive and has adequate power.
-        if (this.isActive && this.energyLevel >= 250) {
+        if (this.isActive && this.energyLevel >= 250 && distFromPlanetCenter > 1.4) {
             this.energyLevel -= 250;
             this.updateEnergyBar();
             // Once created, missile will fly itself, detonate itself, and rease itself.
