@@ -41,6 +41,10 @@ export class Planet {
      */
     private base4: Base;
     /**
+     * Keeps track of proper rotation amount to avoid the weird quarter rotation reset cycle.
+     */
+    private currentRotation: number = 0;
+    /**
      * Controls size and shape of the planet
      */
     private funkGeometry: SphereGeometry;
@@ -69,21 +73,25 @@ export class Planet {
      */
     private quadrantYellow: boolean = true;
     /**
-     * Satellite that starts at 12 o'clock
+     * Satellite that starts at 3 o'clock
      */
     private satellite1: Satellite;
     /**
-     * Satellite that starts at 3 o'clock
+     * Satellite that starts at 6 o'clock
      */
     private satellite2: Satellite;
     /**
-     * Satellite that starts at 6 o'clock
+     * Satellite that starts at 9 o'clock
      */
     private satellite3: Satellite;
     /**
-     * Satellite that starts at 9 o'clock
+     * Satellite that starts at 12 o'clock
      */
     private satellite4: Satellite;
+    /**
+     * Satellite array for ease of selection
+     */
+    private satellites: Satellite[] = [];
     /**
      * Constructor for the Planet class
      * @hidden
@@ -103,16 +111,21 @@ export class Planet {
         this.funkMaterial.shininess = 10;
         this.funk = new Mesh(this.funkGeometry, this.funkMaterial);
         this.funk.position.set(0, 0, 0);
+        this.funk.rotation.set(0, -1.57079644, 0);
         this.funk.name = "Planet";
         // Build the planet's four defensive satellite weapons, and
         // attach the meshes to make orbit a simple thing.
         this.satellite1 = new Satellite(1);
+        this.satellites.push(this.satellite1);
         this.funk.add(this.satellite1.getMesh());
         this.satellite2 = new Satellite(2);
+        this.satellites.push(this.satellite2);
         this.funk.add(this.satellite2.getMesh());
         this.satellite3 = new Satellite(3);
+        this.satellites.push(this.satellite3);
         this.funk.add(this.satellite3.getMesh());
         this.satellite4 = new Satellite(4);
+        this.satellites.push(this.satellite4);
         this.funk.add(this.satellite4.getMesh());
         // Build the planet's four populated bases, and
         // attach the alive and dead meshes to make orbit a simple thing.
@@ -141,18 +154,27 @@ export class Planet {
         scene.add(this.funk);
     }
     /**
+     * At the end of each loop iteration, satellite regains a little energy.
+     */
+    endCycle() {
+        this.rotate();
+        for (let i = 0; i < this.satellites.length; i++) {
+            this.satellites[i].endCycle();
+        }
+    }
+    /**
      * If it's determined that player wanted to fire a weapon, find closest charged satellite to click point,
      * and instruct it to launch the projectile.
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param point point with x,z coordinates where player click mouse on game area.
      */
     fire(scene: Scene, point: Vector3) {
-        // TODO: Determine which of the charged sattelites is closest to click position, and fire that one.
-        this.satellite1.fire(scene, point, this.funk.rotation.y);
-        this.satellite2.fire(scene, point, this.funk.rotation.y);
-        this.satellite3.fire(scene, point, this.funk.rotation.y);
-        this.satellite4.fire(scene, point, this.funk.rotation.y);
-        console.log(this.funk.rotation.y);
+        let distancesToTarget: number[] = [];
+        for (let i = 0; i < 4; i++) {
+            distancesToTarget.push(this.satellites[i].getDistanceToTarget(point, this.funk.rotation.y));
+        }
+        const indexOfMinValue = distancesToTarget.reduce((iMin, x, i, arr) => x < arr[iMin] ? i : iMin, 0);
+        this.satellites[indexOfMinValue].fire(scene, point);
     }
     /**
      * Getter for recharge of planet shield rate.
@@ -195,7 +217,12 @@ export class Planet {
     /**
      * Spins planet at its set rate.
      */
-    rotate(): void {
-        this.funk.rotateY(-0.001);
+    private rotate(): void {
+        const twoPi = 2 * Math.PI;
+        this.currentRotation += 0.001;
+        if (this.currentRotation >= twoPi) {
+            this.currentRotation -= twoPi
+        }
+        this.funk.rotation.set(0, this.currentRotation, 0);
     }
 }

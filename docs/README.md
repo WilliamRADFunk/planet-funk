@@ -120,6 +120,7 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 * ["classes/base"](modules/_classes_base_.md)
 * ["classes/init"](modules/_classes_init_.md)
 * ["classes/planet"](modules/_classes_planet_.md)
+* ["classes/projectile"](modules/_classes_projectile_.md)
 * ["classes/satellite"](modules/_classes_satellite_.md)
 * ["classes/shield"](modules/_classes_shield_.md)
 * ["index"](modules/_index_.md)

@@ -96,7 +96,7 @@ export default () => {
      * The render loop. Everything that should be checked, called, or drawn in each animation frame.
      */
     const render = () => {
-        planet.rotate();
+        planet.endCycle();
         shield.endCycle(planet.getPowerRegenRate());
         renderer.render( scene, camera );
 	    requestAnimationFrame( render );

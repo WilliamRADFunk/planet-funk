@@ -1,13 +1,11 @@
 import {
     BoxGeometry,
     Color,
-    Geometry,
-    Line,
-    LineBasicMaterial, 
     Mesh, 
     MeshBasicMaterial,
     Scene,
     Vector3 } from "three";
+import { Projectile } from "./projectile";
 /**
  * Makes instatiateing the satellite's color by index easier and cleaner to read.
  */
@@ -32,17 +30,34 @@ const positionArray: {xb: number; xc: number; zb: number; zc: number;}[] = [
  */
 export class Satellite {
     /**
+     * When distance is calculated just before firing, this is updated to be used in fire call.
+     */
+    currentDistance: number;
+    /**
+     * When origin is calculated just before firing, this is updated to be used in fire call.
+     */
+    currentOrigin: number[];
+    /**
+     * Max energy amount
+     */
+    private energyMax: number = 1000;
+    /**
+     * Amount of energy at the satellite's disposal.
+     */
+    private energyLevel: number = this.energyMax;
+    /**
      * Number in the creation order. Needed later to scale energy bar.
      */
     index: number ;
     /**
-     * Flag to signal if satellite has been destroyed or not. True = not destroyed. False = destroyed.
+     * Flag to signal if satellite has been destroyed or not.
+     * True = not destroyed. False = destroyed.
      */
     private isActive: boolean = true;
     /**
-     * Amount of energy at the satellite's disposal.
+     * Keeps track of live missiles, to pass along endCycle signals, and destroy calls.
      */
-    private energyLevel: number = 1000;
+    private missiles: Projectile[] = [];
     /**
      * Controls size and shape of the satellite body
      */
@@ -98,24 +113,24 @@ export class Satellite {
      */
     constructor(index: number) {
         this.index = index;
-
+        // The square bulk of the satellite
         this.satelliteBodyGeometry = new BoxGeometry(0.1, 0.1, 0.1);
         this.satelliteBodyMaterial = new MeshBasicMaterial({color: colorArray[index-1]});
         this.satelliteBody = new Mesh(this.satelliteBodyGeometry, this.satelliteBodyMaterial);
-
+        // The little fins on the sides of the satellite.
         this.satelliteWingsGeometry = new BoxGeometry(positionArray[index-1].xc, 0.001, positionArray[index-1].zc);
         this.satelliteWingsMaterial = new MeshBasicMaterial({color: 0x555555});
         this.satelliteWings = new Mesh(this.satelliteWingsGeometry, this.satelliteWingsMaterial);
         this.satelliteWings.position.y -= 0.05;
-
+        // The energy meter adjacent to each satellite.
         this.satelliteEnergyGeometry = new BoxGeometry(positionArray[index-1].xc, 0.001, positionArray[index-1].zc);
         this.satelliteEnergyMaterial = new MeshBasicMaterial({color: 0x00FF00});
         this.satelliteEnergy = new Mesh(this.satelliteEnergyGeometry, this.satelliteEnergyMaterial);
         this.satelliteEnergy.position.set(-positionArray[index-1].xb * 0.1, 0, -positionArray[index-1].zb * 0.1);
-
+        // Attaches wings and meter to satellite body for rendering efficiency.
         this.satelliteBody.add(this.satelliteWings);
         this.satelliteBody.add(this.satelliteEnergy);
-
+        // Container for all the pieces of the satellite, to allow them all to be updated at same time.
         this.satelliteContainerGeometry = new BoxGeometry(0.3, 0.3, 0.3);
         this.satelliteContainerMaterial = new MeshBasicMaterial({
             opacity: 0,
@@ -124,72 +139,106 @@ export class Satellite {
         this.satelliteContainer = new Mesh(this.satelliteContainerGeometry, this.satelliteContainerMaterial);
         this.satelliteContainer.position.set(positionArray[index-1].xb, 0, positionArray[index-1].zb);
         this.satelliteContainer.name = `satellite${index}`;
-
+        // Adds container, and by proxy, all satellite pieces, to the scene.
         this.satelliteContainer.add(this.satelliteBody);
     }
     /**
      * At the end of each loop iteration, satellite regains a little energy.
      */
-    endCycle() {
+    endCycle(): void {
         if (this.isActive) {
             this.energyLevel += 1;
             this.updateEnergyBar();
         }
+        let tempMissiles = [];
+        for (let i = 0; i < this.missiles.length; i++) {
+            let missile = this.missiles[i];
+            if (missile && !missile.endCycle()) {
+                this.missiles[i] = null;
+            }
+            missile = this.missiles[i];
+            if (missile) {
+                tempMissiles.push(missile);
+            }
+        }
+        this.missiles = tempMissiles.slice();
+        tempMissiles = null;
     }
     /**
      * If it's determined that this weapon is closest to click point, and it has the power,
      * it will create and launch the projectile, subtract the energy used, and call to update energy bar.
-     * @param scene     graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     * @param point     point with x,z coordinates where player click mouse on game area.
-     * @param rotaion   parent rotation to calculate proper origin point.
+     * @param scene         coordinates of game area that player clicked/touched.
+     * @param targetPoint   point with x,z coordinates where player click mouse on game area.
      */
-    fire(scene: Scene, point: Vector3, rotation: number) {
+    fire(scene: Scene, targetPoint: Vector3): void {
+        // Only fire if sat is alive and has adequate power.
         if (this.isActive && this.energyLevel >= 250) {
-            // TODO: Create projectile and send it on its way.
             this.energyLevel -= 250;
             this.updateEnergyBar();
+            // Once created, missile will fly itself, detonate itself, and rease itself.
+            this.missiles.push(new Projectile(
+                scene,
+                this.currentOrigin[0],
+                this.currentOrigin[1],
+                targetPoint.x,
+                targetPoint.z,
+                this.currentDistance,
+                colorArray[this.index-1]));
         }
-        // Get accurate origin point for projectile fire trail.
-        const rot = (rotation < 0 && rotation > -1.54) ? rotation : 1.57079644 - rotation;
-        const x = (this.satelliteBody.position.x - positionArray[this.index-1].xb) * Math.cos(rot) -
-            (this.satelliteBody.position.z - positionArray[this.index-1].zb) * Math.sin(rot) +
-            positionArray[this.index-1].xb;
-        const y = this.satelliteBody.position.y;
-        const z = (this.satelliteBody.position.x - positionArray[this.index-1].xb) * Math.sin(rot) +
-        (this.satelliteBody.position.z - (-positionArray[this.index-1].zb)) * Math.cos(rot) +
-        positionArray[this.index-1].xb;
-        // TODO: Create projectile thing, passing origin and destination to its constructor.
-        const geometry = new Geometry();
-        geometry.vertices.push(
-            new Vector3(x, y-0.2, z),
-            new Vector3(point.x, point.y-0.2, point.z));
-
-        const line = new Line(geometry, new LineBasicMaterial({color: colorArray[this.index-1]}));
-        scene.add(line);
-
-        setTimeout(() => {
-            scene.remove(line);
-        }, 5000);
     }
     /**
      * Calculate distance "as the crow flies" from satellite to target.
-     * @returns number of pixelsm from satellite to target.
+     * @param targetPoint   coordinates of game area that player clicked/touched.
+     * @param rotation      current rotation amount of planetary body.
+     * @returns             number of pixels from satellite to target.
      */
-    getDistanceToTarget(targetX: number, targetZ: number): number {
-        // TODO: Calculate distance "as the crow flies" from satellite to target. Return number of pixels.
-        return 0;
+    getDistanceToTarget(targetPoint: Vector3, rotation: number): number {
+        // If sat is dead or out of juice, return absurdly high number for distance.
+        if (!this.isActive && this.energyLevel < 250) {
+            return 1000;
+        }
+        // If it is alive and has power, perform calculation.
+        let x, xb, z, zb, rot, cosRot, sinRot, satNum;
+        const satX = this.satelliteBody.position.x;
+        const satZ = this.satelliteBody.position.z;
+        if (this.index % 2 === 1) {
+            rot = -rotation;
+            satNum = this.index - 1;
+            cosRot = Math.cos(rot);
+            sinRot = Math.sin(rot);
+            xb = positionArray[satNum].xb;
+            zb = positionArray[satNum].zb;
+            x = (satX - xb) * cosRot - (satZ + zb) * sinRot + xb;
+            z = (satX - xb) * sinRot + (satZ + zb) * cosRot + xb;
+        } else {
+            rot = -rotation + 1.57079644;
+            satNum = this.index - 2;
+            cosRot = Math.cos(rot);
+            sinRot = Math.sin(rot);
+            xb = positionArray[satNum].xb;
+            zb = positionArray[satNum].zb;
+            x = (satX - xb) * cosRot - (satZ + zb) * sinRot + xb;
+            z = (satX - xb) * sinRot + (satZ + zb) * cosRot + xb;
+        }
+        // If satellite is closest, and it has the energy, this origin point won't need to be recalculated.
+        this.currentOrigin = [x, z];
+        // d = sqrt{ (x2-x1)^2 + (y2-y1)^2 }
+        const xStep = (targetPoint.x - x) * (targetPoint.x - x);
+        const zStep = (targetPoint.z - z) * (targetPoint.z - z);
+        this.currentDistance = Math.sqrt(xStep + zStep);
+        return this.currentDistance;
     }
     /**
      * Provides the created mesh so it can be added to the mesh of a parent object like the planet.
      * @returns the satellite's mesh
      */
-    getMesh() {
+    getMesh(): Mesh {
         return this.satelliteContainer;
     }
     /**
      * Called when something collides with satellite, which destroys it.
      */
-    impact() {
+    impact(): void {
         if (this.isActive) {
             this.isActive = false;
             (this.satelliteBody.material as any).color.setHex(0x333333);
@@ -199,8 +248,26 @@ export class Satellite {
     /**
      * Changes the size and color of the energy bar.
      */
-    updateEnergyBar() {
-        // TODO: Scales the energy bar based on energy in store.
-        // TODO: Less than 25% should be red. Less than 50% should be yellow. More than 50% should be green.
+    private updateEnergyBar(): void {
+        if (this.energyLevel < 0) {
+            this.energyLevel = 0;
+        } else if (this.energyLevel > this.energyMax) {
+            this.energyLevel = this.energyMax;
+        }
+        const percentOfTotal = this.energyLevel / this.energyMax;
+        const x = positionArray[this.index-1].xc;
+        const z = positionArray[this.index-1].zc;
+        if (x > z) {
+            this.satelliteEnergy.scale.x = percentOfTotal;
+        } else {
+            this.satelliteEnergy.scale.z = percentOfTotal;
+        }
+        if (percentOfTotal <= 0.25) {
+            this.satelliteEnergyMaterial.color = new Color(0xDF3156);
+        } else if (percentOfTotal <= 0.50) {
+            this.satelliteEnergyMaterial.color = new Color(0xF6C123);
+        } else {
+            this.satelliteEnergyMaterial.color = new Color(0x00FF00);
+        }
     }
 }

@@ -30,10 +30,6 @@ const positionArray: {ry: number; xb: number; zb: number;}[] = [
  */
 export class Base {
     /**
-     * Number in the creation order. Needed later to identify base.
-     */
-    index: number ;
-    /**
      * Flag to signal if base has been destroyed or not. True = not destroyed. False = destroyed.
      */
     private isActive: boolean = true;
@@ -67,8 +63,7 @@ export class Base {
      * @hidden
      */
     constructor(index: number) {
-        this.index = index;
-
+        // Creates the bright, still alive, portion of the populated area.
         this.buildingGeometry = new BoxGeometry(0.5, 0.1, 0.5);
         this.buildingMaterial = new MeshPhongMaterial();
         this.buildingMaterial.map = ImageUtils.loadTexture(textureArray[index-1]);
@@ -78,7 +73,7 @@ export class Base {
         this.building = new Mesh(this.buildingGeometry, this.buildingMaterial);
         this.building.rotation.set(0, positionArray[index-1].ry, 0);
         this.building.position.set(positionArray[index-1].xb, -0.1, positionArray[index-1].zb);
-
+        // Creates the dull, dead portion of the populated area. Initially not visible.
         this.buildingDeadGeometry = new BoxGeometry(0.5, 0.1, 0.5);
         this.buildingDeadMaterial = new MeshPhongMaterial();
         this.buildingDeadMaterial.map = ImageUtils.loadTexture(textureArray[index-1]);
@@ -106,13 +101,13 @@ export class Base {
      * Provides the created mesh so it can be added to the mesh of a parent object like the planet.
      * @returns the base's alive and dead meshes
      */
-    getMeshes() {
+    getMeshes(): Mesh[] {
         return [this.building, this.buildingDead];
     }
     /**
      * Called when something collides with base, which destroys it.
      */
-    impact() {
+    impact(): void {
         if (this.isActive) {
             this.isActive = false;
             this.building.visible = false;

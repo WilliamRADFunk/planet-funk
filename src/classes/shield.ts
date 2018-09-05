@@ -8,7 +8,6 @@ import {
     SphereGeometry,
     SphericalReflectionMapping,
     TextureLoader } from 'three';
-
 /**
  * @class
  * Transluscent shield that helps protect player's unit (planet)
@@ -55,6 +54,7 @@ export class Shield {
      * @hidden
      */
     constructor() {
+        // Creates the semi-transparent shield over the planet and it's populated areas.
         this.shieldGeometry = new SphereGeometry(1, 32, 32);
         const envMap = new TextureLoader().load('assets/images/shiny.png');
         envMap.mapping = SphericalReflectionMapping;
@@ -67,10 +67,10 @@ export class Shield {
         });
         this.shield = new Mesh(this.shieldGeometry, this.shieldMaterial);
         this.shield.name = "Shield";
-
+        // Creates and places the energy meter beads in a ring around the shield.
         this.energyBars = new Object3D();
 		this.timeGeometry = new CylinderGeometry(0.03, 0.03, 0.001, 10, 10, false);
-		this.timeMaterial = new MeshBasicMaterial({color: 0x32BD15});
+        this.timeMaterial = new MeshBasicMaterial({color: 0x32BD15});
 		for(let i = 0; i < 60; i++)
 		{
 			const minuteTick = new Mesh(this.timeGeometry, this.timeMaterial.clone());
@@ -83,9 +83,8 @@ export class Shield {
     /**
      * If shield is down, and player has enough energy, this turns the shield on.
      */
-    activate() {
+    activate(): void {
         if (!this.isActive && this.energyLevel > 500) {
-            console.log(`Shields up, Captain!`);
             this.isActive = true;
             this.shield.visible = true;
         }
@@ -101,9 +100,8 @@ export class Shield {
     /**
      * If shield is up, this turns the shield off.
      */
-    deactivate() {
+    deactivate(): void {
         if (this.isActive) {
-            console.log(`Shields down, Captain!`);
             this.shield.visible = false;
         }
         this.isActive = false;
@@ -113,7 +111,7 @@ export class Shield {
      * and regains it by a percentage depending on how many planet quadrant are intact.
      * @param percentRecharge 0.25, 0.5, 0.75, 1 to be multipled against shield energy recharge amount
      */
-    endCycle(percentRecharge: number) {
+    endCycle(percentRecharge: number): void {
         // Add or substrat energy depending on state of shield.
         if (!this.isActive) {
             this.energyLevel += percentRecharge;
@@ -135,6 +133,7 @@ export class Shield {
     }
     /**
      * Returns activity of shield (keeps the actual flag private)
+     * @returns True if not destroyed. False if is destroyed.
      */
     getIsActive(): boolean {
         return this.isActive;
@@ -142,7 +141,7 @@ export class Shield {
     /**
      * Called when something collides with shield, which consumes energy.
      */
-    impact() {
+    impact(): void  {
         if (this.isActive) {
             this.energyLevel -= 250;
         }
@@ -150,7 +149,7 @@ export class Shield {
     /**
      * Changes the size and color of the energy bar.
      */
-    updateEnergyBars() {
+    private updateEnergyBars(): void {
         const percentOfFull: number = this.energyLevel / 1000;
         const pelletsToShow: number = Math.floor(percentOfFull * 60);
         let color: number;
