@@ -12,6 +12,7 @@
 
 ### Properties
 
+* [currentExplosionScale](_classes_projectile_.projectile.md#currentexplosionscale)
 * [currentPoint](_classes_projectile_.projectile.md#currentpoint)
 * [distanceTraveled](_classes_projectile_.projectile.md#distancetraveled)
 * [endingPoint](_classes_projectile_.projectile.md#endingpoint)
@@ -19,6 +20,8 @@
 * [headMaterial](_classes_projectile_.projectile.md#headmaterial)
 * [headMesh](_classes_projectile_.projectile.md#headmesh)
 * [isActive](_classes_projectile_.projectile.md#isactive)
+* [isExploding](_classes_projectile_.projectile.md#isexploding)
+* [isExplosionGrowing](_classes_projectile_.projectile.md#isexplosiongrowing)
 * [originalStartingPoint](_classes_projectile_.projectile.md#originalstartingpoint)
 * [scene](_classes_projectile_.projectile.md#scene)
 * [speed](_classes_projectile_.projectile.md#speed)
@@ -36,13 +39,24 @@
 
 ## Properties
 
+<a id="currentexplosionscale"></a>
+
+### `<Private>` currentExplosionScale
+
+**● currentExplosionScale**: *`number`* = 1
+
+*Defined in [classes/projectile.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L19)*
+
+Keeps track of how big explosions scale is at moment.
+
+___
 <a id="currentpoint"></a>
 
 ### `<Private>` currentPoint
 
 **● currentPoint**: *`number`[]*
 
-*Defined in classes/projectile.ts:19*
+*Defined in [classes/projectile.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L23)*
 
 Keeps track of the x,z point the missile is at currently.
 
@@ -53,7 +67,7 @@ ___
 
 **● distanceTraveled**: *`number`*
 
-*Defined in classes/projectile.ts:23*
+*Defined in [classes/projectile.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L27)*
 
 Tracks the distance traveled thus far to update the calculateNextPoint calculation.
 
@@ -64,7 +78,7 @@ ___
 
 **● endingPoint**: *`number`[]*
 
-*Defined in classes/projectile.ts:27*
+*Defined in [classes/projectile.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L31)*
 
 Keeps track of the x,z point of player's click point.
 
@@ -75,7 +89,7 @@ ___
 
 **● headGeometry**: *`CircleGeometry`*
 
-*Defined in classes/projectile.ts:35*
+*Defined in [classes/projectile.ts:50](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L50)*
 
 Controls size and shape of the missile's glowing head.
 
@@ -86,7 +100,7 @@ ___
 
 **● headMaterial**: *`MeshBasicMaterial`*
 
-*Defined in classes/projectile.ts:39*
+*Defined in [classes/projectile.ts:54](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L54)*
 
 Controls the color of the missile's glowing head material.
 
@@ -97,7 +111,7 @@ ___
 
 **● headMesh**: *`Mesh`*
 
-*Defined in classes/projectile.ts:43*
+*Defined in [classes/projectile.ts:58](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L58)*
 
 Controls the overall rendering of the glowing head.
 
@@ -108,9 +122,31 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in classes/projectile.ts:31*
+*Defined in [classes/projectile.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L36)*
 
 Flag to signal if the missile has been destroyed. True is not destroyed. False is destroyed.
+
+___
+<a id="isexploding"></a>
+
+### `<Private>` isExploding
+
+**● isExploding**: *`boolean`* = false
+
+*Defined in [classes/projectile.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L41)*
+
+Flag to signal if the missile is in explosion mode. True is exploding. False is in motion.
+
+___
+<a id="isexplosiongrowing"></a>
+
+### `<Private>` isExplosionGrowing
+
+**● isExplosionGrowing**: *`boolean`* = true
+
+*Defined in [classes/projectile.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L46)*
+
+Flag to signal if the missile's explosion is expanding/contracting. True is expanding. False is contracting..
 
 ___
 <a id="originalstartingpoint"></a>
@@ -119,7 +155,7 @@ ___
 
 **● originalStartingPoint**: *`number`[]*
 
-*Defined in classes/projectile.ts:47*
+*Defined in [classes/projectile.ts:62](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L62)*
 
 Keeps track of the x,z point where missile fired from.
 
@@ -130,7 +166,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in classes/projectile.ts:51*
+*Defined in [classes/projectile.ts:66](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L66)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -141,7 +177,7 @@ ___
 
 **● speed**: *`number`* = 0.03
 
-*Defined in classes/projectile.ts:55*
+*Defined in [classes/projectile.ts:70](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L70)*
 
 The speed at which the missile travels.
 
@@ -152,7 +188,7 @@ ___
 
 **● tailGeometry**: *`Geometry`*
 
-*Defined in classes/projectile.ts:59*
+*Defined in [classes/projectile.ts:74](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L74)*
 
 Controls size and shape of the missile's fiery trail.
 
@@ -163,7 +199,7 @@ ___
 
 **● tailMaterial**: *`LineBasicMaterial`*
 
-*Defined in classes/projectile.ts:63*
+*Defined in [classes/projectile.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L78)*
 
 Controls the color of the missile's fiery trail material.
 
@@ -174,7 +210,7 @@ ___
 
 **● tailMesh**: *`Line`*
 
-*Defined in classes/projectile.ts:67*
+*Defined in [classes/projectile.ts:82](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L82)*
 
 Controls the overall rendering of the missile's fiery trail.
 
@@ -185,7 +221,7 @@ ___
 
 **● totalDistance**: *`number`*
 
-*Defined in classes/projectile.ts:71*
+*Defined in [classes/projectile.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L86)*
 
 The total distance from satellite to player's click point.
 
@@ -199,7 +235,7 @@ ___
 
 ▸ **calculateNextPoint**(): `void`
 
-*Defined in classes/projectile.ts:111*
+*Defined in [classes/projectile.ts:130](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L130)*
 
 Calculates the next point in the missile's point.
 
@@ -212,7 +248,7 @@ ___
 
 ▸ **endCycle**(): `boolean`
 
-*Defined in classes/projectile.ts:122*
+*Defined in [classes/projectile.ts:141](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/projectile.ts#L141)*
 
 At the end of each loop iteration, move the projectile a little.
 

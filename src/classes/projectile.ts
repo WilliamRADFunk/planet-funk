@@ -14,6 +14,10 @@ import {
  */
 export class Projectile {
     /**
+     * Keeps track of how big explosions scale is at moment.
+     */
+    private currentExplosionScale: number = 1;
+    /**
      * Keeps track of the x,z point the missile is at currently.
      */
     private currentPoint: number[];
@@ -26,9 +30,20 @@ export class Projectile {
      */
     private endingPoint: number[];
     /**
-     * Flag to signal if the missile has been destroyed. True is not destroyed. False is destroyed.
+     * Flag to signal if the missile has been destroyed.
+     * True is not destroyed. False is destroyed.
      */
     private isActive: boolean = true;
+    /**
+     * Flag to signal if the missile is in explosion mode.
+     * True is exploding. False is in motion.
+     */
+    private isExploding: boolean = false;
+    /**
+     * Flag to signal if the missile's explosion is expanding/contracting.
+     * True is expanding. False is contracting..
+     */
+    private isExplosionGrowing: boolean = true;
     /**
      * Controls size and shape of the missile's glowing head.
      */
@@ -99,7 +114,11 @@ export class Projectile {
         scene.add(this.tailMesh);
         // Glowing head of the missile.
         this.headGeometry = new CircleGeometry(0.06, 32);
-        this.headMaterial = new MeshBasicMaterial({color: 0xFF3F34});
+        this.headMaterial = new MeshBasicMaterial({
+            color: 0xFF3F34,
+            opacity: 1,
+            transparent: true
+        });
         this.headMesh = new Mesh(this.headGeometry, this.headMaterial);
         this.headMesh.position.set(this.currentPoint[0], -0.21, this.currentPoint[1]);
         this.headMesh.rotation.set(-1.5708, 0, 0);
@@ -120,14 +139,30 @@ export class Projectile {
      * @returns whether or not the projectile is done, and should be removed from satellite's list.
      */
     endCycle(): boolean {
-        if (this.isActive) {
+        if (this.isActive && !this.isExploding) {
             this.calculateNextPoint();
-            (this.tailMesh.geometry as any).vertices[1].x = this.currentPoint[0];
-            (this.tailMesh.geometry as any).vertices[1].z = this.currentPoint[1];
-            (this.tailMesh.geometry as any).verticesNeedUpdate = true;
+            this.tailGeometry.vertices[1].x = this.currentPoint[0];
+            this.tailGeometry.vertices[1].z = this.currentPoint[1];
+            this.tailGeometry.verticesNeedUpdate = true;
             this.headMesh.position.set(this.currentPoint[0], -0.2, this.currentPoint[1]);
 
             if (this.distanceTraveled >= this.totalDistance) {
+                this.headMaterial.color.set(new Color(0xF9A602));
+                this.isExploding = true;
+            }
+            return true;
+        } else if (this.isActive && this.isExploding) {
+            if (this.isExplosionGrowing) {
+                this.currentExplosionScale += 0.02;
+                this.headMesh.scale.set(this.currentExplosionScale, this.currentExplosionScale, this.currentExplosionScale);
+            } else {
+                this.currentExplosionScale -= 0.02;
+                this.headMaterial.opacity = this.currentExplosionScale;
+            }
+            if (this.isExplosionGrowing && this.currentExplosionScale >= 4) {
+                this.currentExplosionScale = 1;
+                this.isExplosionGrowing = false;
+            } else if (!this.isExplosionGrowing && this.currentExplosionScale <= 0) {
                 this.isActive = false;
             }
             return true;
