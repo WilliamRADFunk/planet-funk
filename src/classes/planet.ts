@@ -169,7 +169,7 @@ export class Planet {
      * @param point point with x,z coordinates where player click mouse on game area.
      */
     fire(scene: Scene, point: Vector3) {
-        let distancesToTarget: number[] = [];
+        const distancesToTarget: number[] = [];
         for (let i = 0; i < 4; i++) {
             distancesToTarget.push(this.satellites[i].getDistanceToTarget(point, this.funk.rotation.y));
         }
