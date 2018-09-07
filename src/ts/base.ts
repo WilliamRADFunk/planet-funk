@@ -6,6 +6,7 @@ import {
     Mesh,
     MeshPhongMaterial,
     Scene } from "three";
+import { Collidable } from "./collidable";
 /**
  * Makes instatiateing the base's texture by index easier and cleaner to read.
  */
@@ -28,7 +29,7 @@ const positionArray: {ry: number; xb: number; zb: number;}[] = [
  * @class
  * Planetary base that player must defend.
  */
-export class Base {
+export class Base implements Collidable{
     /**
      * Flag to signal if base has been destroyed or not. True = not destroyed. False = destroyed.
      */
@@ -96,6 +97,21 @@ export class Base {
     addToScene(scene: Scene): void {
         scene.add(this.building);
         scene.add(this.buildingDead);
+    }
+    /**
+     * Gets the viability of the base.
+     * @returns flag to signal non-destruction. True = not destroyed. False = destroyed.
+     */
+    getActive(): boolean {
+        return this.isActive;
+    }
+    /**
+     * Gets the current position of the base.
+     * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
+     */
+    getCurrentPosition(): number[] {
+        // TODO: must calculate position with rotation reference from planet.
+        return [this.building.position.x, this.building.position.z];
     }
     /**
      * Provides the created mesh so it can be added to the mesh of a parent object like the planet.

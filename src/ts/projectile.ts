@@ -8,11 +8,12 @@ import {
     MeshBasicMaterial,
     Scene,
     Vector3 } from "three";
+import { Collidable } from "./collidable";
 /**
  * @class
  * Projectile that represents missile unit in the game. It hits something, it blows up.
  */
-export class Projectile {
+export class Projectile implements Collidable {
     /**
      * Keeps track of how big explosions scale is at moment.
      */
@@ -120,7 +121,7 @@ export class Projectile {
             transparent: true
         });
         this.headMesh = new Mesh(this.headGeometry, this.headMaterial);
-        this.headMesh.position.set(this.currentPoint[0], -0.21, this.currentPoint[1]);
+        this.headMesh.position.set(this.currentPoint[0], 0.21, this.currentPoint[1]);
         this.headMesh.rotation.set(-1.5708, 0, 0);
         scene.add(this.headMesh);
     }
@@ -171,4 +172,22 @@ export class Projectile {
         this.scene.remove(this.headMesh);
         return false;
     }
+    /**
+     * Gets the viability of the explosive blast head.
+     * @returns flag to signal non-destruction. True = not destroyed. False = destroyed.
+     */
+    getActive(): boolean {
+        return this.isActive;
+    }
+    /**
+     * Gets the current position of the explosive blast head.
+     * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
+     */
+    getCurrentPosition(): number[] {
+        return [this.headMesh.position.x, this.headMesh.position.z];
+    }
+    /**
+     * Called when something collides with asteroid, which destroys it.
+     */
+    impact(): void {}
 }

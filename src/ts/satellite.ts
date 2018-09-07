@@ -6,6 +6,7 @@ import {
     Scene,
     Vector3 } from "three";
 import { Projectile } from "./projectile";
+import { Collidable } from "./collidable";
 /**
  * Makes instatiateing the satellite's color by index easier and cleaner to read.
  */
@@ -28,7 +29,7 @@ const positionArray: {xb: number; xc: number; zb: number; zc: number;}[] = [
  * @class
  * Planetary defense satellite's that player used to fire at incoming threats.
  */
-export class Satellite {
+export class Satellite implements Collidable {
     /**
      * When distance is calculated just before firing, this is updated to be used in fire call.
      */
@@ -189,6 +190,21 @@ export class Satellite {
                 this.currentDistance,
                 colorArray[this.index-1]));
         }
+    }
+    /**
+     * Gets the viability of the satellite.
+     * @returns flag to signal non-destruction. True = not destroyed. False = destroyed.
+     */
+    getActive(): boolean {
+        return this.isActive;
+    }
+    /**
+     * Gets the current position of the collidable object.
+     * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
+     */
+    getCurrentPosition(): number[] {
+        // TODO: must calculate position with rotation reference from planet.
+        return [this.satelliteContainer.position.x, this.satelliteContainer.position.z];
     }
     /**
      * Calculate distance "as the crow flies" from satellite to target.

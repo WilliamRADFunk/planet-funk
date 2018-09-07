@@ -8,11 +8,12 @@ import {
     SphereGeometry,
     SphericalReflectionMapping,
     TextureLoader } from 'three';
+import { Collidable } from './collidable';
 /**
  * @class
  * Transluscent shield that helps protect player's unit (planet)
  */
-export class Shield {
+export class Shield implements Collidable {
     /**
      * Flag to determine if shield is active or not.
      */
@@ -135,8 +136,15 @@ export class Shield {
      * Returns activity of shield (keeps the actual flag private)
      * @returns True if not destroyed. False if is destroyed.
      */
-    getIsActive(): boolean {
+    getActive(): boolean {
         return this.isActive;
+    }
+    /**
+     * Gets the current position of the collidable object.
+     * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
+     */
+    getCurrentPosition(): number[] {
+        return [this.shield.position.x, this.shield.position.z];
     }
     /**
      * Called when something collides with shield, which consumes energy.
