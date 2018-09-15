@@ -1,6 +1,7 @@
 import { CircleGeometry, ImageUtils, LinearFilter, Mesh, MeshPhongMaterial, Scene } from "three";
 
 import { Collidable } from "./collidable";
+import { CollisionatorSingleton } from "./collisionator";
 
 let index: number = 0;
 
@@ -61,6 +62,13 @@ export class Asteroid implements Collidable {
         return this.isActive;
     }
     /**
+     * Gets the current radius of the bounding box (circle) of the collidable.
+     * @returns number to represent pixel distance from object center to edge of bounding box.
+     */
+    getCollisionRadius() {
+        return 0.3;
+    }
+    /**
      * Gets the current position of the collidable object.
      * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
      */
@@ -69,12 +77,31 @@ export class Asteroid implements Collidable {
     }
     /**
      * Called when something collides with asteroid, which destroys it.
+     * @param self the thing to remove from collidables...and scene.
+     * @returns whether or not impact means removing item from the scene.
      */
-    impact(): void {
+    impact(self: Collidable): boolean {
         if (this.isActive) {
             console.log('kaboom!');
             this.isActive = false;
             this.asteroid.visible = false;
+            CollisionatorSingleton.remove(self);
+            return true;
         }
+        return false;
+    }
+    /**
+     * States it is a passive type or not. Two passive types cannot colllide with each other.
+     * @returns True is passive | False is not passive
+     */
+    isPassive() {
+        return false;
+    }
+    /**
+     * Removes asteroid object from the three.js scene.
+     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     */
+    removeFromScene(scene: Scene): void {
+        scene.remove(this.asteroid);
     }
 }

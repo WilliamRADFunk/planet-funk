@@ -36,6 +36,11 @@ export class Projectile implements Collidable {
      */
     private isActive: boolean = true;
     /**
+     * Flag to signal if the missile can be considered for collisions.
+     * True is collidable. False is not collidable.
+     */
+    private isCollidable: boolean = false;
+    /**
      * Flag to signal if the missile is in explosion mode.
      * True is exploding. False is in motion.
      */
@@ -150,6 +155,7 @@ export class Projectile implements Collidable {
             if (this.distanceTraveled >= this.totalDistance) {
                 this.headMaterial.color.set(new Color(0xF9A602));
                 this.isExploding = true;
+                this.isCollidable = true;
             }
             return true;
         } else if (this.isActive && this.isExploding) {
@@ -165,6 +171,7 @@ export class Projectile implements Collidable {
                 this.isExplosionGrowing = false;
             } else if (!this.isExplosionGrowing && this.currentExplosionScale <= 0) {
                 this.isActive = false;
+                this.isCollidable = false;
             }
             return true;
         }
@@ -177,7 +184,14 @@ export class Projectile implements Collidable {
      * @returns flag to signal non-destruction. True = not destroyed. False = destroyed.
      */
     getActive(): boolean {
-        return this.isActive;
+        return this.isCollidable;
+    }
+    /**
+     * Gets the current radius of the bounding box (circle) of the collidable.
+     * @returns number to represent pixel distance from object center to edge of bounding box.
+     */
+    getCollisionRadius() {
+        return this.headMesh.scale.x * 0.06;
     }
     /**
      * Gets the current position of the explosive blast head.
@@ -187,7 +201,18 @@ export class Projectile implements Collidable {
         return [this.headMesh.position.x, this.headMesh.position.z];
     }
     /**
-     * Called when something collides with asteroid, which destroys it.
+     * Called when something collides with projectile blast radius, which does nothing unless it hasn't exploded yet.
+     * @param self the thing to remove from collidables...and scene.
+     * @returns whether or not impact means removing item from the scene.
      */
-    impact(): void {}
+    impact(self: Collidable): boolean {
+        return false;
+    }
+    /**
+     * States it is a passive type or not. Two passive types cannot colllide with each other.
+     * @returns True is passive | False is not passive
+     */
+    isPassive() {
+        return false;
+    }
 }

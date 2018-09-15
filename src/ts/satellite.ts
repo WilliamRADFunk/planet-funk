@@ -7,6 +7,7 @@ import {
     Vector3 } from "three";
 import { Projectile } from "./projectile";
 import { Collidable } from "./collidable";
+import { CollisionatorSingleton } from './collisionator';
 /**
  * Makes instatiateing the satellite's color by index easier and cleaner to read.
  */
@@ -155,6 +156,7 @@ export class Satellite implements Collidable {
         for (let i = 0; i < this.missiles.length; i++) {
             let missile = this.missiles[i];
             if (missile && !missile.endCycle()) {
+                CollisionatorSingleton.remove(missile);
                 this.missiles[i] = null;
             }
             missile = this.missiles[i];
@@ -189,6 +191,7 @@ export class Satellite implements Collidable {
                 targetPoint.z,
                 this.currentDistance,
                 colorArray[this.index-1]));
+            CollisionatorSingleton.add(this.missiles[this.missiles.length - 1]);
         }
     }
     /**
@@ -197,6 +200,13 @@ export class Satellite implements Collidable {
      */
     getActive(): boolean {
         return this.isActive;
+    }
+    /**
+     * Gets the current radius of the bounding box (circle) of the collidable.
+     * @returns number to represent pixel distance from object center to edge of bounding box.
+     */
+    getCollisionRadius() {
+        return 0.3;
     }
     /**
      * Gets the current position of the collidable object.
@@ -256,14 +266,24 @@ export class Satellite implements Collidable {
         return this.satelliteContainer;
     }
     /**
-     * Called when something collides with satellite, which destroys it.
+     * Called when something collides with asteroid, which destroys it.
+     * @param self the thing to remove from collidables...and scene.
+     * @returns whether or not impact means removing item from the scene.
      */
-    impact(): void {
+    impact(self: Collidable): boolean {
         if (this.isActive) {
             this.isActive = false;
             (this.satelliteBody.material as any).color.setHex(0x333333);
             this.satelliteEnergy.visible = false;
         }
+        return false;
+    }
+    /**
+     * States it is a passive type or not. Two passive types cannot colllide with each other.
+     * @returns True is passive | False is not passive
+     */
+    isPassive() {
+        return true;
     }
     /**
      * Changes the size and color of the energy bar.

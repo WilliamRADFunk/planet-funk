@@ -11,6 +11,7 @@ import {
 import { Satellite } from './satellite';
 import { Base } from './base';
 import { Collidable } from './collidable';
+import { CollisionatorSingleton } from './collisionator';
 /**
  * Simple type to represent status of all four populated areas. Cumulatively equals player's health.
  */
@@ -119,33 +120,41 @@ export class Planet implements Collidable {
         this.satellite1 = new Satellite(1);
         this.satellites.push(this.satellite1);
         this.funk.add(this.satellite1.getMesh());
+        CollisionatorSingleton.add(this.satellite1);
         this.satellite2 = new Satellite(2);
         this.satellites.push(this.satellite2);
         this.funk.add(this.satellite2.getMesh());
+        CollisionatorSingleton.add(this.satellite2);
         this.satellite3 = new Satellite(3);
         this.satellites.push(this.satellite3);
         this.funk.add(this.satellite3.getMesh());
+        CollisionatorSingleton.add(this.satellite3);
         this.satellite4 = new Satellite(4);
         this.satellites.push(this.satellite4);
         this.funk.add(this.satellite4.getMesh());
+        CollisionatorSingleton.add(this.satellite4);
         // Build the planet's four populated bases, and
         // attach the alive and dead meshes to make orbit a simple thing.
         this.base1 = new Base(1);
         let meshes = this.base1.getMeshes();
         this.funk.add(meshes[0]);
         this.funk.add(meshes[1]);
+        CollisionatorSingleton.add(this.base1);
         this.base2 = new Base(2);
         meshes = this.base2.getMeshes();
         this.funk.add(meshes[0]);
         this.funk.add(meshes[1]);
+        CollisionatorSingleton.add(this.base2);
         this.base3 = new Base(3);
         meshes = this.base3.getMeshes();
         this.funk.add(meshes[0]);
         this.funk.add(meshes[1]);
+        CollisionatorSingleton.add(this.base3);
         this.base4 = new Base(4);
         meshes = this.base4.getMeshes();
         this.funk.add(meshes[0]);
         this.funk.add(meshes[1]);
+        CollisionatorSingleton.add(this.base4);
     }
     /**
      * Adds planet object to the three.js scene.
@@ -185,6 +194,13 @@ export class Planet implements Collidable {
         return true;
     }
     /**
+     * Gets the current radius of the bounding box (circle) of the collidable.
+     * @returns number to represent pixel distance from object center to edge of bounding box.
+     */
+    getCollisionRadius() {
+        return 0.5;
+    }
+    /**
      * Gets the current position of the planet.
      * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
      */
@@ -193,9 +209,11 @@ export class Planet implements Collidable {
     }
     /**
      * Called when something collides with asteroid, which destroys it.
+     * @param self the thing to remove from collidables...and scene.
+     * @returns whether or not impact means removing item from the scene.
      */
-    impact(): void {
-        // TODO: Need to handle the rotation passing for satellites and bases.
+    impact(self: Collidable): boolean {
+        return false;
     }
     /**
      * Getter for recharge of planet shield rate.
@@ -228,6 +246,13 @@ export class Planet implements Collidable {
             quadrantPurple: true,
             quadrantYellow: true,
         };
+    }
+    /**
+     * States it is a passive type or not. Two passive types cannot colllide with each other.
+     * @returns True is passive | False is not passive
+     */
+    isPassive() {
+        return true;
     }
     /**
      * Removes planet object from the three.js scene.

@@ -1,9 +1,9 @@
 import { AmbientLight, CanvasRenderer, Scene, WebGLRenderer, PerspectiveCamera, Raycaster, Vector2, PlaneGeometry, MeshBasicMaterial, DoubleSide, Mesh } from 'three';
 
+import { Asteroid } from './asteroid';
+import { CollisionatorSingleton } from './collisionator';
 import { Planet } from './planet';
 import { Shield } from './shield';
-import { Satellite } from './satellite';
-import { Asteroid } from './asteroid';
 /**
  * Placeholder function typically used to initiate the applications loop.
  */
@@ -44,10 +44,12 @@ export default () => {
     // Create player's planet, which will also create its four satellites.
     const planet = new Planet;
     planet.addToScene(scene);
+    CollisionatorSingleton.add(planet);
     // Create shield around the planet.
     const shield = new Shield();
     shield.addToScene(scene);
     shield.activate();
+    CollisionatorSingleton.add(shield);
     // Create the click collision layer
     const clickBarrierGeometry = new PlaneGeometry( 100, 100, 0, 0 );
     const clickBarrierMaterial = new MeshBasicMaterial( {opacity: 0, transparent: true, side: DoubleSide} );
@@ -95,16 +97,21 @@ export default () => {
     };
     const asteroid1 = new Asteroid(-2, -2);
     asteroid1.addToScene(scene);
+    CollisionatorSingleton.add(asteroid1);
     const asteroid2 = new Asteroid(2, 2);
     asteroid2.addToScene(scene);
+    CollisionatorSingleton.add(asteroid2);
     const asteroid3 = new Asteroid(2, -2);
     asteroid3.addToScene(scene);
+    CollisionatorSingleton.add(asteroid3);
     const asteroid4 = new Asteroid(-2, 2);
     asteroid4.addToScene(scene);
+    CollisionatorSingleton.add(asteroid4);
     /**
      * The render loop. Everything that should be checked, called, or drawn in each animation frame.
      */
     const render = () => {
+        CollisionatorSingleton.checkForCollisions(scene);
         planet.endCycle();
         shield.endCycle(planet.getPowerRegenRate());
         renderer.render( scene, camera );

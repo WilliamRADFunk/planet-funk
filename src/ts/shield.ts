@@ -140,6 +140,13 @@ export class Shield implements Collidable {
         return this.isActive;
     }
     /**
+     * Gets the current radius of the bounding box (circle) of the collidable.
+     * @returns number to represent pixel distance from object center to edge of bounding box.
+     */
+    getCollisionRadius() {
+        return 1;
+    }
+    /**
      * Gets the current position of the collidable object.
      * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
      */
@@ -148,11 +155,21 @@ export class Shield implements Collidable {
     }
     /**
      * Called when something collides with shield, which consumes energy.
+     * @param self the thing to remove from collidables...and scene.
+     * @returns whether or not impact means removing item from the scene.
      */
-    impact(): void  {
+    impact(self: Collidable): boolean {
         if (this.isActive) {
             this.energyLevel -= 250;
         }
+        return false;
+    }
+    /**
+     * States it is a passive type or not. Two passive types cannot colllide with each other.
+     * @returns True is passive | False is not passive
+     */
+    isPassive() {
+        return true;
     }
     /**
      * Changes the size and color of the energy bar.
