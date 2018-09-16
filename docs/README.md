@@ -117,13 +117,17 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 
 ### External modules
 
-* ["classes/base"](modules/_classes_base_.md)
-* ["classes/init"](modules/_classes_init_.md)
-* ["classes/planet"](modules/_classes_planet_.md)
-* ["classes/projectile"](modules/_classes_projectile_.md)
-* ["classes/satellite"](modules/_classes_satellite_.md)
-* ["classes/shield"](modules/_classes_shield_.md)
 * ["index"](modules/_index_.md)
+* ["ts/asteroid"](modules/_ts_asteroid_.md)
+* ["ts/base"](modules/_ts_base_.md)
+* ["ts/collidable"](modules/_ts_collidable_.md)
+* ["ts/collisionator"](modules/_ts_collisionator_.md)
+* ["ts/explosion"](modules/_ts_explosion_.md)
+* ["ts/init"](modules/_ts_init_.md)
+* ["ts/planet"](modules/_ts_planet_.md)
+* ["ts/projectile"](modules/_ts_projectile_.md)
+* ["ts/satellite"](modules/_ts_satellite_.md)
+* ["ts/shield"](modules/_ts_shield_.md)
 
 ---
 

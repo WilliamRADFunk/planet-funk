@@ -1,17 +1,17 @@
-[planet-funk](../README.md) > ["classes/satellite"](../modules/_classes_satellite_.md)
+[planet-funk](../README.md) > ["ts/satellite"](../modules/_ts_satellite_.md)
 
-# External module: "classes/satellite"
+# External module: "ts/satellite"
 
 ## Index
 
 ### Classes
 
-* [Satellite](../classes/_classes_satellite_.satellite.md)
+* [Satellite](../classes/_ts_satellite_.satellite.md)
 
 ### Variables
 
-* [colorArray](_classes_satellite_.md#colorarray)
-* [positionArray](_classes_satellite_.md#positionarray)
+* [colorArray](_ts_satellite_.md#colorarray)
+* [positionArray](_ts_satellite_.md#positionarray)
 
 ---
 
@@ -28,7 +28,7 @@
     new Color(0x31E4DE)
 ]
 
-*Defined in [classes/satellite.ts:12](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/satellite.ts#L12)*
+*Defined in [ts/satellite.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L14)*
 
 Makes instatiateing the satellite's color by index easier and cleaner to read.
 
@@ -44,7 +44,7 @@ ___
     {xb: -1.25, zb: 0, xc: 0.05, zc: 0.3}
 ]
 
-*Defined in [classes/satellite.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/c7ccb28/src/classes/satellite.ts#L21)*
+*Defined in [ts/satellite.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L23)*
 
 Makes instatiateing the satellite's position by index easier and cleaner to read.
 
