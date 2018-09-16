@@ -40,6 +40,10 @@ export class Satellite implements Collidable {
      */
     currentOrigin: number[];
     /**
+     * Keeps track of planet's rotation to help calc satellite's position.
+     */
+    currentRotation: number;
+    /**
      * Max energy amount
      */
     private energyMax: number = 1000;
@@ -146,8 +150,10 @@ export class Satellite implements Collidable {
     }
     /**
      * At the end of each loop iteration, satellite regains a little energy.
+     * @param rotation of planet to base current position off of.
      */
-    endCycle(): void {
+    endCycle(rotation: number): void {
+        this.currentRotation = rotation;
         if (this.isActive) {
             this.energyLevel += 1;
             this.updateEnergyBar();
@@ -206,33 +212,18 @@ export class Satellite implements Collidable {
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
     getCollisionRadius() {
-        return 0.3;
+        return 0.1;
     }
     /**
      * Gets the current position of the collidable object.
      * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
      */
     getCurrentPosition(): number[] {
-        // TODO: must calculate position with rotation reference from planet.
-        return [this.satelliteContainer.position.x, this.satelliteContainer.position.z];
-    }
-    /**
-     * Calculate distance "as the crow flies" from satellite to target.
-     * @param targetPoint   coordinates of game area that player clicked/touched.
-     * @param rotation      current rotation amount of planetary body.
-     * @returns             number of pixels from satellite to target.
-     */
-    getDistanceToTarget(targetPoint: Vector3, rotation: number): number {
-        // If sat is dead or out of juice, return absurdly high number for distance.
-        if (!this.isActive && this.energyLevel < 250) {
-            return 1000;
-        }
-        // If it is alive and has power, perform calculation.
         let x, xb, z, zb, rot, cosRot, sinRot, satNum;
         const satX = this.satelliteBody.position.x;
         const satZ = this.satelliteBody.position.z;
         if (this.index % 2 === 1) {
-            rot = -rotation;
+            rot = -this.currentRotation;
             satNum = this.index - 1;
             cosRot = Math.cos(rot);
             sinRot = Math.sin(rot);
@@ -241,7 +232,7 @@ export class Satellite implements Collidable {
             x = (satX - xb) * cosRot - (satZ + zb) * sinRot + xb;
             z = (satX - xb) * sinRot + (satZ + zb) * cosRot + xb;
         } else {
-            rot = -rotation + 1.57079644;
+            rot = -this.currentRotation + 1.57079644;
             satNum = this.index - 2;
             cosRot = Math.cos(rot);
             sinRot = Math.sin(rot);
@@ -250,11 +241,25 @@ export class Satellite implements Collidable {
             x = (satX - xb) * cosRot - (satZ + zb) * sinRot + xb;
             z = (satX - xb) * sinRot + (satZ + zb) * cosRot + xb;
         }
+        return [x, z];
+    }
+    /**
+     * Calculate distance "as the crow flies" from satellite to target.
+     * @param targetPoint   coordinates of game area that player clicked/touched.
+     * @param rotation      current rotation amount of planetary body.
+     * @returns             number of pixels from satellite to target.
+     */
+    getDistanceToTarget(targetPoint: Vector3, rotation: number): number {
+        this.currentRotation = rotation;
+        // If sat is dead or out of juice, return absurdly high number for distance.
+        if (!this.isActive && this.energyLevel < 250) {
+            return 1000;
+        }
         // If satellite is closest, and it has the energy, this origin point won't need to be recalculated.
-        this.currentOrigin = [x, z];
+        this.currentOrigin = this.getCurrentPosition();
         // d = sqrt{ (x2-x1)^2 + (y2-y1)^2 }
-        const xStep = (targetPoint.x - x) * (targetPoint.x - x);
-        const zStep = (targetPoint.z - z) * (targetPoint.z - z);
+        const xStep = (targetPoint.x - this.currentOrigin[0]) * (targetPoint.x - this.currentOrigin[0]);
+        const zStep = (targetPoint.z - this.currentOrigin[1]) * (targetPoint.z - this.currentOrigin[1]);
         this.currentDistance = Math.sqrt(xStep + zStep);
         return this.currentDistance;
     }
@@ -264,6 +269,13 @@ export class Satellite implements Collidable {
      */
     getMesh(): Mesh {
         return this.satelliteContainer;
+    }
+    /**
+     * Gets the name of the satellite.
+     * @returns the name of the satellite.
+     */
+    getName() {
+        return this.satelliteContainer.name;
     }
     /**
      * Called when something collides with asteroid, which destroys it.

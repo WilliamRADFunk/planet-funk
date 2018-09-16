@@ -17,6 +17,11 @@ export interface Collidable {
      */
     getCurrentPosition: () => number[];
     /**
+     * Gets the name of the collidable object.
+     * @returns the name of the object.
+     */
+    getName: () => string;
+    /**
      * Call to collidable object that it has been struck.
      * @param self the thing to remove from collidables...and scene.
      * @returns whether or not impact means removing item from the scene.

@@ -4,6 +4,7 @@ import { Asteroid } from './asteroid';
 import { CollisionatorSingleton } from './collisionator';
 import { Planet } from './planet';
 import { Shield } from './shield';
+import { AsteroidGenerator } from './asteroid-generator';
 /**
  * Placeholder function typically used to initiate the applications loop.
  */
@@ -95,31 +96,13 @@ export default () => {
             });
         }
     };
-    const asteroid1 = new Asteroid(scene, -2, -2);
-    asteroid1.addToScene();
-    CollisionatorSingleton.add(asteroid1);
-    const asteroid2 = new Asteroid(scene, 2, 2);
-    asteroid2.addToScene();
-    CollisionatorSingleton.add(asteroid2);
-    const asteroid3 = new Asteroid(scene, 2, -2);
-    asteroid3.addToScene();
-    CollisionatorSingleton.add(asteroid3);
-    const asteroid4 = new Asteroid(scene, -2, 2);
-    asteroid4.addToScene();
-    CollisionatorSingleton.add(asteroid4);
-    const asteroids = [asteroid1, asteroid2, asteroid3, asteroid4];
+    const asteroidGenerator = new AsteroidGenerator(scene);
     /**
      * The render loop. Everything that should be checked, called, or drawn in each animation frame.
      */
     const render = () => {
         CollisionatorSingleton.checkForCollisions(scene);
-        for (let i = 0; i < asteroids.length; i++) {
-            if (asteroids[i]) {
-                if (!asteroids[i].endCycle()) {
-                    asteroids[i] = null;
-                }
-            }
-        }
+        asteroidGenerator.endCycle();
         planet.endCycle();
         shield.endCycle(planet.getPowerRegenRate());
         renderer.render( scene, camera );

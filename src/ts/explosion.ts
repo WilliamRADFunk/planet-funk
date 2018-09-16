@@ -108,6 +108,13 @@ export class Explosion implements Collidable {
         return [this.explosion.position.x, this.explosion.position.z];
     }
     /**
+     * Gets the name of the explosion.
+     * @returns the name of the explosion.
+     */
+    getName() {
+        return this.explosion.name;
+    }
+    /**
      * Call to collidable object that it has been struck.
      * @param self the thing to remove from collidables...and scene.
      * @returns whether or not impact means removing item from the scene.

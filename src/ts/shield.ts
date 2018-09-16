@@ -144,14 +144,21 @@ export class Shield implements Collidable {
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
     getCollisionRadius() {
-        return 0.9;
+        return 0.8;
     }
     /**
      * Gets the current position of the collidable object.
      * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
      */
     getCurrentPosition(): number[] {
-        return [this.shield.position.x, this.shield.position.z];
+        return [0, 0];
+    }
+    /**
+     * Gets the name of the shield.
+     * @returns the name of the shield.
+     */
+    getName() {
+        return this.shield.name;
     }
     /**
      * Called when something collides with shield, which consumes energy.

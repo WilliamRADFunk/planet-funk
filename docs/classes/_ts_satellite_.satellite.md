@@ -18,6 +18,7 @@
 
 * [currentDistance](_ts_satellite_.satellite.md#currentdistance)
 * [currentOrigin](_ts_satellite_.satellite.md#currentorigin)
+* [currentRotation](_ts_satellite_.satellite.md#currentrotation)
 * [energyLevel](_ts_satellite_.satellite.md#energylevel)
 * [energyMax](_ts_satellite_.satellite.md#energymax)
 * [index](_ts_satellite_.satellite.md#index)
@@ -45,6 +46,7 @@
 * [getCurrentPosition](_ts_satellite_.satellite.md#getcurrentposition)
 * [getDistanceToTarget](_ts_satellite_.satellite.md#getdistancetotarget)
 * [getMesh](_ts_satellite_.satellite.md#getmesh)
+* [getName](_ts_satellite_.satellite.md#getname)
 * [impact](_ts_satellite_.satellite.md#impact)
 * [isPassive](_ts_satellite_.satellite.md#ispassive)
 * [updateEnergyBar](_ts_satellite_.satellite.md#updateenergybar)
@@ -59,7 +61,7 @@
 
 **● currentDistance**: *`number`*
 
-*Defined in [ts/satellite.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L37)*
+*Defined in [ts/satellite.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L37)*
 
 When distance is calculated just before firing, this is updated to be used in fire call.
 
@@ -70,9 +72,20 @@ ___
 
 **● currentOrigin**: *`number`[]*
 
-*Defined in [ts/satellite.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L41)*
+*Defined in [ts/satellite.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L41)*
 
 When origin is calculated just before firing, this is updated to be used in fire call.
+
+___
+<a id="currentrotation"></a>
+
+###  currentRotation
+
+**● currentRotation**: *`number`*
+
+*Defined in [ts/satellite.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L45)*
+
+Keeps track of planet's rotation to help calc satellite's position.
 
 ___
 <a id="energylevel"></a>
@@ -81,7 +94,7 @@ ___
 
 **● energyLevel**: *`number`* =  this.energyMax
 
-*Defined in [ts/satellite.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L49)*
+*Defined in [ts/satellite.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L53)*
 
 Amount of energy at the satellite's disposal.
 
@@ -92,7 +105,7 @@ ___
 
 **● energyMax**: *`number`* = 1000
 
-*Defined in [ts/satellite.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L45)*
+*Defined in [ts/satellite.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L49)*
 
 Max energy amount
 
@@ -103,7 +116,7 @@ ___
 
 **● index**: *`number`*
 
-*Defined in [ts/satellite.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L53)*
+*Defined in [ts/satellite.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L57)*
 
 Number in the creation order. Needed later to scale energy bar.
 
@@ -114,7 +127,7 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in [ts/satellite.ts:58](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L58)*
+*Defined in [ts/satellite.ts:62](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L62)*
 
 Flag to signal if satellite has been destroyed or not. True = not destroyed. False = destroyed.
 
@@ -125,7 +138,7 @@ ___
 
 **● missiles**: *[Projectile](_ts_projectile_.projectile.md)[]* =  []
 
-*Defined in [ts/satellite.ts:62](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L62)*
+*Defined in [ts/satellite.ts:66](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L66)*
 
 Keeps track of live missiles, to pass along endCycle signals, and destroy calls.
 
@@ -136,7 +149,7 @@ ___
 
 **● satelliteBody**: *`Mesh`*
 
-*Defined in [ts/satellite.ts:98](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L98)*
+*Defined in [ts/satellite.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L102)*
 
 Controls the overall rendering of the satellite body
 
@@ -147,7 +160,7 @@ ___
 
 **● satelliteBodyGeometry**: *`BoxGeometry`*
 
-*Defined in [ts/satellite.ts:66](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L66)*
+*Defined in [ts/satellite.ts:70](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L70)*
 
 Controls size and shape of the satellite body
 
@@ -158,7 +171,7 @@ ___
 
 **● satelliteBodyMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/satellite.ts:82](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L82)*
+*Defined in [ts/satellite.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L86)*
 
 Controls the color of the satellite body material
 
@@ -169,7 +182,7 @@ ___
 
 **● satelliteContainer**: *`Mesh`*
 
-*Defined in [ts/satellite.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L102)*
+*Defined in [ts/satellite.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L106)*
 
 Controls the overall rendering of the satellite container
 
@@ -180,7 +193,7 @@ ___
 
 **● satelliteContainerGeometry**: *`BoxGeometry`*
 
-*Defined in [ts/satellite.ts:70](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L70)*
+*Defined in [ts/satellite.ts:74](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L74)*
 
 Controls size and shape of the satellite container
 
@@ -191,7 +204,7 @@ ___
 
 **● satelliteContainerMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/satellite.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L86)*
+*Defined in [ts/satellite.ts:90](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L90)*
 
 Controls the color of the satellite container material
 
@@ -202,7 +215,7 @@ ___
 
 **● satelliteEnergy**: *`Mesh`*
 
-*Defined in [ts/satellite.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L106)*
+*Defined in [ts/satellite.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L110)*
 
 Controls the overall rendering of the satellite energy bar
 
@@ -213,7 +226,7 @@ ___
 
 **● satelliteEnergyGeometry**: *`BoxGeometry`*
 
-*Defined in [ts/satellite.ts:74](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L74)*
+*Defined in [ts/satellite.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L78)*
 
 Controls size and shape of the satellite energy bar
 
@@ -224,7 +237,7 @@ ___
 
 **● satelliteEnergyMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/satellite.ts:90](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L90)*
+*Defined in [ts/satellite.ts:94](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L94)*
 
 Controls the color of the satellite energy bar material
 
@@ -235,7 +248,7 @@ ___
 
 **● satelliteWings**: *`Mesh`*
 
-*Defined in [ts/satellite.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L110)*
+*Defined in [ts/satellite.ts:114](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L114)*
 
 Controls the overall rendering of the satellite wings
 
@@ -246,7 +259,7 @@ ___
 
 **● satelliteWingsGeometry**: *`BoxGeometry`*
 
-*Defined in [ts/satellite.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L78)*
+*Defined in [ts/satellite.ts:82](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L82)*
 
 Controls size and shape of the satellite wings
 
@@ -257,7 +270,7 @@ ___
 
 **● satelliteWingsMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/satellite.ts:94](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L94)*
+*Defined in [ts/satellite.ts:98](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L98)*
 
 Controls the color of the satellite wings material
 
@@ -269,11 +282,17 @@ ___
 
 ###  endCycle
 
-▸ **endCycle**(): `void`
+▸ **endCycle**(rotation: *`number`*): `void`
 
-*Defined in [ts/satellite.ts:150](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L150)*
+*Defined in [ts/satellite.ts:155](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L155)*
 
 At the end of each loop iteration, satellite regains a little energy.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| rotation | `number` |  of planet to base current position off of. |
 
 **Returns:** `void`
 
@@ -284,7 +303,7 @@ ___
 
 ▸ **fire**(scene: *`Scene`*, targetPoint: *`Vector3`*): `void`
 
-*Defined in [ts/satellite.ts:176](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L176)*
+*Defined in [ts/satellite.ts:182](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L182)*
 
 If it's determined that this weapon is closest to click point, and it has the power, it will create and launch the projectile, subtract the energy used, and call to update energy bar.
 
@@ -304,7 +323,7 @@ ___
 
 ▸ **getActive**(): `boolean`
 
-*Defined in [ts/satellite.ts:201](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L201)*
+*Defined in [ts/satellite.ts:207](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L207)*
 
 Gets the viability of the satellite.
 
@@ -318,7 +337,7 @@ ___
 
 ▸ **getCollisionRadius**(): `number`
 
-*Defined in [ts/satellite.ts:208](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L208)*
+*Defined in [ts/satellite.ts:214](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L214)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 
@@ -332,7 +351,7 @@ ___
 
 ▸ **getCurrentPosition**(): `number`[]
 
-*Defined in [ts/satellite.ts:215](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L215)*
+*Defined in [ts/satellite.ts:221](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L221)*
 
 Gets the current position of the collidable object.
 
@@ -346,7 +365,7 @@ ___
 
 ▸ **getDistanceToTarget**(targetPoint: *`Vector3`*, rotation: *`number`*): `number`
 
-*Defined in [ts/satellite.ts:225](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L225)*
+*Defined in [ts/satellite.ts:252](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L252)*
 
 Calculate distance "as the crow flies" from satellite to target.
 
@@ -367,12 +386,26 @@ ___
 
 ▸ **getMesh**(): `Mesh`
 
-*Defined in [ts/satellite.ts:265](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L265)*
+*Defined in [ts/satellite.ts:270](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L270)*
 
 Provides the created mesh so it can be added to the mesh of a parent object like the planet.
 
 **Returns:** `Mesh`
 the satellite's mesh
+
+___
+<a id="getname"></a>
+
+###  getName
+
+▸ **getName**(): `string`
+
+*Defined in [ts/satellite.ts:277](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L277)*
+
+Gets the name of the satellite.
+
+**Returns:** `string`
+the name of the satellite.
 
 ___
 <a id="impact"></a>
@@ -381,7 +414,7 @@ ___
 
 ▸ **impact**(self: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*): `boolean`
 
-*Defined in [ts/satellite.ts:273](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L273)*
+*Defined in [ts/satellite.ts:285](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L285)*
 
 Called when something collides with asteroid, which destroys it.
 
@@ -401,7 +434,7 @@ ___
 
 ▸ **isPassive**(): `boolean`
 
-*Defined in [ts/satellite.ts:285](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L285)*
+*Defined in [ts/satellite.ts:297](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L297)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 
@@ -415,7 +448,7 @@ ___
 
 ▸ **updateEnergyBar**(): `void`
 
-*Defined in [ts/satellite.ts:291](https://github.com/WilliamRADFunk/planet-funk/blob/b718844/src/ts/satellite.ts#L291)*
+*Defined in [ts/satellite.ts:303](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/satellite.ts#L303)*
 
 Changes the size and color of the energy bar.
 

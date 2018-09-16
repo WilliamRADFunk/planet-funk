@@ -9,6 +9,8 @@ import {
     Scene,
     Vector3 } from "three";
 import { Collidable } from "./collidable";
+
+let index: number = 0;
 /**
  * @class
  * Projectile that represents missile unit in the game. It hits something, it blows up.
@@ -102,6 +104,7 @@ export class Projectile implements Collidable {
      * @hidden
      */
     constructor(scene: Scene, x1: number, z1: number, x2: number, z2: number, dist: number, color: Color) {
+        index++;
         this.scene = scene;
         this.originalStartingPoint = [x1, z1];
         this.currentPoint = [x1, z1];
@@ -128,6 +131,7 @@ export class Projectile implements Collidable {
         this.headMesh = new Mesh(this.headGeometry, this.headMaterial);
         this.headMesh.position.set(this.currentPoint[0], 0.21, this.currentPoint[1]);
         this.headMesh.rotation.set(-1.5708, 0, 0);
+        this.headMesh.name = `Projectile-${index}`;
         scene.add(this.headMesh);
     }
     /**
@@ -199,6 +203,13 @@ export class Projectile implements Collidable {
      */
     getCurrentPosition(): number[] {
         return [this.headMesh.position.x, this.headMesh.position.z];
+    }
+    /**
+     * Gets the name of the missile.
+     * @returns the name of the missile.
+     */
+    getName() {
+        return this.headMesh.name;
     }
     /**
      * Called when something collides with projectile blast radius, which does nothing unless it hasn't exploded yet.

@@ -43,6 +43,10 @@ export class Planet implements Collidable {
      */
     private base4: Base;
     /**
+     * Iterable list of the bases.
+     */
+    private bases: Base[];
+    /**
      * Keeps track of proper rotation amount to avoid the weird quarter rotation reset cycle.
      */
     private currentRotation: number = 0;
@@ -155,6 +159,7 @@ export class Planet implements Collidable {
         this.funk.add(meshes[0]);
         this.funk.add(meshes[1]);
         CollisionatorSingleton.add(this.base4);
+        this.bases = [this.base1, this.base2, this.base3, this.base4]
     }
     /**
      * Adds planet object to the three.js scene.
@@ -169,7 +174,10 @@ export class Planet implements Collidable {
     endCycle() {
         this.rotate();
         for (let i = 0; i < this.satellites.length; i++) {
-            this.satellites[i].endCycle();
+            this.satellites[i].endCycle(this.funk.rotation.y);
+        }
+        for (let j = 0; j < this.bases.length; j++) {
+            this.bases[j].endCycle(this.funk.rotation.y);
         }
     }
     /**
@@ -198,14 +206,21 @@ export class Planet implements Collidable {
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
     getCollisionRadius() {
-        return 0.5;
+        return 0.4;
     }
     /**
      * Gets the current position of the planet.
      * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
      */
     getCurrentPosition(): number[] {
-        return [this.funk.position.x, this.funk.position.z];
+        return [0, 0];
+    }
+    /**
+     * Gets the name of the planet.
+     * @returns the name of the planet.
+     */
+    getName() {
+        return this.funk.name;
     }
     /**
      * Called when something collides with asteroid, which destroys it.

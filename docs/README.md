@@ -119,6 +119,7 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 
 * ["index"](modules/_index_.md)
 * ["ts/asteroid"](modules/_ts_asteroid_.md)
+* ["ts/asteroid-generator"](modules/_ts_asteroid_generator_.md)
 * ["ts/base"](modules/_ts_base_.md)
 * ["ts/collidable"](modules/_ts_collidable_.md)
 * ["ts/collisionator"](modules/_ts_collisionator_.md)

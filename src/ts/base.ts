@@ -32,10 +32,6 @@ const positionArray: {ry: number; xb: number; zb: number;}[] = [
  */
 export class Base implements Collidable{
     /**
-     * Flag to signal if base has been destroyed or not. True = not destroyed. False = destroyed.
-     */
-    private isActive: boolean = true;
-    /**
      * Controls size and shape of the base
      */
     private buildingGeometry: BoxGeometry;
@@ -60,13 +56,26 @@ export class Base implements Collidable{
      */
     private buildingDead: Mesh;
     /**
+     * Keeps track of planet's rotation to help calc satellite's position.
+     */
+    currentRotation: number;
+    /**
+     * Number in the creation order. Needed later to scale energy bar.
+     */
+    index: number ;
+    /**
+     * Flag to signal if base has been destroyed or not. True = not destroyed. False = destroyed.
+     */
+    private isActive: boolean = true;
+    /**
      * Constructor for the Base class
      * @param index order of creation, used for position 1/2 o'clock and clockwise, and appearance.
      * @hidden
      */
     constructor(index: number) {
+        this.index = index;
         // Creates the bright, still alive, portion of the populated area.
-        this.buildingGeometry = new BoxGeometry(0.5, 0.1, 0.5);
+        this.buildingGeometry = new BoxGeometry(0.5, 0.0001, 0.5);
         this.buildingMaterial = new MeshPhongMaterial();
         this.buildingMaterial.map = ImageUtils.loadTexture(textureArray[index-1]);
         this.buildingMaterial.map.minFilter = LinearFilter;
@@ -74,7 +83,8 @@ export class Base implements Collidable{
         this.buildingMaterial.transparent = true;
         this.building = new Mesh(this.buildingGeometry, this.buildingMaterial);
         this.building.rotation.set(0, positionArray[index-1].ry, 0);
-        this.building.position.set(positionArray[index-1].xb, -0.1, positionArray[index-1].zb);
+        this.building.position.set(positionArray[index-1].xb, -0.0001, positionArray[index-1].zb);
+        this.building.name = `Base-${index}`;
         // Creates the dull, dead portion of the populated area. Initially not visible.
         this.buildingDeadGeometry = new BoxGeometry(0.5, 0.1, 0.5);
         this.buildingDeadMaterial = new MeshPhongMaterial();
@@ -88,7 +98,7 @@ export class Base implements Collidable{
         this.buildingDeadMaterial.opacity = 0.2;
         this.buildingDead = new Mesh(this.buildingDeadGeometry, this.buildingDeadMaterial);
         this.buildingDead.rotation.set(0, positionArray[index-1].ry, 0);
-        this.buildingDead.position.set(positionArray[index-1].xb, -0.1, positionArray[index-1].zb);
+        this.buildingDead.position.set(positionArray[index-1].xb, -0.0001, positionArray[index-1].zb);
         this.buildingDead.visible = false;
     }
     /**
@@ -98,6 +108,13 @@ export class Base implements Collidable{
     addToScene(scene: Scene): void {
         scene.add(this.building);
         scene.add(this.buildingDead);
+    }
+    /**
+     * At the end of each loop iteration, base updates planet's known rotation.
+     * @param rotation of planet to base current position off of.
+     */
+    endCycle(rotation: number): void {
+        this.currentRotation = rotation;
     }
     /**
      * Gets the viability of the base.
@@ -111,15 +128,36 @@ export class Base implements Collidable{
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
     getCollisionRadius() {
-        return 0.4;
+        return 0.25;
     }
     /**
      * Gets the current position of the base.
      * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
      */
     getCurrentPosition(): number[] {
-        // TODO: must calculate position with rotation reference from planet.
-        return [this.building.position.x, this.building.position.z];
+        let x, xb, z, zb, rot, cosRot, sinRot, satNum;
+        const satX = this.building.position.x;
+        const satZ = this.building.position.z;
+        if (this.index % 2 === 1) {
+            rot = -this.currentRotation;
+            satNum = this.index - 1;
+            cosRot = Math.cos(rot);
+            sinRot = Math.sin(rot);
+            xb = positionArray[satNum].xb;
+            zb = positionArray[satNum].zb;
+            x = (satX - xb) * cosRot - (satZ + zb) * sinRot + xb;
+            z = (satX - xb) * sinRot + (satZ + zb) * cosRot + xb;
+        } else {
+            rot = -this.currentRotation + 1.57079644;
+            satNum = this.index - 2;
+            cosRot = Math.cos(rot);
+            sinRot = Math.sin(rot);
+            xb = positionArray[satNum].xb;
+            zb = positionArray[satNum].zb;
+            x = (satX - xb) * cosRot - (satZ + zb) * sinRot + xb;
+            z = (satX - xb) * sinRot + (satZ + zb) * cosRot + xb;
+        }
+        return [x, z];
     }
     /**
      * Provides the created mesh so it can be added to the mesh of a parent object like the planet.
@@ -127,6 +165,13 @@ export class Base implements Collidable{
      */
     getMeshes(): Mesh[] {
         return [this.building, this.buildingDead];
+    }
+    /**
+     * Gets the name of the base.
+     * @returns the name of the base.
+     */
+    getName() {
+        return this.building.name;
     }
     /**
      * Called when something collides with base, which destroys it.

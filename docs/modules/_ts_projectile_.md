@@ -8,5 +8,21 @@
 
 * [Projectile](../classes/_ts_projectile_.projectile.md)
 
+### Variables
+
+* [index](_ts_projectile_.md#index)
+
 ---
+
+## Variables
+
+<a id="index"></a>
+
+### `<Let>` index
+
+**● index**: *`number`* = 0
+
+*Defined in [ts/projectile.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/projectile.ts#L13)*
+
+___
 

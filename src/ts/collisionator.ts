@@ -28,6 +28,8 @@ class Collisionator {
             for (let j = i+1; j < this.collisionItems.length; j++) {
                 if (!this.collisionItems[j].getActive()) continue;
                 if (this.collisionItems[i].isPassive() && this.collisionItems[j].isPassive()) continue;
+                if (!this.collisionItems[i].getName().indexOf('explosion') &&
+                    !this.collisionItems[j].getName().indexOf('explosion')) continue;
                 const posI = this.collisionItems[i].getCurrentPosition();
                 const posJ = this.collisionItems[j].getCurrentPosition();
                 const radI = this.collisionItems[i].getCollisionRadius();
@@ -37,9 +39,9 @@ class Collisionator {
                     (posJ[1] - posI[1]) * (posJ[1] - posI[1])
                 );
                 if (radI + radJ > dist) {
-                    console.log('Boom!');
                     const entityI = this.collisionItems[i];
                     const entityJ = this.collisionItems[j];
+                    console.log('Boom!', entityI.getName(), entityJ.getName());
                     if (entityI.impact(entityI) &&
                     typeof entityI.removeFromScene === 'function') {
                         entityI.removeFromScene(scene);

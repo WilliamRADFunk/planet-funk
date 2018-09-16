@@ -62,6 +62,7 @@ export class Asteroid implements Collidable {
     private totalDistance: number;
     /**
      * Constructor for the Asteroid class
+     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param x1    origin point x of where the asteroid starts.
      * @param z1    origin point z of where the asteroid starts.
      * @hidden
@@ -84,7 +85,7 @@ export class Asteroid implements Collidable {
         this.asteroidMaterial.shininess = 0;
         this.asteroidMaterial.transparent = true;
         this.asteroid = new Mesh(this.asteroidGeometry, this.asteroidMaterial);
-        this.asteroid.position.set(this.currentPoint[0], 0.21, this.currentPoint[1]);
+        this.asteroid.position.set(this.currentPoint[0], 0, this.currentPoint[1]);
         this.asteroid.rotation.set(-1.5708, 0, 0);
         this.asteroid.name = `Asteroid-${index}`;
     }
@@ -117,7 +118,6 @@ export class Asteroid implements Collidable {
      */
     endCycle(): boolean {
         if (this.explosion) {
-            console.log('here', this.explosion.getActive());
             if (!this.explosion.endCycle()) {
                 CollisionatorSingleton.remove(this.explosion);
                 this.scene.remove(this.explosion.getMesh());
@@ -150,6 +150,13 @@ export class Asteroid implements Collidable {
      */
     getCurrentPosition(): number[] {
         return [this.asteroid.position.x, this.asteroid.position.z];
+    }
+    /**
+     * Gets the name of the asteroid.
+     * @returns the name of the asteroid.
+     */
+    getName() {
+        return this.asteroid.name;
     }
     /**
      * Called when something collides with asteroid, which destroys it.
