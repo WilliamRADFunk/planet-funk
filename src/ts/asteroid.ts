@@ -2,6 +2,7 @@ import { CircleGeometry, ImageUtils, LinearFilter, Mesh, MeshPhongMaterial, Scen
 
 import { Collidable } from "./collidable";
 import { CollisionatorSingleton } from "./collisionator";
+import { Explosion } from "./explosion";
 
 let index: number = 0;
 
@@ -10,11 +11,6 @@ let index: number = 0;
  * Slow moving debris object that is sometimes on the path towards planet.
  */
 export class Asteroid implements Collidable {
-    /**
-     * Flag to signal if asteroid has been destroyed or not.
-     * True = not destroyed. False = destroyed.
-     */
-    private isActive: boolean = true;
     /**
      * Controls size and shape of the asteroid
      */
@@ -28,14 +24,59 @@ export class Asteroid implements Collidable {
      */
     private asteroid: Mesh;
     /**
+     * Keeps track of the x,z point the asteroid is at currently.
+     */
+    private currentPoint: number[];
+    /**
+     * Tracks the distance traveled thus far to update the calculateNextPoint calculation.
+     */
+    private distanceTraveled: number;
+    /**
+     * Keeps track of the x,z point of asteroid's destination point.
+     */
+    private endingPoint: number[];
+    /**
+     * Explosion from impacted asteroid
+     */
+    private explosion: Explosion;
+    /**
+     * Flag to signal if asteroid has been destroyed or not.
+     * True = not destroyed. False = destroyed.
+     */
+    private isActive: boolean = true;
+    /**
+     * Keeps track of the x,z point where asteroid fired from.
+     */
+    private originalStartingPoint: number[];
+    /**
+     * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
+     */
+    private scene: Scene;
+    /**
+     * The speed at which the asteroid travels.
+     */
+    private speed: number = 0.005;
+    /**
+     * The total distance from asteroid to planet.
+     */
+    private totalDistance: number;
+    /**
      * Constructor for the Asteroid class
-     * @param x coordinate on x-axis where asteroid should instantiate.
-     * @param z coordinate on z-axis where asteroid should instantiate.
+     * @param x1    origin point x of where the asteroid starts.
+     * @param z1    origin point z of where the asteroid starts.
      * @hidden
      */
-    constructor(x:number, z: number) {
+    constructor(scene: Scene, x1:number, z1: number) {
         index++;
-        // The Planet: its water, landmasses, and textured elevations.
+        this.originalStartingPoint = [x1, z1];
+        this.currentPoint = [x1, z1];
+        this.endingPoint = [0, 0];
+        this.totalDistance = Math.sqrt((x1 * x1) + (z1 * z1));
+        this.distanceTraveled = 0;
+        // Calculates the first (second vertices) point.
+        this.calculateNextPoint();
+
+        this.scene = scene;
 		this.asteroidGeometry = new CircleGeometry(0.2, 16, 16);
         this.asteroidMaterial = new MeshPhongMaterial();
         this.asteroidMaterial.map = ImageUtils.loadTexture('assets/images/asteroid.png');
@@ -43,16 +84,51 @@ export class Asteroid implements Collidable {
         this.asteroidMaterial.shininess = 0;
         this.asteroidMaterial.transparent = true;
         this.asteroid = new Mesh(this.asteroidGeometry, this.asteroidMaterial);
-        this.asteroid.position.set(x, -1, z);
+        this.asteroid.position.set(this.currentPoint[0], 0.21, this.currentPoint[1]);
         this.asteroid.rotation.set(-1.5708, 0, 0);
         this.asteroid.name = `Asteroid-${index}`;
     }
     /**
      * Adds asteroid object to the three.js scene.
-     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      */
-    addToScene(scene: Scene): void {
-        scene.add(this.asteroid);
+    addToScene(): void {
+        this.scene.add(this.asteroid);
+    }
+    /**
+     * Calculates the next point in the missile's point.
+     */
+    private calculateNextPoint(): void {
+        this.distanceTraveled += this.speed;
+        // (xt, yt) = ( ( (1 − t) * x0 + t * x1 ), ( (1 − t) * y0 + t * y1) )
+        const t = this.distanceTraveled / this.totalDistance;
+        this.currentPoint[0] = ((1 - t) * this.originalStartingPoint[0]) + (t * this.endingPoint[0]);
+        this.currentPoint[1] = ((1 - t) * this.originalStartingPoint[1]) + (t * this.endingPoint[1]);
+    }
+    /**
+     * Creates an explosion during collision and adds it to the collildables list.
+     */
+    createExplosion() {
+        this.explosion = new Explosion(this.scene, this.asteroid.position.x, this.asteroid.position.z, 0.2);
+        CollisionatorSingleton.add(this.explosion);
+    }
+    /**
+     * At the end of each loop iteration, move the asteroid a little.
+     * @returns whether or not the asteroid is done, and should be removed from list.
+     */
+    endCycle(): boolean {
+        if (this.explosion) {
+            console.log('here', this.explosion.getActive());
+            if (!this.explosion.endCycle()) {
+                CollisionatorSingleton.remove(this.explosion);
+                this.scene.remove(this.explosion.getMesh());
+                this.explosion = null;
+                return false;
+            }
+        } else {
+            this.calculateNextPoint();
+            this.asteroid.position.set(this.currentPoint[0], -0.2, this.currentPoint[1]);
+        }
+        return true;
     }
     /**
      * Gets the viability of the object.
@@ -86,6 +162,7 @@ export class Asteroid implements Collidable {
             this.isActive = false;
             this.asteroid.visible = false;
             CollisionatorSingleton.remove(self);
+            this.createExplosion();
             return true;
         }
         return false;
@@ -102,6 +179,6 @@ export class Asteroid implements Collidable {
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      */
     removeFromScene(scene: Scene): void {
-        scene.remove(this.asteroid);
+        this.scene.remove(this.asteroid);
     }
 }

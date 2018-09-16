@@ -12,6 +12,7 @@ import sassLint from 'gulp-sass-lint';
 import typedoc from 'gulp-typedoc';
 import browserify from 'browserify';
 import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
 
 gulp.task('clean:dist', () => {
 gutil.log('== Cleaning dist ==');
@@ -25,7 +26,7 @@ gulp.task('clean:docs', () => {
 
 gulp.task('clean:temp', () => {
   gutil.log('== Cleaning temp ==');
-  return del(['dist/js-pure/']);
+  return del(['dist/js-pure/*.*']);
 });
 
 gulp.task('readme', () => {
@@ -124,6 +125,7 @@ gulp.task('bundle', () => {
       .on('error', gutil.log)
     .pipe(source('bundle.js'))
       .on('error', gutil.log)
+    .pipe(buffer())
     .pipe(gulp.dest('./dist/js-pure/'))
 });
  
@@ -132,8 +134,7 @@ gulp.task('fuglify', () => {
   return gulp.src('dist/js-pure/bundle.js')
     .pipe(uglify())
       .on('error', gutil.log)
-    .pipe(gulp.dest('dist/js'))
-    .pipe(connect.reload());
+    .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('sass', () => {
@@ -150,6 +151,10 @@ gulp.task('sass', () => {
     .pipe(connect.reload())
 });
 
+gulp.task('scripts:reload', (callback) => {
+  gulpSequence('clean:temp', 'typescript', 'bundle', 'fuglify', 'reload')(callback);
+});
+
 gulp.task('connect', () => {
   gutil.log('== Opening live reload server ==');
   connect.server({
@@ -158,9 +163,15 @@ gulp.task('connect', () => {
   })
 });
 
+gulp.task('reload', () => {
+  gutil.log('== reloading ==');
+  return gulp.src('dist/index.html')
+    .pipe(connect.reload());
+});
+
 gulp.task('watch', () => {
   gulp.watch('src/assets/**/*', ['assets']);
-  gulp.watch('src/**/*.ts', gulpSequence('clean:temp', 'typescript', 'bundle', 'fuglify'));
+  gulp.watch('src/ts/*.ts', ['scripts:reload']);
   gulp.watch('src/scss/**/*.scss', ['sass']);
   gulp.watch('src/index.html', ['html']);
 });

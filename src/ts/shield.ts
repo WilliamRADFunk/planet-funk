@@ -144,7 +144,7 @@ export class Shield implements Collidable {
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
     getCollisionRadius() {
-        return 1;
+        return 0.9;
     }
     /**
      * Gets the current position of the collidable object.
