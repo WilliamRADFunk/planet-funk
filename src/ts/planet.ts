@@ -63,6 +63,11 @@ export class Planet implements Collidable {
      */
     private funk: Mesh;
     /**
+     * Flag to signal if player has been defeated or not.
+     * True = not defeated. False = defeated.
+     */
+    private isActive: boolean = true;
+    /**
      * Populated section of the planet. Once hit, false signifies inactive.
      */
     private quadrantBlue: boolean = true;
@@ -179,6 +184,17 @@ export class Planet implements Collidable {
         for (let j = 0; j < this.bases.length; j++) {
             this.bases[j].endCycle(this.funk.rotation.y);
         }
+        if (this.isActive) {
+            this.quadrantBlue = this.base1.getActive();
+            this.quadrantGreen = this.base2.getActive();
+            this.quadrantPurple = this.base3.getActive();
+            this.quadrantYellow = this.base4.getActive();
+            this.isActive = this.quadrantBlue || this.quadrantGreen || this.quadrantPurple || this.quadrantYellow;
+            if (!this.isActive) {
+                this.funkMaterial.map = ImageUtils.loadTexture('assets/images/funkmap1k_modified_dead.jpg');
+                this.funkMaterial.needsUpdate = true;
+            }
+        }
     }
     /**
      * If it's determined that player wanted to fire a weapon, find closest charged satellite to click point,
@@ -187,12 +203,14 @@ export class Planet implements Collidable {
      * @param point point with x,z coordinates where player click mouse on game area.
      */
     fire(scene: Scene, point: Vector3) {
-        const distancesToTarget: number[] = [];
-        for (let i = 0; i < 4; i++) {
-            distancesToTarget.push(this.satellites[i].getDistanceToTarget(point, this.funk.rotation.y));
+        if (this.isActive) {
+            const distancesToTarget: number[] = [];
+            for (let i = 0; i < 4; i++) {
+                distancesToTarget.push(this.satellites[i].getDistanceToTarget(point, this.funk.rotation.y));
+            }
+            const indexOfMinValue = distancesToTarget.reduce((iMin, x, i, arr) => x < arr[iMin] ? i : iMin, 0);
+            this.satellites[indexOfMinValue].fire(scene, point);
         }
-        const indexOfMinValue = distancesToTarget.reduce((iMin, x, i, arr) => x < arr[iMin] ? i : iMin, 0);
-        this.satellites[indexOfMinValue].fire(scene, point);
     }
     /**
      * Gets the viability of the planet, which will always be true..
@@ -235,17 +253,18 @@ export class Planet implements Collidable {
      * @returns percentage of productivity the remaining quadrants can produce for shields.
      */
     getPowerRegenRate(): number {
+        if (!this.isActive) return -5;
         let rate = 0;
-        if (this.base1.getActive()) {
+        if (this.quadrantBlue) {
             rate += 0.25;
         }
-        if (this.base2.getActive()) {
+        if (this.quadrantGreen) {
             rate += 0.25;
         }
-        if (this.base3.getActive()) {
+        if (this.quadrantPurple) {
             rate += 0.25;
         }
-        if (this.base4.getActive()) {
+        if (this.quadrantYellow) {
             rate += 0.25;
         }
         return rate;
