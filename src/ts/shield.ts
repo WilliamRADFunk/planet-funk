@@ -110,7 +110,7 @@ export class Shield implements Collidable {
     /**
      * At the end of each loop iteration, planet expends energy if the shield is up,
      * and regains it by a percentage depending on how many planet quadrant are intact.
-     * @param percentRecharge 0.25, 0.5, 0.75, 1 to be multipled against shield energy recharge amount
+     * @param percentRecharge 0, 0.25, 0.5, 0.75, 1 to be multipled against shield energy recharge amount
      */
     endCycle(percentRecharge: number): void {
         // Add or substrat energy depending on state of shield.
@@ -163,10 +163,11 @@ export class Shield implements Collidable {
     /**
      * Called when something collides with shield, which consumes energy.
      * @param self the thing to remove from collidables...and scene.
+     * @param otherThing   the name of the other thing in collision (mainly for explosions -- shouldn't reduce energy).
      * @returns whether or not impact means removing item from the scene.
      */
-    impact(self: Collidable): boolean {
-        if (this.isActive) {
+    impact(self: Collidable, otherThing: string): boolean {
+        if (this.isActive && otherThing.indexOf('explosion')) {
             this.energyLevel -= 100;
         }
         if (this.energyLevel < 0) {

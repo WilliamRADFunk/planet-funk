@@ -129,7 +129,7 @@ export class Base implements Collidable{
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
     getCollisionRadius() {
-        return 0.25;
+        return 0.20;
     }
     /**
      * Gets the current position of the base.

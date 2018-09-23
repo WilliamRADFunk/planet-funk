@@ -22,7 +22,7 @@
 
 **● index**: *`number`* = 0
 
-*Defined in [ts/asteroid.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/2379c53/src/ts/asteroid.ts#L7)*
+*Defined in [ts/asteroid.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/ab63c66/src/ts/asteroid.ts#L7)*
 
 ___
 

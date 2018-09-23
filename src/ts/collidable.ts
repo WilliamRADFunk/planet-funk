@@ -23,10 +23,11 @@ export interface Collidable {
     getName: () => string;
     /**
      * Call to collidable object that it has been struck.
-     * @param self the thing to remove from collidables...and scene.
+     * @param self              the thing to remove from collidables...and scene.
+     * @param otherCollidable   the name of the other thing in collision (mainly for shield).
      * @returns whether or not impact means removing item from the scene.
      */
-    impact: (self: Collidable) => boolean;
+    impact: (self: Collidable, otherCollidable?: string) => boolean;
     /**
      * States it is a passive type or not. Two passive types cannot colllide with each other.
      * @returns True is passive | False is not passive

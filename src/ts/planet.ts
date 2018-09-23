@@ -236,16 +236,16 @@ export class Planet implements Collidable {
      */
     getPowerRegenRate(): number {
         let rate = 0;
-        if (this.quadrantBlue) {
+        if (this.base1.getActive()) {
             rate += 0.25;
         }
-        if (this.quadrantGreen) {
+        if (this.base2.getActive()) {
             rate += 0.25;
         }
-        if (this.quadrantPurple) {
+        if (this.base3.getActive()) {
             rate += 0.25;
         }
-        if (this.quadrantYellow) {
+        if (this.base4.getActive()) {
             rate += 0.25;
         }
         return rate;
@@ -256,10 +256,10 @@ export class Planet implements Collidable {
      */
     getStatus(): PlanetStatus {
         return {
-            quadrantBlue: true,
-            quadrantGreen: true,
-            quadrantPurple: true,
-            quadrantYellow: true,
+            quadrantBlue: this.quadrantBlue,
+            quadrantGreen: this.quadrantGreen,
+            quadrantPurple: this.quadrantPurple,
+            quadrantYellow: this.quadrantYellow,
         };
     }
     /**

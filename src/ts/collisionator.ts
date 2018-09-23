@@ -44,11 +44,11 @@ class Collisionator {
                 );
                 if (radI + radJ > dist) {
                     console.log('Boom!', entityI.getName(), entityJ.getName());
-                    if (entityI.impact(entityI) &&
+                    if (entityI.impact(entityI, entityJ.getName()) &&
                     typeof entityI.removeFromScene === 'function') {
                         entityI.removeFromScene(scene);
                     }
-                    if (entityJ.impact(entityJ) &&
+                    if (entityJ.impact(entityJ, entityI.getName()) &&
                     typeof entityJ.removeFromScene === 'function') {
                         entityJ.removeFromScene(scene);
                     }

@@ -107,10 +107,11 @@ export class Asteroid implements Collidable {
     }
     /**
      * Creates an explosion during collision and adds it to the collildables list.
+     * @param isInert flag to let explosion know it isn't a 'real' explosion (hit shield).
      */
-    createExplosion() {
-        this.explosion = new Explosion(this.scene, this.asteroid.position.x, this.asteroid.position.z, 0.2);
-        CollisionatorSingleton.add(this.explosion);
+    createExplosion(isInert: boolean) {
+        this.explosion = new Explosion(this.scene, this.asteroid.position.x, this.asteroid.position.z, 0.2, isInert);
+        if (!isInert) CollisionatorSingleton.add(this.explosion);
     }
     /**
      * At the end of each loop iteration, move the asteroid a little.
@@ -160,15 +161,16 @@ export class Asteroid implements Collidable {
     }
     /**
      * Called when something collides with asteroid, which destroys it.
-     * @param self the thing to remove from collidables...and scene.
+     * @param self         the thing to remove from collidables...and scene.
+     * @param otherThing   the name of the other thing in collision (mainly for shield).
      * @returns whether or not impact means removing item from the scene.
      */
-    impact(self: Collidable): boolean {
+    impact(self: Collidable, otherThing: string): boolean {
         if (this.isActive) {
             this.isActive = false;
             this.asteroid.visible = false;
             CollisionatorSingleton.remove(self);
-            this.createExplosion();
+            this.createExplosion(!otherThing.indexOf('Shield'));
             return true;
         }
         return false;
