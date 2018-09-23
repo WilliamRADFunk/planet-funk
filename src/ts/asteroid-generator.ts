@@ -45,12 +45,22 @@ export class AsteroidGenerator {
      * @returns the created asteroid to be added to list at index of choice.
      */
     makeAsteroid() {
+        const altRand = Math.random();
         const isXNegative = Math.random() < 0.5 ? -1 : 1;
         const isZNegative = Math.random() < 0.5 ? -1 : 1;
-        const asteroid = new Asteroid(
-            this.scene,
-            isXNegative * ((Math.random() * 10) + 8),
-            isZNegative * ((Math.random() * 10) + 8));
+        let asteroid;
+        if (altRand > 0.15) {
+            asteroid = new Asteroid(
+                this.scene,
+                isXNegative * ((Math.random() * 10) + 8),
+                isZNegative * ((Math.random() * 10) + 8));
+        } else if (altRand > 0.075) {
+            asteroid = new Asteroid(
+                this.scene, 1 * isXNegative, isZNegative * ((Math.random() * 10) + 8));
+        } else {
+            asteroid = new Asteroid(
+                this.scene, isXNegative * ((Math.random() * 10) + 8), 1 * isZNegative);
+        }
         asteroid.addToScene();
         CollisionatorSingleton.add(asteroid);
         return asteroid;
