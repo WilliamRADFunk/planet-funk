@@ -94,17 +94,19 @@ export class Projectile implements Collidable {
     private totalDistance: number;
     /**
      * Constructor for the Projectile class
-     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     * @param x1    origin point x of where the missile starts.
-     * @param z1    origin point z of where the missile starts.
-     * @param x2    final point x of where the missile starts.
-     * @param z2    final point z of where the missile starts.
-     * @param dist  total distance the missile must travel.
-     * @param color color of the missile's fiery tail (matches satellite body color from which it came).
+     * @param scene              graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param x1                 origin point x of where the missile starts.
+     * @param z1                 origin point z of where the missile starts.
+     * @param x2                 final point x of where the missile starts.
+     * @param z2                 final point z of where the missile starts.
+     * @param dist               total distance the missile must travel.
+     * @param color              color of the missile's fiery tail (matches satellite body color from which it came).
+     * @param colllidableAtBirth Enemy missiles need to be destructable before hitting target, where player's don't.
      * @hidden
      */
-    constructor(scene: Scene, x1: number, z1: number, x2: number, z2: number, dist: number, color: Color) {
+    constructor(scene: Scene, x1: number, z1: number, x2: number, z2: number, dist: number, color: Color, colllidableAtBirth?: boolean) {
         index++;
+        this.isCollidable = !!colllidableAtBirth;
         this.scene = scene;
         this.originalStartingPoint = [x1, z1];
         this.currentPoint = [x1, z1];

@@ -23,12 +23,12 @@
 
 **● positionArray**: *`object`[]* =  [
     {xb: 0.49, zb: -0.49, ry: -0.785398},
-    {xb: 0.48, zb: 0.48, ry: -2.35619},
+    {xb: 0.49, zb: 0.49, ry: -2.35619},
     {xb: -0.49, zb: 0.49, ry: 2.35619},
     {xb: -0.49, zb: -0.49, ry: 0.785398}
 ]
 
-*Defined in [ts/base.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/base.ts#L23)*
+*Defined in [ts/base.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/2379c53/src/ts/base.ts#L24)*
 
 Makes instatiateing the base's position by index easier and cleaner to read.
 
@@ -44,7 +44,7 @@ ___
     'assets/images/building4.png'
 ]
 
-*Defined in [ts/base.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/793a093/src/ts/base.ts#L14)*
+*Defined in [ts/base.ts:15](https://github.com/WilliamRADFunk/planet-funk/blob/2379c53/src/ts/base.ts#L15)*
 
 Makes instatiateing the base's texture by index easier and cleaner to read.
 
