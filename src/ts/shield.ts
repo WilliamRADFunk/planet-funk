@@ -167,7 +167,10 @@ export class Shield implements Collidable {
      */
     impact(self: Collidable): boolean {
         if (this.isActive) {
-            this.energyLevel -= 250;
+            this.energyLevel -= 100;
+        }
+        if (this.energyLevel < 0) {
+            this.energyLevel = 0;
         }
         return false;
     }

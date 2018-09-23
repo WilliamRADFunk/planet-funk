@@ -26,21 +26,23 @@ class Collisionator {
         for (let i = 0; i < this.collisionItems.length; i++) {
             if (!this.collisionItems[i].getActive()) continue;
             for (let j = i+1; j < this.collisionItems.length; j++) {
-                if (!this.collisionItems[j].getActive()) continue;
-                if (this.collisionItems[i].isPassive() && this.collisionItems[j].isPassive()) continue;
-                if (!this.collisionItems[i].getName().indexOf('explosion') &&
-                    !this.collisionItems[j].getName().indexOf('explosion')) continue;
-                const posI = this.collisionItems[i].getCurrentPosition();
-                const posJ = this.collisionItems[j].getCurrentPosition();
-                const radI = this.collisionItems[i].getCollisionRadius();
-                const radJ = this.collisionItems[j].getCollisionRadius();
+                const entityI = this.collisionItems[i];
+                const entityJ = this.collisionItems[j];
+                if (!entityJ.getActive()) continue;
+                if (entityI.isPassive() && entityJ.isPassive()) continue;
+                if (!entityI.getName().indexOf('explosion') &&
+                    !entityJ.getName().indexOf('explosion')) continue;
+                if (!entityI.getName().indexOf('Asteroid') &&
+                    !entityJ.getName().indexOf('Asteroid')) continue;
+                const posI = entityI.getCurrentPosition();
+                const posJ = entityJ.getCurrentPosition();
+                const radI = entityI.getCollisionRadius();
+                const radJ = entityJ.getCollisionRadius();
                 const dist = Math.sqrt(
                     (posJ[0] - posI[0]) * (posJ[0] - posI[0]) +
                     (posJ[1] - posI[1]) * (posJ[1] - posI[1])
                 );
                 if (radI + radJ > dist) {
-                    const entityI = this.collisionItems[i];
-                    const entityJ = this.collisionItems[j];
                     console.log('Boom!', entityI.getName(), entityJ.getName());
                     if (entityI.impact(entityI) &&
                     typeof entityI.removeFromScene === 'function') {

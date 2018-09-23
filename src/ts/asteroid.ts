@@ -165,7 +165,6 @@ export class Asteroid implements Collidable {
      */
     impact(self: Collidable): boolean {
         if (this.isActive) {
-            console.log('kaboom!');
             this.isActive = false;
             this.asteroid.visible = false;
             CollisionatorSingleton.remove(self);

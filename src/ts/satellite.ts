@@ -219,29 +219,9 @@ export class Satellite implements Collidable {
      * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
      */
     getCurrentPosition(): number[] {
-        let x, xb, z, zb, rot, cosRot, sinRot, satNum;
-        const satX = this.satelliteBody.position.x;
-        const satZ = this.satelliteBody.position.z;
-        if (this.index % 2 === 1) {
-            rot = -this.currentRotation;
-            satNum = this.index - 1;
-            cosRot = Math.cos(rot);
-            sinRot = Math.sin(rot);
-            xb = positionArray[satNum].xb;
-            zb = positionArray[satNum].zb;
-            x = (satX - xb) * cosRot - (satZ + zb) * sinRot + xb;
-            z = (satX - xb) * sinRot + (satZ + zb) * cosRot + xb;
-        } else {
-            rot = -this.currentRotation + 1.57079644;
-            satNum = this.index - 2;
-            cosRot = Math.cos(rot);
-            sinRot = Math.sin(rot);
-            xb = positionArray[satNum].xb;
-            zb = positionArray[satNum].zb;
-            x = (satX - xb) * cosRot - (satZ + zb) * sinRot + xb;
-            z = (satX - xb) * sinRot + (satZ + zb) * cosRot + xb;
-        }
-        return [x, z];
+        const position = new Vector3();
+        position.setFromMatrixPosition( this.satelliteBody.matrixWorld );
+        return [position.x, position.z];
     }
     /**
      * Calculate distance "as the crow flies" from satellite to target.

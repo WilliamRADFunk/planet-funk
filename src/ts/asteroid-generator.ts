@@ -11,7 +11,7 @@ export class AsteroidGenerator {
     /**
      * Maximum number of asteroids that can exist at one time.
      */
-    maxAsteroids: number = 20;
+    maxAsteroids: number = 50;
     /**
      * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
      */
@@ -49,8 +49,8 @@ export class AsteroidGenerator {
         const isZNegative = Math.random() < 0.5 ? -1 : 1;
         const asteroid = new Asteroid(
             this.scene,
-            isXNegative * ((Math.random() * 12) + 8),
-            isZNegative * ((Math.random() * 12) + 8));
+            isXNegative * ((Math.random() * 10) + 8),
+            isZNegative * ((Math.random() * 10) + 8));
         asteroid.addToScene();
         CollisionatorSingleton.add(asteroid);
         return asteroid;

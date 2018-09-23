@@ -5,7 +5,8 @@ import {
     LinearFilter,
     Mesh,
     MeshPhongMaterial,
-    Scene } from "three";
+    Scene,
+    Vector3 } from "three";
 import { Collidable } from "./collidable";
 import { CollisionatorSingleton } from './collisionator';
 /**
@@ -22,7 +23,7 @@ const textureArray: string[] = [
  */
 const positionArray: {ry: number; xb: number; zb: number;}[] = [
     {xb: 0.49, zb: -0.49, ry: -0.785398},
-    {xb: 0.48, zb: 0.48, ry: -2.35619},
+    {xb: 0.49, zb: 0.49, ry: -2.35619},
     {xb: -0.49, zb: 0.49, ry: 2.35619},
     {xb: -0.49, zb: -0.49, ry: 0.785398}
 ];
@@ -135,29 +136,9 @@ export class Base implements Collidable{
      * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
      */
     getCurrentPosition(): number[] {
-        let x, xb, z, zb, rot, cosRot, sinRot, satNum;
-        const satX = this.building.position.x;
-        const satZ = this.building.position.z;
-        if (this.index % 2 === 1) {
-            rot = -this.currentRotation;
-            satNum = this.index - 1;
-            cosRot = Math.cos(rot);
-            sinRot = Math.sin(rot);
-            xb = positionArray[satNum].xb;
-            zb = positionArray[satNum].zb;
-            x = (satX - xb) * cosRot - (satZ + zb) * sinRot + xb;
-            z = (satX - xb) * sinRot + (satZ + zb) * cosRot + xb;
-        } else {
-            rot = -this.currentRotation + 1.57079644;
-            satNum = this.index - 2;
-            cosRot = Math.cos(rot);
-            sinRot = Math.sin(rot);
-            xb = positionArray[satNum].xb;
-            zb = positionArray[satNum].zb;
-            x = (satX - xb) * cosRot - (satZ + zb) * sinRot + xb;
-            z = (satX - xb) * sinRot + (satZ + zb) * cosRot + xb;
-        }
-        return [x, z];
+        const position = new Vector3();
+        position.setFromMatrixPosition( this.building.matrixWorld );
+        return [position.x, position.z];
     }
     /**
      * Provides the created mesh so it can be added to the mesh of a parent object like the planet.
