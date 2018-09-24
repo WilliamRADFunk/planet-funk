@@ -5,10 +5,12 @@ import { CollisionatorSingleton } from './collisionator';
 import { Planet } from './planet';
 import { Shield } from './shield';
 import { AsteroidGenerator } from './asteroid-generator';
+import { Score } from './score';
 /**
  * Placeholder function typically used to initiate the applications loop.
  */
 export default () => {
+    let isGameLive = true;
     // Establish initial window size.
     let WIDTH: number = window.innerWidth * 0.99;
     let HEIGHT: number = window.innerHeight * 0.99;
@@ -96,15 +98,26 @@ export default () => {
             });
         }
     };
+    const scoreboard = new Score(scene);
     const asteroidGenerator = new AsteroidGenerator(scene);
+    let counter = 0;
     /**
      * The render loop. Everything that should be checked, called, or drawn in each animation frame.
      */
     const render = () => {
+        counter++;
+        if (counter > 10000) counter = 0;
+        // Checks to make sure game isn't over.
+        if (isGameLive && counter % 60 === 0) {
+            const status = planet.getStatus();
+            isGameLive = status.quadrantBlue || status.quadrantGreen || status.quadrantPurple || status.quadrantYellow;
+        }
         CollisionatorSingleton.checkForCollisions(scene);
         asteroidGenerator.endCycle();
         planet.endCycle();
         shield.endCycle(planet.getPowerRegenRate());
+        // If game is over, stop increasing the score.
+        if (isGameLive) scoreboard.endCycle();
         renderer.render( scene, camera );
 	    requestAnimationFrame( render );
     };
