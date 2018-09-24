@@ -2,7 +2,7 @@ import { Font, FontLoader, Mesh, MeshLambertMaterial, Scene, TextGeometry } from
 
 const loader = new FontLoader();
 let scoreFont: Font;
-loader.load( 'https://raw.githack.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', font => {
+loader.load( 'assets/fonts/optimer_regular.typeface.json', font => {
     scoreFont = font;
 });
 
