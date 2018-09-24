@@ -26,7 +26,7 @@ gulp.task('clean:docs', () => {
 
 gulp.task('clean:temp', () => {
   gutil.log('== Cleaning temp ==');
-  return del(['dist/js-pure/*.*']);
+  return del(['dist/js-pure/**/*.*']);
 });
 
 gulp.task('readme', () => {
