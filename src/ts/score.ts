@@ -34,23 +34,25 @@ export class Score {
      */
     constructor(scene: Scene) {
         this.scene = scene;
-        this.scoreGeometry = new TextGeometry(`Score: ${this.currentScore.toFixed(0)}`,
-            {
-                font: scoreFont,
-                size: 0.5,
-                height: 0.2,
-                curveSegments: 12,
-                bevelEnabled: false,
-                bevelThickness: 1,
-                bevelSize: 0.5,
-                bevelSegments: 3
-            });
-        this.scoreMaterial = new MeshLambertMaterial( {color: 0x084E70} );
-        this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
-        this.score.position.x = -1.25;
-        this.score.position.y = -0.5;
-        this.score.position.z = -3.5;
-        this.score.rotation.x = -1.3708;
+        if (scoreFont) {
+            this.scoreGeometry = new TextGeometry(`Score: ${this.currentScore.toFixed(0)}`,
+                {
+                    font: scoreFont,
+                    size: 0.5,
+                    height: 0.2,
+                    curveSegments: 12,
+                    bevelEnabled: false,
+                    bevelThickness: 1,
+                    bevelSize: 0.5,
+                    bevelSegments: 3
+                });
+            this.scoreMaterial = new MeshLambertMaterial( {color: 0x084E70} );
+            this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
+            this.score.position.x = -1.25;
+            this.score.position.y = -0.5;
+            this.score.position.z = -3.5;
+            this.score.rotation.x = -1.3708;
+        }
         scene.add(this.score);
     }
     /**
@@ -58,23 +60,25 @@ export class Score {
      */
     endCycle(): void {
         this.currentScore += 0.01;
-        this.scene.remove(this.score);
-        this.scoreGeometry = new TextGeometry(`Score: ${this.currentScore.toFixed(0)}`,
-            {
-                font: scoreFont,
-                size: 0.5,
-                height: 0.2,
-                curveSegments: 12,
-                bevelEnabled: false,
-                bevelThickness: 1,
-                bevelSize: 0.5,
-                bevelSegments: 3
-            });
-        this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
-        this.score.position.x = -1.25;
-        this.score.position.y = -0.5;
-        this.score.position.z = -3.5;
-        this.score.rotation.x = -1.3708;
-        this.scene.add(this.score);
+        if (scoreFont && this.score) {
+            this.scene.remove(this.score);
+            this.scoreGeometry = new TextGeometry(`Score: ${this.currentScore.toFixed(0)}`,
+                {
+                    font: scoreFont,
+                    size: 0.5,
+                    height: 0.2,
+                    curveSegments: 12,
+                    bevelEnabled: false,
+                    bevelThickness: 1,
+                    bevelSize: 0.5,
+                    bevelSegments: 3
+                });
+            this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
+            this.score.position.x = -1.25;
+            this.score.position.y = -0.5;
+            this.score.position.z = -3.5;
+            this.score.rotation.x = -1.3708;
+            this.scene.add(this.score);
+        }
     }
 }
