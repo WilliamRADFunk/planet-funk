@@ -127,7 +127,7 @@ export class Satellite implements Collidable {
         this.satelliteWingsGeometry = new BoxGeometry(positionArray[index-1].xc, 0.001, positionArray[index-1].zc);
         this.satelliteWingsMaterial = new MeshBasicMaterial({color: 0x555555});
         this.satelliteWings = new Mesh(this.satelliteWingsGeometry, this.satelliteWingsMaterial);
-        this.satelliteWings.position.y -= 0.05;
+        this.satelliteWings.position.y += 0.05;
         // The energy meter adjacent to each satellite.
         this.satelliteEnergyGeometry = new BoxGeometry(positionArray[index-1].xc, 0.001, positionArray[index-1].zc);
         this.satelliteEnergyMaterial = new MeshBasicMaterial({color: 0x00FF00});

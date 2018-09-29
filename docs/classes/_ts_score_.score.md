@@ -30,7 +30,7 @@
 
 **● currentScore**: *`number`* = 0
 
-*Defined in ts/score.ts:13*
+*Defined in [ts/score.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L13)*
 
 Keeps track of player's current score
 
@@ -41,7 +41,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in ts/score.ts:17*
+*Defined in [ts/score.ts:17](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L17)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -52,7 +52,7 @@ ___
 
 **● score**: *`Mesh`*
 
-*Defined in ts/score.ts:29*
+*Defined in [ts/score.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L29)*
 
 Controls the overall rendering of the score
 
@@ -63,7 +63,7 @@ ___
 
 **● scoreGeometry**: *`TextGeometry`*
 
-*Defined in ts/score.ts:21*
+*Defined in [ts/score.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L21)*
 
 Controls size and shape of the score
 
@@ -74,7 +74,7 @@ ___
 
 **● scoreMaterial**: *`MeshLambertMaterial`*
 
-*Defined in ts/score.ts:25*
+*Defined in [ts/score.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L25)*
 
 Controls the color of the score material
 
@@ -88,7 +88,7 @@ ___
 
 ▸ **endCycle**(): `void`
 
-*Defined in ts/score.ts:59*
+*Defined in [ts/score.ts:61](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L61)*
 
 At the end of each loop iteration, score updates with time increase.
 

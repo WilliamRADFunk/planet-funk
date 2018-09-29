@@ -49,14 +49,14 @@ export class AsteroidGenerator {
         if (altRand > 0.15) {
             asteroid = new Asteroid(
                 this.scene,
-                isXNegative * ((Math.random() * 15) + 12),
-                isZNegative * ((Math.random() * 15) + 12));
+                isXNegative * ((Math.random() * 12) + 8),
+                isZNegative * ((Math.random() * 12) + 8));
         } else if (altRand > 0.075) {
             asteroid = new Asteroid(
-                this.scene, 1 * isXNegative, isZNegative * ((Math.random() * 15) + 12));
+                this.scene, 1 * isXNegative, isZNegative * ((Math.random() * 12) + 8));
         } else {
             asteroid = new Asteroid(
-                this.scene, isXNegative * ((Math.random() * 15) + 12), 1 * isZNegative);
+                this.scene, isXNegative * ((Math.random() * 12) + 8), 1 * isZNegative);
         }
         asteroid.addToScene();
         CollisionatorSingleton.add(asteroid);

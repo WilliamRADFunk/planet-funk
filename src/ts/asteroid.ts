@@ -85,7 +85,7 @@ export class Asteroid implements Collidable {
         this.asteroidMaterial.shininess = 0;
         this.asteroidMaterial.transparent = true;
         this.asteroid = new Mesh(this.asteroidGeometry, this.asteroidMaterial);
-        this.asteroid.position.set(this.currentPoint[0], 0, this.currentPoint[1]);
+        this.asteroid.position.set(this.currentPoint[0], 0.2, this.currentPoint[1]);
         this.asteroid.rotation.set(-1.5708, 0, 0);
         this.asteroid.name = `Asteroid-${index}`;
     }
@@ -127,7 +127,7 @@ export class Asteroid implements Collidable {
             }
         } else {
             this.calculateNextPoint();
-            this.asteroid.position.set(this.currentPoint[0], -0.2, this.currentPoint[1]);
+            this.asteroid.position.set(this.currentPoint[0], 0.2, this.currentPoint[1]);
         }
         return true;
     }
@@ -185,7 +185,7 @@ export class Asteroid implements Collidable {
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      */
     removeFromScene(scene: Scene): void {
-        this.asteroid.position.set(this.originalStartingPoint[0], 0, this.originalStartingPoint[1]);
+        this.asteroid.position.set(this.originalStartingPoint[0], 0.2, this.originalStartingPoint[1]);
         this.currentPoint = [this.originalStartingPoint[0], this.originalStartingPoint[1]];
         this.distanceTraveled = 0;
         setTimeout(() => {

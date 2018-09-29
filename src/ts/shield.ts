@@ -67,6 +67,7 @@ export class Shield implements Collidable {
             transparent: true
         });
         this.shield = new Mesh(this.shieldGeometry, this.shieldMaterial);
+        this.shield.position.set(0, -10, 0);
         this.shield.name = "Shield";
         // Creates and places the energy meter beads in a ring around the shield.
         this.energyBars = new Object3D();
@@ -144,7 +145,7 @@ export class Shield implements Collidable {
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
     getCollisionRadius() {
-        return 0.8;
+        return 1;
     }
     /**
      * Gets the current position of the collidable object.

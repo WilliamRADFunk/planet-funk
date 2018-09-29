@@ -1,6 +1,15 @@
-import { AmbientLight, CanvasRenderer, Scene, WebGLRenderer, PerspectiveCamera, Raycaster, Vector2, PlaneGeometry, MeshBasicMaterial, DoubleSide, Mesh } from 'three';
-
-import { Asteroid } from './asteroid';
+import {
+    AmbientLight,
+    CanvasRenderer,
+    DoubleSide,
+    Mesh,
+    MeshBasicMaterial,
+    OrthographicCamera,
+    PlaneGeometry,
+    Raycaster,
+    Scene,
+    WebGLRenderer,
+    Vector2 } from 'three';
 import { CollisionatorSingleton } from './collisionator';
 import { Planet } from './planet';
 import { Shield } from './shield';
@@ -29,8 +38,8 @@ export default () => {
     const container = document.getElementById('mainview');
 	container.appendChild( (renderer as any).domElement );
     // Set up player's ability to see the game, and focus center on planet.
-    const camera =  new PerspectiveCamera( 25, WIDTH / HEIGHT, 0.01, 1000 );
-	camera.position.set(0, 20, 0);
+    const camera =  new OrthographicCamera( -6, 6, -6, 6, 0, 100 );
+	camera.position.set(0, -20, 0);
     camera.lookAt(scene.position);
     /**
      * Gracefully handles a change in window size, by recalculating shape and updating camera and renderer.
@@ -38,9 +47,10 @@ export default () => {
     const onWindowResize = () => {
         WIDTH = window.innerWidth * 0.99;
         HEIGHT = window.innerHeight * 0.99;
-        camera.aspect = WIDTH / HEIGHT;
-        camera.updateProjectionMatrix();
+        if(WIDTH < HEIGHT) HEIGHT = WIDTH;
+        else WIDTH = HEIGHT;
         renderer.setSize( WIDTH, HEIGHT );
+        document.getElementById("mainview").style.left = (((window.innerWidth * 0.99) - WIDTH) / 2) + "px";
     };
     onWindowResize();
     window.addEventListener( 'resize', onWindowResize, false);

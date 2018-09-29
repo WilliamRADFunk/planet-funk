@@ -84,10 +84,10 @@ export class Base implements Collidable{
         this.buildingMaterial.transparent = true;
         this.building = new Mesh(this.buildingGeometry, this.buildingMaterial);
         this.building.rotation.set(0, positionArray[index-1].ry, 0);
-        this.building.position.set(positionArray[index-1].xb, -0.0001, positionArray[index-1].zb);
+        this.building.position.set(positionArray[index-1].xb, 0.0001, positionArray[index-1].zb);
         this.building.name = `Base-${index}`;
         // Creates the dull, dead portion of the populated area. Initially not visible.
-        this.buildingDeadGeometry = new BoxGeometry(0.5, 0.1, 0.5);
+        this.buildingDeadGeometry = new BoxGeometry(0.5, 0.0001, 0.5);
         this.buildingDeadMaterial = new MeshPhongMaterial();
         this.buildingDeadMaterial.map = ImageUtils.loadTexture(textureArray[index-1]);
         this.buildingDeadMaterial.map.minFilter = LinearFilter;
@@ -99,7 +99,7 @@ export class Base implements Collidable{
         this.buildingDeadMaterial.opacity = 0.2;
         this.buildingDead = new Mesh(this.buildingDeadGeometry, this.buildingDeadMaterial);
         this.buildingDead.rotation.set(0, positionArray[index-1].ry, 0);
-        this.buildingDead.position.set(positionArray[index-1].xb, -0.0001, positionArray[index-1].zb);
+        this.buildingDead.position.set(positionArray[index-1].xb, 0.0001, positionArray[index-1].zb);
         this.buildingDead.visible = false;
     }
     /**

@@ -22,7 +22,7 @@
 
 **● index**: *`number`* = 0
 
-*Defined in [ts/explosion.ts:5](https://github.com/WilliamRADFunk/planet-funk/blob/1af4f41/src/ts/explosion.ts#L5)*
+*Defined in [ts/explosion.ts:5](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/explosion.ts#L5)*
 
 ___
 

@@ -118,8 +118,8 @@ export class Projectile implements Collidable {
         // Creates the missile's fiery trail.
         this.tailGeometry = new Geometry();
         this.tailGeometry.vertices.push(
-            new Vector3(x1, -0.2, z1),
-            new Vector3(this.currentPoint[0], -0.2, this.currentPoint[1]));
+            new Vector3(x1, 0.25, z1),
+            new Vector3(this.currentPoint[0], 0.25, this.currentPoint[1]));
         this.tailMaterial = new LineBasicMaterial({color: color});
         this.tailMesh = new Line(this.tailGeometry, this.tailMaterial);
         scene.add(this.tailMesh);
@@ -156,7 +156,7 @@ export class Projectile implements Collidable {
             this.tailGeometry.vertices[1].x = this.currentPoint[0];
             this.tailGeometry.vertices[1].z = this.currentPoint[1];
             this.tailGeometry.verticesNeedUpdate = true;
-            this.headMesh.position.set(this.currentPoint[0], -0.2, this.currentPoint[1]);
+            this.headMesh.position.set(this.currentPoint[0], 0.21, this.currentPoint[1]);
 
             if (this.distanceTraveled >= this.totalDistance) {
                 this.headMaterial.color.set(new Color(0xF9A602));

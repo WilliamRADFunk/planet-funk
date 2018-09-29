@@ -48,12 +48,11 @@ export class Score {
                     bevelSegments: 3
                 });
             this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
-            this.score.position.x = -1.25;
-            this.score.position.y = -0.5;
-            this.score.position.z = -3.5;
+            this.score.position.x = -5.5;
+            this.score.position.y = 0.5;
+            this.score.position.z = -5;
             this.score.rotation.x = -1.3708;
         }
-        console.log('score', scoreFont);
         scene.add(this.score);
     }
     /**
@@ -78,9 +77,9 @@ export class Score {
                     bevelSegments: 3
                 });
             this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
-            this.score.position.x = -1.25;
-            this.score.position.y = -0.5;
-            this.score.position.z = -3.5;
+            this.score.position.x = -5.5;
+            this.score.position.y = 0.5;
+            this.score.position.z = -5;
             this.score.rotation.x = -1.3708;
             this.scene.add(this.score);
         }

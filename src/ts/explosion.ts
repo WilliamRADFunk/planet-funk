@@ -59,7 +59,7 @@ export class Explosion implements Collidable {
             transparent: true
         });
         this.explosion = new Mesh(this.explosionGeometry, this.explosionMaterial);
-        this.explosion.position.set(x, 0.21, z);
+        this.explosion.position.set(x, -0.25, z);
         this.explosion.rotation.set(-1.5708, 0, 0);
         this.explosion.name = `explosion-${index}`;
         this.scene.add(this.explosion);

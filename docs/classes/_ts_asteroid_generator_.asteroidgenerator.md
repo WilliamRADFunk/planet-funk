@@ -29,7 +29,7 @@
 
 **● asteroids**: *[Asteroid](_ts_asteroid_.asteroid.md)[]* =  []
 
-*Defined in [ts/asteroid-generator.ts:10](https://github.com/WilliamRADFunk/planet-funk/blob/1af4f41/src/ts/asteroid-generator.ts#L10)*
+*Defined in [ts/asteroid-generator.ts:10](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/asteroid-generator.ts#L10)*
 
 Asteroid array for ease of iteration
 
@@ -40,7 +40,7 @@ ___
 
 **● maxAsteroids**: *`number`* = 50
 
-*Defined in [ts/asteroid-generator.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/1af4f41/src/ts/asteroid-generator.ts#L14)*
+*Defined in [ts/asteroid-generator.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/asteroid-generator.ts#L14)*
 
 Maximum number of asteroids that can exist at one time.
 
@@ -51,7 +51,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/asteroid-generator.ts:18](https://github.com/WilliamRADFunk/planet-funk/blob/1af4f41/src/ts/asteroid-generator.ts#L18)*
+*Defined in [ts/asteroid-generator.ts:18](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/asteroid-generator.ts#L18)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -65,7 +65,7 @@ ___
 
 ▸ **endCycle**(): `void`
 
-*Defined in [ts/asteroid-generator.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/1af4f41/src/ts/asteroid-generator.ts#L33)*
+*Defined in [ts/asteroid-generator.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/asteroid-generator.ts#L33)*
 
 At the end of each loop iteration, iterate endCycle through all asteroids.
 
@@ -78,7 +78,7 @@ ___
 
 ▸ **makeAsteroid**(): `any`
 
-*Defined in [ts/asteroid-generator.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/1af4f41/src/ts/asteroid-generator.ts#L47)*
+*Defined in [ts/asteroid-generator.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/asteroid-generator.ts#L44)*
 
 Asteroid generation in one place to avoid breaking DRY.
 

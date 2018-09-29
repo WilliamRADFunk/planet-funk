@@ -23,7 +23,7 @@
 
 **● loader**: *`FontLoader`* =  new FontLoader()
 
-*Defined in ts/score.ts:3*
+*Defined in [ts/score.ts:3](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L3)*
 
 ___
 <a id="scorefont"></a>
@@ -32,7 +32,7 @@ ___
 
 **● scoreFont**: *`Font`*
 
-*Defined in ts/score.ts:4*
+*Defined in [ts/score.ts:4](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L4)*
 
 ___
 

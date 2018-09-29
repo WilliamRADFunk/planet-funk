@@ -22,7 +22,7 @@
 
 **● index**: *`number`* = 0
 
-*Defined in [ts/projectile.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/1af4f41/src/ts/projectile.ts#L13)*
+*Defined in [ts/projectile.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L13)*
 
 ___
 
