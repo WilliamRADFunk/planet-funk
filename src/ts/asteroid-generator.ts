@@ -33,10 +33,7 @@ export class AsteroidGenerator {
     endCycle() {
         for (let i = 0; i < this.asteroids.length; i++) {
             if (this.asteroids[i]) {
-                if (!this.asteroids[i].endCycle()) {
-                    this.asteroids[i] = null;
-                    this.asteroids[i] = this.makeAsteroid();
-                }
+                this.asteroids[i].endCycle();
             }
         }
     }
@@ -52,14 +49,14 @@ export class AsteroidGenerator {
         if (altRand > 0.15) {
             asteroid = new Asteroid(
                 this.scene,
-                isXNegative * ((Math.random() * 10) + 8),
-                isZNegative * ((Math.random() * 10) + 8));
+                isXNegative * ((Math.random() * 15) + 12),
+                isZNegative * ((Math.random() * 15) + 12));
         } else if (altRand > 0.075) {
             asteroid = new Asteroid(
-                this.scene, 1 * isXNegative, isZNegative * ((Math.random() * 10) + 8));
+                this.scene, 1 * isXNegative, isZNegative * ((Math.random() * 15) + 12));
         } else {
             asteroid = new Asteroid(
-                this.scene, isXNegative * ((Math.random() * 10) + 8), 1 * isZNegative);
+                this.scene, isXNegative * ((Math.random() * 15) + 12), 1 * isZNegative);
         }
         asteroid.addToScene();
         CollisionatorSingleton.add(asteroid);

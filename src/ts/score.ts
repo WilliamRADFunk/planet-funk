@@ -34,6 +34,7 @@ export class Score {
      */
     constructor(scene: Scene) {
         this.scene = scene;
+        this.scoreMaterial = new MeshLambertMaterial( {color: 0x084E70} );
         if (scoreFont) {
             this.scoreGeometry = new TextGeometry(`Score: ${this.currentScore.toFixed(0)}`,
                 {
@@ -46,22 +47,25 @@ export class Score {
                     bevelSize: 0.5,
                     bevelSegments: 3
                 });
-            this.scoreMaterial = new MeshLambertMaterial( {color: 0x084E70} );
             this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
             this.score.position.x = -1.25;
             this.score.position.y = -0.5;
             this.score.position.z = -3.5;
             this.score.rotation.x = -1.3708;
         }
+        console.log('score', scoreFont);
         scene.add(this.score);
     }
     /**
      * At the end of each loop iteration, score updates with time increase.
      */
     endCycle(): void {
-        this.currentScore += 0.01;
-        if (scoreFont && this.score) {
-            this.scene.remove(this.score);
+        this.currentScore += 0.6;
+        if (scoreFont) {
+            // Only remove score if it was added before.
+            if (this.score) this.scene.remove(this.score);
+            // Added before or not, make a new one and add it.
+            // Sadly TextGeometries must be removed and added whenever the text content changes.
             this.scoreGeometry = new TextGeometry(`Score: ${this.currentScore.toFixed(0)}`,
                 {
                     font: scoreFont,

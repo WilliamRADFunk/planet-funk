@@ -100,24 +100,30 @@ export default () => {
     };
     const scoreboard = new Score(scene);
     const asteroidGenerator = new AsteroidGenerator(scene);
-    let counter = 0;
+    let secondsCounter = 0;
+    let jobCounter = 0;
     /**
      * The render loop. Everything that should be checked, called, or drawn in each animation frame.
      */
     const render = () => {
-        counter++;
-        if (counter > 10000) counter = 0;
+        secondsCounter++;
+        jobCounter++;
+        if (jobCounter > 10) jobCounter = 0;
+        if (secondsCounter > 60) secondsCounter = 0;
         // Checks to make sure game isn't over.
-        if (isGameLive && counter % 60 === 0) {
+        if (isGameLive && secondsCounter === 60) {
             const status = planet.getStatus();
             isGameLive = status.quadrantBlue || status.quadrantGreen || status.quadrantPurple || status.quadrantYellow;
+            // If game is over, stop increasing the score.
+            scoreboard.endCycle();
         }
-        CollisionatorSingleton.checkForCollisions(scene);
-        asteroidGenerator.endCycle();
-        planet.endCycle();
-        shield.endCycle(planet.getPowerRegenRate());
-        // If game is over, stop increasing the score.
-        if (isGameLive) scoreboard.endCycle();
+        if (jobCounter === 10 && secondsCounter !== 60) {
+            CollisionatorSingleton.checkForCollisions(scene);
+        } else {
+            asteroidGenerator.endCycle();
+            planet.endCycle();
+            shield.endCycle(planet.getPowerRegenRate());
+        }
         renderer.render( scene, camera );
 	    requestAnimationFrame( render );
     };

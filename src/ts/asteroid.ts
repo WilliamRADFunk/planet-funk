@@ -163,13 +163,11 @@ export class Asteroid implements Collidable {
      * Called when something collides with asteroid, which destroys it.
      * @param self         the thing to remove from collidables...and scene.
      * @param otherThing   the name of the other thing in collision (mainly for shield).
-     * @returns whether or not impact means removing item from the scene.
+     * @returns whether or not impact means calling removeFromScene by collisionator.
      */
     impact(self: Collidable, otherThing: string): boolean {
         if (this.isActive) {
             this.isActive = false;
-            this.asteroid.visible = false;
-            CollisionatorSingleton.remove(self);
             this.createExplosion(!otherThing.indexOf('Shield'));
             return true;
         }
@@ -183,10 +181,15 @@ export class Asteroid implements Collidable {
         return false;
     }
     /**
-     * Removes asteroid object from the three.js scene.
+     * Removes asteroid object from the "visible" scene by sending it back to its starting location.
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      */
     removeFromScene(scene: Scene): void {
-        this.scene.remove(this.asteroid);
+        this.asteroid.position.set(this.originalStartingPoint[0], 0, this.originalStartingPoint[1]);
+        this.currentPoint = [this.originalStartingPoint[0], this.originalStartingPoint[1]];
+        this.distanceTraveled = 0;
+        setTimeout(() => {
+            this.isActive = true;
+        }, 100);
     }
 }
