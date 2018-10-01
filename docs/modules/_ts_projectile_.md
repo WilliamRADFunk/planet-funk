@@ -22,7 +22,7 @@
 
 **● index**: *`number`* = 0
 
-*Defined in [ts/projectile.ts:15](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L15)*
+*Defined in [ts/projectile.ts:17](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/projectile.ts#L17)*
 
 Static index to help name one projectile differenly than another.
 

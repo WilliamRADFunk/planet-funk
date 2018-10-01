@@ -21,9 +21,9 @@ let index: number = 0;
  */
 export class Projectile implements Collidable {
     /**
-     * Keeps track of how big explosions scale is at moment.
+     * Holds tail color.
      */
-    private currentExplosionScale: number = 1;
+    private color: Color;
     /**
      * Keeps track of the x,z point the missile is at currently.
      */
@@ -67,16 +67,6 @@ export class Projectile implements Collidable {
      */
     private isEnemyMissile: boolean;
     /**
-     * Flag to signal if the missile is in explosion mode.
-     * True is exploding. False is in motion.
-     */
-    private isExploding: boolean = false;
-    /**
-     * Flag to signal if the missile's explosion is expanding/contracting.
-     * True is expanding. False is contracting..
-     */
-    private isExplosionGrowing: boolean = true;
-    /**
      * Keeps track of the x,z point where missile fired from.
      */
     private originalStartingPoint: number[];
@@ -118,6 +108,7 @@ export class Projectile implements Collidable {
      */
     constructor(scene: Scene, x1: number, z1: number, x2: number, z2: number, dist: number, color: Color, colllidableAtBirth?: boolean, speed?: number) {
         index++;
+        this.color = color;
         this.speed = speed || this.speed;
         this.isCollidable = !!colllidableAtBirth;
         this.isEnemyMissile = this.isCollidable;
@@ -129,14 +120,6 @@ export class Projectile implements Collidable {
         this.distanceTraveled = 0;
         // Calculates the first (second vertices) point.
         this.calculateNextPoint();
-        // Creates the missile's fiery trail.
-        this.tailGeometry = new Geometry();
-        this.tailGeometry.vertices.push(
-            new Vector3(x1, 0.25, z1),
-            new Vector3(this.currentPoint[0], 0.25, this.currentPoint[1]));
-        this.tailMaterial = new LineBasicMaterial({color: color});
-        this.tailMesh = new Line(this.tailGeometry, this.tailMaterial);
-        scene.add(this.tailMesh);
         // Glowing head of the missile.
         this.headGeometry = new CircleGeometry(0.06, 32);
         this.headMaterial = new MeshBasicMaterial({
@@ -183,10 +166,25 @@ export class Projectile implements Collidable {
             }
         } else {
             this.calculateNextPoint();
-            this.tailGeometry.vertices[1].x = this.currentPoint[0];
-            this.tailGeometry.vertices[1].z = this.currentPoint[1];
-            this.tailGeometry.verticesNeedUpdate = true;
-            this.headMesh.position.set(this.currentPoint[0], 0.21, this.currentPoint[1]);
+            if (!this.tailGeometry &&
+                this.currentPoint[0] > -6 &&
+                this.currentPoint[0] < 6 &&
+                this.currentPoint[1] > -6 && this.currentPoint[1] < 6) {
+                // Creates the missile's fiery trail.
+                this.tailGeometry = new Geometry();
+                this.tailGeometry.vertices.push(
+                    new Vector3(this.currentPoint[0], 0.25, this.currentPoint[1]),
+                    new Vector3(this.currentPoint[0], 0.25, this.currentPoint[1]));
+                this.tailMaterial = new LineBasicMaterial({color: this.color});
+                this.tailMesh = new Line(this.tailGeometry, this.tailMaterial);
+                this.scene.add(this.tailMesh);
+            }
+            if (this.tailGeometry) {
+                this.tailGeometry.vertices[1].x = this.currentPoint[0];
+                this.tailGeometry.vertices[1].z = this.currentPoint[1];
+                this.tailGeometry.verticesNeedUpdate = true;
+                this.headMesh.position.set(this.currentPoint[0], 0.21, this.currentPoint[1]);
+            }
             if (this.distanceTraveled >= this.totalDistance) {
                 this.createExplosion(false);
                 this.removeFromScene(this.scene);

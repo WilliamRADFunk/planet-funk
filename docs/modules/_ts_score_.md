@@ -23,7 +23,7 @@
 
 **● loader**: *`FontLoader`* =  new FontLoader()
 
-*Defined in [ts/score.ts:5](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/score.ts#L5)*
+*Defined in [ts/score.ts:5](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/score.ts#L5)*
 
 Loads the font from a json file.
 
@@ -34,7 +34,7 @@ ___
 
 **● scoreFont**: *`Font`*
 
-*Defined in [ts/score.ts:9](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/score.ts#L9)*
+*Defined in [ts/score.ts:9](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/score.ts#L9)*
 
 The loaded font, used for the scoreboard.
 

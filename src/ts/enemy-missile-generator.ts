@@ -66,7 +66,9 @@ export class EnemyMissileGenerator {
             if (missile && !missile.endCycle()) {
                 CollisionatorSingleton.remove(this.missiles[i]);
                 this.missiles[i] = null;
-                this.scoreboard.addPoints(this.currentLevel * this.missilePoints);
+                if (isGameActive) {
+                    this.scoreboard.addPoints(this.currentLevel * this.missilePoints);
+                }
             }
             missile = this.missiles[i];
             if (missile) {

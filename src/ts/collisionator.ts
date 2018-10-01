@@ -27,18 +27,25 @@ class Collisionator {
      */
     checkForCollisions(scene: Scene): void {
         for (let i = 0; i < this.collisionItems.length; i++) {
+            // If first collidable isn't active, don't collide
             if (!this.collisionItems[i].getActive()) continue;
             for (let j = i+1; j < this.collisionItems.length; j++) {
                 const entityI = this.collisionItems[i];
                 const entityJ = this.collisionItems[j];
-                const isEnemyMissile = (entityI.getName().indexOf('enemy') > -1 || entityJ.getName().indexOf('enemy') > -1);
-                if (entityI.getName().indexOf('enemy') > -1 && entityJ.getName().indexOf('enemy') > -1) continue;
+                // If second collidable isn't active, don't collide
                 if (!entityJ.getActive()) continue;
+                const isEnemyMissile = (entityI.getName().indexOf('enemy') > -1 || entityJ.getName().indexOf('enemy') > -1);
+                // Two unexploded enemy missiles should not collide.
+                if (entityI.getName().indexOf('enemy') > -1 && entityJ.getName().indexOf('enemy') > -1) continue;
+                // If both collidables are passive (ie. planet && shield) then they should not collide
                 if (entityI.isPassive() && entityJ.isPassive()) continue;
+                // No need to register two explosions colliding; they're already blowing up.
                 if (!entityI.getName().indexOf('explosion') &&
                     !entityJ.getName().indexOf('explosion')) continue;
+                // Two unexploding asteroids shouldn't collide.
                 if (!entityI.getName().indexOf('Asteroid') &&
                     !entityJ.getName().indexOf('Asteroid')) continue;
+                // Unexploded enemy missiles and asteroids should not collide.
                 if ((!entityI.getName().indexOf('Asteroid') ||
                     !entityJ.getName().indexOf('Asteroid')) && isEnemyMissile) continue;
                 const posI = entityI.getCurrentPosition();
@@ -50,7 +57,7 @@ class Collisionator {
                     (posJ[1] - posI[1]) * (posJ[1] - posI[1])
                 );
                 if (radI + radJ > dist) {
-                    console.log('Boom!', entityI.getName(), entityJ.getName());
+                    // console.log('Boom!', entityI.getName(), entityJ.getName());
                     if (entityI.impact(entityI, entityJ.getName()) &&
                     typeof entityI.removeFromScene === 'function') {
                         entityI.removeFromScene(scene);

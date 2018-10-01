@@ -14,7 +14,7 @@
 
 * [asteroidPoints](_ts_asteroid_generator_.asteroidgenerator.md#asteroidpoints)
 * [asteroids](_ts_asteroid_generator_.asteroidgenerator.md#asteroids)
-* [currentLavel](_ts_asteroid_generator_.asteroidgenerator.md#currentlavel)
+* [currentLevel](_ts_asteroid_generator_.asteroidgenerator.md#currentlevel)
 * [maxAsteroids](_ts_asteroid_generator_.asteroidgenerator.md#maxasteroids)
 * [scene](_ts_asteroid_generator_.asteroidgenerator.md#scene)
 * [scoreboard](_ts_asteroid_generator_.asteroidgenerator.md#scoreboard)
@@ -32,9 +32,9 @@
 
 ### `<Private>` asteroidPoints
 
-**● asteroidPoints**: *`number`* = 50
+**● asteroidPoints**: *`number`* = 25
 
-*Defined in [ts/asteroid-generator.ts:18](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/asteroid-generator.ts#L18)*
+*Defined in [ts/asteroid-generator.ts:18](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/asteroid-generator.ts#L18)*
 
 Points multiplier per asteroid destroyed.
 
@@ -45,29 +45,29 @@ ___
 
 **● asteroids**: *[Asteroid](_ts_asteroid_.asteroid.md)[]* =  []
 
-*Defined in [ts/asteroid-generator.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/asteroid-generator.ts#L14)*
+*Defined in [ts/asteroid-generator.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/asteroid-generator.ts#L14)*
 
 Asteroid array for ease of iteration
 
 ___
-<a id="currentlavel"></a>
+<a id="currentlevel"></a>
 
-### `<Private>` currentLavel
+### `<Private>` currentLevel
 
-**● currentLavel**: *`number`* = 1
+**● currentLevel**: *`number`* = 1
 
-*Defined in [ts/asteroid-generator.ts:22](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/asteroid-generator.ts#L22)*
+*Defined in [ts/asteroid-generator.ts:22](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/asteroid-generator.ts#L22)*
 
-Current level player is on, effects mas asteroids and points per asteroid destroyed.
+Current level player is on, effects max asteroids and points per asteroid destroyed.
 
 ___
 <a id="maxasteroids"></a>
 
 ### `<Private>` maxAsteroids
 
-**● maxAsteroids**: *`number`* = 50
+**● maxAsteroids**: *`number`* = 30
 
-*Defined in [ts/asteroid-generator.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/asteroid-generator.ts#L26)*
+*Defined in [ts/asteroid-generator.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/asteroid-generator.ts#L26)*
 
 Maximum number of asteroids that can exist at one time.
 
@@ -78,7 +78,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/asteroid-generator.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/asteroid-generator.ts#L30)*
+*Defined in [ts/asteroid-generator.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/asteroid-generator.ts#L30)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -89,7 +89,7 @@ ___
 
 **● scoreboard**: *[Score](_ts_score_.score.md)*
 
-*Defined in [ts/asteroid-generator.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/asteroid-generator.ts#L34)*
+*Defined in [ts/asteroid-generator.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/asteroid-generator.ts#L34)*
 
 Reference to the scorekeeper for adding points on asteroid destruction.
 
@@ -103,7 +103,7 @@ ___
 
 ▸ **endCycle**(isGameActive: *`boolean`*): `void`
 
-*Defined in [ts/asteroid-generator.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/asteroid-generator.ts#L52)*
+*Defined in [ts/asteroid-generator.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/asteroid-generator.ts#L52)*
 
 At the end of each loop iteration, iterate endCycle through all asteroids.
 
@@ -122,7 +122,7 @@ ___
 
 ▸ **makeAsteroid**(): [Asteroid](_ts_asteroid_.asteroid.md)
 
-*Defined in [ts/asteroid-generator.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/asteroid-generator.ts#L65)*
+*Defined in [ts/asteroid-generator.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/asteroid-generator.ts#L65)*
 
 Asteroid generation in one place to avoid breaking DRY.
 
