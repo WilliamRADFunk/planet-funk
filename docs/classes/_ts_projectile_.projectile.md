@@ -56,7 +56,7 @@
 
 **● currentExplosionScale**: *`number`* = 1
 
-*Defined in [ts/projectile.ts:22](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L22)*
+*Defined in [ts/projectile.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L24)*
 
 Keeps track of how big explosions scale is at moment.
 
@@ -67,7 +67,7 @@ ___
 
 **● currentPoint**: *`number`[]*
 
-*Defined in [ts/projectile.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L26)*
+*Defined in [ts/projectile.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L28)*
 
 Keeps track of the x,z point the missile is at currently.
 
@@ -78,7 +78,7 @@ ___
 
 **● distanceTraveled**: *`number`*
 
-*Defined in [ts/projectile.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L30)*
+*Defined in [ts/projectile.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L32)*
 
 Tracks the distance traveled thus far to update the calculateNextPoint calculation.
 
@@ -89,7 +89,7 @@ ___
 
 **● endingPoint**: *`number`[]*
 
-*Defined in [ts/projectile.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L34)*
+*Defined in [ts/projectile.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L36)*
 
 Keeps track of the x,z point of player's click point.
 
@@ -100,7 +100,7 @@ ___
 
 **● headGeometry**: *`CircleGeometry`*
 
-*Defined in [ts/projectile.ts:58](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L58)*
+*Defined in [ts/projectile.ts:60](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L60)*
 
 Controls size and shape of the missile's glowing head.
 
@@ -111,7 +111,7 @@ ___
 
 **● headMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/projectile.ts:62](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L62)*
+*Defined in [ts/projectile.ts:64](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L64)*
 
 Controls the color of the missile's glowing head material.
 
@@ -122,7 +122,7 @@ ___
 
 **● headMesh**: *`Mesh`*
 
-*Defined in [ts/projectile.ts:66](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L66)*
+*Defined in [ts/projectile.ts:68](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L68)*
 
 Controls the overall rendering of the glowing head.
 
@@ -133,7 +133,7 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in [ts/projectile.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L39)*
+*Defined in [ts/projectile.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L41)*
 
 Flag to signal if the missile has been destroyed. True is not destroyed. False is destroyed.
 
@@ -144,7 +144,7 @@ ___
 
 **● isCollidable**: *`boolean`* = false
 
-*Defined in [ts/projectile.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L44)*
+*Defined in [ts/projectile.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L46)*
 
 Flag to signal if the missile can be considered for collisions. True is collidable. False is not collidable.
 
@@ -155,7 +155,7 @@ ___
 
 **● isExploding**: *`boolean`* = false
 
-*Defined in [ts/projectile.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L49)*
+*Defined in [ts/projectile.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L51)*
 
 Flag to signal if the missile is in explosion mode. True is exploding. False is in motion.
 
@@ -166,7 +166,7 @@ ___
 
 **● isExplosionGrowing**: *`boolean`* = true
 
-*Defined in [ts/projectile.ts:54](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L54)*
+*Defined in [ts/projectile.ts:56](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L56)*
 
 Flag to signal if the missile's explosion is expanding/contracting. True is expanding. False is contracting..
 
@@ -177,7 +177,7 @@ ___
 
 **● originalStartingPoint**: *`number`[]*
 
-*Defined in [ts/projectile.ts:70](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L70)*
+*Defined in [ts/projectile.ts:72](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L72)*
 
 Keeps track of the x,z point where missile fired from.
 
@@ -188,7 +188,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/projectile.ts:74](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L74)*
+*Defined in [ts/projectile.ts:76](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L76)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -199,7 +199,7 @@ ___
 
 **● speed**: *`number`* = 0.03
 
-*Defined in [ts/projectile.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L78)*
+*Defined in [ts/projectile.ts:80](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L80)*
 
 The speed at which the missile travels.
 
@@ -210,7 +210,7 @@ ___
 
 **● tailGeometry**: *`Geometry`*
 
-*Defined in [ts/projectile.ts:82](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L82)*
+*Defined in [ts/projectile.ts:84](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L84)*
 
 Controls size and shape of the missile's fiery trail.
 
@@ -221,7 +221,7 @@ ___
 
 **● tailMaterial**: *`LineBasicMaterial`*
 
-*Defined in [ts/projectile.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L86)*
+*Defined in [ts/projectile.ts:88](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L88)*
 
 Controls the color of the missile's fiery trail material.
 
@@ -232,7 +232,7 @@ ___
 
 **● tailMesh**: *`Line`*
 
-*Defined in [ts/projectile.ts:90](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L90)*
+*Defined in [ts/projectile.ts:92](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L92)*
 
 Controls the overall rendering of the missile's fiery trail.
 
@@ -243,7 +243,7 @@ ___
 
 **● totalDistance**: *`number`*
 
-*Defined in [ts/projectile.ts:94](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L94)*
+*Defined in [ts/projectile.ts:96](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L96)*
 
 The total distance from satellite to player's click point.
 
@@ -257,7 +257,7 @@ ___
 
 ▸ **calculateNextPoint**(): `void`
 
-*Defined in [ts/projectile.ts:142](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L142)*
+*Defined in [ts/projectile.ts:144](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L144)*
 
 Calculates the next point in the missile's point.
 
@@ -270,7 +270,7 @@ ___
 
 ▸ **endCycle**(): `boolean`
 
-*Defined in [ts/projectile.ts:153](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L153)*
+*Defined in [ts/projectile.ts:155](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L155)*
 
 At the end of each loop iteration, move the projectile a little.
 
@@ -284,7 +284,7 @@ ___
 
 ▸ **getActive**(): `boolean`
 
-*Defined in [ts/projectile.ts:192](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L192)*
+*Defined in [ts/projectile.ts:194](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L194)*
 
 Gets the viability of the explosive blast head.
 
@@ -298,7 +298,7 @@ ___
 
 ▸ **getCollisionRadius**(): `number`
 
-*Defined in [ts/projectile.ts:199](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L199)*
+*Defined in [ts/projectile.ts:201](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L201)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 
@@ -312,7 +312,7 @@ ___
 
 ▸ **getCurrentPosition**(): `number`[]
 
-*Defined in [ts/projectile.ts:206](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L206)*
+*Defined in [ts/projectile.ts:208](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L208)*
 
 Gets the current position of the explosive blast head.
 
@@ -326,7 +326,7 @@ ___
 
 ▸ **getName**(): `string`
 
-*Defined in [ts/projectile.ts:213](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L213)*
+*Defined in [ts/projectile.ts:215](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L215)*
 
 Gets the name of the missile.
 
@@ -340,7 +340,7 @@ ___
 
 ▸ **impact**(self: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*): `boolean`
 
-*Defined in [ts/projectile.ts:221](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L221)*
+*Defined in [ts/projectile.ts:223](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L223)*
 
 Called when something collides with projectile blast radius, which does nothing unless it hasn't exploded yet.
 
@@ -360,7 +360,7 @@ ___
 
 ▸ **isPassive**(): `boolean`
 
-*Defined in [ts/projectile.ts:228](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/projectile.ts#L228)*
+*Defined in [ts/projectile.ts:230](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/projectile.ts#L230)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 

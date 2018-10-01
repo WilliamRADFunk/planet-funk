@@ -34,15 +34,15 @@ export class Satellite implements Collidable {
     /**
      * When distance is calculated just before firing, this is updated to be used in fire call.
      */
-    currentDistance: number;
+    private currentDistance: number;
     /**
      * When origin is calculated just before firing, this is updated to be used in fire call.
      */
-    currentOrigin: number[];
+    private currentOrigin: number[];
     /**
      * Keeps track of planet's rotation to help calc satellite's position.
      */
-    currentRotation: number;
+    private currentRotation: number;
     /**
      * Max energy amount
      */
@@ -54,7 +54,7 @@ export class Satellite implements Collidable {
     /**
      * Number in the creation order. Needed later to scale energy bar.
      */
-    index: number ;
+    private index: number;
     /**
      * Flag to signal if satellite has been destroyed or not.
      * True = not destroyed. False = destroyed.
@@ -211,7 +211,7 @@ export class Satellite implements Collidable {
      * Gets the current radius of the bounding box (circle) of the collidable.
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
-    getCollisionRadius() {
+    getCollisionRadius(): number {
         return 0.1;
     }
     /**
@@ -254,7 +254,7 @@ export class Satellite implements Collidable {
      * Gets the name of the satellite.
      * @returns the name of the satellite.
      */
-    getName() {
+    getName(): string {
         return this.satelliteContainer.name;
     }
     /**
@@ -274,7 +274,7 @@ export class Satellite implements Collidable {
      * States it is a passive type or not. Two passive types cannot colllide with each other.
      * @returns True is passive | False is not passive
      */
-    isPassive() {
+    isPassive(): boolean {
         return true;
     }
     /**

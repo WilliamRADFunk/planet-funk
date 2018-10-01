@@ -59,11 +59,11 @@ export class Base implements Collidable{
     /**
      * Keeps track of planet's rotation to help calc satellite's position.
      */
-    currentRotation: number;
+    private currentRotation: number;
     /**
      * Number in the creation order. Needed later to scale energy bar.
      */
-    index: number ;
+    private index: number;
     /**
      * Flag to signal if base has been destroyed or not. True = not destroyed. False = destroyed.
      */
@@ -128,7 +128,7 @@ export class Base implements Collidable{
      * Gets the current radius of the bounding box (circle) of the collidable.
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
-    getCollisionRadius() {
+    getCollisionRadius(): number {
         return 0.20;
     }
     /**
@@ -151,7 +151,7 @@ export class Base implements Collidable{
      * Gets the name of the base.
      * @returns the name of the base.
      */
-    getName() {
+    getName(): string {
         return this.building.name;
     }
     /**
@@ -172,7 +172,7 @@ export class Base implements Collidable{
      * States it is a passive type or not. Two passive types cannot colllide with each other.
      * @returns True is passive | False is not passive
      */
-    isPassive() {
+    isPassive(): boolean {
         return true;
     }
 }

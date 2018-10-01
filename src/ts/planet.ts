@@ -176,7 +176,7 @@ export class Planet implements Collidable {
     /**
      * At the end of each loop iteration, satellite regains a little energy.
      */
-    endCycle() {
+    endCycle(): void {
         this.rotate();
         for (let i = 0; i < this.satellites.length; i++) {
             this.satellites[i].endCycle(this.funk.rotation.y);
@@ -202,7 +202,7 @@ export class Planet implements Collidable {
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param point point with x,z coordinates where player click mouse on game area.
      */
-    fire(scene: Scene, point: Vector3) {
+    fire(scene: Scene, point: Vector3): void {
         if (this.isActive) {
             const distancesToTarget: number[] = [];
             for (let i = 0; i < 4; i++) {
@@ -223,7 +223,7 @@ export class Planet implements Collidable {
      * Gets the current radius of the bounding box (circle) of the collidable.
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
-    getCollisionRadius() {
+    getCollisionRadius(): number {
         return 0.4;
     }
     /**
@@ -237,7 +237,7 @@ export class Planet implements Collidable {
      * Gets the name of the planet.
      * @returns the name of the planet.
      */
-    getName() {
+    getName(): string {
         return this.funk.name;
     }
     /**
@@ -285,7 +285,7 @@ export class Planet implements Collidable {
      * States it is a passive type or not. Two passive types cannot colllide with each other.
      * @returns True is passive | False is not passive
      */
-    isPassive() {
+    isPassive(): boolean {
         return true;
     }
     /**

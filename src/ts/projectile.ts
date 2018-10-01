@@ -9,7 +9,9 @@ import {
     Scene,
     Vector3 } from "three";
 import { Collidable } from "./collidable";
-
+/**
+ * Static index to help name one projectile differenly than another.
+ */
 let index: number = 0;
 /**
  * @class
@@ -196,7 +198,7 @@ export class Projectile implements Collidable {
      * Gets the current radius of the bounding box (circle) of the collidable.
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
-    getCollisionRadius() {
+    getCollisionRadius(): number {
         return this.headMesh.scale.x * 0.06;
     }
     /**
@@ -210,7 +212,7 @@ export class Projectile implements Collidable {
      * Gets the name of the missile.
      * @returns the name of the missile.
      */
-    getName() {
+    getName(): string {
         return this.headMesh.name;
     }
     /**
@@ -225,7 +227,7 @@ export class Projectile implements Collidable {
      * States it is a passive type or not. Two passive types cannot colllide with each other.
      * @returns True is passive | False is not passive
      */
-    isPassive() {
+    isPassive(): boolean {
         return false;
     }
 }

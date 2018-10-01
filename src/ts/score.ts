@@ -1,11 +1,22 @@
 import { Font, FontLoader, Mesh, MeshLambertMaterial, Scene, TextGeometry } from "three";
-
+/**
+ * Loads the font from a json file.
+ */
 const loader = new FontLoader();
+/**
+ * The loaded font, used for the scoreboard.
+ */
 let scoreFont: Font;
+/**
+ * Callback function to set the scoreboard font once it is finished loading.
+ */
 loader.load( 'assets/fonts/optimer_regular.typeface.json', font => {
     scoreFont = font;
 });
-
+/**
+ * @class
+ * Keeps track of all things score related.
+ */
 export class Score {
     /**
      * Keeps track of player's current score
@@ -54,6 +65,13 @@ export class Score {
             this.score.rotation.x = -1.3708;
         }
         scene.add(this.score);
+    }
+    /**
+     * Adds points when blowing up asteroids, enemy missiles, and ufos.
+     * @param points the amount of points to add to current score.
+     */
+    addPoints(points: number): void {
+        this.currentScore += points;
     }
     /**
      * At the end of each loop iteration, score updates with time increase.

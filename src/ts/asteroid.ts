@@ -109,13 +109,13 @@ export class Asteroid implements Collidable {
      * Creates an explosion during collision and adds it to the collildables list.
      * @param isInert flag to let explosion know it isn't a 'real' explosion (hit shield).
      */
-    createExplosion(isInert: boolean) {
+    private createExplosion(isInert: boolean): void {
         this.explosion = new Explosion(this.scene, this.asteroid.position.x, this.asteroid.position.z, 0.2, isInert);
         if (!isInert) CollisionatorSingleton.add(this.explosion);
     }
     /**
      * At the end of each loop iteration, move the asteroid a little.
-     * @returns whether or not the asteroid is done, and should be removed from list.
+     * @returns whether or not the asteroid is done, and its points calculated.
      */
     endCycle(): boolean {
         if (this.explosion) {
@@ -142,7 +142,7 @@ export class Asteroid implements Collidable {
      * Gets the current radius of the bounding box (circle) of the collidable.
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
-    getCollisionRadius() {
+    getCollisionRadius(): number {
         return 0.3;
     }
     /**
@@ -156,7 +156,7 @@ export class Asteroid implements Collidable {
      * Gets the name of the asteroid.
      * @returns the name of the asteroid.
      */
-    getName() {
+    getName(): string {
         return this.asteroid.name;
     }
     /**
@@ -177,7 +177,7 @@ export class Asteroid implements Collidable {
      * States it is a passive type or not. Two passive types cannot colllide with each other.
      * @returns True is passive | False is not passive
      */
-    isPassive() {
+    isPassive(): boolean {
         return false;
     }
     /**

@@ -2,6 +2,8 @@
 
 # Class: Score
 
+*__class__*: Keeps track of all things score related.
+
 ## Hierarchy
 
 **Score**
@@ -18,6 +20,7 @@
 
 ### Methods
 
+* [addPoints](_ts_score_.score.md#addpoints)
 * [endCycle](_ts_score_.score.md#endcycle)
 
 ---
@@ -30,7 +33,7 @@
 
 **● currentScore**: *`number`* = 0
 
-*Defined in [ts/score.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L13)*
+*Defined in [ts/score.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/score.ts#L24)*
 
 Keeps track of player's current score
 
@@ -41,7 +44,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/score.ts:17](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L17)*
+*Defined in [ts/score.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/score.ts#L28)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -52,7 +55,7 @@ ___
 
 **● score**: *`Mesh`*
 
-*Defined in [ts/score.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L29)*
+*Defined in [ts/score.ts:40](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/score.ts#L40)*
 
 Controls the overall rendering of the score
 
@@ -63,7 +66,7 @@ ___
 
 **● scoreGeometry**: *`TextGeometry`*
 
-*Defined in [ts/score.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L21)*
+*Defined in [ts/score.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/score.ts#L32)*
 
 Controls size and shape of the score
 
@@ -74,7 +77,7 @@ ___
 
 **● scoreMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/score.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L25)*
+*Defined in [ts/score.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/score.ts#L36)*
 
 Controls the color of the score material
 
@@ -82,13 +85,32 @@ ___
 
 ## Methods
 
+<a id="addpoints"></a>
+
+###  addPoints
+
+▸ **addPoints**(points: *`number`*): `void`
+
+*Defined in [ts/score.ts:73](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/score.ts#L73)*
+
+Adds points when blowing up asteroids, enemy missiles, and ufos.
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| points | `number` |  the amount of points to add to current score. |
+
+**Returns:** `void`
+
+___
 <a id="endcycle"></a>
 
 ###  endCycle
 
 ▸ **endCycle**(): `void`
 
-*Defined in [ts/score.ts:61](https://github.com/WilliamRADFunk/planet-funk/blob/ca1cee5/src/ts/score.ts#L61)*
+*Defined in [ts/score.ts:79](https://github.com/WilliamRADFunk/planet-funk/blob/02b6762/src/ts/score.ts#L79)*
 
 At the end of each loop iteration, score updates with time increase.
 

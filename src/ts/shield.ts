@@ -144,7 +144,7 @@ export class Shield implements Collidable {
      * Gets the current radius of the bounding box (circle) of the collidable.
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
-    getCollisionRadius() {
+    getCollisionRadius(): number {
         return 1;
     }
     /**
@@ -158,7 +158,7 @@ export class Shield implements Collidable {
      * Gets the name of the shield.
      * @returns the name of the shield.
      */
-    getName() {
+    getName(): string {
         return this.shield.name;
     }
     /**
@@ -180,7 +180,7 @@ export class Shield implements Collidable {
      * States it is a passive type or not. Two passive types cannot colllide with each other.
      * @returns True is passive | False is not passive
      */
-    isPassive() {
+    isPassive(): boolean {
         return true;
     }
     /**

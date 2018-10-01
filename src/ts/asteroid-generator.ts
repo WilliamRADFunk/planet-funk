@@ -2,38 +2,59 @@ import { Scene } from "three";
 
 import { Asteroid } from "./asteroid";
 import { CollisionatorSingleton } from "./collisionator";
-
+import { Score } from "./score";
+/**
+ * @class
+ * Makes, Moves, and Scores the asteroids and their resulting destruction.
+ */
 export class AsteroidGenerator {
     /**
      * Asteroid array for ease of iteration
      */
-    asteroids: Asteroid[] = [];
+    private asteroids: Asteroid[] = [];
+    /**
+     * Points multiplier per asteroid destroyed.
+     */
+    private asteroidPoints: number = 50;
+    /**
+     * Current level player is on, effects mas asteroids and points per asteroid destroyed.
+     */
+    private currentLavel: number = 1;
     /**
      * Maximum number of asteroids that can exist at one time.
      */
-    maxAsteroids: number = 50;
+    private maxAsteroids: number = 50;
     /**
      * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
      */
     private scene: Scene;
     /**
+     * Reference to the scorekeeper for adding points on asteroid destruction.
+     */
+    private scoreboard: Score;
+    /**
      * Constructor for the AsteroidGenerator class
-     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param scene      graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param scoreboard reference to the scorekeeper for adding points on asteroid destruction.
      * @hidden
      */
-    constructor(scene: Scene) {
+    constructor(scene: Scene, scoreboard: Score) {
         this.scene = scene;
+        this.scoreboard = scoreboard;
         for (let i = 0; i < this.maxAsteroids; i++) {
             this.asteroids.push(this.makeAsteroid());
         }
     }
     /**
      * At the end of each loop iteration, iterate endCycle through all asteroids.
+     * @param isGameActive flag to let generator know if game is not lost. If it is, don't continue accruing points.
      */
-    endCycle() {
+    endCycle(isGameActive: boolean): void {
         for (let i = 0; i < this.asteroids.length; i++) {
             if (this.asteroids[i]) {
-                this.asteroids[i].endCycle();
+                if (!this.asteroids[i].endCycle() && isGameActive) {
+                    this.scoreboard.addPoints(this.currentLavel * this.asteroidPoints);
+                }
             }
         }
     }
@@ -41,7 +62,7 @@ export class AsteroidGenerator {
      * Asteroid generation in one place to avoid breaking DRY.
      * @returns the created asteroid to be added to list at index of choice.
      */
-    makeAsteroid() {
+    private makeAsteroid(): Asteroid {
         const altRand = Math.random();
         const isXNegative = Math.random() < 0.5 ? -1 : 1;
         const isZNegative = Math.random() < 0.5 ? -1 : 1;

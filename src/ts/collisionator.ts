@@ -1,11 +1,14 @@
 import { Collidable } from "./collidable";
 import { Scene } from "three";
-
+/**
+ * @class
+ * The collision detection system.
+ */
 class Collisionator {
     /**
      * Registered list of things that can are collidable.
      */
-    collisionItems: Collidable[] = [];
+    private collisionItems: Collidable[] = [];
     /**
      * Constructor for the Collisionator class
      * @hidden
@@ -15,14 +18,14 @@ class Collisionator {
      * Adds a collidable object to the list.
      * @param collidable the object with collidable characteristics to add to the collidables list.
      */
-    add(collidable: Collidable) {
+    add(collidable: Collidable): void {
         this.collisionItems.push(collidable);
     }
     /**
      * Check for collisions between two or more object, and signal them to impact.
      * @param scene  graphic rendering scene object. Used each iteration to redraw things contained in scene.
      */
-    checkForCollisions(scene: Scene) {
+    checkForCollisions(scene: Scene): void {
         for (let i = 0; i < this.collisionItems.length; i++) {
             if (!this.collisionItems[i].getActive()) continue;
             for (let j = i+1; j < this.collisionItems.length; j++) {
@@ -60,12 +63,11 @@ class Collisionator {
      * Removes a collidable object to the list.
      * @param collidable the object with collidable characteristics to remove to the collidables list.
      */
-    remove(collidable: Collidable) {
+    remove(collidable: Collidable): void {
         const index = this.collisionItems.indexOf(collidable);
         if (index > -1) {
             this.collisionItems.splice(index, 1);
         }
     }
 }
-// TODO: Also need to get radius of reach
 export const CollisionatorSingleton = new Collisionator();

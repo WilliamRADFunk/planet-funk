@@ -109,7 +109,7 @@ export default () => {
         }
     };
     const scoreboard = new Score(scene);
-    const asteroidGenerator = new AsteroidGenerator(scene);
+    const asteroidGenerator = new AsteroidGenerator(scene, scoreboard);
     let secondsCounter = 0;
     let jobCounter = 0;
     /**
@@ -130,7 +130,7 @@ export default () => {
         if (jobCounter === 10 && secondsCounter !== 60) {
             CollisionatorSingleton.checkForCollisions(scene);
         } else {
-            asteroidGenerator.endCycle();
+            asteroidGenerator.endCycle(isGameLive);
             planet.endCycle();
             shield.endCycle(planet.getPowerRegenRate());
         }

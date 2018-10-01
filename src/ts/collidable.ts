@@ -1,5 +1,8 @@
 import { Scene } from "three";
-
+/**
+ * @class
+ * All things within the collision detections system must have this interface.
+ */
 export interface Collidable {
     /**
      * Gets the viability of the object.

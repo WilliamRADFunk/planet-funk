@@ -1,9 +1,14 @@
 import { CircleGeometry, Mesh, MeshBasicMaterial, Scene } from "three";
 
 import { Collidable } from "./collidable";
-
+/**
+ * Static index to help name one explosion differenly than another.
+ */
 let index: number = 0;
-
+/**
+ * @class
+ * An expanding explosion of force that dissolves over time, but can cause other things to explode on contanct.
+ */
 export class Explosion implements Collidable {
     /**
      * Keeps track of how big explosions scale is at moment.
@@ -91,28 +96,28 @@ export class Explosion implements Collidable {
      * Gets the viability of the object.
      * @returns flag to signal non-destruction. True = not destroyed. False = destroyed.
      */
-    getActive() {
+    getActive(): boolean {
         return this.isActive;
     }
     /**
      * Gets the current radius of the bounding box (circle) of the collidable.
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
-    getCollisionRadius() {
+    getCollisionRadius(): number {
         return this.explosion.scale.x * this.radius;
     }
     /**
      * Gets the current position of the collidable object.
      * @returns the array is of length 2 with x coordinate being first, and then z coordinate.
      */
-    getCurrentPosition() {
+    getCurrentPosition(): number[] {
         return [this.explosion.position.x, this.explosion.position.z];
     }
     /**
      * Gets the name of the explosion.
      * @returns the name of the explosion.
      */
-    getName() {
+    getName(): string {
         return this.explosion.name;
     }
     /**
@@ -120,18 +125,19 @@ export class Explosion implements Collidable {
      * @param self the thing to remove from collidables...and scene.
      * @returns whether or not impact means removing item from the scene.
      */
-    impact(self: Collidable) {
+    impact(self: Collidable): boolean {
         return false;
     }
     /**
      * States it is a passive type or not. Two passive types cannot colllide with each other.
      * @returns True is passive | False is not passive
      */
-    isPassive() {
+    isPassive(): boolean {
         return false;
     }
     /**
      * Returns mesh so it can be removed from scene.
+     * @returns the explosion mesh
      */
     getMesh(): Mesh {
         return this.explosion;
