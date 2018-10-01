@@ -167,9 +167,9 @@ export class Projectile implements Collidable {
         } else {
             this.calculateNextPoint();
             if (!this.tailGeometry &&
-                this.currentPoint[0] > -6 &&
-                this.currentPoint[0] < 6 &&
-                this.currentPoint[1] > -6 && this.currentPoint[1] < 6) {
+                this.currentPoint[0] > -5.95 &&
+                this.currentPoint[0] < 5.95 &&
+                this.currentPoint[1] > -5.95 && this.currentPoint[1] < 5.95) {
                 // Creates the missile's fiery trail.
                 this.tailGeometry = new Geometry();
                 this.tailGeometry.vertices.push(
