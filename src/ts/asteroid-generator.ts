@@ -15,15 +15,15 @@ export class AsteroidGenerator {
     /**
      * Points multiplier per asteroid destroyed.
      */
-    private asteroidPoints: number = 50;
+    private asteroidPoints: number = 25;
     /**
-     * Current level player is on, effects mas asteroids and points per asteroid destroyed.
+     * Current level player is on, effects max asteroids and points per asteroid destroyed.
      */
-    private currentLavel: number = 1;
+    private currentLevel: number = 1;
     /**
      * Maximum number of asteroids that can exist at one time.
      */
-    private maxAsteroids: number = 50;
+    private maxAsteroids: number = 30;
     /**
      * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
      */
@@ -53,7 +53,7 @@ export class AsteroidGenerator {
         for (let i = 0; i < this.asteroids.length; i++) {
             if (this.asteroids[i]) {
                 if (!this.asteroids[i].endCycle() && isGameActive) {
-                    this.scoreboard.addPoints(this.currentLavel * this.asteroidPoints);
+                    this.scoreboard.addPoints(this.currentLevel * this.asteroidPoints);
                 }
             }
         }

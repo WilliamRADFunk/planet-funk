@@ -15,6 +15,7 @@ import { Planet } from './planet';
 import { Shield } from './shield';
 import { AsteroidGenerator } from './asteroid-generator';
 import { Score } from './score';
+import { EnemyMissileGenerator } from './enemy-missile-generator';
 /**
  * Placeholder function typically used to initiate the applications loop.
  */
@@ -110,6 +111,7 @@ export default () => {
     };
     const scoreboard = new Score(scene);
     const asteroidGenerator = new AsteroidGenerator(scene, scoreboard);
+    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard);
     let secondsCounter = 0;
     let jobCounter = 0;
     /**
@@ -131,6 +133,7 @@ export default () => {
             CollisionatorSingleton.checkForCollisions(scene);
         } else {
             asteroidGenerator.endCycle(isGameLive);
+            enemyMissileGenerator.endCycle(isGameLive);
             planet.endCycle();
             shield.endCycle(planet.getPowerRegenRate());
         }

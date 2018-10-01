@@ -9,6 +9,8 @@ import {
     Scene,
     Vector3 } from "three";
 import { Collidable } from "./collidable";
+import { Explosion } from "./explosion";
+import { CollisionatorSingleton } from "./collisionator";
 /**
  * Static index to help name one projectile differenly than another.
  */
@@ -35,25 +37,9 @@ export class Projectile implements Collidable {
      */
     private endingPoint: number[];
     /**
-     * Flag to signal if the missile has been destroyed.
-     * True is not destroyed. False is destroyed.
+     * Explosion from impacted missile
      */
-    private isActive: boolean = true;
-    /**
-     * Flag to signal if the missile can be considered for collisions.
-     * True is collidable. False is not collidable.
-     */
-    private isCollidable: boolean = false;
-    /**
-     * Flag to signal if the missile is in explosion mode.
-     * True is exploding. False is in motion.
-     */
-    private isExploding: boolean = false;
-    /**
-     * Flag to signal if the missile's explosion is expanding/contracting.
-     * True is expanding. False is contracting..
-     */
-    private isExplosionGrowing: boolean = true;
+    private explosion: Explosion;
     /**
      * Controls size and shape of the missile's glowing head.
      */
@@ -66,6 +52,30 @@ export class Projectile implements Collidable {
      * Controls the overall rendering of the glowing head.
      */
     private headMesh: Mesh;
+    /**
+     * Flag to signal if the missile has been destroyed.
+     * True is not destroyed. False is destroyed.
+     */
+    private isActive: boolean = true;
+    /**
+     * Flag to signal if the missile can be considered for collisions.
+     * True is collidable. False is not collidable.
+     */
+    private isCollidable: boolean = false;
+    /**
+     * Flag to determine enemy allegiance of missile.
+     */
+    private isEnemyMissile: boolean;
+    /**
+     * Flag to signal if the missile is in explosion mode.
+     * True is exploding. False is in motion.
+     */
+    private isExploding: boolean = false;
+    /**
+     * Flag to signal if the missile's explosion is expanding/contracting.
+     * True is expanding. False is contracting..
+     */
+    private isExplosionGrowing: boolean = true;
     /**
      * Keeps track of the x,z point where missile fired from.
      */
@@ -106,9 +116,11 @@ export class Projectile implements Collidable {
      * @param colllidableAtBirth Enemy missiles need to be destructable before hitting target, where player's don't.
      * @hidden
      */
-    constructor(scene: Scene, x1: number, z1: number, x2: number, z2: number, dist: number, color: Color, colllidableAtBirth?: boolean) {
+    constructor(scene: Scene, x1: number, z1: number, x2: number, z2: number, dist: number, color: Color, colllidableAtBirth?: boolean, speed?: number) {
         index++;
+        this.speed = speed || this.speed;
         this.isCollidable = !!colllidableAtBirth;
+        this.isEnemyMissile = this.isCollidable;
         this.scene = scene;
         this.originalStartingPoint = [x1, z1];
         this.currentPoint = [x1, z1];
@@ -136,6 +148,7 @@ export class Projectile implements Collidable {
         this.headMesh.position.set(this.currentPoint[0], 0.21, this.currentPoint[1]);
         this.headMesh.rotation.set(-1.5708, 0, 0);
         this.headMesh.name = `Projectile-${index}`;
+        if (this.isEnemyMissile) this.headMesh.name = `Projectile-${index}-enemy`;
         scene.add(this.headMesh);
     }
     /**
@@ -149,43 +162,37 @@ export class Projectile implements Collidable {
         this.currentPoint[1] = ((1 - t) * this.originalStartingPoint[1]) + (t * this.endingPoint[1]);
     }
     /**
+     * Creates an explosion during collision and adds it to the collildables list.
+     * @param isInert flag to let explosion know it isn't a 'real' explosion (hit shield).
+     */
+    private createExplosion(isInert: boolean): void {
+        this.explosion = new Explosion(this.scene, this.headMesh.position.x, this.headMesh.position.z, 0.12, isInert);
+        if (!isInert) CollisionatorSingleton.add(this.explosion);
+    }
+    /**
      * At the end of each loop iteration, move the projectile a little.
      * @returns whether or not the projectile is done, and should be removed from satellite's list.
      */
     endCycle(): boolean {
-        if (this.isActive && !this.isExploding) {
+        if (this.explosion) {
+            if (!this.explosion.endCycle()) {
+                CollisionatorSingleton.remove(this.explosion);
+                this.scene.remove(this.explosion.getMesh());
+                this.explosion = null;
+                return false;
+            }
+        } else {
             this.calculateNextPoint();
             this.tailGeometry.vertices[1].x = this.currentPoint[0];
             this.tailGeometry.vertices[1].z = this.currentPoint[1];
             this.tailGeometry.verticesNeedUpdate = true;
             this.headMesh.position.set(this.currentPoint[0], 0.21, this.currentPoint[1]);
-
             if (this.distanceTraveled >= this.totalDistance) {
-                this.headMaterial.color.set(new Color(0xF9A602));
-                this.isExploding = true;
-                this.isCollidable = true;
+                this.createExplosion(false);
+                this.removeFromScene(this.scene);
             }
-            return true;
-        } else if (this.isActive && this.isExploding) {
-            if (this.isExplosionGrowing) {
-                this.currentExplosionScale += 0.02;
-                this.headMesh.scale.set(this.currentExplosionScale, this.currentExplosionScale, this.currentExplosionScale);
-            } else {
-                this.currentExplosionScale -= 0.02;
-                this.headMaterial.opacity = this.currentExplosionScale;
-            }
-            if (this.isExplosionGrowing && this.currentExplosionScale >= 4) {
-                this.currentExplosionScale = 1;
-                this.isExplosionGrowing = false;
-            } else if (!this.isExplosionGrowing && this.currentExplosionScale <= 0) {
-                this.isActive = false;
-                this.isCollidable = false;
-            }
-            return true;
         }
-        this.scene.remove(this.tailMesh);
-        this.scene.remove(this.headMesh);
-        return false;
+        return true;
     }
     /**
      * Gets the viability of the explosive blast head.
@@ -218,9 +225,15 @@ export class Projectile implements Collidable {
     /**
      * Called when something collides with projectile blast radius, which does nothing unless it hasn't exploded yet.
      * @param self the thing to remove from collidables...and scene.
+     * @param otherThing   the name of the other thing in collision (mainly for shield).
      * @returns whether or not impact means removing item from the scene.
      */
-    impact(self: Collidable): boolean {
+    impact(self: Collidable, otherThing: string): boolean {
+        if (this.isActive) {
+            this.isActive = false;
+            this.createExplosion(!otherThing.indexOf('Shield'));
+            return true;
+        }
         return false;
     }
     /**
@@ -229,5 +242,15 @@ export class Projectile implements Collidable {
      */
     isPassive(): boolean {
         return false;
+    }
+    /**
+     * Removes missile object from the "visible" scene by removing non-explosion parts from scene.
+     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     */
+    removeFromScene(scene: Scene): void {
+        this.isCollidable = false;
+        this.isActive = false;
+        this.scene.remove(this.tailMesh);
+        this.scene.remove(this.headMesh);
     }
 }

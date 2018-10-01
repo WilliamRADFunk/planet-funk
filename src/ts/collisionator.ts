@@ -31,12 +31,16 @@ class Collisionator {
             for (let j = i+1; j < this.collisionItems.length; j++) {
                 const entityI = this.collisionItems[i];
                 const entityJ = this.collisionItems[j];
+                const isEnemyMissile = (entityI.getName().indexOf('enemy') > -1 || entityJ.getName().indexOf('enemy') > -1);
+                if (entityI.getName().indexOf('enemy') > -1 && entityJ.getName().indexOf('enemy') > -1) continue;
                 if (!entityJ.getActive()) continue;
                 if (entityI.isPassive() && entityJ.isPassive()) continue;
                 if (!entityI.getName().indexOf('explosion') &&
                     !entityJ.getName().indexOf('explosion')) continue;
                 if (!entityI.getName().indexOf('Asteroid') &&
                     !entityJ.getName().indexOf('Asteroid')) continue;
+                if ((!entityI.getName().indexOf('Asteroid') ||
+                    !entityJ.getName().indexOf('Asteroid')) && isEnemyMissile) continue;
                 const posI = entityI.getCurrentPosition();
                 const posJ = entityJ.getCurrentPosition();
                 const radI = entityI.getCollisionRadius();
@@ -46,7 +50,7 @@ class Collisionator {
                     (posJ[1] - posI[1]) * (posJ[1] - posI[1])
                 );
                 if (radI + radJ > dist) {
-                    // console.log('Boom!', entityI.getName(), entityJ.getName());
+                    console.log('Boom!', entityI.getName(), entityJ.getName());
                     if (entityI.impact(entityI, entityJ.getName()) &&
                     typeof entityI.removeFromScene === 'function') {
                         entityI.removeFromScene(scene);
