@@ -77,13 +77,16 @@ export class AsteroidGenerator {
             asteroid = new Asteroid(
                 this.scene,
                 isXNegative * ((Math.random() * 12) + 8),
-                isZNegative * ((Math.random() * 12) + 8));
+                isZNegative * ((Math.random() * 12) + 8),
+                this.currentLevel);
         } else if (altRand > 0.075) {
             asteroid = new Asteroid(
-                this.scene, 1 * isXNegative, isZNegative * ((Math.random() * 12) + 8));
+                this.scene, 1 * isXNegative, isZNegative * ((Math.random() * 12) + 8),
+                this.currentLevel);
         } else {
             asteroid = new Asteroid(
-                this.scene, isXNegative * ((Math.random() * 12) + 8), 1 * isZNegative);
+                this.scene, isXNegative * ((Math.random() * 12) + 8), 1 * isZNegative,
+                this.currentLevel);
         }
         asteroid.addToScene();
         CollisionatorSingleton.add(asteroid);
@@ -93,9 +96,9 @@ export class AsteroidGenerator {
      * Start of new level means reactivating asteroids, and creating new ones.
      * @param level level number, grabbed from the LevelHandler.
      */
-    refreshLevel(level: number) {
+    refreshLevel(level: number): void {
         this.currentLevel = level;
-        this.maxAsteroids += level;
+        this.maxAsteroids += 1;
         for (let i = this.asteroids.length; i < this.maxAsteroids; i++) {
             this.asteroids.push(this.makeAsteroid());
         }

@@ -116,10 +116,10 @@ export class EnemyMissileGenerator {
      * @param level level number, grabbed from the LevelHandler.
      * @param color level color, grabbed from the LevelHandler.
      */
-    refreshLevel(level: number, color: Color) {
+    refreshLevel(level: number, color: Color): void {
         this.currentColor = color;
         this.currentLevel = level;
-        this.maxMissiles += level;
+        this.maxMissiles += 1;
         for (let i = this.missiles.length; i < this.maxMissiles; i++) {
             this.makeMissile();
         }

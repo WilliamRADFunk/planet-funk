@@ -96,6 +96,11 @@ export class Projectile implements Collidable {
      */
     private totalDistance: number;
     /**
+     * The wait number of iterations before loosing the enemy missile.
+     * Prevents new level creation from throwing all missiles at once.
+     */
+    private waitToFire: number = 0;
+    /**
      * Constructor for the Projectile class
      * @param scene              graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param x1                 origin point x of where the missile starts.
@@ -132,7 +137,10 @@ export class Projectile implements Collidable {
         this.headMesh.position.set(this.currentPoint[0], 0.21, this.currentPoint[1]);
         this.headMesh.rotation.set(-1.5708, 0, 0);
         this.headMesh.name = `Projectile-${index}`;
-        if (this.isEnemyMissile) this.headMesh.name = `Projectile-${index}-enemy`;
+        if (this.isEnemyMissile) {
+            this.headMesh.name = `Projectile-${index}-enemy`;
+            this.waitToFire = Math.floor((Math.random() * 900) + 1);
+        }
         scene.add(this.headMesh);
     }
     /**
@@ -158,6 +166,10 @@ export class Projectile implements Collidable {
      * @returns whether or not the projectile is done, and should be removed from satellite's list.
      */
     endCycle(): boolean {
+        if (this.waitToFire) {
+            this.waitToFire--;
+            return true;
+        }
         if (this.explosion) {
             if (!this.explosion.endCycle()) {
                 CollisionatorSingleton.remove(this.explosion);

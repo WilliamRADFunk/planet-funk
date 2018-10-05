@@ -191,8 +191,13 @@ export class Planet implements Collidable {
             this.quadrantYellow = this.base4.getActive();
             this.isActive = this.quadrantBlue || this.quadrantGreen || this.quadrantPurple || this.quadrantYellow;
             if (!this.isActive) {
+                // Game over...Show dead planet.
                 this.funkMaterial.map = ImageUtils.loadTexture('assets/images/funkmap1k_modified_dead.jpg');
                 this.funkMaterial.needsUpdate = true;
+                // Game over...Blow 'em up!
+                for (let i = 0; i < this.satellites.length; i++) {
+                    this.satellites[i].impact(this.satellites[i]);
+                }
             }
         }
     }

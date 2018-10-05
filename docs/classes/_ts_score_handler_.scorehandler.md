@@ -22,6 +22,7 @@
 ### Methods
 
 * [addPoints](_ts_score_handler_.scorehandler.md#addpoints)
+* [createText](_ts_score_handler_.scorehandler.md#createtext)
 * [endCycle](_ts_score_handler_.scorehandler.md#endcycle)
 
 ---
@@ -34,7 +35,7 @@
 
 **● currentColor**: *`Color`*
 
-*Defined in [ts/score-handler.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/score-handler.ts#L31)*
+*Defined in [ts/score-handler.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/score-handler.ts#L31)*
 
 Keeps track of level's current color
 
@@ -45,7 +46,7 @@ ___
 
 **● currentScore**: *`number`* = 0
 
-*Defined in [ts/score-handler.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/score-handler.ts#L35)*
+*Defined in [ts/score-handler.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/score-handler.ts#L35)*
 
 Keeps track of player's current score
 
@@ -56,7 +57,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/score-handler.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/score-handler.ts#L39)*
+*Defined in [ts/score-handler.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/score-handler.ts#L39)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -67,7 +68,7 @@ ___
 
 **● score**: *`Mesh`*
 
-*Defined in [ts/score-handler.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/score-handler.ts#L51)*
+*Defined in [ts/score-handler.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/score-handler.ts#L51)*
 
 Controls the overall rendering of the score
 
@@ -78,7 +79,7 @@ ___
 
 **● scoreGeometry**: *`TextGeometry`*
 
-*Defined in [ts/score-handler.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/score-handler.ts#L43)*
+*Defined in [ts/score-handler.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/score-handler.ts#L43)*
 
 Controls size and shape of the score
 
@@ -89,7 +90,7 @@ ___
 
 **● scoreMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/score-handler.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/score-handler.ts#L47)*
+*Defined in [ts/score-handler.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/score-handler.ts#L47)*
 
 Controls the color of the score material
 
@@ -103,7 +104,7 @@ ___
 
 ▸ **addPoints**(points: *`number`*): `void`
 
-*Defined in [ts/score-handler.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/score-handler.ts#L86)*
+*Defined in [ts/score-handler.ts:70](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/score-handler.ts#L70)*
 
 Adds points when blowing up asteroids, enemy missiles, and ufos.
 
@@ -116,13 +117,26 @@ Adds points when blowing up asteroids, enemy missiles, and ufos.
 **Returns:** `void`
 
 ___
+<a id="createtext"></a>
+
+### `<Private>` createText
+
+▸ **createText**(): `void`
+
+*Defined in [ts/score-handler.ts:76](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/score-handler.ts#L76)*
+
+Creates the text in one place to obey the DRY rule.
+
+**Returns:** `void`
+
+___
 <a id="endcycle"></a>
 
 ###  endCycle
 
 ▸ **endCycle**(color: *`Color`*): `void`
 
-*Defined in [ts/score-handler.ts:93](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/score-handler.ts#L93)*
+*Defined in [ts/score-handler.ts:103](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/score-handler.ts#L103)*
 
 At the end of each loop iteration, score updates with time increase.
 

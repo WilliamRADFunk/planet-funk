@@ -24,7 +24,7 @@
 
 **● levelFont**: *`Font`*
 
-*Defined in [ts/level-handler.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/level-handler.ts#L14)*
+*Defined in [ts/level-handler.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L14)*
 
 The loaded font, used for the level display.
 
@@ -35,7 +35,7 @@ ___
 
 **● loader**: *`FontLoader`* =  new FontLoader()
 
-*Defined in [ts/level-handler.ts:18](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/level-handler.ts#L18)*
+*Defined in [ts/level-handler.ts:18](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L18)*
 
 Loads the font from a json file.
 
@@ -46,7 +46,7 @@ ___
 
 **● randomColor**: *`any`* =  require('randomcolor')
 
-*Defined in [ts/level-handler.ts:10](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/level-handler.ts#L10)*
+*Defined in [ts/level-handler.ts:10](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L10)*
 
 ___
 

@@ -64,10 +64,9 @@ export default () => {
     // Create shield around the planet.
     const shield = new Shield();
     shield.addToScene(scene);
-    shield.activate();
     CollisionatorSingleton.add(shield);
     // Create the click collision layer
-    const clickBarrierGeometry = new PlaneGeometry( 100, 100, 0, 0 );
+    const clickBarrierGeometry = new PlaneGeometry( 12, 12, 0, 0 );
     const clickBarrierMaterial = new MeshBasicMaterial( {opacity: 0, transparent: true, side: DoubleSide} );
     const clickBarrier = new Mesh( clickBarrierGeometry, clickBarrierMaterial );
     clickBarrier.name = 'Click Barrier';
@@ -128,27 +127,54 @@ export default () => {
         if (jobCounter > 10) jobCounter = 0;
         if (secondsCounter > 60) secondsCounter = 0;
 
-        // Checks to make sure game isn't over.
-        if (isGameLive && secondsCounter === 60) {
-            const status = planet.getStatus();
-            isGameLive = status.quadrantBlue || status.quadrantGreen || status.quadrantPurple || status.quadrantYellow;
-            // If game is over, stop increasing the score.
-            scoreboard.endCycle(levelHandler.getColor());
-            // If game is over, level can't change.
-            levelHandler.endCycle();
-        }
-        if (jobCounter === 10 && secondsCounter !== 60) {
-            CollisionatorSingleton.checkForCollisions(scene);
+        // Only run operations allowed during a fluctuating banner animation.
+        if (levelHandler.isAnimating()) {
+            levelHandler.runAnimationCycle();
+            // Periodically check if things collided.
+            if (jobCounter === 10 && secondsCounter !== 60) {
+                CollisionatorSingleton.checkForCollisions(scene);
+            }
+            // Let the last explosions finish off even during next level banner animation.
+            noAsteroids = asteroidGenerator.endCycle(isGameLive);
+            noMissiles = enemyMissileGenerator.endCycle(isGameLive);
+            // To give the game over screen a more interesting feel,
+            // spawn moer asteroids and missiles after they've exhausted themselves.
+            if (noAsteroids && noMissiles) {
+                enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
+                asteroidGenerator.refreshLevel(levelHandler.getLevel());
+            }
+            // The world keeps on spinning.
+            planet.endCycle();
+            // If dead, drain the battery. If not, let charging get a head start.
+            shield.endCycle(planet.getPowerRegenRate());
+        // Run operations unrelated to fluctuating banner animation
         } else {
+            // Checks to make sure game isn't over.
+            if (isGameLive && secondsCounter === 60) {
+                const status = planet.getStatus();
+                isGameLive = status.quadrantBlue || status.quadrantGreen || status.quadrantPurple || status.quadrantYellow;
+                // If game is over, stop increasing the score.
+                scoreboard.endCycle(levelHandler.getColor());
+                // If game is over, level can't change.
+                levelHandler.endCycle();
+                if (!isGameLive) levelHandler.endGame();
+            }
+            // Periodically check if things collided.
+            if (jobCounter === 10 && secondsCounter !== 60) {
+                CollisionatorSingleton.checkForCollisions(scene);
+            }
             noAsteroids = asteroidGenerator.endCycle(isGameLive);
             noMissiles = enemyMissileGenerator.endCycle(isGameLive);
             planet.endCycle();
             shield.endCycle(planet.getPowerRegenRate());
-        }
-        if (isGameLive && noAsteroids && noMissiles) {
-            levelHandler.nextLevel();
-            enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
-            asteroidGenerator.refreshLevel(levelHandler.getLevel());
+            // Game is still live but there are no more enemy missiles or asteroids.
+            // Increase the level and refresh everything.
+            if (isGameLive && noAsteroids && noMissiles) {
+                levelHandler.nextLevel();
+                scoreboard.endCycle(levelHandler.getColor());
+                enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
+                asteroidGenerator.refreshLevel(levelHandler.getLevel());
+            }
         }
         renderer.render( scene, camera );
 	    requestAnimationFrame( render );

@@ -60,24 +60,8 @@ export class ScoreHandler {
         this.scene = scene;
         this.scoreMaterial = new MeshLambertMaterial( {color: color || 0x084E70} );
         if (scoreFont) {
-            this.scoreGeometry = new TextGeometry(`Score: ${this.currentScore.toFixed(0)}`,
-                {
-                    font: scoreFont,
-                    size: 0.5,
-                    height: 0.2,
-                    curveSegments: 12,
-                    bevelEnabled: false,
-                    bevelThickness: 1,
-                    bevelSize: 0.5,
-                    bevelSegments: 3
-                });
-            this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
-            this.score.position.x = -5.5;
-            this.score.position.y = 0.5;
-            this.score.position.z = -5;
-            this.score.rotation.x = -1.3708;
+            this.createText();
         }
-        scene.add(this.score);
     }
     /**
      * Adds points when blowing up asteroids, enemy missiles, and ufos.
@@ -85,6 +69,32 @@ export class ScoreHandler {
      */
     addPoints(points: number): void {
         this.currentScore += points;
+    }
+    /**
+     * Creates the text in one place to obey the DRY rule.
+     */
+    private createText(): void {
+        // Only remove score if it was added before.
+        if (this.score) this.scene.remove(this.score);
+        // Added before or not, make a new one and add it.
+        // Sadly TextGeometries must be removed and added whenever the text content changes.
+        this.scoreGeometry = new TextGeometry(`Score: ${this.currentScore.toFixed(0)}`,
+            {
+                font: scoreFont,
+                size: 0.5,
+                height: 0.2,
+                curveSegments: 12,
+                bevelEnabled: false,
+                bevelThickness: 1,
+                bevelSize: 0.5,
+                bevelSegments: 3
+            });
+        this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
+        this.score.position.x = -5.5;
+        this.score.position.y = 0.5;
+        this.score.position.z = -5.1;
+        this.score.rotation.x = -1.3708;
+        this.scene.add(this.score);
     }
     /**
      * At the end of each loop iteration, score updates with time increase.
@@ -98,27 +108,7 @@ export class ScoreHandler {
         this.currentColor = color;
         this.currentScore += 0.6;
         if (scoreFont) {
-            // Only remove score if it was added before.
-            if (this.score) this.scene.remove(this.score);
-            // Added before or not, make a new one and add it.
-            // Sadly TextGeometries must be removed and added whenever the text content changes.
-            this.scoreGeometry = new TextGeometry(`Score: ${this.currentScore.toFixed(0)}`,
-                {
-                    font: scoreFont,
-                    size: 0.5,
-                    height: 0.2,
-                    curveSegments: 12,
-                    bevelEnabled: false,
-                    bevelThickness: 1,
-                    bevelSize: 0.5,
-                    bevelSegments: 3
-                });
-            this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
-            this.score.position.x = -5.5;
-            this.score.position.y = 0.5;
-            this.score.position.z = -5;
-            this.score.rotation.x = -1.3708;
-            this.scene.add(this.score);
+            this.createText();
         }
     }
 }

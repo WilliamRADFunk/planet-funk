@@ -99,6 +99,10 @@ export class Shield implements Collidable {
     addToScene(scene: Scene): void {
         scene.add(this.energyBars);
         scene.add(this.shield);
+        setTimeout(() => {
+            this.activate();
+            this.deactivate();
+        }, 100);
     }
     /**
      * If shield is up, this turns the shield off.

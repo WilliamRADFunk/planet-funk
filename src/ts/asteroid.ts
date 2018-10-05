@@ -71,10 +71,12 @@ export class Asteroid implements Collidable {
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param x1    origin point x of where the asteroid starts.
      * @param z1    origin point z of where the asteroid starts.
+     * @param level level at time of asteroid instantiation.
      * @hidden
      */
-    constructor(scene: Scene, x1:number, z1: number) {
+    constructor(scene: Scene, x1:number, z1: number, level: number) {
         index++;
+        this.speed += (level / 1000);
         this.originalStartingPoint = [x1, z1];
         this.currentPoint = [x1, z1];
         this.endingPoint = [0, 0];

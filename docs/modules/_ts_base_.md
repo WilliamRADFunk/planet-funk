@@ -28,7 +28,7 @@
     {xb: -0.49, zb: -0.49, ry: 0.785398}
 ]
 
-*Defined in [ts/base.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/base.ts#L25)*
+*Defined in [ts/base.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/base.ts#L25)*
 
 Makes instatiateing the base's position by index easier and cleaner to read.
 
@@ -44,7 +44,7 @@ ___
     'assets/images/building4.png'
 ]
 
-*Defined in [ts/base.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/2946feb/src/ts/base.ts#L16)*
+*Defined in [ts/base.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/base.ts#L16)*
 
 Makes instatiateing the base's texture by index easier and cleaner to read.
 
