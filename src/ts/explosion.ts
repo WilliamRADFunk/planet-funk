@@ -1,6 +1,6 @@
-import { CircleGeometry, Mesh, MeshBasicMaterial, Scene } from "three";
+import { CircleGeometry, Mesh, MeshBasicMaterial, Scene } from 'three';
 
-import { Collidable } from "./collidable";
+import { Collidable } from './collidable';
 /**
  * Static index to help name one explosion differenly than another.
  */

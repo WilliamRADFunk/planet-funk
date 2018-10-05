@@ -10,12 +10,14 @@ import {
     Scene,
     WebGLRenderer,
     Vector2 } from 'three';
+
 import { CollisionatorSingleton } from './collisionator';
 import { Planet } from './planet';
 import { Shield } from './shield';
 import { AsteroidGenerator } from './asteroid-generator';
-import { Score } from './score';
+import { ScoreHandler } from './score-handler';
 import { EnemyMissileGenerator } from './enemy-missile-generator';
+import { LevelHandler } from './level-handler';
 /**
  * Placeholder function typically used to initiate the applications loop.
  */
@@ -51,7 +53,7 @@ export default () => {
         if(WIDTH < HEIGHT) HEIGHT = WIDTH;
         else WIDTH = HEIGHT;
         renderer.setSize( WIDTH, HEIGHT );
-        document.getElementById("mainview").style.left = (((window.innerWidth * 0.99) - WIDTH) / 2) + "px";
+        document.getElementById('mainview').style.left = (((window.innerWidth * 0.99) - WIDTH) / 2) + 'px';
     };
     onWindowResize();
     window.addEventListener( 'resize', onWindowResize, false);
@@ -109,9 +111,10 @@ export default () => {
             });
         }
     };
-    const scoreboard = new Score(scene);
+    const levelHandler = new LevelHandler(scene);
+    const scoreboard = new ScoreHandler(scene, levelHandler.getColor());
     const asteroidGenerator = new AsteroidGenerator(scene, scoreboard);
-    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard);
+    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor());
     let secondsCounter = 0;
     let jobCounter = 0;
     /**
@@ -122,18 +125,23 @@ export default () => {
         jobCounter++;
         if (jobCounter > 10) jobCounter = 0;
         if (secondsCounter > 60) secondsCounter = 0;
+
+        const currentColor = levelHandler.getColor();
+        const currentLevel = levelHandler.getLevel();
         // Checks to make sure game isn't over.
         if (isGameLive && secondsCounter === 60) {
             const status = planet.getStatus();
             isGameLive = status.quadrantBlue || status.quadrantGreen || status.quadrantPurple || status.quadrantYellow;
             // If game is over, stop increasing the score.
-            scoreboard.endCycle();
+            scoreboard.endCycle(currentColor);
+            // If game is over, level can't change.
+            levelHandler.endCycle();
         }
         if (jobCounter === 10 && secondsCounter !== 60) {
             CollisionatorSingleton.checkForCollisions(scene);
         } else {
             asteroidGenerator.endCycle(isGameLive);
-            enemyMissileGenerator.endCycle(isGameLive);
+            enemyMissileGenerator.endCycle(isGameLive, currentColor, currentLevel);
             planet.endCycle();
             shield.endCycle(planet.getPowerRegenRate());
         }

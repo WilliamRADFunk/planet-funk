@@ -7,10 +7,11 @@ import {
     Mesh,
     MeshBasicMaterial,
     Scene,
-    Vector3 } from "three";
-import { Collidable } from "./collidable";
-import { Explosion } from "./explosion";
-import { CollisionatorSingleton } from "./collisionator";
+    Vector3 } from 'three';
+
+import { Collidable } from './collidable';
+import { Explosion } from './explosion';
+import { CollisionatorSingleton } from './collisionator';
 /**
  * Static index to help name one projectile differenly than another.
  */
@@ -242,7 +243,7 @@ export class Projectile implements Collidable {
         return false;
     }
     /**
-     * Removes missile object from the "visible" scene by removing non-explosion parts from scene.
+     * Removes missile object from the 'visible' scene by removing non-explosion parts from scene.
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      */
     removeFromScene(scene: Scene): void {

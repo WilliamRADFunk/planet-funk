@@ -1,4 +1,11 @@
-import { Font, FontLoader, Mesh, MeshLambertMaterial, Scene, TextGeometry } from "three";
+import {
+    Color,
+    Font,
+    FontLoader,
+    Mesh,
+    MeshLambertMaterial,
+    Scene,
+    TextGeometry} from 'three';
 /**
  * Loads the font from a json file.
  */
@@ -17,7 +24,11 @@ loader.load( 'assets/fonts/optimer_regular.typeface.json', font => {
  * @class
  * Keeps track of all things score related.
  */
-export class Score {
+export class ScoreHandler {
+    /**
+     * Keeps track of level's current color
+     */
+    private currentColor: Color;
     /**
      * Keeps track of player's current score
      */
@@ -39,13 +50,15 @@ export class Score {
      */
     private score: Mesh;
     /**
-     * Constructor for the Score class
+     * Constructor for the ScoreHandler class
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param color level color, grabbed from the LevelHandler.
      * @hidden
      */
-    constructor(scene: Scene) {
+    constructor(scene: Scene, color: Color) {
+        this.currentColor = color;
         this.scene = scene;
-        this.scoreMaterial = new MeshLambertMaterial( {color: 0x084E70} );
+        this.scoreMaterial = new MeshLambertMaterial( {color: color || 0x084E70} );
         if (scoreFont) {
             this.scoreGeometry = new TextGeometry(`Score: ${this.currentScore.toFixed(0)}`,
                 {
@@ -75,8 +88,14 @@ export class Score {
     }
     /**
      * At the end of each loop iteration, score updates with time increase.
+     * @param color level color, grabbed from the LevelHandler
      */
-    endCycle(): void {
+    endCycle(color: Color): void {
+        if (color !== this.currentColor) {
+            this.currentColor = color || this.currentColor;
+            this.scoreMaterial = new MeshLambertMaterial( {color: this.currentColor} );
+        }
+        this.currentColor = color;
         this.currentScore += 0.6;
         if (scoreFont) {
             // Only remove score if it was added before.

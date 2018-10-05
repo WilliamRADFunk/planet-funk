@@ -1,8 +1,14 @@
-import { CircleGeometry, ImageUtils, LinearFilter, Mesh, MeshPhongMaterial, Scene } from "three";
+import {
+    CircleGeometry,
+    ImageUtils,
+    LinearFilter,
+    Mesh,
+    MeshPhongMaterial,
+    Scene } from 'three';
 
-import { Collidable } from "./collidable";
-import { CollisionatorSingleton } from "./collisionator";
-import { Explosion } from "./explosion";
+import { Collidable } from './collidable';
+import { CollisionatorSingleton } from './collisionator';
+import { Explosion } from './explosion';
 
 let index: number = 0;
 
@@ -181,7 +187,7 @@ export class Asteroid implements Collidable {
         return false;
     }
     /**
-     * Removes asteroid object from the "visible" scene by sending it back to its starting location.
+     * Removes asteroid object from the 'visible' scene by sending it back to its starting location.
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      */
     removeFromScene(scene: Scene): void {

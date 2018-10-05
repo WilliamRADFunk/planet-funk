@@ -22,7 +22,7 @@
 
 **● index**: *`number`* = 0
 
-*Defined in [ts/explosion.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/explosion.ts#L7)*
+*Defined in [ts/explosion.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/explosion.ts#L7)*
 
 Static index to help name one explosion differenly than another.
 

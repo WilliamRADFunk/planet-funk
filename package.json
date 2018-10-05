@@ -50,6 +50,7 @@
   },
   "homepage": "https://github.com/WilliamRADFunk/planet-funk#readme",
   "devDependencies": {
+    "@types/randomcolor": "^0.5.0",
     "@types/three": "^0.92.18",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
@@ -78,6 +79,7 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
+    "randomcolor": "^0.5.3",
     "three": "^0.96.0"
   }
 }

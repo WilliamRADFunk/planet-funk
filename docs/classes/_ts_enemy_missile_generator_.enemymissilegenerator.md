@@ -12,6 +12,7 @@
 
 ### Properties
 
+* [currentColor](_ts_enemy_missile_generator_.enemymissilegenerator.md#currentcolor)
 * [currentLevel](_ts_enemy_missile_generator_.enemymissilegenerator.md#currentlevel)
 * [maxMissiles](_ts_enemy_missile_generator_.enemymissilegenerator.md#maxmissiles)
 * [missilePoints](_ts_enemy_missile_generator_.enemymissilegenerator.md#missilepoints)
@@ -28,13 +29,24 @@
 
 ## Properties
 
+<a id="currentcolor"></a>
+
+### `<Private>` currentColor
+
+**● currentColor**: *`Color`*
+
+*Defined in [ts/enemy-missile-generator.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/enemy-missile-generator.ts#L14)*
+
+Keeps track of level's current color
+
+___
 <a id="currentlevel"></a>
 
 ### `<Private>` currentLevel
 
 **● currentLevel**: *`number`* = 1
 
-*Defined in [ts/enemy-missile-generator.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/enemy-missile-generator.ts#L23)*
+*Defined in [ts/enemy-missile-generator.ts:18](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/enemy-missile-generator.ts#L18)*
 
 Current level player is on, effects max missiles and points per missile destroyed.
 
@@ -45,7 +57,7 @@ ___
 
 **● maxMissiles**: *`number`* = 20
 
-*Defined in [ts/enemy-missile-generator.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/enemy-missile-generator.ts#L27)*
+*Defined in [ts/enemy-missile-generator.ts:22](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/enemy-missile-generator.ts#L22)*
 
 Maximum number of missiles that can exist at one time.
 
@@ -56,7 +68,7 @@ ___
 
 **● missilePoints**: *`number`* = 30
 
-*Defined in [ts/enemy-missile-generator.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/enemy-missile-generator.ts#L31)*
+*Defined in [ts/enemy-missile-generator.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/enemy-missile-generator.ts#L26)*
 
 Points multiplier per enemy missile destroyed.
 
@@ -67,7 +79,7 @@ ___
 
 **● missiles**: *[Projectile](_ts_projectile_.projectile.md)[]* =  []
 
-*Defined in [ts/enemy-missile-generator.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/enemy-missile-generator.ts#L35)*
+*Defined in [ts/enemy-missile-generator.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/enemy-missile-generator.ts#L30)*
 
 Keeps track of live missiles, to pass along endCycle signals, and destroy calls.
 
@@ -78,7 +90,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/enemy-missile-generator.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/enemy-missile-generator.ts#L39)*
+*Defined in [ts/enemy-missile-generator.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/enemy-missile-generator.ts#L34)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -87,9 +99,9 @@ ___
 
 ### `<Private>` scoreboard
 
-**● scoreboard**: *[Score](_ts_score_.score.md)*
+**● scoreboard**: *[ScoreHandler](_ts_score_handler_.scorehandler.md)*
 
-*Defined in [ts/enemy-missile-generator.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/enemy-missile-generator.ts#L43)*
+*Defined in [ts/enemy-missile-generator.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/enemy-missile-generator.ts#L38)*
 
 Reference to the scorekeeper for adding points on enemy missile destruction.
 
@@ -101,9 +113,9 @@ ___
 
 ###  endCycle
 
-▸ **endCycle**(isGameActive: *`boolean`*): `void`
+▸ **endCycle**(isGameActive: *`boolean`*, color: *`Color`*, level: *`number`*): `void`
 
-*Defined in [ts/enemy-missile-generator.ts:58](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/enemy-missile-generator.ts#L58)*
+*Defined in [ts/enemy-missile-generator.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/enemy-missile-generator.ts#L57)*
 
 At the end of each loop iteration, iterate endCycle through all missiless.
 
@@ -112,6 +124,8 @@ At the end of each loop iteration, iterate endCycle through all missiless.
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | isGameActive | `boolean` |  flag to let generator know if game is not lost. If it is, don't continue accruing points. |
+| color | `Color` |  level number, grabbed from the LevelHandler. |
+| level | `number` |
 
 **Returns:** `void`
 
@@ -122,7 +136,7 @@ ___
 
 ▸ **makeMissile**(): `void`
 
-*Defined in [ts/enemy-missile-generator.ts:84](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/enemy-missile-generator.ts#L84)*
+*Defined in [ts/enemy-missile-generator.ts:89](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/enemy-missile-generator.ts#L89)*
 
 Missiles generation in one place to avoid breaking DRY.
 

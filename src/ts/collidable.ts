@@ -1,4 +1,4 @@
-import { Scene } from "three";
+import { Scene } from 'three';
 /**
  * @class
  * All things within the collision detections system must have this interface.

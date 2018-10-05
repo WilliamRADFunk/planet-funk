@@ -4,9 +4,10 @@ import {
     Mesh, 
     MeshBasicMaterial,
     Scene,
-    Vector3 } from "three";
-import { Projectile } from "./projectile";
-import { Collidable } from "./collidable";
+    Vector3 } from 'three';
+
+import { Projectile } from './projectile';
+import { Collidable } from './collidable';
 import { CollisionatorSingleton } from './collisionator';
 /**
  * Makes instatiateing the satellite's color by index easier and cleaner to read.
@@ -224,7 +225,7 @@ export class Satellite implements Collidable {
         return [position.x, position.z];
     }
     /**
-     * Calculate distance "as the crow flies" from satellite to target.
+     * Calculate distance 'as the crow flies' from satellite to target.
      * @param targetPoint   coordinates of game area that player clicked/touched.
      * @param rotation      current rotation amount of planetary body.
      * @returns             number of pixels from satellite to target.

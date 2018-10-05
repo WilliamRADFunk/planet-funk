@@ -1,8 +1,8 @@
-import { Scene } from "three";
+import { Scene } from 'three';
 
-import { Asteroid } from "./asteroid";
-import { CollisionatorSingleton } from "./collisionator";
-import { Score } from "./score";
+import { Asteroid } from './asteroid';
+import { CollisionatorSingleton } from './collisionator';
+import { ScoreHandler } from './score-handler';
 /**
  * @class
  * Makes, Moves, and Scores the asteroids and their resulting destruction.
@@ -31,14 +31,14 @@ export class AsteroidGenerator {
     /**
      * Reference to the scorekeeper for adding points on asteroid destruction.
      */
-    private scoreboard: Score;
+    private scoreboard: ScoreHandler;
     /**
      * Constructor for the AsteroidGenerator class
      * @param scene      graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param scoreboard reference to the scorekeeper for adding points on asteroid destruction.
      * @hidden
      */
-    constructor(scene: Scene, scoreboard: Score) {
+    constructor(scene: Scene, scoreboard: ScoreHandler) {
         this.scene = scene;
         this.scoreboard = scoreboard;
         for (let i = 0; i < this.maxAsteroids; i++) {

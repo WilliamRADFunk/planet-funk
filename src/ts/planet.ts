@@ -123,7 +123,7 @@ export class Planet implements Collidable {
         this.funk = new Mesh(this.funkGeometry, this.funkMaterial);
         this.funk.position.set(0, 0, 0);
         this.funk.rotation.set(0, -1.57079644, 0);
-        this.funk.name = "Planet";
+        this.funk.name = 'Planet';
         // Build the planet's four defensive satellite weapons, and
         // attach the meshes to make orbit a simple thing.
         this.satellite1 = new Satellite(1);

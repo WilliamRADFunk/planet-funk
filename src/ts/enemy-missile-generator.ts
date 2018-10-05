@@ -1,22 +1,17 @@
-import { Color, Scene } from "three";
+import { Color, Scene } from 'three';
 
-import { CollisionatorSingleton } from "./collisionator";
-import { Score } from "./score";
-import { Projectile } from "./projectile";
-/**
- * Makes instatiateing the satellite's color by index easier and cleaner to read.
- */
-const colorArray: Color[] = [
-    new Color(0xF6C123),
-    new Color(0xDF3156),
-    new Color(0x32BD15),
-    new Color(0x31E4DE)
-];
+import { CollisionatorSingleton } from './collisionator';
+import { ScoreHandler } from './score-handler';
+import { Projectile } from './projectile';
 /**
  * @class
  * Makes, Moves, and Scores the missiles and their resulting destruction.
  */
 export class EnemyMissileGenerator {
+    /**
+     * Keeps track of level's current color
+     */
+    private currentColor: Color;
     /**
      * Current level player is on, effects max missiles and points per missile destroyed.
      */
@@ -40,22 +35,32 @@ export class EnemyMissileGenerator {
     /**
      * Reference to the scorekeeper for adding points on enemy missile destruction.
      */
-    private scoreboard: Score;
+    private scoreboard: ScoreHandler;
     /**
      * Constructor for the EnemyMissileGenerator class
      * @param scene      graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param scoreboard reference to the scorekeeper for adding points on enemy missile destruction.
+     * @param color level color, grabbed from the LevelHandler.
      * @hidden
      */
-    constructor(scene: Scene, scoreboard: Score) {
+    constructor(scene: Scene, scoreboard: ScoreHandler, color: Color) {
         this.scene = scene;
         this.scoreboard = scoreboard;
+        this.currentColor = color;
     }
     /**
      * At the end of each loop iteration, iterate endCycle through all missiless.
      * @param isGameActive flag to let generator know if game is not lost. If it is, don't continue accruing points.
+     * @param color level color, grabbed from the LevelHandler.
+     * @param color level number, grabbed from the LevelHandler.
      */
-    endCycle(isGameActive: boolean): void {
+    endCycle(isGameActive: boolean, color: Color, level: number): void {
+        if (color !== this.currentColor) {
+            this.currentColor = color;
+        }
+        if (level !== this.currentLevel) {
+            this.currentLevel = level;
+        }
         // Keep them missiles coming.
         for (let i = this.missiles.length; i < this.maxMissiles; i++) {
             this.makeMissile();
@@ -99,7 +104,16 @@ export class EnemyMissileGenerator {
         // d = sqrt{ (x2-x1)^2 + (y2-y1)^2 }
         const distance = Math.sqrt((x * x) + (z * z));
         // Once created, missile will fly itself, detonate itself, and rease itself. colorArray[this.currentLevel-1]
-        this.missiles.push(new Projectile(this.scene, x, z, 0, 0, distance, new Color(0xFF0000), true, (0.008 * this.currentLevel)));
+        this.missiles.push(new Projectile(
+            this.scene,
+            x,
+            z,
+            0,
+            0,
+            distance,
+            this.currentColor || new Color(0xFF0000),
+            true,
+            (0.008 * this.currentLevel)));
         CollisionatorSingleton.add(this.missiles[this.missiles.length - 1]);
     }
 }

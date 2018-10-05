@@ -6,8 +6,9 @@ import {
     Mesh,
     MeshPhongMaterial,
     Scene,
-    Vector3 } from "three";
-import { Collidable } from "./collidable";
+    Vector3 } from 'three';
+
+import { Collidable } from './collidable';
 import { CollisionatorSingleton } from './collisionator';
 /**
  * Makes instatiateing the base's texture by index easier and cleaner to read.

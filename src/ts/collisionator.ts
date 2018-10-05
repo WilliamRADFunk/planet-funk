@@ -1,5 +1,7 @@
-import { Collidable } from "./collidable";
-import { Scene } from "three";
+
+import { Scene } from 'three';
+
+import { Collidable } from './collidable';
 /**
  * @class
  * The collision detection system.

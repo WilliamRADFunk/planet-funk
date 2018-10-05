@@ -8,6 +8,7 @@ import {
     SphereGeometry,
     SphericalReflectionMapping,
     TextureLoader } from 'three';
+
 import { Collidable } from './collidable';
 /**
  * @class
@@ -68,7 +69,7 @@ export class Shield implements Collidable {
         });
         this.shield = new Mesh(this.shieldGeometry, this.shieldMaterial);
         this.shield.position.set(0, -10, 0);
-        this.shield.name = "Shield";
+        this.shield.name = 'Shield';
         // Creates and places the energy meter beads in a ring around the shield.
         this.energyBars = new Object3D();
 		this.timeGeometry = new CylinderGeometry(0.03, 0.03, 0.001, 10, 10, false);

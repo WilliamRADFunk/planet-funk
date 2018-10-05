@@ -126,10 +126,11 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 * ["ts/enemy-missile-generator"](modules/_ts_enemy_missile_generator_.md)
 * ["ts/explosion"](modules/_ts_explosion_.md)
 * ["ts/init"](modules/_ts_init_.md)
+* ["ts/level-handler"](modules/_ts_level_handler_.md)
 * ["ts/planet"](modules/_ts_planet_.md)
 * ["ts/projectile"](modules/_ts_projectile_.md)
 * ["ts/satellite"](modules/_ts_satellite_.md)
-* ["ts/score"](modules/_ts_score_.md)
+* ["ts/score-handler"](modules/_ts_score_handler_.md)
 * ["ts/shield"](modules/_ts_shield_.md)
 
 ---

@@ -50,7 +50,7 @@
 
 **● energyBars**: *`Object3D`*
 
-*Defined in [ts/shield.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L24)*
+*Defined in [ts/shield.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L25)*
 
 Container for the shield energy meter.
 
@@ -61,7 +61,7 @@ ___
 
 **● energyLevel**: *`number`* = 1000
 
-*Defined in [ts/shield.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L28)*
+*Defined in [ts/shield.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L29)*
 
 Amount of power in the shield.
 
@@ -72,7 +72,7 @@ ___
 
 **● isActive**: *`boolean`* = false
 
-*Defined in [ts/shield.ts:20](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L20)*
+*Defined in [ts/shield.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L21)*
 
 Flag to determine if shield is active or not.
 
@@ -83,7 +83,7 @@ ___
 
 **● lastEnergyBarColor**: *`string`* = "green"
 
-*Defined in [ts/shield.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L32)*
+*Defined in [ts/shield.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L33)*
 
 Keeps track of previous energy bar color (if same, no need to update material colors).
 
@@ -94,7 +94,7 @@ ___
 
 **● shield**: *`Mesh`*
 
-*Defined in [ts/shield.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L44)*
+*Defined in [ts/shield.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L45)*
 
 Controls the overall rendering of the shield
 
@@ -105,7 +105,7 @@ ___
 
 **● shieldGeometry**: *`SphereGeometry`*
 
-*Defined in [ts/shield.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L36)*
+*Defined in [ts/shield.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L37)*
 
 Controls size and shape of the shield
 
@@ -116,7 +116,7 @@ ___
 
 **● shieldMaterial**: *`MeshStandardMaterial`*
 
-*Defined in [ts/shield.ts:40](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L40)*
+*Defined in [ts/shield.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L41)*
 
 Controls the color of the shield material
 
@@ -127,7 +127,7 @@ ___
 
 **● timeGeometry**: *`CylinderGeometry`*
 
-*Defined in [ts/shield.ts:48](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L48)*
+*Defined in [ts/shield.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L49)*
 
 Controls size and shape of the energy meter
 
@@ -138,7 +138,7 @@ ___
 
 **● timeMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/shield.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L52)*
+*Defined in [ts/shield.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L53)*
 
 Controls the color of the energy meter material
 
@@ -152,7 +152,7 @@ ___
 
 ▸ **activate**(): `void`
 
-*Defined in [ts/shield.ts:88](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L88)*
+*Defined in [ts/shield.ts:89](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L89)*
 
 If shield is down, and player has enough energy, this turns the shield on.
 
@@ -165,7 +165,7 @@ ___
 
 ▸ **addToScene**(scene: *`Scene`*): `void`
 
-*Defined in [ts/shield.ts:98](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L98)*
+*Defined in [ts/shield.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L99)*
 
 Adds shield object to the three.js scene
 
@@ -184,7 +184,7 @@ ___
 
 ▸ **deactivate**(): `void`
 
-*Defined in [ts/shield.ts:105](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L105)*
+*Defined in [ts/shield.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L106)*
 
 If shield is up, this turns the shield off.
 
@@ -197,7 +197,7 @@ ___
 
 ▸ **endCycle**(percentRecharge: *`number`*): `void`
 
-*Defined in [ts/shield.ts:116](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L116)*
+*Defined in [ts/shield.ts:117](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L117)*
 
 At the end of each loop iteration, planet expends energy if the shield is up, and regains it by a percentage depending on how many planet quadrant are intact.
 
@@ -216,7 +216,7 @@ ___
 
 ▸ **getActive**(): `boolean`
 
-*Defined in [ts/shield.ts:140](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L140)*
+*Defined in [ts/shield.ts:141](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L141)*
 
 Returns activity of shield (keeps the actual flag private)
 
@@ -230,7 +230,7 @@ ___
 
 ▸ **getCollisionRadius**(): `number`
 
-*Defined in [ts/shield.ts:147](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L147)*
+*Defined in [ts/shield.ts:148](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L148)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 
@@ -244,7 +244,7 @@ ___
 
 ▸ **getCurrentPosition**(): `number`[]
 
-*Defined in [ts/shield.ts:154](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L154)*
+*Defined in [ts/shield.ts:155](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L155)*
 
 Gets the current position of the collidable object.
 
@@ -258,7 +258,7 @@ ___
 
 ▸ **getName**(): `string`
 
-*Defined in [ts/shield.ts:161](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L161)*
+*Defined in [ts/shield.ts:162](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L162)*
 
 Gets the name of the shield.
 
@@ -272,7 +272,7 @@ ___
 
 ▸ **impact**(self: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*, otherThing: *`string`*): `boolean`
 
-*Defined in [ts/shield.ts:170](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L170)*
+*Defined in [ts/shield.ts:171](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L171)*
 
 Called when something collides with shield, which consumes energy.
 
@@ -293,7 +293,7 @@ ___
 
 ▸ **isPassive**(): `boolean`
 
-*Defined in [ts/shield.ts:183](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L183)*
+*Defined in [ts/shield.ts:184](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L184)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 
@@ -307,7 +307,7 @@ ___
 
 ▸ **updateEnergyBars**(): `void`
 
-*Defined in [ts/shield.ts:189](https://github.com/WilliamRADFunk/planet-funk/blob/59b11b0/src/ts/shield.ts#L189)*
+*Defined in [ts/shield.ts:190](https://github.com/WilliamRADFunk/planet-funk/blob/c76261c/src/ts/shield.ts#L190)*
 
 Changes the size and color of the energy bar.
 
