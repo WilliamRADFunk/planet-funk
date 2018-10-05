@@ -71,22 +71,7 @@ export class LevelHandler {
         this.scene = scene;
         this.scoreMaterial = new MeshLambertMaterial( {color: this.levelColor} );
         if (levelFont) {
-            this.scoreGeometry = new TextGeometry(`Level: ${this.currentLevel.toFixed(0)}`,
-                {
-                    font: levelFont,
-                    size: 0.5,
-                    height: 0.2,
-                    curveSegments: 12,
-                    bevelEnabled: false,
-                    bevelThickness: 1,
-                    bevelSize: 0.5,
-                    bevelSegments: 3
-                });
-            this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
-            this.score.position.x = -5.5;
-            this.score.position.y = 0.5;
-            this.score.position.z = 5;
-            this.score.rotation.x = -1.3708;
+            this.createText();
         }
         scene.add(this.score);
     }
@@ -123,31 +108,37 @@ export class LevelHandler {
         }
     }
     /**
+     * Creates the text in one place to obey the DRY rule.
+     */
+    createText() {
+        // Only remove score if it was added before.
+        if (this.score) this.scene.remove(this.score);
+        // Added before or not, make a new one and add it.
+        // Sadly TextGeometries must be removed and added whenever the text content changes.
+        this.scoreGeometry = new TextGeometry(`Level: ${this.currentLevel}`,
+            {
+                font: levelFont,
+                size: 0.5,
+                height: 0.2,
+                curveSegments: 12,
+                bevelEnabled: false,
+                bevelThickness: 1,
+                bevelSize: 0.5,
+                bevelSegments: 3
+            });
+        this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
+        this.score.position.x = -5.5;
+        this.score.position.y = 0.5;
+        this.score.position.z = 5;
+        this.score.rotation.x = -1.3708;
+        this.scene.add(this.score);
+    }
+    /**
      * At the end of each loop iteration, score updates with time increase.
      */
     endCycle(): void {
         if (levelFont && !this.score) {
-            // Only remove score if it was added before.
-            if (this.score) this.scene.remove(this.score);
-            // Added before or not, make a new one and add it.
-            // Sadly TextGeometries must be removed and added whenever the text content changes.
-            this.scoreGeometry = new TextGeometry(`Level: ${this.currentLevel.toFixed(0)}`,
-                {
-                    font: levelFont,
-                    size: 0.5,
-                    height: 0.2,
-                    curveSegments: 12,
-                    bevelEnabled: false,
-                    bevelThickness: 1,
-                    bevelSize: 0.5,
-                    bevelSegments: 3
-                });
-            this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
-            this.score.position.x = -5.5;
-            this.score.position.y = 0.5;
-            this.score.position.z = 5;
-            this.score.rotation.x = -1.3708;
-            this.scene.add(this.score);
+            this.createText();
         }
     }
     /**
@@ -175,6 +166,10 @@ export class LevelHandler {
                 break;
             }
         } while(true);
+        this.scoreMaterial = new MeshLambertMaterial( {color: this.levelColor} );
+        if (levelFont) {
+            this.createText();
+        }
         // TODO: Run new level animation
         this.isLevelAnimating = false;
     }

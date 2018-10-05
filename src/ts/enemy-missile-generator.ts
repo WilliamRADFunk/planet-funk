@@ -19,7 +19,7 @@ export class EnemyMissileGenerator {
     /**
      * Maximum number of missiles that can exist at one time.
      */
-    private maxMissiles: number = 20;
+    private maxMissiles: number = 10;
     /**
      * Points multiplier per enemy missile destroyed.
      */
@@ -47,24 +47,17 @@ export class EnemyMissileGenerator {
         this.scene = scene;
         this.scoreboard = scoreboard;
         this.currentColor = color;
+        for (let i = this.missiles.length; i < this.maxMissiles; i++) {
+            this.makeMissile();
+        }
     }
     /**
      * At the end of each loop iteration, iterate endCycle through all missiless.
      * @param isGameActive flag to let generator know if game is not lost. If it is, don't continue accruing points.
      * @param color level color, grabbed from the LevelHandler.
-     * @param color level number, grabbed from the LevelHandler.
+     * @returns TRUE is all missiles are spent | FALSE means missiles remain.
      */
-    endCycle(isGameActive: boolean, color: Color, level: number): void {
-        if (color !== this.currentColor) {
-            this.currentColor = color;
-        }
-        if (level !== this.currentLevel) {
-            this.currentLevel = level;
-        }
-        // Keep them missiles coming.
-        for (let i = this.missiles.length; i < this.maxMissiles; i++) {
-            this.makeMissile();
-        }
+    endCycle(isGameActive: boolean): boolean {
         let tempMissiles = [];
         for (let i = 0; i < this.missiles.length; i++) {
             let missile = this.missiles[i];
@@ -82,6 +75,8 @@ export class EnemyMissileGenerator {
         }
         this.missiles = tempMissiles.slice();
         tempMissiles = null;
+        // 0 length will result in a true value, any other length will be false;
+        return !this.missiles.length;
     }
     /**
      * Missiles generation in one place to avoid breaking DRY.
@@ -113,7 +108,20 @@ export class EnemyMissileGenerator {
             distance,
             this.currentColor || new Color(0xFF0000),
             true,
-            (0.008 * this.currentLevel)));
+            (0.008 + (this.currentLevel / 1000))));
         CollisionatorSingleton.add(this.missiles[this.missiles.length - 1]);
+    }
+    /**
+     * Start of new level means rebuilding missiles.
+     * @param level level number, grabbed from the LevelHandler.
+     * @param color level color, grabbed from the LevelHandler.
+     */
+    refreshLevel(level: number, color: Color) {
+        this.currentColor = color;
+        this.currentLevel = level;
+        this.maxMissiles += level;
+        for (let i = this.missiles.length; i < this.maxMissiles; i++) {
+            this.makeMissile();
+        }
     }
 }

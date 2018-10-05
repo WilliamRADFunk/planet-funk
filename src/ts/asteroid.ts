@@ -96,6 +96,12 @@ export class Asteroid implements Collidable {
         this.asteroid.name = `Asteroid-${index}`;
     }
     /**
+     * (Re)activates the asteroid, usually at beginning of new level.
+     */
+    activate(): void {
+        this.isActive = true;
+    }
+    /**
      * Adds asteroid object to the three.js scene.
      */
     addToScene(): void {
@@ -131,7 +137,7 @@ export class Asteroid implements Collidable {
                 this.explosion = null;
                 return false;
             }
-        } else {
+        } else if (this.isActive) {
             this.calculateNextPoint();
             this.asteroid.position.set(this.currentPoint[0], 0.2, this.currentPoint[1]);
         }
@@ -194,8 +200,5 @@ export class Asteroid implements Collidable {
         this.asteroid.position.set(this.originalStartingPoint[0], 0.2, this.originalStartingPoint[1]);
         this.currentPoint = [this.originalStartingPoint[0], this.originalStartingPoint[1]];
         this.distanceTraveled = 0;
-        setTimeout(() => {
-            this.isActive = true;
-        }, 100);
     }
 }

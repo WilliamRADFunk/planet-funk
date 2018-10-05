@@ -117,6 +117,8 @@ export default () => {
     const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor());
     let secondsCounter = 0;
     let jobCounter = 0;
+    let noMissiles = false;
+    let noAsteroids = false;
     /**
      * The render loop. Everything that should be checked, called, or drawn in each animation frame.
      */
@@ -126,24 +128,27 @@ export default () => {
         if (jobCounter > 10) jobCounter = 0;
         if (secondsCounter > 60) secondsCounter = 0;
 
-        const currentColor = levelHandler.getColor();
-        const currentLevel = levelHandler.getLevel();
         // Checks to make sure game isn't over.
         if (isGameLive && secondsCounter === 60) {
             const status = planet.getStatus();
             isGameLive = status.quadrantBlue || status.quadrantGreen || status.quadrantPurple || status.quadrantYellow;
             // If game is over, stop increasing the score.
-            scoreboard.endCycle(currentColor);
+            scoreboard.endCycle(levelHandler.getColor());
             // If game is over, level can't change.
             levelHandler.endCycle();
         }
         if (jobCounter === 10 && secondsCounter !== 60) {
             CollisionatorSingleton.checkForCollisions(scene);
         } else {
-            asteroidGenerator.endCycle(isGameLive);
-            enemyMissileGenerator.endCycle(isGameLive, currentColor, currentLevel);
+            noAsteroids = asteroidGenerator.endCycle(isGameLive);
+            noMissiles = enemyMissileGenerator.endCycle(isGameLive);
             planet.endCycle();
             shield.endCycle(planet.getPowerRegenRate());
+        }
+        if (isGameLive && noAsteroids && noMissiles) {
+            levelHandler.nextLevel();
+            enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
+            asteroidGenerator.refreshLevel(levelHandler.getLevel());
         }
         renderer.render( scene, camera );
 	    requestAnimationFrame( render );

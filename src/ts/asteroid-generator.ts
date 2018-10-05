@@ -23,7 +23,7 @@ export class AsteroidGenerator {
     /**
      * Maximum number of asteroids that can exist at one time.
      */
-    private maxAsteroids: number = 30;
+    private maxAsteroids: number = 10;
     /**
      * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
      */
@@ -48,15 +48,21 @@ export class AsteroidGenerator {
     /**
      * At the end of each loop iteration, iterate endCycle through all asteroids.
      * @param isGameActive flag to let generator know if game is not lost. If it is, don't continue accruing points.
+     * @returns TRUE is all asteroids are destroyed | FALSE means asteroids remain.
      */
-    endCycle(isGameActive: boolean): void {
+    endCycle(isGameActive: boolean): boolean {
+        let asteroidsRemain = false;
         for (let i = 0; i < this.asteroids.length; i++) {
             if (this.asteroids[i]) {
                 if (!this.asteroids[i].endCycle() && isGameActive) {
                     this.scoreboard.addPoints(this.currentLevel * this.asteroidPoints);
                 }
+                if (this.asteroids[i].getActive()) {
+                    asteroidsRemain = true;
+                }
             }
         }
+        return !asteroidsRemain;
     }
     /**
      * Asteroid generation in one place to avoid breaking DRY.
@@ -82,5 +88,19 @@ export class AsteroidGenerator {
         asteroid.addToScene();
         CollisionatorSingleton.add(asteroid);
         return asteroid;
+    }
+    /**
+     * Start of new level means reactivating asteroids, and creating new ones.
+     * @param level level number, grabbed from the LevelHandler.
+     */
+    refreshLevel(level: number) {
+        this.currentLevel = level;
+        this.maxAsteroids += level;
+        for (let i = this.asteroids.length; i < this.maxAsteroids; i++) {
+            this.asteroids.push(this.makeAsteroid());
+        }
+        for (let i = 0; i < this.asteroids.length; i++) {
+            this.asteroids[i].activate();
+        }
     }
 }
