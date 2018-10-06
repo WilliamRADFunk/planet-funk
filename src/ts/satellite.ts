@@ -233,7 +233,7 @@ export class Satellite implements Collidable {
     getDistanceToTarget(targetPoint: Vector3, rotation: number): number {
         this.currentRotation = rotation;
         // If sat is dead or out of juice, return absurdly high number for distance.
-        if (!this.isActive && this.energyLevel < 250) {
+        if (!this.isActive || this.energyLevel < 250) {
             return 1000;
         }
         // If satellite is closest, and it has the energy, this origin point won't need to be recalculated.
