@@ -18,6 +18,7 @@ import { AsteroidGenerator } from './asteroid-generator';
 import { ScoreHandler } from './score-handler';
 import { EnemyMissileGenerator } from './enemy-missile-generator';
 import { LevelHandler } from './level-handler';
+import { SaucerGenerator } from './saucer-generator';
 /**
  * Placeholder function typically used to initiate the applications loop.
  */
@@ -113,11 +114,13 @@ export default () => {
     const levelHandler = new LevelHandler(scene);
     const scoreboard = new ScoreHandler(scene, levelHandler.getColor());
     const asteroidGenerator = new AsteroidGenerator(scene, scoreboard);
+    const saucerGenerator = new SaucerGenerator(scene, scoreboard);
     const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor());
     let secondsCounter = 0;
     let jobCounter = 0;
     let noMissiles = false;
     let noAsteroids = false;
+    let noSaucers = false;
     /**
      * The render loop. Everything that should be checked, called, or drawn in each animation frame.
      */
@@ -136,12 +139,14 @@ export default () => {
             }
             // Let the last explosions finish off even during next level banner animation.
             noAsteroids = asteroidGenerator.endCycle(isGameLive);
+            noSaucers = saucerGenerator.endCycle(isGameLive);
             noMissiles = enemyMissileGenerator.endCycle(isGameLive);
             // To give the game over screen a more interesting feel,
             // spawn moer asteroids and missiles after they've exhausted themselves.
             if (noAsteroids && noMissiles) {
                 enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
                 asteroidGenerator.refreshLevel(levelHandler.getLevel());
+                saucerGenerator.refreshLevel(levelHandler.getLevel());
             }
             // The world keeps on spinning.
             planet.endCycle();
@@ -164,16 +169,18 @@ export default () => {
                 CollisionatorSingleton.checkForCollisions(scene);
             }
             noAsteroids = asteroidGenerator.endCycle(isGameLive);
+            noSaucers = saucerGenerator.endCycle(isGameLive);
             noMissiles = enemyMissileGenerator.endCycle(isGameLive);
             planet.endCycle();
             shield.endCycle(planet.getPowerRegenRate());
             // Game is still live but there are no more enemy missiles or asteroids.
             // Increase the level and refresh everything.
-            if (isGameLive && noAsteroids && noMissiles) {
+            if (isGameLive && noAsteroids && noMissiles && noSaucers) {
                 levelHandler.nextLevel();
                 scoreboard.endCycle(levelHandler.getColor());
                 enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
                 asteroidGenerator.refreshLevel(levelHandler.getLevel());
+                saucerGenerator.refreshLevel(levelHandler.getLevel());
             }
         }
         renderer.render( scene, camera );

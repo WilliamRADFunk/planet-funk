@@ -34,6 +34,10 @@ export class ScoreHandler {
      */
     private currentScore: number = 0;
     /**
+     * Keeps track of whether score has changed since last update.
+     */
+    private hasChanged: boolean = false;
+    /**
      * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
      */
     private scene: Scene;
@@ -69,6 +73,7 @@ export class ScoreHandler {
      */
     addPoints(points: number): void {
         this.currentScore += points;
+        this.hasChanged = true;
     }
     /**
      * Creates the text in one place to obey the DRY rule.
@@ -106,9 +111,9 @@ export class ScoreHandler {
             this.scoreMaterial = new MeshLambertMaterial( {color: this.currentColor} );
         }
         this.currentColor = color;
-        this.currentScore += 0.6;
-        if (scoreFont) {
+        if (scoreFont && this.hasChanged) {
             this.createText();
+            this.hasChanged = false;
         }
     }
 }

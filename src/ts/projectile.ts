@@ -144,7 +144,7 @@ export class Projectile implements Collidable {
         scene.add(this.headMesh);
     }
     /**
-     * Calculates the next point in the missile's point.
+     * Calculates the next point in the missile's path.
      */
     private calculateNextPoint(): void {
         this.distanceTraveled += this.speed;

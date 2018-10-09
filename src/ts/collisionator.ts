@@ -50,6 +50,12 @@ class Collisionator {
                 // Unexploded enemy missiles and asteroids should not collide.
                 if ((!entityI.getName().indexOf('Asteroid') ||
                     !entityJ.getName().indexOf('Asteroid')) && isEnemyMissile) continue;
+                // Unexploded enemy missiles and saucers should not collide.
+                if ((!entityI.getName().indexOf('Saucer') ||
+                    !entityJ.getName().indexOf('Saucer')) && isEnemyMissile) continue;
+                // Asteroids and saucers should not collide.
+                if ((!entityI.getName().indexOf('Saucer') && !entityJ.getName().indexOf('Asteroid')) || 
+                    (!entityI.getName().indexOf('Asteroid') && !entityJ.getName().indexOf('Saucer'))) continue;
                 const posI = entityI.getCurrentPosition();
                 const posJ = entityJ.getCurrentPosition();
                 const radI = entityI.getCollisionRadius();
