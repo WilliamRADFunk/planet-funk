@@ -89,7 +89,7 @@ export class Shield implements Collidable {
     activate(): void {
         if (!this.isActive && this.energyLevel > 500) {
             this.isActive = true;
-            this.shield.visible = true;
+            this.shieldMaterial.opacity = 0.65;
         }
     }
     /**
@@ -109,7 +109,7 @@ export class Shield implements Collidable {
      */
     deactivate(): void {
         if (this.isActive) {
-            this.shield.visible = false;
+            this.shieldMaterial.opacity = 0;
         }
         this.isActive = false;
     }

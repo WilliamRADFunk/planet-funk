@@ -93,7 +93,7 @@ export default () => {
         let launchFlag = true;
         // Detection for player clicked on planet for shield manipulation.
         thingsTouched.forEach(el => {
-            if (el.object.name === 'Planet') {
+            if (el.object.name === 'Shield') {
                 if (shield.getActive()) shield.deactivate();
                 else shield.activate();
                 launchFlag = false;
