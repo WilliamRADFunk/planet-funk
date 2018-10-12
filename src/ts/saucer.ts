@@ -155,10 +155,6 @@ export class Saucer implements Collidable {
      * @returns whether or not the saucer is done, and its points calculated.
      */
     endCycle(): boolean {
-        if (this.waitToFire) {
-            this.waitToFire--;
-            return true;
-        }
         if (this.explosion) {
             if (!this.explosion.endCycle()) {
                 CollisionatorSingleton.remove(this.explosion);
@@ -166,7 +162,12 @@ export class Saucer implements Collidable {
                 this.explosion = null;
                 return false;
             }
-        } else if (this.isActive) {
+        }
+        if (this.waitToFire) {
+            this.waitToFire--;
+            return true;
+        }
+        if (this.isActive) {
             this.calculateNextPoint();
             this.saucer.position.set(this.currentPoint[0], 0.6, this.currentPoint[1]);
         }

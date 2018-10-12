@@ -143,7 +143,7 @@ export default () => {
             noMissiles = enemyMissileGenerator.endCycle(isGameLive);
             // To give the game over screen a more interesting feel,
             // spawn moer asteroids and missiles after they've exhausted themselves.
-            if (noAsteroids && noMissiles) {
+            if (noAsteroids && noMissiles && (noSaucers || !isGameLive)) {
                 enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
                 asteroidGenerator.refreshLevel(levelHandler.getLevel());
                 saucerGenerator.refreshLevel(levelHandler.getLevel());
@@ -178,9 +178,9 @@ export default () => {
             if (isGameLive && noAsteroids && noMissiles && noSaucers) {
                 levelHandler.nextLevel();
                 scoreboard.endCycle(true);
-                enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
                 asteroidGenerator.refreshLevel(levelHandler.getLevel());
                 saucerGenerator.refreshLevel(levelHandler.getLevel());
+                enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
             }
         }
         renderer.render( scene, camera );
