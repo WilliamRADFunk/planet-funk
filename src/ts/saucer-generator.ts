@@ -20,6 +20,10 @@ const saucerStartingPositions: number[][] = [
  */
 export class SaucerGenerator {
     /**
+     * Flag to let generator know if game is not lost..
+     */
+    private isGameActive: boolean = true;
+    /**
      * Saucer array for ease of iteration
      */
     private saucers: Saucer[] = [];
@@ -62,6 +66,7 @@ export class SaucerGenerator {
      * @returns TRUE is all saucers are destroyed | FALSE means saucers remain.
      */
     endCycle(isGameActive: boolean): boolean {
+        this.isGameActive = isGameActive;
         let saucersRemain = false;
         for (let i = 0; i < this.saucers.length; i++) {
             if (this.saucers[i]) {
@@ -107,10 +112,15 @@ export class SaucerGenerator {
      */
     refreshLevel(level: number): void {
         this.currentLevel = level;
-        this.maxSaucers += 1;
+        // Only increment new saucers if game is still going.
+        if (this.isGameActive) {
+            this.maxSaucers += 1;
+        }
+        // Instantiates new saucers for new level
         for (let i = this.saucers.length; i < this.maxSaucers; i++) {
             this.saucers.push(this.makeSaucer());
         }
+        // Reactivate the old, dead saucers
         for (let i = 0; i < this.saucers.length; i++) {
             this.saucers[i].activate();
         }

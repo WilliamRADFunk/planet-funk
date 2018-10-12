@@ -86,7 +86,7 @@ export class Saucer implements Collidable {
      * @param level level at time of saucer instantiation.
      * @hidden
      */
-    constructor(scene: Scene, x1:number, z1: number, x2: number, z2: number, dist, level: number) {
+    constructor(scene: Scene, x1:number, z1: number, x2: number, z2: number, dist: number, level: number) {
         index++;
         this.speed += (level / 1000);
         this.originalStartingPoint = [x1, z1];
@@ -105,7 +105,7 @@ export class Saucer implements Collidable {
         this.saucerMaterial.shininess = 0;
         this.saucerMaterial.transparent = true;
         this.saucer = new Mesh(this.saucerGeometry, this.saucerMaterial);
-        this.saucer.position.set(this.currentPoint[0], 0.2, this.currentPoint[1]);
+        this.saucer.position.set(this.currentPoint[0], 0.6, this.currentPoint[1]);
         this.saucer.rotation.set(-1.5708, 0, 0);
         this.saucer.name = `Saucer-${index}`;
         this.waitToFire = Math.floor((Math.random() * 2000) + 1);
@@ -114,8 +114,11 @@ export class Saucer implements Collidable {
      * (Re)activates the saucer, usually at beginning of new level.
      */
     activate(): void {
+        // If saucer was never destroyed (game over), let him "wait" on his own loop.
+        if (!this.isActive) {
+            this.waitToFire = Math.floor((Math.random() * 2000) + 1);
+        }
         this.isActive = true;
-        this.waitToFire = Math.floor((Math.random() * 2000) + 1);
     }
     /**
      * Adds saucer object to the three.js scene.
@@ -144,7 +147,7 @@ export class Saucer implements Collidable {
      * @param isInert flag to let explosion know it isn't a 'real' explosion (hit shield).
      */
     private createExplosion(isInert: boolean): void {
-        this.explosion = new Explosion(this.scene, this.saucer.position.x, this.saucer.position.z, 0.2, isInert);
+        this.explosion = new Explosion(this.scene, this.saucer.position.x, this.saucer.position.z, 0.4, isInert);
         if (!isInert) CollisionatorSingleton.add(this.explosion);
     }
     /**
@@ -165,7 +168,7 @@ export class Saucer implements Collidable {
             }
         } else if (this.isActive) {
             this.calculateNextPoint();
-            this.saucer.position.set(this.currentPoint[0], 0.2, this.currentPoint[1]);
+            this.saucer.position.set(this.currentPoint[0], 0.6, this.currentPoint[1]);
         }
         return true;
     }
@@ -181,7 +184,7 @@ export class Saucer implements Collidable {
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
     getCollisionRadius(): number {
-        return 0.3;
+        return 0.2;
     }
     /**
      * Gets the current position of the collidable object.
@@ -223,7 +226,7 @@ export class Saucer implements Collidable {
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      */
     removeFromScene(scene: Scene): void {
-        this.saucer.position.set(this.originalStartingPoint[0], 0.2, this.originalStartingPoint[1]);
+        this.saucer.position.set(this.originalStartingPoint[0], 0.6, this.originalStartingPoint[1]);
         this.currentPoint = [this.originalStartingPoint[0], this.originalStartingPoint[1]];
         this.distanceTraveled = 0;
     }

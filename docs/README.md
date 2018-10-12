@@ -130,6 +130,8 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 * ["ts/planet"](modules/_ts_planet_.md)
 * ["ts/projectile"](modules/_ts_projectile_.md)
 * ["ts/satellite"](modules/_ts_satellite_.md)
+* ["ts/saucer"](modules/_ts_saucer_.md)
+* ["ts/saucer-generator"](modules/_ts_saucer_generator_.md)
 * ["ts/score-handler"](modules/_ts_score_handler_.md)
 * ["ts/shield"](modules/_ts_shield_.md)
 

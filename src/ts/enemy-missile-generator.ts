@@ -17,6 +17,10 @@ export class EnemyMissileGenerator {
      */
     private currentLevel: number = 1;
     /**
+     * Flag to let generator know if game is not lost.
+     */
+    private isGameActive: boolean = true;
+    /**
      * Maximum number of missiles that can exist at one time.
      */
     private maxMissiles: number = 10;
@@ -58,6 +62,7 @@ export class EnemyMissileGenerator {
      * @returns TRUE is all missiles are spent | FALSE means missiles remain.
      */
     endCycle(isGameActive: boolean): boolean {
+        this.isGameActive = isGameActive;
         let tempMissiles = [];
         for (let i = 0; i < this.missiles.length; i++) {
             let missile = this.missiles[i];
@@ -119,7 +124,11 @@ export class EnemyMissileGenerator {
     refreshLevel(level: number, color: Color): void {
         this.currentColor = color;
         this.currentLevel = level;
-        this.maxMissiles += 1;
+        // Only increment new missiles if game is still going.
+        if (this.isGameActive) {
+            this.maxMissiles += 1;
+        }
+        // Instantiates new missiles for new level
         for (let i = this.missiles.length; i < this.maxMissiles; i++) {
             this.makeMissile();
         }

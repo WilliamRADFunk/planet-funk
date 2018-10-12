@@ -246,23 +246,24 @@ export class LevelHandler {
             }
         } while(true);
         this.levelMaterial = new MeshLambertMaterial( {color: this.levelColor} );
-        if (levelFont) {
-            this.createText();
-        }
+        this.level.visible = false;
         this.isLevelAnimating = true;
     }
     /**
      * Fades level banner in and out before resuming play.
      */
-    runAnimationCycle(): void {
+    runAnimationCycle(): boolean {
         // If the font hasn't loaded yet, don't force it to create.
         if (!levelFont) return;
         // Only if loadFont is ready and banner hasn't been already created.
         if (!this.banner) this.createBanner();
         // Normal fade in and fade out movements ofr animation until done (if not infinite loop).
         if (this.isBannerExpanding) {
-            if (this.currentOpacity >= 1) this.isBannerExpanding = false;
-            else this.currentOpacity += 0.01;
+            if (this.currentOpacity >= 1) {
+                this.isBannerExpanding = false;
+                this.createText();
+                return true;
+            } else this.currentOpacity += 0.01;
             this.bannerMaterial.opacity = this.currentOpacity;
         } else {
             if (this.currentOpacity <= 0) {

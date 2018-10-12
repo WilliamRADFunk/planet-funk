@@ -6,6 +6,9 @@ import {
     MeshLambertMaterial,
     Scene,
     TextGeometry} from 'three';
+
+export type ScoreGeometries = TextGeometry[];
+export type ScoreDigits = Mesh[];
 /**
  * Loads the font from a json file.
  */
@@ -21,6 +24,11 @@ loader.load( 'assets/fonts/optimer_regular.typeface.json', font => {
     scoreFont = font;
 });
 /**
+ * Iterable list of x positions for each digit of the score.
+ * Necessary since constantly recreating TextGeometries with each new score is very costly.
+ */
+const positionIndex = [ -3.5, -3.15, -2.8, -2.45, -2.1, -1.75, -1.4, -1.05, -0.7, -0.35 ];
+/**
  * @class
  * Keeps track of all things score related.
  */
@@ -34,10 +42,6 @@ export class ScoreHandler {
      */
     private currentScore: number = 0;
     /**
-     * Keeps track of whether score has changed since last update.
-     */
-    private hasChanged: boolean = false;
-    /**
      * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
      */
     private scene: Scene;
@@ -46,13 +50,21 @@ export class ScoreHandler {
      */
     private scoreGeometry: TextGeometry;
     /**
+     * A better way to iterate through the digit geometries.
+     */
+    private scoreGeometries: ScoreGeometries[] = [[], [], [], [], [], [], [], [], [], []];
+    /**
      * Controls the color of the score material
      */
     private scoreMaterial: MeshLambertMaterial;
     /**
      * Controls the overall rendering of the score
      */
-    private score: Mesh;
+    private score: Mesh
+    /**
+     * A better way to iterate through the digit meshes.
+     */
+    private scores: ScoreDigits[] = [[], [], [], [], [], [], [], [], [], []];
     /**
      * Constructor for the ScoreHandler class
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
@@ -60,10 +72,10 @@ export class ScoreHandler {
      * @hidden
      */
     constructor(scene: Scene, color: Color) {
-        this.currentColor = color;
         this.scene = scene;
-        this.scoreMaterial = new MeshLambertMaterial( {color: color || 0x084E70} );
         if (scoreFont) {
+            this.currentColor = color;
+            this.scoreMaterial = new MeshLambertMaterial( {color: color || 0x084E70} );
             this.createText();
         }
     }
@@ -73,17 +85,37 @@ export class ScoreHandler {
      */
     addPoints(points: number): void {
         this.currentScore += points;
-        this.hasChanged = true;
+        if (this.score && this.score.visible) {
+            this.changeScore();
+        }
+    }
+    /**
+     * Flips only score relevent digits to visible.
+     */
+    private changeScore() {
+        const curScore = this.currentScore.toString();
+        for (let i = 0; i < positionIndex.length; i++) {
+            for (let j = 0; j < positionIndex.length; j++) {
+                const mesh: Mesh = this.scores[i][j];
+                mesh.visible = false;
+            }
+        }
+        for (let i = 0; i < curScore.length; i++) {
+            const mesh: Mesh = this.scores[i][Number(curScore[i])];
+            mesh.visible = true;
+        }
     }
     /**
      * Creates the text in one place to obey the DRY rule.
      */
     private createText(): void {
         // Only remove score if it was added before.
-        if (this.score) this.scene.remove(this.score);
+        if (this.score) {
+            this.removePreviousDigits();
+        }
         // Added before or not, make a new one and add it.
         // Sadly TextGeometries must be removed and added whenever the text content changes.
-        this.scoreGeometry = new TextGeometry(`Score: ${this.currentScore.toFixed(0)}`,
+        this.scoreGeometry = new TextGeometry(`Score: `,
             {
                 font: scoreFont,
                 size: 0.5,
@@ -96,24 +128,74 @@ export class ScoreHandler {
             });
         this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
         this.score.position.x = -5.5;
-        this.score.position.y = 0.5;
+        this.score.position.y = 0.75;
         this.score.position.z = -5.1;
         this.score.rotation.x = -1.3708;
         this.scene.add(this.score);
+        
+        for (let i = 0; i < positionIndex.length; i++) {
+            for (let j = 0; j < positionIndex.length; j++) {
+                this.scoreGeometries[i][j] = new TextGeometry(`${j}`,
+                    {
+                        font: scoreFont,
+                        size: 0.5,
+                        height: 0.2,
+                        curveSegments: 12,
+                        bevelEnabled: false,
+                        bevelThickness: 1,
+                        bevelSize: 0.5,
+                        bevelSegments: 3
+                    });
+                this.scores[i][j] = new Mesh( this.scoreGeometries[i][j], this.scoreMaterial );
+                this.scores[i][j].position.x = positionIndex[i];
+                this.scores[i][j].position.y = 0.75;
+                this.scores[i][j].position.z = -5.08;
+                this.scores[i][j].rotation.x = -1.3708;
+                this.scores[i][j].visible = false;
+                this.scene.add(this.scores[i][j]);
+            }
+        }
+        this.changeScore();
     }
     /**
      * At the end of each loop iteration, score updates with time increase.
+     * @param hide hide the score if new level, so old color isn't showing.
+     */
+    endCycle(hide?: boolean): void {
+        if (this.score) {
+            if (hide) {
+                this.score.visible = false;
+                for (let i = 0; i < positionIndex.length; i++) {
+                    for (let j = 0; j < positionIndex.length; j++) {
+                        const mesh: Mesh = this.scores[i][j];
+                        mesh.visible = false;
+                    }
+                }
+            } else if (this.score && this.score.visible) {
+                this.changeScore();
+            }
+        }
+    }
+    /**
+     * Only recreate the digits with the new color
      * @param color level color, grabbed from the LevelHandler
      */
-    endCycle(color: Color): void {
-        if (color !== this.currentColor) {
-            this.currentColor = color || this.currentColor;
+    nextLevel(color: Color) {
+        if (scoreFont) {
+            this.currentColor = color;
             this.scoreMaterial = new MeshLambertMaterial( {color: this.currentColor} );
-        }
-        this.currentColor = color;
-        if (scoreFont && this.hasChanged) {
             this.createText();
-            this.hasChanged = false;
+        }
+    }
+    /**
+     * Removes all previously created score text and digits to change color.
+     */
+    private removePreviousDigits() {
+        this.scene.remove(this.score);
+        for (let i = 0; i < positionIndex.length; i++) {
+            for (let j = 0; j < positionIndex.length; j++) {
+                this.scene.remove(this.scores[i][j]);
+            }
         }
     }
 }

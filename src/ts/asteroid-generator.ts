@@ -21,6 +21,10 @@ export class AsteroidGenerator {
      */
     private currentLevel: number = 1;
     /**
+     * Flag to let generator know if game is not lost.
+     */
+    private isGameActive: boolean = true;
+    /**
      * Maximum number of asteroids that can exist at one time.
      */
     private maxAsteroids: number = 10;
@@ -51,6 +55,7 @@ export class AsteroidGenerator {
      * @returns TRUE is all asteroids are destroyed | FALSE means asteroids remain.
      */
     endCycle(isGameActive: boolean): boolean {
+        this.isGameActive = isGameActive;
         let asteroidsRemain = false;
         for (let i = 0; i < this.asteroids.length; i++) {
             if (this.asteroids[i]) {
@@ -98,10 +103,15 @@ export class AsteroidGenerator {
      */
     refreshLevel(level: number): void {
         this.currentLevel = level;
-        this.maxAsteroids += 1;
+        // Only increment new units if game is still going.
+        if (this.isGameActive) {
+            this.maxAsteroids += 1;
+        }
+        // Instantiates new asteroids for new level
         for (let i = this.asteroids.length; i < this.maxAsteroids; i++) {
             this.asteroids.push(this.makeAsteroid());
         }
+        // Reactivate the old, dead asteroids
         for (let i = 0; i < this.asteroids.length; i++) {
             this.asteroids[i].activate();
         }

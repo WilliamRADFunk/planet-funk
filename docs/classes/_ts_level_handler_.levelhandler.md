@@ -49,7 +49,7 @@
 
 **● banner**: *`Mesh`*
 
-*Defined in [ts/level-handler.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L65)*
+*Defined in [ts/level-handler.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L65)*
 
 Controls the overall rendering of the banner display
 
@@ -60,7 +60,7 @@ ___
 
 **● bannerGeometry**: *`TextGeometry`*
 
-*Defined in [ts/level-handler.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L57)*
+*Defined in [ts/level-handler.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L57)*
 
 Controls size and shape of the banner display
 
@@ -71,7 +71,7 @@ ___
 
 **● bannerMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/level-handler.ts:61](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L61)*
+*Defined in [ts/level-handler.ts:61](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L61)*
 
 Controls the color of the banner display material
 
@@ -82,7 +82,7 @@ ___
 
 **● currentLevel**: *`number`* = 1
 
-*Defined in [ts/level-handler.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L37)*
+*Defined in [ts/level-handler.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L37)*
 
 Keeps track of player's current level
 
@@ -93,7 +93,7 @@ ___
 
 **● currentOpacity**: *`number`* = 0.01
 
-*Defined in [ts/level-handler.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L41)*
+*Defined in [ts/level-handler.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L41)*
 
 Current banner opacity, which creates the illusion of 'animation'.
 
@@ -104,7 +104,7 @@ ___
 
 **● isBannerExpanding**: *`boolean`* = true
 
-*Defined in [ts/level-handler.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L33)*
+*Defined in [ts/level-handler.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L33)*
 
 Tracks which phase of the animation currently in.
 
@@ -115,7 +115,7 @@ ___
 
 **● isLevelAnimating**: *`boolean`* = true
 
-*Defined in [ts/level-handler.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L45)*
+*Defined in [ts/level-handler.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L45)*
 
 Prevents other things from moving if level display is animating a new level.
 
@@ -126,7 +126,7 @@ ___
 
 **● level**: *`Mesh`*
 
-*Defined in [ts/level-handler.ts:77](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L77)*
+*Defined in [ts/level-handler.ts:77](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L77)*
 
 Controls the overall rendering of the level display
 
@@ -137,7 +137,7 @@ ___
 
 **● levelColor**: *`Color`*
 
-*Defined in [ts/level-handler.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L49)*
+*Defined in [ts/level-handler.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L49)*
 
 The loaded font, used for the level display.
 
@@ -148,7 +148,7 @@ ___
 
 **● levelGeometry**: *`TextGeometry`*
 
-*Defined in [ts/level-handler.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L69)*
+*Defined in [ts/level-handler.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L69)*
 
 Controls size and shape of the level display
 
@@ -159,7 +159,7 @@ ___
 
 **● levelMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/level-handler.ts:73](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L73)*
+*Defined in [ts/level-handler.ts:73](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L73)*
 
 Controls the color of the level display material
 
@@ -170,7 +170,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/level-handler.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L53)*
+*Defined in [ts/level-handler.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L53)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -181,7 +181,7 @@ ___
 
 **● useLevelBanner**: *`boolean`* = true
 
-*Defined in [ts/level-handler.ts:81](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L81)*
+*Defined in [ts/level-handler.ts:81](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L81)*
 
 Flag to distinguish between level banner and game over banner.
 
@@ -195,7 +195,7 @@ ___
 
 ▸ **checkColorBrighness**(colorHex: *`string`*): `boolean`
 
-*Defined in [ts/level-handler.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L106)*
+*Defined in [ts/level-handler.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L106)*
 
 Makes sure hex is a valid color string.
 
@@ -215,7 +215,7 @@ ___
 
 ▸ **createBanner**(): `void`
 
-*Defined in [ts/level-handler.ts:136](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L136)*
+*Defined in [ts/level-handler.ts:136](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L136)*
 
 Creates the text in one place to obey the DRY rule.
 
@@ -228,7 +228,7 @@ ___
 
 ▸ **createText**(): `void`
 
-*Defined in [ts/level-handler.ts:177](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L177)*
+*Defined in [ts/level-handler.ts:177](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L177)*
 
 Creates the text in one place to obey the DRY rule.
 
@@ -241,7 +241,7 @@ ___
 
 ▸ **endCycle**(): `void`
 
-*Defined in [ts/level-handler.ts:203](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L203)*
+*Defined in [ts/level-handler.ts:203](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L203)*
 
 At the end of each loop iteration, level updates with time increase.
 
@@ -254,7 +254,7 @@ ___
 
 ▸ **endGame**(): `void`
 
-*Defined in [ts/level-handler.ts:211](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L211)*
+*Defined in [ts/level-handler.ts:211](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L211)*
 
 Lets LevelHandler know the game is over, and to use the Game Over banner.
 
@@ -267,7 +267,7 @@ ___
 
 ▸ **getColor**(): `Color`
 
-*Defined in [ts/level-handler.ts:219](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L219)*
+*Defined in [ts/level-handler.ts:219](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L219)*
 
 Returns the current level's color'.
 
@@ -281,7 +281,7 @@ ___
 
 ▸ **getLevel**(): `number`
 
-*Defined in [ts/level-handler.ts:226](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L226)*
+*Defined in [ts/level-handler.ts:226](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L226)*
 
 Returns the current level player is on.
 
@@ -295,7 +295,7 @@ ___
 
 ▸ **isAnimating**(): `boolean`
 
-*Defined in [ts/level-handler.ts:233](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L233)*
+*Defined in [ts/level-handler.ts:233](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L233)*
 
 Returns animating state of level.
 
@@ -309,7 +309,7 @@ ___
 
 ▸ **nextLevel**(): `void`
 
-*Defined in [ts/level-handler.ts:239](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L239)*
+*Defined in [ts/level-handler.ts:239](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L239)*
 
 Increases currentLevel by one, and runs the new level display animation.
 
@@ -320,13 +320,13 @@ ___
 
 ###  runAnimationCycle
 
-▸ **runAnimationCycle**(): `void`
+▸ **runAnimationCycle**(): `boolean`
 
-*Defined in [ts/level-handler.ts:257](https://github.com/WilliamRADFunk/planet-funk/blob/81086ed/src/ts/level-handler.ts#L257)*
+*Defined in [ts/level-handler.ts:255](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/level-handler.ts#L255)*
 
 Fades level banner in and out before resuming play.
 
-**Returns:** `void`
+**Returns:** `boolean`
 
 ___
 

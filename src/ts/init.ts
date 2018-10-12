@@ -116,7 +116,6 @@ export default () => {
     const asteroidGenerator = new AsteroidGenerator(scene, scoreboard);
     const saucerGenerator = new SaucerGenerator(scene, scoreboard);
     const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor());
-    let secondsCounter = 0;
     let jobCounter = 0;
     let noMissiles = false;
     let noAsteroids = false;
@@ -125,16 +124,17 @@ export default () => {
      * The render loop. Everything that should be checked, called, or drawn in each animation frame.
      */
     const render = () => {
-        secondsCounter++;
         jobCounter++;
         if (jobCounter > 10) jobCounter = 0;
-        if (secondsCounter > 60) secondsCounter = 0;
 
         // Only run operations allowed during a fluctuating banner animation.
         if (levelHandler.isAnimating()) {
-            levelHandler.runAnimationCycle();
+            const levelBannerPeak = levelHandler.runAnimationCycle();
+            if (levelBannerPeak && isGameLive) {
+                scoreboard.nextLevel(levelHandler.getColor());
+            }
             // Periodically check if things collided.
-            if (jobCounter === 10 && secondsCounter !== 60) {
+            if (jobCounter === 10) {
                 CollisionatorSingleton.checkForCollisions(scene);
             }
             // Let the last explosions finish off even during next level banner animation.
@@ -155,17 +155,17 @@ export default () => {
         // Run operations unrelated to fluctuating banner animation
         } else {
             // Checks to make sure game isn't over.
-            if (isGameLive && secondsCounter === 60) {
+            if (isGameLive) {
                 const status = planet.getStatus();
                 isGameLive = status.quadrantBlue || status.quadrantGreen || status.quadrantPurple || status.quadrantYellow;
                 // If game is over, stop increasing the score.
-                scoreboard.endCycle(levelHandler.getColor());
+                scoreboard.endCycle();
                 // If game is over, level can't change.
                 levelHandler.endCycle();
                 if (!isGameLive) levelHandler.endGame();
             }
             // Periodically check if things collided.
-            if (jobCounter === 10 && secondsCounter !== 60) {
+            if (jobCounter === 10) {
                 CollisionatorSingleton.checkForCollisions(scene);
             }
             noAsteroids = asteroidGenerator.endCycle(isGameLive);
@@ -177,7 +177,7 @@ export default () => {
             // Increase the level and refresh everything.
             if (isGameLive && noAsteroids && noMissiles && noSaucers) {
                 levelHandler.nextLevel();
-                scoreboard.endCycle(levelHandler.getColor());
+                scoreboard.endCycle(true);
                 enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
                 asteroidGenerator.refreshLevel(levelHandler.getLevel());
                 saucerGenerator.refreshLevel(levelHandler.getLevel());
