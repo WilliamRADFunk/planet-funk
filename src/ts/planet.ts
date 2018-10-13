@@ -1,11 +1,11 @@
 import {
     Color,
-    ImageUtils,
     LinearFilter,
     Mesh,
     MeshPhongMaterial,
     Scene,
-    SphereGeometry, 
+    SphereGeometry,
+    Texture,
     Vector3 } from 'three';
 
 import { Satellite } from './satellite';
@@ -50,6 +50,10 @@ export class Planet implements Collidable {
      * Keeps track of proper rotation amount to avoid the weird quarter rotation reset cycle.
      */
     private currentRotation: number = 0;
+    /**
+     * Holds onto texture for dead planet until game over.
+     */
+    private deadPlanetTexture: Texture;
     /**
      * Controls size and shape of the planet
      */
@@ -107,16 +111,62 @@ export class Planet implements Collidable {
      * Constructor for the Planet class
      * @hidden
      */
-    constructor() {
+    constructor() {}
+    /**
+     * Adds planet object to the three.js scene.
+     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     */
+    addToScene(scene: Scene, planetTextures: Texture[], buildtexture: Texture[], specMap: Texture): void {
+        this.constructPlanet(planetTextures, specMap);
+        this.constructSatellites();
+        this.constructBases(buildtexture, specMap);
+        scene.add(this.funk);
+    }
+    /**
+     * Builds the four bases player must protect.
+     * @param buildtexture textures for the buildings
+     * @param specMap textures for the dead buildings
+     */
+    constructBases(buildtexture: Texture[], specMap: Texture) {
+        // Build the planet's four populated bases, and
+        // attach the alive and dead meshes to make orbit a simple thing.
+        this.base1 = new Base(1, buildtexture[0], specMap);
+        let meshes = this.base1.getMeshes();
+        this.funk.add(meshes[0]);
+        this.funk.add(meshes[1]);
+        CollisionatorSingleton.add(this.base1);
+        this.base2 = new Base(2, buildtexture[1], specMap);
+        meshes = this.base2.getMeshes();
+        this.funk.add(meshes[0]);
+        this.funk.add(meshes[1]);
+        CollisionatorSingleton.add(this.base2);
+        this.base3 = new Base(3, buildtexture[2], specMap);
+        meshes = this.base3.getMeshes();
+        this.funk.add(meshes[0]);
+        this.funk.add(meshes[1]);
+        CollisionatorSingleton.add(this.base3);
+        this.base4 = new Base(4, buildtexture[3], specMap);
+        meshes = this.base4.getMeshes();
+        this.funk.add(meshes[0]);
+        this.funk.add(meshes[1]);
+        CollisionatorSingleton.add(this.base4);
+        this.bases = [this.base1, this.base2, this.base3, this.base4];
+    }
+    /**
+     * Builds the player's planet.
+     * @param planetTextures textures for the planet
+     * @param specMap textures for the dead planet
+     */
+    constructPlanet(planetTextures: Texture[], specMap: Texture) {
         // The Planet: its water, landmasses, and textured elevations.
 		this.funkGeometry = new SphereGeometry(0.5, 32, 32);
         this.funkMaterial = new MeshPhongMaterial();
-        this.funkMaterial.map = ImageUtils.loadTexture('assets/images/funkmap1k_modified.jpg');
+        this.funkMaterial.map = planetTextures[0];
         this.funkMaterial.map.minFilter = LinearFilter;
-		this.funkMaterial.bumpMap = ImageUtils.loadTexture('assets/images/funkbump1k.jpg');
+		this.funkMaterial.bumpMap = planetTextures[1];
 		this.funkMaterial.bumpMap.minFilter = LinearFilter;
         this.funkMaterial.bumpScale = 0.02;
-        this.funkMaterial.specularMap = ImageUtils.loadTexture('assets/images/funkspec1k.jpg');
+        this.funkMaterial.specularMap = specMap;
 		this.funkMaterial.specularMap.minFilter = LinearFilter;
 		this.funkMaterial.specular  = new Color(0xFFFFFF);
         this.funkMaterial.shininess = 10;
@@ -124,6 +174,12 @@ export class Planet implements Collidable {
         this.funk.position.set(0, 0, 0);
         this.funk.rotation.set(0, -1.57079644, 0);
         this.funk.name = 'Planet';
+        this.deadPlanetTexture = planetTextures[2];
+    }
+    /**
+     * Builds the player's four defensive satellites.
+     */
+    constructSatellites() {
         // Build the planet's four defensive satellite weapons, and
         // attach the meshes to make orbit a simple thing.
         this.satellite1 = new Satellite(1);
@@ -142,36 +198,6 @@ export class Planet implements Collidable {
         this.satellites.push(this.satellite4);
         this.funk.add(this.satellite4.getMesh());
         CollisionatorSingleton.add(this.satellite4);
-        // Build the planet's four populated bases, and
-        // attach the alive and dead meshes to make orbit a simple thing.
-        this.base1 = new Base(1);
-        let meshes = this.base1.getMeshes();
-        this.funk.add(meshes[0]);
-        this.funk.add(meshes[1]);
-        CollisionatorSingleton.add(this.base1);
-        this.base2 = new Base(2);
-        meshes = this.base2.getMeshes();
-        this.funk.add(meshes[0]);
-        this.funk.add(meshes[1]);
-        CollisionatorSingleton.add(this.base2);
-        this.base3 = new Base(3);
-        meshes = this.base3.getMeshes();
-        this.funk.add(meshes[0]);
-        this.funk.add(meshes[1]);
-        CollisionatorSingleton.add(this.base3);
-        this.base4 = new Base(4);
-        meshes = this.base4.getMeshes();
-        this.funk.add(meshes[0]);
-        this.funk.add(meshes[1]);
-        CollisionatorSingleton.add(this.base4);
-        this.bases = [this.base1, this.base2, this.base3, this.base4]
-    }
-    /**
-     * Adds planet object to the three.js scene.
-     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     */
-    addToScene(scene: Scene): void {
-        scene.add(this.funk);
     }
     /**
      * At the end of each loop iteration, satellite regains a little energy.
@@ -192,7 +218,7 @@ export class Planet implements Collidable {
             this.isActive = this.quadrantBlue || this.quadrantGreen || this.quadrantPurple || this.quadrantYellow;
             if (!this.isActive) {
                 // Game over...Show dead planet.
-                this.funkMaterial.map = ImageUtils.loadTexture('assets/images/funkmap1k_modified_dead.jpg');
+                this.funkMaterial.map = this.deadPlanetTexture;
                 this.funkMaterial.needsUpdate = true;
                 // Game over...Blow 'em up!
                 for (let i = 0; i < this.satellites.length; i++) {

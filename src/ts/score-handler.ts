@@ -1,7 +1,6 @@
 import {
     Color,
     Font,
-    FontLoader,
     Mesh,
     MeshLambertMaterial,
     Scene,
@@ -9,20 +8,6 @@ import {
 
 export type ScoreGeometries = TextGeometry[];
 export type ScoreDigits = Mesh[];
-/**
- * Loads the font from a json file.
- */
-const loader = new FontLoader();
-/**
- * The loaded font, used for the scoreboard.
- */
-let scoreFont: Font;
-/**
- * Callback function to set the scoreboard font once it is finished loading.
- */
-loader.load( 'assets/fonts/optimer_regular.typeface.json', font => {
-    scoreFont = font;
-});
 /**
  * Iterable list of x positions for each digit of the score.
  * Necessary since constantly recreating TextGeometries with each new score is very costly.
@@ -45,6 +30,10 @@ export class ScoreHandler {
      * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
      */
     private scene: Scene;
+    /**
+     * The loaded font, used for the scoreboard.
+     */
+    private scoreFont: Font;
     /**
      * Controls size and shape of the score
      */
@@ -71,13 +60,12 @@ export class ScoreHandler {
      * @param color level color, grabbed from the LevelHandler.
      * @hidden
      */
-    constructor(scene: Scene, color: Color) {
+    constructor(scene: Scene, color: Color, scoreFont: Font) {
         this.scene = scene;
-        if (scoreFont) {
-            this.currentColor = color;
-            this.scoreMaterial = new MeshLambertMaterial( {color: color || 0x084E70} );
-            this.createText();
-        }
+        this.scoreFont = scoreFont;
+        this.currentColor = color;
+        this.scoreMaterial = new MeshLambertMaterial( {color: color || 0x084E70} );
+        this.createText();
     }
     /**
      * Adds points when blowing up asteroids, enemy missiles, and ufos.
@@ -117,7 +105,7 @@ export class ScoreHandler {
         // Sadly TextGeometries must be removed and added whenever the text content changes.
         this.scoreGeometry = new TextGeometry(`Score: `,
             {
-                font: scoreFont,
+                font: this.scoreFont,
                 size: 0.5,
                 height: 0.2,
                 curveSegments: 12,
@@ -137,7 +125,7 @@ export class ScoreHandler {
             for (let j = 0; j < positionIndex.length; j++) {
                 this.scoreGeometries[i][j] = new TextGeometry(`${j}`,
                     {
-                        font: scoreFont,
+                        font: this.scoreFont,
                         size: 0.5,
                         height: 0.2,
                         curveSegments: 12,
@@ -181,11 +169,9 @@ export class ScoreHandler {
      * @param color level color, grabbed from the LevelHandler
      */
     nextLevel(color: Color) {
-        if (scoreFont) {
-            this.currentColor = color;
-            this.scoreMaterial = new MeshLambertMaterial( {color: this.currentColor} );
-            this.createText();
-        }
+        this.currentColor = color;
+        this.scoreMaterial = new MeshLambertMaterial( {color: this.currentColor} );
+        this.createText();
     }
     /**
      * Removes all previously created score text and digits to change color.

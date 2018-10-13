@@ -1,27 +1,12 @@
 import {
     Color,
     Font,
-    FontLoader,
     Mesh,
     MeshLambertMaterial,
     Scene,
     TextGeometry } from 'three';
 
 const randomColor = require('randomcolor');
-/**
- * The loaded font, used for the level display.
- */
-let levelFont: Font;
-/**
- * Loads the font from a json file.
- */
-const loader = new FontLoader();
-/**
- * Callback function to set the level display font once it is finished loading.
- */
-loader.load( 'assets/fonts/optimer_regular.typeface.json', font => {
-    levelFont = font;
-});
 /**
  * @class
  * Keeps track of all things level related.
@@ -47,6 +32,10 @@ export class LevelHandler {
      * The loaded font, used for the level display.
      */
     private levelColor: Color;
+    /**
+     * The loaded font, used for the level text and banners.
+     */
+    private levelFont: Font;
     /**
      * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
      */
@@ -84,7 +73,8 @@ export class LevelHandler {
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @hidden
      */
-    constructor(scene: Scene) {
+    constructor(scene: Scene, levelFont: Font) {
+        this.levelFont = levelFont;
         do {
             const colorHex = randomColor();
             if (this.checkColorBrighness(colorHex)) {
@@ -94,9 +84,7 @@ export class LevelHandler {
         } while(true);
         this.scene = scene;
         this.levelMaterial = new MeshLambertMaterial( {color: this.levelColor} );
-        if (levelFont) {
-            this.createText();
-        }
+        this.createText();
     }
     /**
      * Makes sure hex is a valid color string.
@@ -155,7 +143,7 @@ export class LevelHandler {
         // Sadly TextGeometries must be removed and added whenever the text content changes.
         this.bannerGeometry = new TextGeometry(text,
             {
-                font: levelFont,
+                font: this.levelFont,
                 size: 1,
                 height: 0.2,
                 curveSegments: 12,
@@ -181,7 +169,7 @@ export class LevelHandler {
         // Sadly TextGeometries must be removed and added whenever the text content changes.
         this.levelGeometry = new TextGeometry(`Level: ${this.currentLevel}`,
             {
-                font: levelFont,
+                font: this.levelFont,
                 size: 0.5,
                 height: 0.2,
                 curveSegments: 12,
@@ -201,7 +189,7 @@ export class LevelHandler {
      * At the end of each loop iteration, level updates with time increase.
      */
     endCycle(): void {
-        if (levelFont && !this.level) {
+        if (!this.level) {
             this.createText();
         }
     }
@@ -253,8 +241,6 @@ export class LevelHandler {
      * Fades level banner in and out before resuming play.
      */
     runAnimationCycle(): boolean {
-        // If the font hasn't loaded yet, don't force it to create.
-        if (!levelFont) return;
         // Only if loadFont is ready and banner hasn't been already created.
         if (!this.banner) this.createBanner();
         // Normal fade in and fade out movements ofr animation until done (if not infinite loop).

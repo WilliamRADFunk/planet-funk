@@ -1,24 +1,16 @@
 import {
     CircleGeometry,
-    ImageUtils,
     LinearFilter,
     Mesh,
     MeshPhongMaterial,
-    Scene } from 'three';
+    Scene,
+    Texture } from 'three';
     
 import { Collidable } from "./collidable";
 import { Explosion } from './explosion';
 import { CollisionatorSingleton } from './collisionator';
 
 let index: number = 0;
-
-const saucers: string[] = [
-    'assets/images/saucer1.png',
-    'assets/images/saucer2.png',
-    'assets/images/saucer3.png',
-    'assets/images/saucer4.png',
-    'assets/images/saucer5.png'
-]
 
 export class Saucer implements Collidable {
     /**
@@ -86,7 +78,7 @@ export class Saucer implements Collidable {
      * @param level level at time of saucer instantiation.
      * @hidden
      */
-    constructor(scene: Scene, x1:number, z1: number, x2: number, z2: number, dist: number, level: number) {
+    constructor(scene: Scene, saucerTextures:Texture[], x1:number, z1: number, x2: number, z2: number, dist: number, level: number) {
         index++;
         this.speed += (level / 1000);
         this.originalStartingPoint = [x1, z1];
@@ -100,7 +92,7 @@ export class Saucer implements Collidable {
         this.scene = scene;
 		this.saucerGeometry = new CircleGeometry(0.2, 16, 16);
         this.saucerMaterial = new MeshPhongMaterial();
-        this.saucerMaterial.map = ImageUtils.loadTexture(saucers[Math.floor((Math.random() * 5) +0)]);
+        this.saucerMaterial.map = saucerTextures[Math.floor((Math.random() * 5) +0)];
         this.saucerMaterial.map.minFilter = LinearFilter;
         this.saucerMaterial.shininess = 0;
         this.saucerMaterial.transparent = true;

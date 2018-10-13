@@ -1,4 +1,4 @@
-import { Scene } from 'three';
+import { Scene, Texture } from 'three';
 
 import { Saucer } from './saucer';
 import { CollisionatorSingleton } from './collisionator';
@@ -32,6 +32,10 @@ export class SaucerGenerator {
      */
     private saucerPoints: number = 250;
     /**
+     * The loaded textures, used for the saucers.
+     */
+    private saucerTextures: Texture[];
+    /**
      * Current level player is on, effects max saucers and points per saucer destroyed.
      */
     private currentLevel: number = 1;
@@ -53,7 +57,8 @@ export class SaucerGenerator {
      * @param scoreboard reference to the scorekeeper for adding points on saucer destruction.
      * @hidden
      */
-    constructor(scene: Scene, scoreboard: ScoreHandler) {
+    constructor(scene: Scene, scoreboard: ScoreHandler, saucerTextures: Texture[]) {
+        this.saucerTextures = saucerTextures;
         this.scene = scene;
         this.scoreboard = scoreboard;
         for (let i = 0; i < this.maxSaucers; i++) {
@@ -88,7 +93,7 @@ export class SaucerGenerator {
         const positionRand = Math.floor((Math.random() * 7) + 0);
         const isXNegative = Math.random() < 0.5 ? -1 : 1;
         const isZNegative = Math.random() < 0.5 ? -1 : 1;
-        const altRand = (Math.random() * 2) + 0;
+        const altRand = (Math.random() * 1.8) + 0;
         let saucer;
         const saucerPos = saucerStartingPositions[positionRand];
         let saucerEnd;
@@ -101,7 +106,7 @@ export class SaucerGenerator {
             saucerEnd = saucerPos.slice();
             saucerEnd[1] = -1 * saucerPos[1];
         }
-        saucer = new Saucer(this.scene, saucerPos[0], saucerPos[1], saucerEnd[0], saucerEnd[1], 20, this.currentLevel);
+        saucer = new Saucer(this.scene, this.saucerTextures, saucerPos[0], saucerPos[1], saucerEnd[0], saucerEnd[1], 20, this.currentLevel);
         saucer.addToScene();
         CollisionatorSingleton.add(saucer);
         return saucer;

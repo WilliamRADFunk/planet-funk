@@ -1,24 +1,15 @@
 import {
     BoxGeometry,
     Color,
-    ImageUtils,
     LinearFilter,
     Mesh,
     MeshPhongMaterial,
     Scene,
+    Texture,
     Vector3 } from 'three';
 
 import { Collidable } from './collidable';
 import { CollisionatorSingleton } from './collisionator';
-/**
- * Makes instatiateing the base's texture by index easier and cleaner to read.
- */
-const textureArray: string[] = [
-    'assets/images/building1.png',
-    'assets/images/building2.png',
-    'assets/images/building3.png',
-    'assets/images/building4.png'
-];
 /**
  * Makes instatiateing the base's position by index easier and cleaner to read.
  */
@@ -74,12 +65,12 @@ export class Base implements Collidable{
      * @param index order of creation, used for position 1/2 o'clock and clockwise, and appearance.
      * @hidden
      */
-    constructor(index: number) {
+    constructor(index: number, buildingTexture: Texture, specMap: Texture) {
         this.index = index;
         // Creates the bright, still alive, portion of the populated area.
         this.buildingGeometry = new BoxGeometry(0.5, 0.0001, 0.5);
         this.buildingMaterial = new MeshPhongMaterial();
-        this.buildingMaterial.map = ImageUtils.loadTexture(textureArray[index-1]);
+        this.buildingMaterial.map = buildingTexture;
         this.buildingMaterial.map.minFilter = LinearFilter;
         this.buildingMaterial.shininess = 0;
         this.buildingMaterial.transparent = true;
@@ -90,9 +81,9 @@ export class Base implements Collidable{
         // Creates the dull, dead portion of the populated area. Initially not visible.
         this.buildingDeadGeometry = new BoxGeometry(0.5, 0.0001, 0.5);
         this.buildingDeadMaterial = new MeshPhongMaterial();
-        this.buildingDeadMaterial.map = ImageUtils.loadTexture(textureArray[index-1]);
+        this.buildingDeadMaterial.map = buildingTexture;
         this.buildingDeadMaterial.map.minFilter = LinearFilter;
-        this.buildingDeadMaterial.specularMap = ImageUtils.loadTexture('assets/images/funkspec1k.jpg');
+        this.buildingDeadMaterial.specularMap = specMap;
 		this.buildingDeadMaterial.specularMap.minFilter = LinearFilter;
         this.buildingDeadMaterial.specular  = new Color(0x333333);
         this.buildingDeadMaterial.shininess = 0;

@@ -2,14 +2,18 @@ import {
     AmbientLight,
     CanvasRenderer,
     DoubleSide,
+    Font,
+    FontLoader,
     Mesh,
     MeshBasicMaterial,
     OrthographicCamera,
     PlaneGeometry,
     Raycaster,
     Scene,
+    TextureLoader,
     WebGLRenderer,
-    Vector2 } from 'three';
+    Vector2, 
+    Texture} from 'three';
 
 import { CollisionatorSingleton } from './collisionator';
 import { Planet } from './planet';
@@ -19,10 +23,135 @@ import { ScoreHandler } from './score-handler';
 import { EnemyMissileGenerator } from './enemy-missile-generator';
 import { LevelHandler } from './level-handler';
 import { SaucerGenerator } from './saucer-generator';
+
 /**
- * Placeholder function typically used to initiate the applications loop.
+ * Loads the graphic for asteroid.
  */
-export default () => {
+const asteroidLoader = new TextureLoader();
+/**
+ * The loaded texture, used for the asteroids.
+ */
+let asteroidTexture: Texture;
+/**
+ * Loads the graphics for buildings.
+ */
+const buildingLoaders: TextureLoader[] = [
+    new TextureLoader(),
+    new TextureLoader(),
+    new TextureLoader(),
+    new TextureLoader()
+];
+/**
+ * The loaded textures, used for the buildings.
+ */
+const buildingTextures: Texture[] = [];
+/**
+ * Loads the font from a json file.
+ */
+const fontLoader = new FontLoader();
+/**
+ * The loaded font, used for the scoreboard.
+ */
+let gameFont: Font;
+/**
+ * Loads the graphics for planet.
+ */
+const planetLoaders: TextureLoader[] = [
+    new TextureLoader(),
+    new TextureLoader(),
+    new TextureLoader()
+];
+/**
+ * The loaded textures, used for the planet.
+ */
+const planetTextures: Texture[] = [];
+/**
+ * Loads the graphics for saucers.
+ */
+const saucerLoaders: TextureLoader[] = [
+    new TextureLoader(),
+    new TextureLoader(),
+    new TextureLoader(),
+    new TextureLoader(),
+    new TextureLoader()
+];
+/**
+ * The loaded textures, used for the saucers.
+ */
+const saucerTextures: Texture[] = [];
+/**
+ * Loads the graphics for specMap.
+ */
+const specMapLoader = new TextureLoader();
+/**
+ * The loaded font, used for the scoreboard.
+ */
+let specMap: Texture;
+/**
+ * Passes the callback functions to font and texture loaders,
+ * each fitted with their chance to check if all others are done.
+ */
+const loadAssets = () => {
+    // Callback function to set the asteroid texture once it is finished loading.
+    asteroidLoader.load( 'assets/images/asteroid.png', texture => {
+        asteroidTexture = texture;
+        checkAssetsLoaded();
+    });
+    // Get the ball rolling on each of the five saucer texture loads.
+    buildingLoaders.forEach((loader, index) => {
+        buildingLoaders[index].load( `assets/images/building${index + 1}.png`, texture => {
+            buildingTextures[index] = texture;
+            checkAssetsLoaded();
+        });
+    });
+    // Callback function to set the scoreboard font once it is finished loading.
+    fontLoader.load( 'assets/fonts/optimer_regular.typeface.json', font => {
+        gameFont = font;
+        checkAssetsLoaded();
+    });
+    // Callback function to set the planet foundation texture once it is finished loading.
+    planetLoaders[0].load( 'assets/images/funkmap.jpg', texture => {
+        planetTextures[0] = texture;
+        checkAssetsLoaded();
+    });
+    // Callback function to set the planet dead texture once it is finished loading.
+    planetLoaders[2].load( 'assets/images/funkmap_dead.jpg', texture => {
+        planetTextures[2] = texture;
+        checkAssetsLoaded();
+    });
+    // Callback function to set the planet bump texture once it is finished loading.
+    planetLoaders[1].load( 'assets/images/funkbump.jpg', texture => {
+        planetTextures[1] = texture;
+        checkAssetsLoaded();
+    });
+    // Get the ball rolling on each of the five saucer texture loads.
+    saucerLoaders.forEach((loader, index) => {
+        saucerLoaders[index].load( `assets/images/saucer${index + 1}.png`, texture => {
+            saucerTextures[index] = texture;
+            checkAssetsLoaded();
+        });
+    });
+    // Callback function to set the specMap texture once it is finished loading.
+    specMapLoader.load( 'assets/images/funkspec.jpg', texture => {
+        specMap = texture;
+        checkAssetsLoaded();
+    });
+};
+/**
+ * Checks to see if all assets are finished loaded. If so, start rendering the game.
+ */
+const checkAssetsLoaded = () => {
+    if (gameFont && asteroidTexture && specMap &&
+        buildingTextures.length === buildingLoaders.length &&
+        saucerTextures.length === saucerLoaders.length &&
+        planetTextures.length === planetLoaders.length) {
+        loadGame();
+    }
+};
+/**
+ * All things game related. Only starts when all assets are finished loading.
+ */
+const loadGame = () => {
     let isGameLive = true;
     // Establish initial window size.
     let WIDTH: number = window.innerWidth * 0.99;
@@ -59,8 +188,8 @@ export default () => {
     onWindowResize();
     window.addEventListener( 'resize', onWindowResize, false);
     // Create player's planet, which will also create its four satellites.
-    const planet = new Planet;
-    planet.addToScene(scene);
+    const planet = new Planet();
+    planet.addToScene(scene, planetTextures, buildingTextures, specMap);
     CollisionatorSingleton.add(planet);
     // Create shield around the planet.
     const shield = new Shield();
@@ -111,15 +240,16 @@ export default () => {
             });
         }
     };
-    const levelHandler = new LevelHandler(scene);
-    const scoreboard = new ScoreHandler(scene, levelHandler.getColor());
-    const asteroidGenerator = new AsteroidGenerator(scene, scoreboard);
-    const saucerGenerator = new SaucerGenerator(scene, scoreboard);
-    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor());
+    
     let jobCounter = 0;
     let noMissiles = false;
     let noAsteroids = false;
     let noSaucers = false;
+    const levelHandler = new LevelHandler(scene, gameFont);
+    const scoreboard = new ScoreHandler(scene, levelHandler.getColor(), gameFont);
+    const asteroidGenerator = new AsteroidGenerator(scene, scoreboard, asteroidTexture);
+    const saucerGenerator = new SaucerGenerator(scene, scoreboard, saucerTextures);
+    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor());
     /**
      * The render loop. Everything that should be checked, called, or drawn in each animation frame.
      */
@@ -189,4 +319,10 @@ export default () => {
     // Kick off the first render loop iteration.
     renderer.render( scene, camera );
 	requestAnimationFrame( render );
+};
+/**
+ * Called by DOM when page is finished loading. Now load assets, then the game.
+ */
+export default () => {
+    loadAssets();
 }

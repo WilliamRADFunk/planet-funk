@@ -11,7 +11,6 @@
 ### Variables
 
 * [positionArray](_ts_base_.md#positionarray)
-* [textureArray](_ts_base_.md#texturearray)
 
 ---
 
@@ -28,25 +27,9 @@
     {xb: -0.49, zb: -0.49, ry: 0.785398}
 ]
 
-*Defined in [ts/base.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/base.ts#L25)*
+*Defined in [ts/base.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/base.ts#L16)*
 
 Makes instatiateing the base's position by index easier and cleaner to read.
-
-___
-<a id="texturearray"></a>
-
-### `<Const>` textureArray
-
-**● textureArray**: *`string`[]* =  [
-    'assets/images/building1.png',
-    'assets/images/building2.png',
-    'assets/images/building3.png',
-    'assets/images/building4.png'
-]
-
-*Defined in [ts/base.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/cf5d1fe/src/ts/base.ts#L16)*
-
-Makes instatiateing the base's texture by index easier and cleaner to read.
 
 ___
 

@@ -1,10 +1,10 @@
 import {
     CircleGeometry,
-    ImageUtils,
     LinearFilter,
     Mesh,
     MeshPhongMaterial,
-    Scene } from 'three';
+    Scene,
+    Texture } from 'three';
 
 import { Collidable } from './collidable';
 import { CollisionatorSingleton } from './collisionator';
@@ -74,7 +74,7 @@ export class Asteroid implements Collidable {
      * @param level level at time of asteroid instantiation.
      * @hidden
      */
-    constructor(scene: Scene, x1:number, z1: number, level: number) {
+    constructor(scene: Scene, asteroidTexture: Texture, x1:number, z1: number, level: number) {
         index++;
         this.speed += (level / 1000);
         this.originalStartingPoint = [x1, z1];
@@ -88,7 +88,7 @@ export class Asteroid implements Collidable {
         this.scene = scene;
 		this.asteroidGeometry = new CircleGeometry(0.2, 16, 16);
         this.asteroidMaterial = new MeshPhongMaterial();
-        this.asteroidMaterial.map = ImageUtils.loadTexture('assets/images/asteroid.png');
+        this.asteroidMaterial.map = asteroidTexture;
         this.asteroidMaterial.map.minFilter = LinearFilter;
         this.asteroidMaterial.shininess = 0;
         this.asteroidMaterial.transparent = true;

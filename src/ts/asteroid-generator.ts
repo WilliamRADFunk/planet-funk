@@ -1,4 +1,4 @@
-import { Scene } from 'three';
+import { Scene, Texture } from 'three';
 
 import { Asteroid } from './asteroid';
 import { CollisionatorSingleton } from './collisionator';
@@ -12,6 +12,10 @@ export class AsteroidGenerator {
      * Asteroid array for ease of iteration
      */
     private asteroids: Asteroid[] = [];
+    /**
+     * The loaded texture, used for the asteroids.
+     */
+    private aTexture: Texture;
     /**
      * Points multiplier per asteroid destroyed.
      */
@@ -42,9 +46,10 @@ export class AsteroidGenerator {
      * @param scoreboard reference to the scorekeeper for adding points on asteroid destruction.
      * @hidden
      */
-    constructor(scene: Scene, scoreboard: ScoreHandler) {
+    constructor(scene: Scene, scoreboard: ScoreHandler, asteroidTexture: Texture) {
         this.scene = scene;
         this.scoreboard = scoreboard;
+        this.aTexture = asteroidTexture;
         for (let i = 0; i < this.maxAsteroids; i++) {
             this.asteroids.push(this.makeAsteroid());
         }
@@ -80,18 +85,13 @@ export class AsteroidGenerator {
         let asteroid;
         if (altRand > 0.15) {
             asteroid = new Asteroid(
-                this.scene,
-                isXNegative * ((Math.random() * 12) + 8),
-                isZNegative * ((Math.random() * 12) + 8),
-                this.currentLevel);
+                this.scene,  this.aTexture, isXNegative * ((Math.random() * 12) + 8), isZNegative * ((Math.random() * 12) + 8),  this.currentLevel);
         } else if (altRand > 0.075) {
             asteroid = new Asteroid(
-                this.scene, 1 * isXNegative, isZNegative * ((Math.random() * 12) + 8),
-                this.currentLevel);
+                this.scene, this.aTexture, 1 * isXNegative, isZNegative * ((Math.random() * 12) + 8), this.currentLevel);
         } else {
             asteroid = new Asteroid(
-                this.scene, isXNegative * ((Math.random() * 12) + 8), 1 * isZNegative,
-                this.currentLevel);
+                this.scene, this.aTexture, isXNegative * ((Math.random() * 12) + 8), 1 * isZNegative, this.currentLevel);
         }
         asteroid.addToScene();
         CollisionatorSingleton.add(asteroid);
