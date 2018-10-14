@@ -272,6 +272,7 @@ export class LevelHandler {
         } while(true);
         this.levelMaterial = new MeshLambertMaterial( {color: this.levelColor} );
         this.level.visible = false;
+        this.diffText.visible = false;
         this.isLevelAnimating = true;
     }
     /**
