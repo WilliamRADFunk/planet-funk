@@ -87,7 +87,7 @@ export class Shield implements Collidable {
      * If shield is down, and player has enough energy, this turns the shield on.
      */
     activate(): void {
-        if (!this.isActive && this.energyLevel > 500) {
+        if (!this.isActive && this.energyLevel > 349) {
             this.isActive = true;
             this.shieldMaterial.opacity = 0.65;
         }
@@ -195,7 +195,7 @@ export class Shield implements Collidable {
         const percentOfFull: number = this.energyLevel / 1000;
         const pelletsToShow: number = Math.floor(percentOfFull * 60);
         let color: number;
-        if (percentOfFull >= 0.5) {
+        if (percentOfFull >= 0.35) {
             if (this.lastEnergyBarColor !== 'green') {
                 color = 0x32BD15;
                 this.lastEnergyBarColor = 'green';
