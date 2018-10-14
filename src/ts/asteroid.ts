@@ -61,22 +61,22 @@ export class Asteroid implements Collidable {
     /**
      * The speed at which the asteroid travels.
      */
-    private speed: number = 0.005;
+    private speed: number = 0.002;
     /**
      * The total distance from asteroid to planet.
      */
     private totalDistance: number;
     /**
      * Constructor for the Asteroid class
-     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     * @param x1    origin point x of where the asteroid starts.
-     * @param z1    origin point z of where the asteroid starts.
-     * @param level level at time of asteroid instantiation.
+     * @param scene     graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param x1        origin point x of where the asteroid starts.
+     * @param z1        origin point z of where the asteroid starts.
+     * @param speedMod  speed modifier at time of saucer instantiation.
      * @hidden
      */
-    constructor(scene: Scene, asteroidTexture: Texture, x1:number, z1: number, level: number) {
+    constructor(scene: Scene, asteroidTexture: Texture, x1:number, z1: number, speedMod: number) {
         index++;
-        this.speed += (level / 1000);
+        this.speed += (speedMod / 1000);
         this.originalStartingPoint = [x1, z1];
         this.currentPoint = [x1, z1];
         this.endingPoint = [0, 0];

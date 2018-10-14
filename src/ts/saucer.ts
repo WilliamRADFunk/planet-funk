@@ -57,7 +57,7 @@ export class Saucer implements Collidable {
     /**
      * The speed at which the saucer travels.
      */
-    private speed: number = 0.01;
+    private speed: number = 0.008;
     /**
      * The total distance from saucer to final destination.
      */
@@ -69,18 +69,18 @@ export class Saucer implements Collidable {
     private waitToFire: number = 0;
     /**
      * Constructor for the Saucer class
-     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     * @param x1    origin point x of where the saucer starts.
-     * @param z1    origin point z of where the saucer starts.
-     * @param x2    final point x of where the saucer starts.
-     * @param z2    final point z of where the saucer starts.
-     * @param dist  total distance the saucer must travel.
-     * @param level level at time of saucer instantiation.
+     * @param scene     graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param x1        origin point x of where the saucer starts.
+     * @param z1        origin point z of where the saucer starts.
+     * @param x2        final point x of where the saucer starts.
+     * @param z2        final point z of where the saucer starts.
+     * @param dist      total distance the saucer must travel.
+     * @param speedMod  speed modifier at time of saucer instantiation.
      * @hidden
      */
-    constructor(scene: Scene, saucerTextures:Texture[], x1:number, z1: number, x2: number, z2: number, dist: number, level: number) {
+    constructor(scene: Scene, saucerTextures:Texture[], x1:number, z1: number, x2: number, z2: number, dist: number, speedMod: number) {
         index++;
-        this.speed += (level / 1000);
+        this.speed += (speedMod / 1000);
         this.originalStartingPoint = [x1, z1];
         this.currentPoint = [x1, z1];
         this.endingPoint = [x2, z2];

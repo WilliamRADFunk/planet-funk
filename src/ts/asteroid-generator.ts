@@ -19,11 +19,15 @@ export class AsteroidGenerator {
     /**
      * Points multiplier per asteroid destroyed.
      */
-    private asteroidPoints: number = 25;
+    private asteroidPoints: number = 5;
     /**
      * Current level player is on, effects max asteroids and points per asteroid destroyed.
      */
     private currentLevel: number = 1;
+    /**
+     * Player chosen level of difficulty
+     */
+    private difficulty: number;
     /**
      * Flag to let generator know if game is not lost.
      */
@@ -44,9 +48,12 @@ export class AsteroidGenerator {
      * Constructor for the AsteroidGenerator class
      * @param scene      graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param scoreboard reference to the scorekeeper for adding points on asteroid destruction.
+     * @param difficulty level of difficulty chosen by player.
      * @hidden
      */
-    constructor(scene: Scene, scoreboard: ScoreHandler, asteroidTexture: Texture) {
+    constructor(scene: Scene, scoreboard: ScoreHandler, asteroidTexture: Texture, difficulty: number) {
+        this.difficulty = difficulty;
+        this.asteroidPoints = (this.difficulty + 1) * this.asteroidPoints;
         this.scene = scene;
         this.scoreboard = scoreboard;
         this.aTexture = asteroidTexture;
@@ -85,13 +92,13 @@ export class AsteroidGenerator {
         let asteroid;
         if (altRand > 0.15) {
             asteroid = new Asteroid(
-                this.scene,  this.aTexture, isXNegative * ((Math.random() * 12) + 8), isZNegative * ((Math.random() * 12) + 8),  this.currentLevel);
+                this.scene,  this.aTexture, isXNegative * ((Math.random() * 12) + 8), isZNegative * ((Math.random() * 12) + 8), this.currentLevel + this.difficulty);
         } else if (altRand > 0.075) {
             asteroid = new Asteroid(
-                this.scene, this.aTexture, 1 * isXNegative, isZNegative * ((Math.random() * 12) + 8), this.currentLevel);
+                this.scene, this.aTexture, 1 * isXNegative, isZNegative * ((Math.random() * 12) + 8), this.currentLevel + this.difficulty);
         } else {
             asteroid = new Asteroid(
-                this.scene, this.aTexture, isXNegative * ((Math.random() * 12) + 8), 1 * isZNegative, this.currentLevel);
+                this.scene, this.aTexture, isXNegative * ((Math.random() * 12) + 8), 1 * isZNegative, this.currentLevel + this.difficulty);
         }
         asteroid.addToScene();
         CollisionatorSingleton.add(asteroid);
@@ -105,7 +112,7 @@ export class AsteroidGenerator {
         this.currentLevel = level;
         // Only increment new units if game is still going.
         if (this.isGameActive) {
-            this.maxAsteroids += 1;
+            this.maxAsteroids += (this.difficulty + 1);
         }
         // Instantiates new asteroids for new level
         for (let i = this.asteroids.length; i < this.maxAsteroids; i++) {

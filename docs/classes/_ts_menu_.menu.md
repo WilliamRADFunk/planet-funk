@@ -56,7 +56,7 @@
 
 **● clickMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/menu.ts:22](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L22)*
+*Defined in [ts/menu.ts:22](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L22)*
 
 Controls the background click surface of buttons.
 
@@ -67,7 +67,7 @@ ___
 
 **● copyright**: *`Mesh`*
 
-*Defined in [ts/menu.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L30)*
+*Defined in [ts/menu.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L30)*
 
 Controls the overall rendering of the copyright display
 
@@ -78,7 +78,7 @@ ___
 
 **● copyrightGeometry**: *`TextGeometry`*
 
-*Defined in [ts/menu.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L34)*
+*Defined in [ts/menu.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L34)*
 
 Controls size and shape of the copyright text
 
@@ -89,7 +89,7 @@ ___
 
 **● difficultyLevel**: *`number`* = 3
 
-*Defined in [ts/menu.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L26)*
+*Defined in [ts/menu.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L26)*
 
 Easy, Medium, Hard, Hardcore
 
@@ -100,7 +100,7 @@ ___
 
 **● easy**: *`Mesh`*
 
-*Defined in [ts/menu.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L38)*
+*Defined in [ts/menu.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L38)*
 
 Controls the overall rendering of the easy button display
 
@@ -111,7 +111,7 @@ ___
 
 **● easyGeometry**: *`TextGeometry`*
 
-*Defined in [ts/menu.ts:42](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L42)*
+*Defined in [ts/menu.ts:42](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L42)*
 
 Controls size and shape of the easy button text
 
@@ -122,7 +122,7 @@ ___
 
 **● fontDifficultyBtnParams**: *`TextGeometryParameters`*
 
-*Defined in [ts/menu.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L46)*
+*Defined in [ts/menu.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L46)*
 
 Since most of the text on the menu has same parameters, use one variable.
 
@@ -133,7 +133,7 @@ ___
 
 **● hard**: *`Mesh`*
 
-*Defined in [ts/menu.ts:50](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L50)*
+*Defined in [ts/menu.ts:50](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L50)*
 
 Controls the overall rendering of the hard button display
 
@@ -144,7 +144,7 @@ ___
 
 **● hardGeometry**: *`TextGeometry`*
 
-*Defined in [ts/menu.ts:54](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L54)*
+*Defined in [ts/menu.ts:54](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L54)*
 
 Controls size and shape of the hard button text
 
@@ -155,7 +155,7 @@ ___
 
 **● hardcore**: *`Mesh`*
 
-*Defined in [ts/menu.ts:58](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L58)*
+*Defined in [ts/menu.ts:58](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L58)*
 
 Controls the overall rendering of the hardcore button display
 
@@ -166,7 +166,7 @@ ___
 
 **● hardcoreGeometry**: *`TextGeometry`*
 
-*Defined in [ts/menu.ts:62](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L62)*
+*Defined in [ts/menu.ts:62](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L62)*
 
 Controls size and shape of the hardcore button text
 
@@ -177,7 +177,7 @@ ___
 
 **● help**: *`Mesh`*
 
-*Defined in [ts/menu.ts:66](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L66)*
+*Defined in [ts/menu.ts:66](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L66)*
 
 Controls the overall rendering of the help button display
 
@@ -188,7 +188,7 @@ ___
 
 **● helpGeometry**: *`TextGeometry`*
 
-*Defined in [ts/menu.ts:70](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L70)*
+*Defined in [ts/menu.ts:70](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L70)*
 
 Controls size and shape of the help button text
 
@@ -199,7 +199,7 @@ ___
 
 **● load**: *`Mesh`*
 
-*Defined in [ts/menu.ts:74](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L74)*
+*Defined in [ts/menu.ts:74](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L74)*
 
 Controls the overall rendering of the load button display
 
@@ -210,7 +210,7 @@ ___
 
 **● loadGeometry**: *`TextGeometry`*
 
-*Defined in [ts/menu.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L78)*
+*Defined in [ts/menu.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L78)*
 
 Controls size and shape of the load button text
 
@@ -221,7 +221,7 @@ ___
 
 **● mainBanner**: *`Mesh`*
 
-*Defined in [ts/menu.ts:82](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L82)*
+*Defined in [ts/menu.ts:82](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L82)*
 
 Controls the overall rendering of the main banner display
 
@@ -232,7 +232,7 @@ ___
 
 **● mainBannerGeometry**: *`TextGeometry`*
 
-*Defined in [ts/menu.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L86)*
+*Defined in [ts/menu.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L86)*
 
 Controls size and shape of the main banner text
 
@@ -243,7 +243,7 @@ ___
 
 **● menuFont**: *`Font`*
 
-*Defined in [ts/menu.ts:90](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L90)*
+*Defined in [ts/menu.ts:90](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L90)*
 
 Loaded font for menu text.
 
@@ -254,7 +254,7 @@ ___
 
 **● menuMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/menu.ts:94](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L94)*
+*Defined in [ts/menu.ts:94](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L94)*
 
 Controls the color of the untouched button display material
 
@@ -265,7 +265,7 @@ ___
 
 **● menuSelectedMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/menu.ts:98](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L98)*
+*Defined in [ts/menu.ts:98](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L98)*
 
 Controls the color of the selected button display material
 
@@ -276,7 +276,7 @@ ___
 
 **● normal**: *`Mesh`*
 
-*Defined in [ts/menu.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L102)*
+*Defined in [ts/menu.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L102)*
 
 Controls the overall rendering of the normal button display
 
@@ -287,7 +287,7 @@ ___
 
 **● normalGeometry**: *`TextGeometry`*
 
-*Defined in [ts/menu.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L106)*
+*Defined in [ts/menu.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L106)*
 
 Controls size and shape of the normal button text
 
@@ -298,7 +298,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/menu.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L110)*
+*Defined in [ts/menu.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L110)*
 
 Reference to the scene, used to remove and reinstall text geometries.
 
@@ -309,7 +309,7 @@ ___
 
 **● shimmer**: *`PointLight`*
 
-*Defined in [ts/menu.ts:114](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L114)*
+*Defined in [ts/menu.ts:114](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L114)*
 
 Controls the light that give the text its shine.
 
@@ -320,7 +320,7 @@ ___
 
 **● start**: *`Mesh`*
 
-*Defined in [ts/menu.ts:118](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L118)*
+*Defined in [ts/menu.ts:118](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L118)*
 
 Controls the overall rendering of the start button display
 
@@ -331,7 +331,7 @@ ___
 
 **● startGeometry**: *`TextGeometry`*
 
-*Defined in [ts/menu.ts:122](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L122)*
+*Defined in [ts/menu.ts:122](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L122)*
 
 Controls size and shape of the start button text
 
@@ -345,7 +345,7 @@ ___
 
 ▸ **changeDifficulty**(diff: *`number`*): `void`
 
-*Defined in [ts/menu.ts:266](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L266)*
+*Defined in [ts/menu.ts:266](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L266)*
 
 Changes difficulty level, and instigates the altering of the button texts associated with that choice.
 
@@ -364,7 +364,7 @@ ___
 
 ▸ **createDifficultyButtons**(buttonIndex: *`number`*, material: *`MeshLambertMaterial`*, removeFirst: *`boolean`*): `void`
 
-*Defined in [ts/menu.ts:278](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L278)*
+*Defined in [ts/menu.ts:278](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L278)*
 
 Called to (re)create difficulty menu button text
 
@@ -385,7 +385,7 @@ ___
 
 ▸ **endCycle**(): `void`
 
-*Defined in [ts/menu.ts:334](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L334)*
+*Defined in [ts/menu.ts:334](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L334)*
 
 Moves the point light from left to right a little every frame.
 
@@ -398,7 +398,7 @@ ___
 
 ▸ **pressedStart**(): `number`
 
-*Defined in [ts/menu.ts:344](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/menu.ts#L344)*
+*Defined in [ts/menu.ts:344](https://github.com/WilliamRADFunk/planet-funk/blob/f859c68/src/ts/menu.ts#L344)*
 
 Changes the start menu button text when clicked to signal to user that their click worked.
 

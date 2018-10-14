@@ -17,6 +17,10 @@ export class EnemyMissileGenerator {
      */
     private currentLevel: number = 1;
     /**
+     * Player chosen level of difficulty
+     */
+    private difficulty: number;
+    /**
      * Flag to let generator know if game is not lost.
      */
     private isGameActive: boolean = true;
@@ -27,7 +31,7 @@ export class EnemyMissileGenerator {
     /**
      * Points multiplier per enemy missile destroyed.
      */
-    private missilePoints: number = 30;
+    private missilePoints: number = 10;
     /**
      * Keeps track of live missiles, to pass along endCycle signals, and destroy calls.
      */
@@ -44,10 +48,13 @@ export class EnemyMissileGenerator {
      * Constructor for the EnemyMissileGenerator class
      * @param scene      graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param scoreboard reference to the scorekeeper for adding points on enemy missile destruction.
-     * @param color level color, grabbed from the LevelHandler.
+     * @param color      level color, grabbed from the LevelHandler.
+     * @param difficulty level of difficulty chosen by player.
      * @hidden
      */
-    constructor(scene: Scene, scoreboard: ScoreHandler, color: Color) {
+    constructor(scene: Scene, scoreboard: ScoreHandler, color: Color, difficulty: number) {
+        this.difficulty = difficulty;
+        this.missilePoints = (this.difficulty + 1) * this.missilePoints;
         this.scene = scene;
         this.scoreboard = scoreboard;
         this.currentColor = color;
@@ -113,7 +120,7 @@ export class EnemyMissileGenerator {
             distance,
             this.currentColor || new Color(0xFF0000),
             true,
-            (0.008 + (this.currentLevel / 1000))));
+            (0.005 + (this.currentLevel / 1000) + (this.difficulty / 1000))));
         CollisionatorSingleton.add(this.missiles[this.missiles.length - 1]);
     }
     /**
@@ -126,7 +133,7 @@ export class EnemyMissileGenerator {
         this.currentLevel = level;
         // Only increment new missiles if game is still going.
         if (this.isGameActive) {
-            this.maxMissiles += 1;
+            this.maxMissiles += (this.difficulty + 1);
         }
         // Instantiates new missiles for new level
         for (let i = this.missiles.length; i < this.maxMissiles; i++) {

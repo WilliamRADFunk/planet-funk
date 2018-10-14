@@ -20,9 +20,21 @@ const saucerStartingPositions: number[][] = [
  */
 export class SaucerGenerator {
     /**
+     * Current level player is on, effects max saucers and points per saucer destroyed.
+     */
+    private currentLevel: number = 1;
+    /**
+     * Player chosen level of difficulty
+     */
+    private difficulty: number;
+    /**
      * Flag to let generator know if game is not lost..
      */
     private isGameActive: boolean = true;
+    /**
+     * Maximum number of saucers that can exist at one time.
+     */
+    private maxSaucers: number = 1;
     /**
      * Saucer array for ease of iteration
      */
@@ -30,19 +42,11 @@ export class SaucerGenerator {
     /**
      * Points multiplier per saucer destroyed.
      */
-    private saucerPoints: number = 250;
+    private saucerPoints: number = 50;
     /**
      * The loaded textures, used for the saucers.
      */
     private saucerTextures: Texture[];
-    /**
-     * Current level player is on, effects max saucers and points per saucer destroyed.
-     */
-    private currentLevel: number = 1;
-    /**
-     * Maximum number of saucers that can exist at one time.
-     */
-    private maxSaucers: number = 1;
     /**
      * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
      */
@@ -55,9 +59,12 @@ export class SaucerGenerator {
      * Constructor for the SaucerGenerator class
      * @param scene      graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param scoreboard reference to the scorekeeper for adding points on saucer destruction.
+     * @param difficulty level of difficulty chosen by player.
      * @hidden
      */
-    constructor(scene: Scene, scoreboard: ScoreHandler, saucerTextures: Texture[]) {
+    constructor(scene: Scene, scoreboard: ScoreHandler, saucerTextures: Texture[], difficulty: number) {
+        this.difficulty = difficulty;
+        this.saucerPoints = (this.difficulty + 1) * this.saucerPoints;
         this.saucerTextures = saucerTextures;
         this.scene = scene;
         this.scoreboard = scoreboard;
@@ -106,7 +113,7 @@ export class SaucerGenerator {
             saucerEnd = saucerPos.slice();
             saucerEnd[1] = -1 * saucerPos[1];
         }
-        saucer = new Saucer(this.scene, this.saucerTextures, saucerPos[0], saucerPos[1], saucerEnd[0], saucerEnd[1], 20, this.currentLevel);
+        saucer = new Saucer(this.scene, this.saucerTextures, saucerPos[0], saucerPos[1], saucerEnd[0], saucerEnd[1], 20, this.currentLevel + this.difficulty);
         saucer.addToScene();
         CollisionatorSingleton.add(saucer);
         return saucer;
@@ -119,7 +126,7 @@ export class SaucerGenerator {
         this.currentLevel = level;
         // Only increment new saucers if game is still going.
         if (this.isGameActive) {
-            this.maxSaucers += 1;
+            this.maxSaucers += (this.difficulty + 1);
         }
         // Instantiates new saucers for new level
         for (let i = this.saucers.length; i < this.maxSaucers; i++) {

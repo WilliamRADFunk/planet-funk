@@ -4,7 +4,8 @@ import {
     Mesh,
     MeshLambertMaterial,
     Scene,
-    TextGeometry } from 'three';
+    TextGeometry,
+    TextGeometryParameters } from 'three';
 
 const randomColor = require('randomcolor');
 /**
@@ -13,33 +14,9 @@ const randomColor = require('randomcolor');
  */
 export class LevelHandler {
     /**
-     * Tracks which phase of the animation currently in.
+     * Controls the overall rendering of the banner display
      */
-    private isBannerExpanding: boolean = true;
-    /**
-     * Keeps track of player's current level
-     */
-    private currentLevel: number = 1;
-    /**
-     * Current banner opacity, which creates the illusion of 'animation'.
-     */
-    private currentOpacity: number = 0.01;
-    /**
-     * Prevents other things from moving if level display is animating a new level.
-     */
-    private isLevelAnimating: boolean = true;
-    /**
-     * The loaded font, used for the level display.
-     */
-    private levelColor: Color;
-    /**
-     * The loaded font, used for the level text and banners.
-     */
-    private levelFont: Font;
-    /**
-     * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
-     */
-    private scene: Scene;
+    private banner: Mesh;
     /**
      * Controls size and shape of the banner display
      */
@@ -49,9 +26,49 @@ export class LevelHandler {
      */
     private bannerMaterial: MeshLambertMaterial;
     /**
-     * Controls the overall rendering of the banner display
+     * Keeps track of player's current level
      */
-    private banner: Mesh;
+    private currentLevel: number = 1;
+    /**
+     * Current banner opacity, which creates the illusion of 'animation'.
+     */
+    private currentOpacity: number = 0.01;
+    /**
+     * Player chosen level of difficulty.
+     */
+    private difficultyLevel: number;
+    /**
+     * Controls the overall rendering of the difficulty display
+     */
+    private diffText: Mesh;
+    /**
+     * Controls size and shape of the difficulty display
+     */
+    private diffTextGeometry: TextGeometry;
+    /**
+     * Since most of the text on the menu has same parameters, use one variable.
+     */
+    private fontLowerTextParams: TextGeometryParameters;
+    /**
+     * Tracks which phase of the animation currently in.
+     */
+    private isBannerExpanding: boolean = true;
+    /**
+     * Prevents other things from moving if level display is animating a new level.
+     */
+    private isLevelAnimating: boolean = true;
+    /**
+     * Controls the overall rendering of the level display
+     */
+    private level: Mesh;
+    /**
+     * The loaded font, used for the level display.
+     */
+    private levelColor: Color;
+    /**
+     * The loaded font, used for the level text and banners.
+     */
+    private levelFont: Font;
     /**
      * Controls size and shape of the level display
      */
@@ -61,21 +78,33 @@ export class LevelHandler {
      */
     private levelMaterial: MeshLambertMaterial;
     /**
-     * Controls the overall rendering of the level display
+     * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
      */
-    private level: Mesh;
+    private scene: Scene;
     /**
      * Flag to distinguish between level banner and game over banner.
      */
     private useLevelBanner: boolean = true;
     /**
      * Constructor for the LevelHandler class
-     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     * @param levelFont loaded font to use for score text.
+     * @param scene         graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param levelFont     loaded font to use for score text.
+     * @param difficulty    level of difficulty chosen by player.
      * @hidden
      */
-    constructor(scene: Scene, levelFont: Font) {
+    constructor(scene: Scene, levelFont: Font, difficulty: number) {
+        this.difficultyLevel = difficulty
         this.levelFont = levelFont;
+        this.fontLowerTextParams = {
+            font: this.levelFont,
+            size: 0.3,
+            height: 0.2,
+            curveSegments: 12,
+            bevelEnabled: false,
+            bevelThickness: 1,
+            bevelSize: 0.5,
+            bevelSegments: 3
+        }
         do {
             const colorHex = randomColor();
             if (this.checkColorBrighness(colorHex)) {
@@ -166,25 +195,32 @@ export class LevelHandler {
     private createText(): void {
         // Only remove level if it was added before.
         if (this.level) this.scene.remove(this.level);
-        // Added before or not, make a new one and add it.
-        // Sadly TextGeometries must be removed and added whenever the text content changes.
-        this.levelGeometry = new TextGeometry(`Level: ${this.currentLevel}`,
-            {
-                font: this.levelFont,
-                size: 0.3,
-                height: 0.2,
-                curveSegments: 12,
-                bevelEnabled: false,
-                bevelThickness: 1,
-                bevelSize: 0.5,
-                bevelSegments: 3
-            });
+        this.levelGeometry = new TextGeometry(`Level: ${this.currentLevel}`, this.fontLowerTextParams);
         this.level = new Mesh( this.levelGeometry, this.levelMaterial );
         this.level.position.x = -5.5;
         this.level.position.y = 0.5;
         this.level.position.z = 5.5;
         this.level.rotation.x = -1.5708;
         this.scene.add(this.level);
+        // Only remove lediffTextvel if it was added before.
+        if (this.diffText) this.scene.remove(this.diffText);
+        let mode = 'Easy';
+        let xPos = 2.75;
+        if (this.difficultyLevel === 1) {
+            mode = 'Normal';
+            xPos = 2.3;
+        } else if (this.difficultyLevel === 2) {
+            mode = 'Hard';
+            xPos = 2.75;
+        } else if (this.difficultyLevel === 3) {
+            mode = 'Hardcore';
+            xPos = 1.5;
+        }
+        this.diffTextGeometry = new TextGeometry(`Mode: ${mode}`, this.fontLowerTextParams);
+        this.diffText = new Mesh( this.diffTextGeometry, this.levelMaterial );
+        this.diffText.position.set(xPos, 0.5, 5.5);
+        this.diffText.rotation.x = -1.5708;
+        this.scene.add(this.diffText);
     }
     /**
      * At the end of each loop iteration, level updates with time increase.

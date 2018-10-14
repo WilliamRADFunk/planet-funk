@@ -363,11 +363,11 @@ const loadGame = (difficulty: number) => {
     let noMissiles = false;
     let noAsteroids = false;
     let noSaucers = false;
-    const levelHandler = new LevelHandler(scene, gameFont);
+    const levelHandler = new LevelHandler(scene, gameFont, difficulty);
     const scoreboard = new ScoreHandler(scene, levelHandler.getColor(), gameFont);
-    const asteroidGenerator = new AsteroidGenerator(scene, scoreboard, asteroidTexture);
-    const saucerGenerator = new SaucerGenerator(scene, scoreboard, saucerTextures);
-    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor());
+    const asteroidGenerator = new AsteroidGenerator(scene, scoreboard, asteroidTexture, difficulty);
+    const saucerGenerator = new SaucerGenerator(scene, scoreboard, saucerTextures, difficulty);
+    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor(), difficulty);
     /**
      * The render loop. Everything that should be checked, called, or drawn in each animation frame.
      */
