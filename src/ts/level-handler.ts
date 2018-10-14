@@ -71,6 +71,7 @@ export class LevelHandler {
     /**
      * Constructor for the LevelHandler class
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param levelFont loaded font to use for score text.
      * @hidden
      */
     constructor(scene: Scene, levelFont: Font) {
@@ -122,11 +123,11 @@ export class LevelHandler {
      * Creates the text in one place to obey the DRY rule.
      */
     private createBanner(): void {
-        let xPos = -2.2;
+        let xPos = -1.5;
         let text = `Level: ${this.currentLevel}`;
         if (!this.useLevelBanner) {
             text = 'Game Over';
-            xPos = -3.5;
+            xPos = -2.25;
             this.bannerMaterial = new MeshLambertMaterial({
                 color: 0xFF0000,
                 opacity: this.currentOpacity,
@@ -144,7 +145,7 @@ export class LevelHandler {
         this.bannerGeometry = new TextGeometry(text,
             {
                 font: this.levelFont,
-                size: 1,
+                size: 0.5,
                 height: 0.2,
                 curveSegments: 12,
                 bevelEnabled: false,
@@ -156,7 +157,7 @@ export class LevelHandler {
         this.banner.position.x = xPos;
         this.banner.position.y = 0.5;
         this.banner.position.z = -2;
-        this.banner.rotation.x = -1.3708;
+        this.banner.rotation.x = -1.5708;
         this.scene.add(this.banner);
     }
     /**
@@ -170,7 +171,7 @@ export class LevelHandler {
         this.levelGeometry = new TextGeometry(`Level: ${this.currentLevel}`,
             {
                 font: this.levelFont,
-                size: 0.5,
+                size: 0.3,
                 height: 0.2,
                 curveSegments: 12,
                 bevelEnabled: false,
@@ -182,7 +183,7 @@ export class LevelHandler {
         this.level.position.x = -5.5;
         this.level.position.y = 0.5;
         this.level.position.z = 5.5;
-        this.level.rotation.x = -1.3708;
+        this.level.rotation.x = -1.5708;
         this.scene.add(this.level);
     }
     /**

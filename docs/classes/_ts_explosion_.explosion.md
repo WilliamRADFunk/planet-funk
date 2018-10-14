@@ -46,7 +46,7 @@
 
 **● currentExplosionScale**: *`number`* = 1
 
-*Defined in [ts/explosion.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L16)*
+*Defined in [ts/explosion.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L16)*
 
 Keeps track of how big explosions scale is at moment.
 
@@ -57,7 +57,7 @@ ___
 
 **● explosion**: *`Mesh`*
 
-*Defined in [ts/explosion.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L28)*
+*Defined in [ts/explosion.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L28)*
 
 Controls the overall rendering of the explosion
 
@@ -68,7 +68,7 @@ ___
 
 **● explosionGeometry**: *`CircleGeometry`*
 
-*Defined in [ts/explosion.ts:20](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L20)*
+*Defined in [ts/explosion.ts:20](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L20)*
 
 Controls size and shape of the explosion
 
@@ -79,7 +79,7 @@ ___
 
 **● explosionMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/explosion.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L24)*
+*Defined in [ts/explosion.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L24)*
 
 Controls the color of the explosion material
 
@@ -90,7 +90,7 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in [ts/explosion.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L33)*
+*Defined in [ts/explosion.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L33)*
 
 Flag to signal if explosion is in its collidable state. True = collidable. False = not collidable.
 
@@ -101,7 +101,7 @@ ___
 
 **● isExplosionGrowing**: *`boolean`* = true
 
-*Defined in [ts/explosion.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L38)*
+*Defined in [ts/explosion.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L38)*
 
 Flag to signal if the explosion is expanding/contracting. True is expanding. False is contracting..
 
@@ -112,7 +112,7 @@ ___
 
 **● radius**: *`number`*
 
-*Defined in [ts/explosion.ts:42](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L42)*
+*Defined in [ts/explosion.ts:42](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L42)*
 
 Starting size of the explosion. Usually the size of the thing that went boom.
 
@@ -123,7 +123,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/explosion.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L46)*
+*Defined in [ts/explosion.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L46)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -137,7 +137,7 @@ ___
 
 ▸ **endCycle**(): `boolean`
 
-*Defined in [ts/explosion.ts:76](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L76)*
+*Defined in [ts/explosion.ts:76](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L76)*
 
 At the end of each loop iteration, expand or contract the explosion a little.
 
@@ -151,7 +151,7 @@ ___
 
 ▸ **getActive**(): `boolean`
 
-*Defined in [ts/explosion.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L99)*
+*Defined in [ts/explosion.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L99)*
 
 Gets the viability of the object.
 
@@ -165,7 +165,7 @@ ___
 
 ▸ **getCollisionRadius**(): `number`
 
-*Defined in [ts/explosion.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L106)*
+*Defined in [ts/explosion.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L106)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 
@@ -179,7 +179,7 @@ ___
 
 ▸ **getCurrentPosition**(): `number`[]
 
-*Defined in [ts/explosion.ts:113](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L113)*
+*Defined in [ts/explosion.ts:113](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L113)*
 
 Gets the current position of the collidable object.
 
@@ -193,7 +193,7 @@ ___
 
 ▸ **getMesh**(): `Mesh`
 
-*Defined in [ts/explosion.ts:142](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L142)*
+*Defined in [ts/explosion.ts:142](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L142)*
 
 Returns mesh so it can be removed from scene.
 
@@ -207,7 +207,7 @@ ___
 
 ▸ **getName**(): `string`
 
-*Defined in [ts/explosion.ts:120](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L120)*
+*Defined in [ts/explosion.ts:120](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L120)*
 
 Gets the name of the explosion.
 
@@ -221,7 +221,7 @@ ___
 
 ▸ **impact**(self: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*): `boolean`
 
-*Defined in [ts/explosion.ts:128](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L128)*
+*Defined in [ts/explosion.ts:128](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L128)*
 
 Call to collidable object that it has been struck.
 
@@ -241,7 +241,7 @@ ___
 
 ▸ **isPassive**(): `boolean`
 
-*Defined in [ts/explosion.ts:135](https://github.com/WilliamRADFunk/planet-funk/blob/05e0e7f/src/ts/explosion.ts#L135)*
+*Defined in [ts/explosion.ts:135](https://github.com/WilliamRADFunk/planet-funk/blob/b46ca69/src/ts/explosion.ts#L135)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 

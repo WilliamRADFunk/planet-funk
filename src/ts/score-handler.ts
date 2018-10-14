@@ -106,7 +106,7 @@ export class ScoreHandler {
         this.scoreGeometry = new TextGeometry(`Score: `,
             {
                 font: this.scoreFont,
-                size: 0.5,
+                size: 0.3,
                 height: 0.2,
                 curveSegments: 12,
                 bevelEnabled: false,
@@ -118,7 +118,7 @@ export class ScoreHandler {
         this.score.position.x = -5.5;
         this.score.position.y = 0.75;
         this.score.position.z = -5.1;
-        this.score.rotation.x = -1.3708;
+        this.score.rotation.x = -1.5708;
         this.scene.add(this.score);
         
         for (let i = 0; i < positionIndex.length; i++) {
@@ -126,7 +126,7 @@ export class ScoreHandler {
                 this.scoreGeometries[i][j] = new TextGeometry(`${j}`,
                     {
                         font: this.scoreFont,
-                        size: 0.5,
+                        size: 0.3,
                         height: 0.2,
                         curveSegments: 12,
                         bevelEnabled: false,
@@ -138,7 +138,7 @@ export class ScoreHandler {
                 this.scores[i][j].position.x = positionIndex[i];
                 this.scores[i][j].position.y = 0.75;
                 this.scores[i][j].position.z = -5.08;
-                this.scores[i][j].rotation.x = -1.3708;
+                this.scores[i][j].rotation.x = -1.5708;
                 this.scores[i][j].visible = false;
                 this.scene.add(this.scores[i][j]);
             }

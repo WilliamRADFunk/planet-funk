@@ -13,7 +13,8 @@ import {
     TextureLoader,
     WebGLRenderer,
     Vector2, 
-    Texture} from 'three';
+    Texture,
+    Camera} from 'three';
 
 import { CollisionatorSingleton } from './collisionator';
 import { Planet } from './planet';
@@ -23,6 +24,7 @@ import { ScoreHandler } from './score-handler';
 import { EnemyMissileGenerator } from './enemy-missile-generator';
 import { LevelHandler } from './level-handler';
 import { SaucerGenerator } from './saucer-generator';
+import { Menu } from './menu';
 
 /**
  * Loads the graphic for asteroid.
@@ -46,6 +48,10 @@ const buildingLoaders: TextureLoader[] = [
  */
 const buildingTextures: Texture[] = [];
 /**
+ * The camera for main menu
+ */
+let cameraMenu: Camera;
+/**
  * Loads the font from a json file.
  */
 const fontLoader = new FontLoader();
@@ -53,6 +59,14 @@ const fontLoader = new FontLoader();
  * The loaded font, used for the scoreboard.
  */
 let gameFont: Font;
+/**
+ * Flag to allow menu rendering to continue.
+ */
+let isMenuMode: boolean = true;
+/**
+ * Instance of Menu for controlling buttons and menu lighting.
+ */
+let menu: Menu;
 /**
  * Loads the graphics for planet.
  */
@@ -65,6 +79,10 @@ const planetLoaders: TextureLoader[] = [
  * The loaded textures, used for the planet.
  */
 const planetTextures: Texture[] = [];
+/**
+ * The renderer for main menu
+ */
+let rendererMenu: WebGLRenderer|CanvasRenderer;
 /**
  * Loads the graphics for saucers.
  */
@@ -79,6 +97,10 @@ const saucerLoaders: TextureLoader[] = [
  * The loaded textures, used for the saucers.
  */
 const saucerTextures: Texture[] = [];
+/**
+ * The scene for main menu.
+ */
+let sceneMenu: Scene;
 /**
  * Loads the graphics for specMap.
  */
@@ -105,7 +127,7 @@ const loadAssets = () => {
         });
     });
     // Callback function to set the scoreboard font once it is finished loading.
-    fontLoader.load( 'assets/fonts/optimer_regular.typeface.json', font => {
+    fontLoader.load( 'assets/fonts/Light Pixel-7_Regular.json', font => {
         gameFont = font;
         checkAssetsLoaded();
     });
@@ -145,13 +167,107 @@ const checkAssetsLoaded = () => {
         buildingTextures.length === buildingLoaders.length &&
         saucerTextures.length === saucerLoaders.length &&
         planetTextures.length === planetLoaders.length) {
-        loadGame();
+        loadMenu();
     }
+};
+const loadMenu = () => {
+    // Establish initial window size.
+    let WIDTH: number = window.innerWidth * 0.99;
+    let HEIGHT: number = window.innerHeight * 0.99;
+    // Create ThreeJS scene.
+    sceneMenu = new Scene();
+    // Choose WebGL renderer if browser supports, otherwise fall back to canvas renderer.
+    rendererMenu = ((window as any)['WebGLRenderingContext']) ?
+        new WebGLRenderer() : new CanvasRenderer();
+    // Make it black and size it to window.
+    (rendererMenu as any).setClearColor(0x000000, 0);
+    rendererMenu.setSize( WIDTH, HEIGHT );
+    rendererMenu.autoClear = false;
+    // An all around brightish light that hits everything equally.
+    // sceneMenu.add(new AmbientLight(0xCCCCCC));
+    // Render to the html container.
+    const container = document.getElementById('mainview');
+	container.appendChild( (rendererMenu as any).domElement );
+    // Set up player's ability to see the game, and focus center on planet.
+    cameraMenu =  new OrthographicCamera( -6, 6, -6, 6, 0, 100 );
+	cameraMenu.position.set(0, -20, 0);
+    cameraMenu.lookAt(sceneMenu.position);
+    /**
+     * Gracefully handles a change in window size, by recalculating shape and updating cameraMenu and rendererMenu.
+     */
+    const onWindowResize = () => {
+        WIDTH = window.innerWidth * 0.99;
+        HEIGHT = window.innerHeight * 0.99;
+        if(WIDTH < HEIGHT) HEIGHT = WIDTH;
+        else WIDTH = HEIGHT;
+        rendererMenu.setSize( WIDTH, HEIGHT );
+        document.getElementById('mainview').style.left = (((window.innerWidth * 0.99) - WIDTH) / 2) + 'px';
+        document.getElementById('mainview').style.width = WIDTH + 'px';
+        document.getElementById('mainview').style.height = HEIGHT + 'px';
+    };
+    onWindowResize();
+    window.addEventListener( 'resize', onWindowResize, false);
+    // Click event listener that turns shield on or off if player clicks on planet. Fire weapon otherwise.
+    const raycaster = new Raycaster();
+    document.onclick = event => {
+        const mouse = new Vector2();
+        event.preventDefault();
+        // Gets accurate click positions using css and raycasting.
+        const position = {
+            left: container.offsetLeft,
+            top: container.offsetTop
+        };
+        const scrollUp = document.getElementsByTagName('body')[0].scrollTop;
+        if (event.clientX !== undefined) {
+            mouse.x = ((event.clientX - position.left) / container.clientWidth) * 2 - 1;
+            mouse.y = - ((event.clientY - position.top + scrollUp) / container.clientHeight) * 2 + 1;
+        }
+        raycaster.setFromCamera(mouse, cameraMenu);
+        const thingsTouched = raycaster.intersectObjects(sceneMenu.children);
+        // Detection for player clicked on planet for shield manipulation.
+        thingsTouched.forEach(el => {
+            console.log(el.object.name);
+            if (el.object.name === 'Start') {
+                const difficulty = menu.pressedStart();
+                setTimeout(() => {
+                    isMenuMode = false;
+                    container.removeChild( (rendererMenu as any).domElement );
+                    loadGame(difficulty);
+                }, 750);
+            } else if (el.object.name === 'Easy') {
+                menu.changeDifficulty(0);
+            } else if (el.object.name === 'Normal') {
+                menu.changeDifficulty(1);
+            } else if (el.object.name === 'Hard') {
+                menu.changeDifficulty(2);
+            } else if (el.object.name === 'Hardcore') {
+                menu.changeDifficulty(3);
+            }
+        });
+    };
+    menu = new Menu(sceneMenu, gameFont);
+    startMenuRendering();
+};
+const startMenuRendering = () => {
+    /**
+     * The render loop. Everything that should be checked, called, or drawn in each animation frame.
+     */
+    const render = () => {
+        if (isMenuMode) {
+            menu.endCycle();
+            rendererMenu.render( sceneMenu, cameraMenu );
+            requestAnimationFrame( render );
+        }
+    };
+    // Kick off the first render loop iteration.
+    rendererMenu.render( sceneMenu, cameraMenu );
+	requestAnimationFrame( render );
 };
 /**
  * All things game related. Only starts when all assets are finished loading.
+ * @param difficulty player's choice in difficulty level.
  */
-const loadGame = () => {
+const loadGame = (difficulty: number) => {
     let isGameLive = true;
     // Establish initial window size.
     let WIDTH: number = window.innerWidth * 0.99;
@@ -184,6 +300,8 @@ const loadGame = () => {
         else WIDTH = HEIGHT;
         renderer.setSize( WIDTH, HEIGHT );
         document.getElementById('mainview').style.left = (((window.innerWidth * 0.99) - WIDTH) / 2) + 'px';
+        document.getElementById('mainview').style.width = WIDTH + 'px';
+        document.getElementById('mainview').style.height = HEIGHT + 'px';
     };
     onWindowResize();
     window.addEventListener( 'resize', onWindowResize, false);
