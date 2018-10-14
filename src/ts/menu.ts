@@ -77,6 +77,10 @@ export class Menu {
      */
     private loadGeometry: TextGeometry;
     /**
+     * Controls the color of the load button text material
+     */
+    private loadMaterial: MeshLambertMaterial;
+    /**
      * Controls the overall rendering of the main banner display
      */
     private mainBanner: Mesh;
@@ -150,6 +154,7 @@ export class Menu {
         
         this.menuMaterial = new MeshLambertMaterial( {color: 0x00B39F, opacity: 1, transparent: true} );
         this.menuSelectedMaterial = new MeshLambertMaterial( {color: 0xFF3333, opacity: 1, transparent: true} );
+        this.loadMaterial = new MeshLambertMaterial( {color: 0x00B39F, opacity: 0.2, transparent: true} );
         this.clickMaterial = new MeshBasicMaterial( {opacity: 0, transparent: true, side: DoubleSide} );
         // Create the start collision layer
         const startBarrierGeometry = new PlaneGeometry( 1.5, 0.8, 0, 0 );
@@ -248,7 +253,7 @@ export class Menu {
         this.createDifficultyButtons(3, ((this.difficultyLevel === 3) ? this.menuSelectedMaterial : this.menuMaterial), false);
         // Load button text
         this.loadGeometry = new TextGeometry(`Load`, this.fontDifficultyBtnParams);
-        this.load = new Mesh( this.loadGeometry, this.menuMaterial );
+        this.load = new Mesh( this.loadGeometry, this.loadMaterial );
         this.load.position.set(-0.6, -0.5, 1.2);
         this.load.rotation.x = -1.5708;
         this.scene.add(this.load);
@@ -265,6 +270,11 @@ export class Menu {
      */
     changeDifficulty(diff: number): void {
         if (diff === this.difficultyLevel) return;
+        if (this.difficultyLevel === 3) {
+            this.loadMaterial.opacity = 1;
+        } else {
+            this.loadMaterial.opacity = 0.2;
+        }
         this.createDifficultyButtons(this.difficultyLevel, this.menuMaterial, true);
         this.difficultyLevel = diff;
         this.createDifficultyButtons(this.difficultyLevel, this.menuSelectedMaterial, true);
@@ -338,6 +348,35 @@ export class Menu {
         this.shimmer.position.x += 0.2;
     }
     /**
+     * Changes the help menu button text when clicked to signal to user that their click worked.
+     */
+    pressedHelp(): void {
+        this.scene.remove(this.help);
+        // Selected help button text
+        this.helpGeometry = new TextGeometry(`Help`, this.fontDifficultyBtnParams);
+        this.help = new Mesh( this.helpGeometry, this.menuSelectedMaterial );
+        this.help.position.set(-0.5, -0.5, 2.2);
+        this.help.rotation.x = -1.5708;
+        this.scene.add(this.help);
+    }
+    /**
+     * Changes the load menu button text when clicked to signal to user that their click worked (if not hardcore difficulty).
+     * @returns TRUE --> valid click, move onto load menu | FALSE --> harcore mode means load is inactive.
+     */
+    pressedLoad(): boolean {
+        if (this.difficultyLevel === 3) {
+            return false;
+        }
+        this.scene.remove(this.load);
+        // Selected load button text
+        this.loadGeometry = new TextGeometry(`Load`, this.fontDifficultyBtnParams);
+        this.load = new Mesh( this.loadGeometry, this.menuSelectedMaterial );
+        this.load.position.set(-0.6, -0.5, 1.2);
+        this.load.rotation.x = -1.5708;
+        this.scene.add(this.load);
+        return true;
+    }
+    /**
      * Changes the start menu button text when clicked to signal to user that their click worked.
      * @returns difficulty level chosen before start was pressed (to be used in game difficulty checks)
      */
@@ -350,5 +389,35 @@ export class Menu {
         this.start.rotation.x = -1.5708;
         this.scene.add(this.start);
         return this.difficultyLevel;
+    }
+    /**
+     * Reactivates main menu options.
+     * @param returnedFrom helps to distinguish which button had been pressed to leave menu in first place.
+     */
+    returnToMainMenu(returnedFrom: string): void {
+        if (returnedFrom === 'Load') {
+            this.scene.remove(this.load);
+            // Selected load button text
+            this.loadGeometry = new TextGeometry(`Load`, this.fontDifficultyBtnParams);
+            this.loadMaterial.opacity = this.difficultyLevel === 3 ? 0.2 : 1;
+            this.load = new Mesh( this.loadGeometry, this.loadMaterial );
+            this.load.position.set(-0.6, -0.5, 1.2);
+            this.load.rotation.x = -1.5708;
+            this.scene.add(this.load);
+        } else if (returnedFrom === 'Help') {
+            this.scene.remove(this.help);
+            // Selected help button text
+            this.helpGeometry = new TextGeometry(`Help`, this.fontDifficultyBtnParams);
+            this.help = new Mesh( this.helpGeometry, this.menuMaterial );
+            this.help.position.set(-0.5, -0.5, 2.2);
+            this.help.rotation.x = -1.5708;
+            this.scene.add(this.help);
+        }
+        this.createDifficultyButtons(0, this.menuMaterial, true);
+        this.createDifficultyButtons(1, this.menuMaterial, true);
+        this.createDifficultyButtons(2, this.menuMaterial, true);
+        this.createDifficultyButtons(3, this.menuMaterial, true);
+        
+        this.createDifficultyButtons(this.difficultyLevel, this.menuSelectedMaterial, true);
     }
 }

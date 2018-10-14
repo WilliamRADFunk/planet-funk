@@ -226,7 +226,6 @@ const loadMenu = () => {
         const thingsTouched = raycaster.intersectObjects(sceneMenu.children);
         // Detection for player clicked on planet for shield manipulation.
         thingsTouched.forEach(el => {
-            console.log(el.object.name);
             if (el.object.name === 'Start') {
                 const difficulty = menu.pressedStart();
                 setTimeout(() => {
@@ -242,6 +241,20 @@ const loadMenu = () => {
                 menu.changeDifficulty(2);
             } else if (el.object.name === 'Hardcore') {
                 menu.changeDifficulty(3);
+            } else if (el.object.name === 'Load') {
+                const validLoad = menu.pressedLoad();
+                setTimeout(() => {
+                    if (validLoad) {
+                        console.log('Transitioning to load menu...');
+                        menu.returnToMainMenu('Load');
+                    }
+                }, 750);
+            } else if (el.object.name === 'Help') {
+                menu.pressedHelp();
+                setTimeout(() => {
+                    console.log('Transitioning to help menu...');
+                    menu.returnToMainMenu('Help');
+                }, 750);
             }
         });
     };

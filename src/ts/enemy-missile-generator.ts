@@ -120,7 +120,7 @@ export class EnemyMissileGenerator {
             distance,
             this.currentColor || new Color(0xFF0000),
             true,
-            (0.005 + (this.currentLevel / 1000) + (this.difficulty / 1000))));
+            (0.005 + ((this.currentLevel / 1000) + (this.difficulty / 1000) / 2))));
         CollisionatorSingleton.add(this.missiles[this.missiles.length - 1]);
     }
     /**

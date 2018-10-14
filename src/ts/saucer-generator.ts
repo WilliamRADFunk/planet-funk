@@ -113,7 +113,7 @@ export class SaucerGenerator {
             saucerEnd = saucerPos.slice();
             saucerEnd[1] = -1 * saucerPos[1];
         }
-        saucer = new Saucer(this.scene, this.saucerTextures, saucerPos[0], saucerPos[1], saucerEnd[0], saucerEnd[1], 20, this.currentLevel + this.difficulty);
+        saucer = new Saucer(this.scene, this.saucerTextures, saucerPos[0], saucerPos[1], saucerEnd[0], saucerEnd[1], 20, (this.currentLevel + this.difficulty) / 2);
         saucer.addToScene();
         CollisionatorSingleton.add(saucer);
         return saucer;
@@ -126,7 +126,7 @@ export class SaucerGenerator {
         this.currentLevel = level;
         // Only increment new saucers if game is still going.
         if (this.isGameActive) {
-            this.maxSaucers += (this.difficulty + 1);
+            this.maxSaucers += Math.floor(((this.difficulty + 1) + level) / 4);
         }
         // Instantiates new saucers for new level
         for (let i = this.saucers.length; i < this.maxSaucers; i++) {
