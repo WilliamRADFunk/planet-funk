@@ -21,10 +21,6 @@ export class Menu {
      */
     private clickMaterial: MeshBasicMaterial;
     /**
-     * Easy, Medium, Hard, Hardcore
-     */
-    private difficultyLevel: number = 3; // Hardcore
-    /**
      * Controls the overall rendering of the copyright display
      */
     private copyright: Mesh;
@@ -32,6 +28,10 @@ export class Menu {
      * Controls size and shape of the copyright text
      */
     private copyrightGeometry: TextGeometry;
+    /**
+     * Easy, Medium, Hard, Hardcore
+     */
+    private difficultyLevel: number = 3; // Hardcore
     /**
      * Controls the overall rendering of the easy button display
      */

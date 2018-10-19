@@ -25,6 +25,7 @@ import { EnemyMissileGenerator } from './enemy-missile-generator';
 import { LevelHandler } from './level-handler';
 import { SaucerGenerator } from './saucer-generator';
 import { Menu } from './menu';
+import { ControlPanel } from './control-panel';
 
 /**
  * Loads the graphic for asteroid.
@@ -334,6 +335,8 @@ const loadGame = (difficulty: number) => {
     clickBarrier.position.set(0, 0, 0);
     clickBarrier.rotation.set(1.5708, 0, 0);
     scene.add(clickBarrier);
+    // Create control panel in upper right corner of screen.
+    const controlPanel = new ControlPanel(scene, 2.25, -5.75, difficulty);
     // Click event listener that turns shield on or off if player clicks on planet. Fire weapon otherwise.
     const raycaster = new Raycaster();
     document.onclick = event => {
@@ -352,23 +355,33 @@ const loadGame = (difficulty: number) => {
         raycaster.setFromCamera(mouse, camera);
         const thingsTouched = raycaster.intersectObjects(scene.children);
         let launchFlag = true;
-        // Detection for player clicked on planet for shield manipulation.
+        // Detection for player clicked on pause button
         thingsTouched.forEach(el => {
-            if (el.object.name === 'Shield') {
-                if (shield.getActive()) shield.deactivate();
-                else shield.activate();
+            if (el.object.name === 'Pause Button') {
+                controlPanel.pauseChange();
                 launchFlag = false;
                 return;
             }
         });
-        // Detection for where (if not planet) player clicked to fire satellite weapons.
-        if (launchFlag) {
+        if (!controlPanel.isPaused()) {
+            // Detection for player clicked on planet for shield manipulation.
             thingsTouched.forEach(el => {
-                if (el.object.name === 'Click Barrier') {
-                    planet.fire(scene, el.point);
+                if (el.object.name === 'Shield') {
+                    if (shield.getActive()) shield.deactivate();
+                    else shield.activate();
+                    launchFlag = false;
                     return;
                 }
             });
+            // Detection for where (if not planet) player clicked to fire satellite weapons.
+            if (launchFlag) {
+                thingsTouched.forEach(el => {
+                    if (el.object.name === 'Click Barrier') {
+                        planet.fire(scene, el.point);
+                        return;
+                    }
+                });
+            }
         }
     };
     
@@ -388,8 +401,10 @@ const loadGame = (difficulty: number) => {
         jobCounter++;
         if (jobCounter > 10) jobCounter = 0;
 
+        if (controlPanel.isPaused()) {
+            // When paused, do nothing but render.
         // Only run operations allowed during a fluctuating banner animation.
-        if (levelHandler.isAnimating()) {
+        } else if (levelHandler.isAnimating()) {
             const levelBannerPeak = levelHandler.runAnimationCycle();
             if (levelBannerPeak && isGameLive) {
                 scoreboard.nextLevel(levelHandler.getColor());
