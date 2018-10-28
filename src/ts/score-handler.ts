@@ -159,7 +159,7 @@ export class ScoreHandler {
                         mesh.visible = false;
                     }
                 }
-            } else if (this.score && this.score.visible) {
+            } else if (this.score.visible) {
                 this.changeScore();
             }
         }

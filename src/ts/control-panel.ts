@@ -1,4 +1,5 @@
 import {
+    Color,
     DoubleSide,
     Geometry,
     Line,
@@ -17,9 +18,21 @@ export class ControlPanel {
      */
     private buttonMaterial: MeshBasicMaterial;
     /**
+     * Keeps track of level's current color
+     */
+    private currentColor: Color;
+    /**
      * Player chosen difficulty level.
      */
     private difficulty: number;
+    /**
+     * Line mesh for border of entire panel.
+     */
+    private panelBorder: Line;
+    /**
+     * Controls the panel's border material.
+     */
+    private panelBorderMaterial: LineBasicMaterial;
     /**
      * Tracks state of game pause.
      */
@@ -28,6 +41,10 @@ export class ControlPanel {
      * Mesh for the pause button.
      */
     private pauseButton: Mesh;
+    /**
+     * Controls the pause button's border material.
+     */
+    private pauseButtonBorderMaterial: LineBasicMaterial;
     /**
      * Reference to the scene, used to remove asteroid from rendering cycle once destroyed.
      */
@@ -40,16 +57,17 @@ export class ControlPanel {
      * @param difficulty    player chosen difficulty level.
      * @hidden
      */
-    constructor(scene: Scene, x: number, z: number, difficulty: number) {
+    constructor(scene: Scene, x: number, z: number, difficulty: number, color: Color) {
         this.scene = scene;
         this.difficulty = difficulty;
+        this.currentColor = color;
         const clickMaterial = new MeshBasicMaterial({
             color: 0x0000FF,
             opacity: 0,
             side: DoubleSide,
             transparent: true });
         this.buttonMaterial = new MeshBasicMaterial({
-            color: 0xFFFFFF,
+            color: this.currentColor,
             opacity: 1,
             side: DoubleSide,
             transparent: true });
@@ -63,12 +81,12 @@ export class ControlPanel {
             new Vector3(x + 3.15, 0, z + 0.90),
             new Vector3(x, 0, z + 0.90),
             new Vector3(x, 0, z));
-        const panelBorderMaterial = new LineBasicMaterial({
-            color: 0xFFFFFF,
+        this.panelBorderMaterial = new LineBasicMaterial({
+            color: this.currentColor,
             opacity: 1,
             transparent: true });
-        const panelBorder = new Line(panelBorderGeometry, panelBorderMaterial);
-        this.scene.add(panelBorder);
+        this.panelBorder = new Line(panelBorderGeometry, this.panelBorderMaterial);
+        this.scene.add(this.panelBorder);
         //
         // Pause Button
         //
@@ -87,11 +105,11 @@ export class ControlPanel {
             new Vector3(BUTTON_SIZE, 0, BUTTON_SIZE),
             new Vector3(0, 0, BUTTON_SIZE),
             new Vector3(0, 0, 0));
-        const pauseButtonBorderMaterial = new LineBasicMaterial({
-            color: 0xFFFFFF,
+        this.pauseButtonBorderMaterial = new LineBasicMaterial({
+            color: this.currentColor,
             opacity: 1,
             transparent: true });
-        const pauseButtonBorder = new Line(pauseButtonBorderGeometry, pauseButtonBorderMaterial);
+        const pauseButtonBorder = new Line(pauseButtonBorderGeometry, this.pauseButtonBorderMaterial);
         // Left bar of pause button.
         const pauseBarGeometry = new PlaneGeometry( 0.45, 0.15, 0, 0 );
         const pauseBar1 = new Mesh( pauseBarGeometry, this.buttonMaterial );
@@ -111,7 +129,18 @@ export class ControlPanel {
         // If hardcore difficulty, pause button is inaccessible.
         if (difficulty === 3) {
             this.buttonMaterial.opacity = 0.2;
-            pauseButtonBorderMaterial.opacity = 0.2;
+            this.pauseButtonBorderMaterial.opacity = 0.2;
+        }
+    }
+    /**
+     * At the end of each loop iteration, control panel is told to hide or not.
+     * @param hide hide the control panel if new level, so old color isn't showing.
+     */
+    endCycle(hide?: boolean): void {
+        if (hide) {
+            this.pauseButton.visible = false;
+            this.panelBorder.visible = false;
+            return;
         }
     }
     /**
@@ -123,6 +152,18 @@ export class ControlPanel {
             return this.pause;
         }
         return false;
+    }
+    /**
+     * Only recreate the digits with the new color
+     * @param color level color, grabbed from the LevelHandler
+     */
+    nextLevel(color: Color) {
+        this.currentColor = color;
+        this.panelBorderMaterial.color = this.currentColor;
+        this.buttonMaterial.color = this.currentColor;
+        this.pauseButtonBorderMaterial.color = this.currentColor;
+        this.pauseButton.visible = true;
+        this.panelBorder.visible = true;
     }
     /**
      * Alerts control panel that pause button has been clicked by user.

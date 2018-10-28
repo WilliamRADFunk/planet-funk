@@ -335,8 +335,17 @@ const loadGame = (difficulty: number) => {
     clickBarrier.position.set(0, 0, 0);
     clickBarrier.rotation.set(1.5708, 0, 0);
     scene.add(clickBarrier);
+
+    // Create Score and Level handlers 
+    const levelHandler = new LevelHandler(scene, gameFont, difficulty);
+    const scoreboard = new ScoreHandler(scene, levelHandler.getColor(), gameFont);
+    // Create all unit generators that can be dangerous to player
+    const asteroidGenerator = new AsteroidGenerator(scene, scoreboard, asteroidTexture, difficulty);
+    const saucerGenerator = new SaucerGenerator(scene, scoreboard, saucerTextures, difficulty);
+    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor(), difficulty);
     // Create control panel in upper right corner of screen.
-    const controlPanel = new ControlPanel(scene, 2.25, -5.75, difficulty);
+    const controlPanel = new ControlPanel(scene, 2.25, -5.75, difficulty, levelHandler.getColor());
+
     // Click event listener that turns shield on or off if player clicks on planet. Fire weapon otherwise.
     const raycaster = new Raycaster();
     document.onclick = event => {
@@ -389,11 +398,6 @@ const loadGame = (difficulty: number) => {
     let noMissiles = false;
     let noAsteroids = false;
     let noSaucers = false;
-    const levelHandler = new LevelHandler(scene, gameFont, difficulty);
-    const scoreboard = new ScoreHandler(scene, levelHandler.getColor(), gameFont);
-    const asteroidGenerator = new AsteroidGenerator(scene, scoreboard, asteroidTexture, difficulty);
-    const saucerGenerator = new SaucerGenerator(scene, scoreboard, saucerTextures, difficulty);
-    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor(), difficulty);
     /**
      * The render loop. Everything that should be checked, called, or drawn in each animation frame.
      */
@@ -407,6 +411,7 @@ const loadGame = (difficulty: number) => {
         } else if (levelHandler.isAnimating()) {
             const levelBannerPeak = levelHandler.runAnimationCycle();
             if (levelBannerPeak && isGameLive) {
+                controlPanel.nextLevel(levelHandler.getColor());
                 scoreboard.nextLevel(levelHandler.getColor());
             }
             // Periodically check if things collided.
@@ -418,7 +423,7 @@ const loadGame = (difficulty: number) => {
             noSaucers = saucerGenerator.endCycle(isGameLive);
             noMissiles = enemyMissileGenerator.endCycle(isGameLive);
             // To give the game over screen a more interesting feel,
-            // spawn moer asteroids and missiles after they've exhausted themselves.
+            // spawn more asteroids and missiles after they've exhausted themselves.
             if (noAsteroids && noMissiles && (noSaucers || !isGameLive)) {
                 enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
                 asteroidGenerator.refreshLevel(levelHandler.getLevel());
@@ -434,6 +439,8 @@ const loadGame = (difficulty: number) => {
             if (isGameLive) {
                 const status = planet.getStatus();
                 isGameLive = status.quadrantBlue || status.quadrantGreen || status.quadrantPurple || status.quadrantYellow;
+                // No matter what let control panel be visible again.
+                controlPanel.endCycle();
                 // If game is over, stop increasing the score.
                 scoreboard.endCycle();
                 // If game is over, level can't change.
@@ -454,6 +461,7 @@ const loadGame = (difficulty: number) => {
             if (isGameLive && noAsteroids && noMissiles && noSaucers) {
                 levelHandler.nextLevel();
                 scoreboard.endCycle(true);
+                controlPanel.endCycle(true);
                 asteroidGenerator.refreshLevel(levelHandler.getLevel());
                 saucerGenerator.refreshLevel(levelHandler.getLevel());
                 enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
