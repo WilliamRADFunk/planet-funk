@@ -6,19 +6,31 @@ import {
     LineBasicMaterial,
     Mesh,
     MeshBasicMaterial,
-    PlaneGeometry,
     Scene,
-    Shape,
-    ShapeGeometry,
     Vector3 } from "three";
-
+import { ControlPause } from "./control-pause";
+import { ControlPlay } from "./control-play";
+/**
+ * A constant size / position modifier to shrink or expand the entire panel symmetrically from one variable.
+ */
 const BUTTON_SIZE = 0.4;
-
+/**
+ * @class
+ * Control panel that handles all of the buttons and their states.
+ */
 export class ControlPanel {
     /**
      * Controls the buttons material.
      */
     private buttonMaterial: MeshBasicMaterial;
+    /**
+     * Controls the pause button.
+     */
+    private controlPause: ControlPause;
+    /**
+     * Controls the play button.
+     */
+    private controlPlay: ControlPlay;
     /**
      * Keeps track of level's current color
      */
@@ -39,26 +51,6 @@ export class ControlPanel {
      * Tracks state of game pause.
      */
     private pause: boolean = false;
-    /**
-     * Mesh for the pause button.
-     */
-    private pauseButton: Mesh;
-    /**
-     * Controls the pause button's border material.
-     */
-    private pauseButtonBorderMaterial: LineBasicMaterial;
-    /**
-     * Tracks state of game play.
-     */
-    private play: boolean = false;
-    /**
-     * Mesh for the play button.
-     */
-    private playButton: Mesh;
-    /**
-     * Controls the play button's border material.
-     */
-    private playButtonBorderMaterial: LineBasicMaterial;
     /**
      * Reference to the scene, used to remove asteroid from rendering cycle once destroyed.
      */
@@ -104,80 +96,30 @@ export class ControlPanel {
         //
         // Pause Button
         //
-        // Pause button click barrier.
-        const pauseBarrierGeometry = new PlaneGeometry( BUTTON_SIZE, BUTTON_SIZE, 0, 0 );
-        const pauseBarrier = new Mesh( pauseBarrierGeometry, clickMaterial );
-        pauseBarrier.name = 'Pause Button';
-        pauseBarrier.position.set(x + (BUTTON_SIZE / 2) + (0.25 * BUTTON_SIZE), 1, z + (BUTTON_SIZE / 2) + (0.25 * BUTTON_SIZE));
-        pauseBarrier.rotation.set(1.5708, 0, 0);
-        this.scene.add(pauseBarrier);
-        // Pause button border.
-        const pauseButtonBorderGeometry = new Geometry();
-        pauseButtonBorderGeometry.vertices.push(
-            new Vector3(0, 0, 0),
-            new Vector3(BUTTON_SIZE, 0, 0),
-            new Vector3(BUTTON_SIZE, 0, BUTTON_SIZE),
-            new Vector3(0, 0, BUTTON_SIZE),
-            new Vector3(0, 0, 0));
-        this.pauseButtonBorderMaterial = new LineBasicMaterial({
-            color: this.currentColor,
-            opacity: 1,
-            transparent: true });
-        const pauseButtonBorder = new Line(pauseButtonBorderGeometry, this.pauseButtonBorderMaterial);
-        // Left bar of pause button.
-        const pauseBarGeometry = new PlaneGeometry((0.75 * BUTTON_SIZE), (0.25 * BUTTON_SIZE), 0, 0 );
-        const pauseBar1 = new Mesh( pauseBarGeometry, this.buttonMaterial );
-        pauseBar1.position.set((0.25 * BUTTON_SIZE), 0, (0.508333333334 * BUTTON_SIZE));
-        pauseBar1.rotation.set(1.5708, 0, 1.5708);
-        // Right bar of pause button.
-        const pauseBar2 = new Mesh( pauseBarGeometry, this.buttonMaterial );
-        pauseBar2.position.set((0.75 * BUTTON_SIZE), 0, (0.508333333334 * BUTTON_SIZE));
-        pauseBar2.rotation.set(1.5708, 0, 1.5708);
-        // The melding of the complete pause button.
-        this.pauseButton = new Mesh();
-        this.pauseButton.position.set(x + (0.25 * BUTTON_SIZE), 0, z + (0.25 * BUTTON_SIZE));
-        this.pauseButton.add(pauseButtonBorder);
-        this.pauseButton.add(pauseBar1);
-        this.pauseButton.add(pauseBar2);
-        this.scene.add(this.pauseButton);
-        // Play button border.
-        const playButtonBorderGeometry = new Geometry();
-        playButtonBorderGeometry.vertices.push(
-            new Vector3(0, 0, 0),
-            new Vector3(BUTTON_SIZE, 0, 0),
-            new Vector3(BUTTON_SIZE, 0, BUTTON_SIZE),
-            new Vector3(0, 0, BUTTON_SIZE),
-            new Vector3(0, 0, 0));
-        this.playButtonBorderMaterial = new LineBasicMaterial({
-            color: this.currentColor,
-            opacity: 1,
-            transparent: true });
-        const playButtonBorder = new Line(playButtonBorderGeometry, this.playButtonBorderMaterial);
-        // Left bar of play button.
-        const xPlay = (0.0625 * BUTTON_SIZE);
-        const yPlay = (0.375 * BUTTON_SIZE);
-        const playTriangle = new Shape();
-        playTriangle.moveTo( xPlay, yPlay );
-        playTriangle.lineTo( xPlay + (0.45 * BUTTON_SIZE), yPlay - (0.375 * BUTTON_SIZE) );
-        playTriangle.lineTo( xPlay, yPlay - (0.75 * BUTTON_SIZE) );
-        playTriangle.lineTo( xPlay, yPlay );
-        const playTriangleGeometry = new ShapeGeometry(playTriangle);
-        const playTriangleMesh = new Mesh( playTriangleGeometry, this.buttonMaterial );
-        playTriangleMesh.position.set((0.25 * BUTTON_SIZE), 0, (0.508333333334 * BUTTON_SIZE));
-        playTriangleMesh.rotation.set(-1.5708, 0, 0);
-        // The melding of the complete play button.
-        this.playButton = new Mesh();
-        this.playButton.position.set(x + (0.25 * BUTTON_SIZE), 0, z + (0.25 * BUTTON_SIZE));
-        this.playButton.add(playButtonBorder);
-        this.playButton.add(playTriangleMesh);
-        this.scene.add(this.playButton);
+        this.controlPause = new ControlPause(
+            this.scene,
+            [x, z],
+            BUTTON_SIZE,
+            this.currentColor,
+            this.buttonMaterial,
+            clickMaterial);
+        //
+        // Play Button
+        //
+        this.controlPlay = new ControlPlay(
+            this.scene,
+            [x, z],
+            BUTTON_SIZE,
+            this.currentColor,
+            this.buttonMaterial,
+            clickMaterial);
         // If hardcore difficulty, play button is inaccessible.
         if (difficulty === 3) {
             this.buttonMaterial.opacity = 0.2;
-            this.pauseButtonBorderMaterial.opacity = 0.2;
-            this.playButtonBorderMaterial.opacity = 0.2;
+            this.controlPause.changeOpacity(0.2);
+            this.controlPlay.changeOpacity(0.2);
         }
-        this.playButton.visible = false;
+        this.controlPlay.hide();
     }
     /**
      * At the end of each loop iteration, control panel is told to hide or not.
@@ -185,8 +127,8 @@ export class ControlPanel {
      */
     endCycle(hide?: boolean): void {
         if (hide) {
-            this.pauseButton.visible = false;
-            this.playButton.visible = false;
+            this.controlPause.hide();
+            this.controlPlay.hide();
             this.panelBorder.visible = false;
             return;
         }
@@ -209,9 +151,9 @@ export class ControlPanel {
         this.currentColor = color;
         this.panelBorderMaterial.color = this.currentColor;
         this.buttonMaterial.color = this.currentColor;
-        this.pauseButtonBorderMaterial.color = this.currentColor;
-        this.pauseButton.visible = true;
-        this.playButtonBorderMaterial.color = this.currentColor;
+        this.controlPause.changeColor(this.currentColor);
+        this.controlPause.show();
+        this.controlPlay.changeColor(this.currentColor);
         // this.playButton.visible = true;
         this.panelBorder.visible = true;
     }
@@ -221,11 +163,11 @@ export class ControlPanel {
     pauseChange(): void {
         this.pause = !this.pause;
         if (this.pause) {
-            this.playButton.visible = true;
-            this.pauseButton.visible = false;
+            this.controlPlay.show();
+            this.controlPause.hide();
         } else {
-            this.pauseButton.visible = true;
-            this.playButton.visible = false;
+            this.controlPause.show();
+            this.controlPlay.hide();
         }
     }
 }
