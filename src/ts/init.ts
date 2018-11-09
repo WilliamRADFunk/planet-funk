@@ -344,7 +344,7 @@ const loadGame = (difficulty: number) => {
     const saucerGenerator = new SaucerGenerator(scene, scoreboard, saucerTextures, difficulty);
     const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor(), difficulty);
     // Create control panel in upper right corner of screen.
-    const controlPanel = new ControlPanel(scene, 2.40, -5.55, difficulty, levelHandler.getColor());
+    const controlPanel = new ControlPanel(scene, 2.40, -5.55, difficulty, levelHandler.getColor(), gameFont);
 
     // Click event listener that turns shield on or off if player clicks on planet. Fire weapon otherwise.
     const raycaster = new Raycaster();
@@ -368,6 +368,12 @@ const loadGame = (difficulty: number) => {
         thingsTouched.forEach(el => {
             if (el.object.name === 'Pause Button') {
                 controlPanel.pauseChange();
+                launchFlag = false;
+                return;
+            }
+            if (el.object.name === 'Help Button') {
+                console.log('Help!');
+                controlPanel.helpChange();
                 launchFlag = false;
                 return;
             }

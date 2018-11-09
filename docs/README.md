@@ -123,6 +123,7 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 * ["ts/base"](modules/_ts_base_.md)
 * ["ts/collidable"](modules/_ts_collidable_.md)
 * ["ts/collisionator"](modules/_ts_collisionator_.md)
+* ["ts/control-help"](modules/_ts_control_help_.md)
 * ["ts/control-panel"](modules/_ts_control_panel_.md)
 * ["ts/control-pause"](modules/_ts_control_pause_.md)
 * ["ts/control-play"](modules/_ts_control_play_.md)

@@ -27,7 +27,7 @@ export class ScoreHandler {
      */
     private currentScore: number = 0;
     /**
-     * Reference to the scene, used to remove projectile from rendering cycle once destroyed.
+     * Reference to the scene, used to remove text in order to change it.
      */
     private scene: Scene;
     /**

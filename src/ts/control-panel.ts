@@ -1,15 +1,16 @@
 import {
     Color,
     DoubleSide,
+    Font,
     Geometry,
     Line,
     LineBasicMaterial,
-    Mesh,
     MeshBasicMaterial,
     Scene,
     Vector3 } from "three";
 import { ControlPause } from "./control-pause";
 import { ControlPlay } from "./control-play";
+import { ControlHelp } from "./control-help";
 /**
  * A constant size / position modifier to shrink or expand the entire panel symmetrically from one variable.
  */
@@ -23,6 +24,10 @@ export class ControlPanel {
      * Controls the buttons material.
      */
     private buttonMaterial: MeshBasicMaterial;
+    /**
+     * Controls the help button.
+     */
+    private controlHelp: ControlHelp;
     /**
      * Controls the pause button.
      */
@@ -39,6 +44,10 @@ export class ControlPanel {
      * Player chosen difficulty level.
      */
     private difficulty: number;
+    /**
+     * Tracks state of game help menu.
+     */
+    private help: boolean = false;
     /**
      * Line mesh for border of entire panel.
      */
@@ -63,7 +72,7 @@ export class ControlPanel {
      * @param difficulty    player chosen difficulty level.
      * @hidden
      */
-    constructor(scene: Scene, x: number, z: number, difficulty: number, color: Color) {
+    constructor(scene: Scene, x: number, z: number, difficulty: number, color: Color, font: Font) {
         this.scene = scene;
         this.difficulty = difficulty;
         this.currentColor = color;
@@ -113,11 +122,24 @@ export class ControlPanel {
             this.currentColor,
             this.buttonMaterial,
             clickMaterial);
+        //
+        // Help Button
+        //
+        this.controlHelp = new ControlHelp(
+            this.scene,
+            [x + (0.25 * BUTTON_SIZE) + BUTTON_SIZE, z],
+            BUTTON_SIZE,
+            this.currentColor,
+            clickMaterial,
+            font);
+        //
         // If hardcore difficulty, play button is inaccessible.
+        //
         if (difficulty === 3) {
-            this.buttonMaterial.opacity = 0.2;
-            this.controlPause.changeOpacity(0.2);
-            this.controlPlay.changeOpacity(0.2);
+            this.buttonMaterial.opacity = 0.5;
+            this.controlPause.changeOpacity(0.5);
+            this.controlPlay.changeOpacity(0.5);
+            this.controlHelp.changeOpacity(0.5);
         }
         this.controlPlay.hide();
     }
@@ -129,8 +151,26 @@ export class ControlPanel {
         if (hide) {
             this.controlPause.hide();
             this.controlPlay.hide();
+            this.controlHelp.hide();
             this.panelBorder.visible = false;
             return;
+        }
+    }
+    /**
+     * Alerts control panel that help button has been clicked by user.
+     */
+    helpChange(): void {
+        this.help = !this.help;
+        if (this.help) {
+            this.pause = true;
+            this.controlPlay.show();
+            this.controlPause.hide();
+            this.controlHelp.activate();
+        } else {
+            this.pause = false;
+            this.controlPause.show();
+            this.controlPlay.hide();
+            this.controlHelp.deactivate();
         }
     }
     /**
@@ -154,7 +194,8 @@ export class ControlPanel {
         this.controlPause.changeColor(this.currentColor);
         this.controlPause.show();
         this.controlPlay.changeColor(this.currentColor);
-        // this.playButton.visible = true;
+        this.controlHelp.changeColor(this.currentColor);
+        this.controlHelp.show();
         this.panelBorder.visible = true;
     }
     /**
@@ -168,6 +209,7 @@ export class ControlPanel {
         } else {
             this.controlPause.show();
             this.controlPlay.hide();
+            if (this.help) this.helpChange();
         }
     }
 }

@@ -13,10 +13,12 @@
 ### Properties
 
 * [buttonMaterial](_ts_control_panel_.controlpanel.md#buttonmaterial)
+* [controlHelp](_ts_control_panel_.controlpanel.md#controlhelp)
 * [controlPause](_ts_control_panel_.controlpanel.md#controlpause)
 * [controlPlay](_ts_control_panel_.controlpanel.md#controlplay)
 * [currentColor](_ts_control_panel_.controlpanel.md#currentcolor)
 * [difficulty](_ts_control_panel_.controlpanel.md#difficulty)
+* [help](_ts_control_panel_.controlpanel.md#help)
 * [panelBorder](_ts_control_panel_.controlpanel.md#panelborder)
 * [panelBorderMaterial](_ts_control_panel_.controlpanel.md#panelbordermaterial)
 * [pause](_ts_control_panel_.controlpanel.md#pause)
@@ -25,6 +27,7 @@
 ### Methods
 
 * [endCycle](_ts_control_panel_.controlpanel.md#endcycle)
+* [helpChange](_ts_control_panel_.controlpanel.md#helpchange)
 * [isPaused](_ts_control_panel_.controlpanel.md#ispaused)
 * [nextLevel](_ts_control_panel_.controlpanel.md#nextlevel)
 * [pauseChange](_ts_control_panel_.controlpanel.md#pausechange)
@@ -39,9 +42,20 @@
 
 **● buttonMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/control-panel.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L25)*
+*Defined in [ts/control-panel.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L26)*
 
 Controls the buttons material.
+
+___
+<a id="controlhelp"></a>
+
+### `<Private>` controlHelp
+
+**● controlHelp**: *[ControlHelp](_ts_control_help_.controlhelp.md)*
+
+*Defined in [ts/control-panel.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L30)*
+
+Controls the help button.
 
 ___
 <a id="controlpause"></a>
@@ -50,7 +64,7 @@ ___
 
 **● controlPause**: *[ControlPause](_ts_control_pause_.controlpause.md)*
 
-*Defined in [ts/control-panel.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L29)*
+*Defined in [ts/control-panel.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L34)*
 
 Controls the pause button.
 
@@ -61,7 +75,7 @@ ___
 
 **● controlPlay**: *[ControlPlay](_ts_control_play_.controlplay.md)*
 
-*Defined in [ts/control-panel.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L33)*
+*Defined in [ts/control-panel.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L38)*
 
 Controls the play button.
 
@@ -72,7 +86,7 @@ ___
 
 **● currentColor**: *`Color`*
 
-*Defined in [ts/control-panel.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L37)*
+*Defined in [ts/control-panel.ts:42](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L42)*
 
 Keeps track of level's current color
 
@@ -83,9 +97,20 @@ ___
 
 **● difficulty**: *`number`*
 
-*Defined in [ts/control-panel.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L41)*
+*Defined in [ts/control-panel.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L46)*
 
 Player chosen difficulty level.
+
+___
+<a id="help"></a>
+
+### `<Private>` help
+
+**● help**: *`boolean`* = false
+
+*Defined in [ts/control-panel.ts:50](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L50)*
+
+Tracks state of game help menu.
 
 ___
 <a id="panelborder"></a>
@@ -94,7 +119,7 @@ ___
 
 **● panelBorder**: *`Line`*
 
-*Defined in [ts/control-panel.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L45)*
+*Defined in [ts/control-panel.ts:54](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L54)*
 
 Line mesh for border of entire panel.
 
@@ -105,7 +130,7 @@ ___
 
 **● panelBorderMaterial**: *`LineBasicMaterial`*
 
-*Defined in [ts/control-panel.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L49)*
+*Defined in [ts/control-panel.ts:58](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L58)*
 
 Controls the panel's border material.
 
@@ -116,7 +141,7 @@ ___
 
 **● pause**: *`boolean`* = false
 
-*Defined in [ts/control-panel.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L53)*
+*Defined in [ts/control-panel.ts:62](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L62)*
 
 Tracks state of game pause.
 
@@ -127,7 +152,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/control-panel.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L57)*
+*Defined in [ts/control-panel.ts:66](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L66)*
 
 Reference to the scene, used to remove asteroid from rendering cycle once destroyed.
 
@@ -141,7 +166,7 @@ ___
 
 ▸ **endCycle**(hide?: *`boolean`*): `void`
 
-*Defined in [ts/control-panel.ts:128](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L128)*
+*Defined in [ts/control-panel.ts:150](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L150)*
 
 At the end of each loop iteration, control panel is told to hide or not.
 
@@ -154,13 +179,26 @@ At the end of each loop iteration, control panel is told to hide or not.
 **Returns:** `void`
 
 ___
+<a id="helpchange"></a>
+
+###  helpChange
+
+▸ **helpChange**(): `void`
+
+*Defined in [ts/control-panel.ts:162](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L162)*
+
+Alerts control panel that help button has been clicked by user.
+
+**Returns:** `void`
+
+___
 <a id="ispaused"></a>
 
 ###  isPaused
 
 ▸ **isPaused**(): `boolean`
 
-*Defined in [ts/control-panel.ts:140](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L140)*
+*Defined in [ts/control-panel.ts:180](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L180)*
 
 Getter for game pause state.
 
@@ -174,7 +212,7 @@ ___
 
 ▸ **nextLevel**(color: *`Color`*): `void`
 
-*Defined in [ts/control-panel.ts:150](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L150)*
+*Defined in [ts/control-panel.ts:190](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L190)*
 
 Only recreate the digits with the new color
 
@@ -193,7 +231,7 @@ ___
 
 ▸ **pauseChange**(): `void`
 
-*Defined in [ts/control-panel.ts:163](https://github.com/WilliamRADFunk/planet-funk/blob/2c553a5/src/ts/control-panel.ts#L163)*
+*Defined in [ts/control-panel.ts:204](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-panel.ts#L204)*
 
 Alerts control panel that pause button has been clicked by user.
 
