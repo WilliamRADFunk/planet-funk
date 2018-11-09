@@ -8,9 +8,11 @@ import {
     MeshBasicMaterial,
     PlaneGeometry,
     Scene,
+    Shape,
+    ShapeGeometry,
     Vector3 } from "three";
 
-const BUTTON_SIZE = 0.6;
+const BUTTON_SIZE = 0.4;
 
 export class ControlPanel {
     /**
@@ -46,6 +48,18 @@ export class ControlPanel {
      */
     private pauseButtonBorderMaterial: LineBasicMaterial;
     /**
+     * Tracks state of game play.
+     */
+    private play: boolean = false;
+    /**
+     * Mesh for the play button.
+     */
+    private playButton: Mesh;
+    /**
+     * Controls the play button's border material.
+     */
+    private playButtonBorderMaterial: LineBasicMaterial;
+    /**
      * Reference to the scene, used to remove asteroid from rendering cycle once destroyed.
      */
     private scene: Scene;
@@ -77,9 +91,9 @@ export class ControlPanel {
         const panelBorderGeometry = new Geometry();
         panelBorderGeometry.vertices.push(
             new Vector3(x, 0, z),
-            new Vector3(x + 3.15, 0, z),
-            new Vector3(x + 3.15, 0, z + 0.90),
-            new Vector3(x, 0, z + 0.90),
+            new Vector3(x + (7.875 * BUTTON_SIZE), 0, z),
+            new Vector3(x + (7.875 * BUTTON_SIZE), 0, z + (1.5 * BUTTON_SIZE)),
+            new Vector3(x, 0, z + (1.5 * BUTTON_SIZE)),
             new Vector3(x, 0, z));
         this.panelBorderMaterial = new LineBasicMaterial({
             color: this.currentColor,
@@ -94,7 +108,7 @@ export class ControlPanel {
         const pauseBarrierGeometry = new PlaneGeometry( BUTTON_SIZE, BUTTON_SIZE, 0, 0 );
         const pauseBarrier = new Mesh( pauseBarrierGeometry, clickMaterial );
         pauseBarrier.name = 'Pause Button';
-        pauseBarrier.position.set(x + (BUTTON_SIZE / 2) + 0.15, 1, z + (BUTTON_SIZE / 2) + 0.15);
+        pauseBarrier.position.set(x + (BUTTON_SIZE / 2) + (0.25 * BUTTON_SIZE), 1, z + (BUTTON_SIZE / 2) + (0.25 * BUTTON_SIZE));
         pauseBarrier.rotation.set(1.5708, 0, 0);
         this.scene.add(pauseBarrier);
         // Pause button border.
@@ -111,26 +125,59 @@ export class ControlPanel {
             transparent: true });
         const pauseButtonBorder = new Line(pauseButtonBorderGeometry, this.pauseButtonBorderMaterial);
         // Left bar of pause button.
-        const pauseBarGeometry = new PlaneGeometry( 0.45, 0.15, 0, 0 );
+        const pauseBarGeometry = new PlaneGeometry((0.75 * BUTTON_SIZE), (0.25 * BUTTON_SIZE), 0, 0 );
         const pauseBar1 = new Mesh( pauseBarGeometry, this.buttonMaterial );
-        pauseBar1.position.set(0.15, 0, 0.305);
+        pauseBar1.position.set((0.25 * BUTTON_SIZE), 0, (0.508333333334 * BUTTON_SIZE));
         pauseBar1.rotation.set(1.5708, 0, 1.5708);
         // Right bar of pause button.
         const pauseBar2 = new Mesh( pauseBarGeometry, this.buttonMaterial );
-        pauseBar2.position.set(0.45, 0, 0.305);
+        pauseBar2.position.set((0.75 * BUTTON_SIZE), 0, (0.508333333334 * BUTTON_SIZE));
         pauseBar2.rotation.set(1.5708, 0, 1.5708);
         // The melding of the complete pause button.
         this.pauseButton = new Mesh();
-        this.pauseButton.position.set(x + 0.15, 0, z + 0.15);
+        this.pauseButton.position.set(x + (0.25 * BUTTON_SIZE), 0, z + (0.25 * BUTTON_SIZE));
         this.pauseButton.add(pauseButtonBorder);
         this.pauseButton.add(pauseBar1);
         this.pauseButton.add(pauseBar2);
         this.scene.add(this.pauseButton);
-        // If hardcore difficulty, pause button is inaccessible.
+        // Play button border.
+        const playButtonBorderGeometry = new Geometry();
+        playButtonBorderGeometry.vertices.push(
+            new Vector3(0, 0, 0),
+            new Vector3(BUTTON_SIZE, 0, 0),
+            new Vector3(BUTTON_SIZE, 0, BUTTON_SIZE),
+            new Vector3(0, 0, BUTTON_SIZE),
+            new Vector3(0, 0, 0));
+        this.playButtonBorderMaterial = new LineBasicMaterial({
+            color: this.currentColor,
+            opacity: 1,
+            transparent: true });
+        const playButtonBorder = new Line(playButtonBorderGeometry, this.playButtonBorderMaterial);
+        // Left bar of play button.
+        const xPlay = (0.0625 * BUTTON_SIZE);
+        const yPlay = (0.375 * BUTTON_SIZE);
+        const playTriangle = new Shape();
+        playTriangle.moveTo( xPlay, yPlay );
+        playTriangle.lineTo( xPlay + (0.45 * BUTTON_SIZE), yPlay - (0.375 * BUTTON_SIZE) );
+        playTriangle.lineTo( xPlay, yPlay - (0.75 * BUTTON_SIZE) );
+        playTriangle.lineTo( xPlay, yPlay );
+        const playTriangleGeometry = new ShapeGeometry(playTriangle);
+        const playTriangleMesh = new Mesh( playTriangleGeometry, this.buttonMaterial );
+        playTriangleMesh.position.set((0.25 * BUTTON_SIZE), 0, (0.508333333334 * BUTTON_SIZE));
+        playTriangleMesh.rotation.set(-1.5708, 0, 0);
+        // The melding of the complete play button.
+        this.playButton = new Mesh();
+        this.playButton.position.set(x + (0.25 * BUTTON_SIZE), 0, z + (0.25 * BUTTON_SIZE));
+        this.playButton.add(playButtonBorder);
+        this.playButton.add(playTriangleMesh);
+        this.scene.add(this.playButton);
+        // If hardcore difficulty, play button is inaccessible.
         if (difficulty === 3) {
             this.buttonMaterial.opacity = 0.2;
             this.pauseButtonBorderMaterial.opacity = 0.2;
+            this.playButtonBorderMaterial.opacity = 0.2;
         }
+        this.playButton.visible = false;
     }
     /**
      * At the end of each loop iteration, control panel is told to hide or not.
@@ -139,6 +186,7 @@ export class ControlPanel {
     endCycle(hide?: boolean): void {
         if (hide) {
             this.pauseButton.visible = false;
+            this.playButton.visible = false;
             this.panelBorder.visible = false;
             return;
         }
@@ -163,6 +211,8 @@ export class ControlPanel {
         this.buttonMaterial.color = this.currentColor;
         this.pauseButtonBorderMaterial.color = this.currentColor;
         this.pauseButton.visible = true;
+        this.playButtonBorderMaterial.color = this.currentColor;
+        // this.playButton.visible = true;
         this.panelBorder.visible = true;
     }
     /**
@@ -170,5 +220,12 @@ export class ControlPanel {
      */
     pauseChange(): void {
         this.pause = !this.pause;
+        if (this.pause) {
+            this.playButton.visible = true;
+            this.pauseButton.visible = false;
+        } else {
+            this.pauseButton.visible = true;
+            this.playButton.visible = false;
+        }
     }
 }
