@@ -11,6 +11,7 @@ import {
 import { ControlPause } from "./control-pause";
 import { ControlPlay } from "./control-play";
 import { ControlHelp } from "./control-help";
+import { ControlSave } from "./control-save";
 /**
  * A constant size / position modifier to shrink or expand the entire panel symmetrically from one variable.
  */
@@ -36,6 +37,10 @@ export class ControlPanel {
      * Controls the play button.
      */
     private controlPlay: ControlPlay;
+    /**
+     * Controls the save button.
+     */
+    private controlSave: ControlSave;
     /**
      * Keeps track of level's current color
      */
@@ -92,8 +97,8 @@ export class ControlPanel {
         const panelBorderGeometry = new Geometry();
         panelBorderGeometry.vertices.push(
             new Vector3(x, 0, z),
-            new Vector3(x + (7.875 * BUTTON_SIZE), 0, z),
-            new Vector3(x + (7.875 * BUTTON_SIZE), 0, z + (1.5 * BUTTON_SIZE)),
+            new Vector3(x + (4 * BUTTON_SIZE), 0, z),
+            new Vector3(x + (4 * BUTTON_SIZE), 0, z + (1.5 * BUTTON_SIZE)),
             new Vector3(x, 0, z + (1.5 * BUTTON_SIZE)),
             new Vector3(x, 0, z));
         this.panelBorderMaterial = new LineBasicMaterial({
@@ -127,11 +132,20 @@ export class ControlPanel {
         //
         this.controlHelp = new ControlHelp(
             this.scene,
-            [x + (0.25 * BUTTON_SIZE) + BUTTON_SIZE, z],
+            [x + (1.25 * BUTTON_SIZE), z],
             BUTTON_SIZE,
             this.currentColor,
             clickMaterial,
             font);
+        //
+        // Save Button
+        //
+        this.controlSave = new ControlSave(
+            this.scene,
+            [x + (2.5 * BUTTON_SIZE), z],
+            BUTTON_SIZE,
+            this.currentColor,
+            clickMaterial);
         //
         // If hardcore difficulty, play button is inaccessible.
         //
@@ -140,7 +154,9 @@ export class ControlPanel {
             this.controlPause.changeOpacity(0.5);
             this.controlPlay.changeOpacity(0.5);
             this.controlHelp.changeOpacity(0.5);
+            this.controlSave.changeOpacity(0.5);
         }
+        this.controlSave.changeOpacity(0.5); // TODO: Connect save functionality, and delete this.
         this.controlPlay.hide();
     }
     /**
@@ -152,6 +168,7 @@ export class ControlPanel {
             this.controlPause.hide();
             this.controlPlay.hide();
             this.controlHelp.hide();
+            this.controlSave.hide();
             this.panelBorder.visible = false;
             return;
         }
@@ -160,6 +177,7 @@ export class ControlPanel {
      * Alerts control panel that help button has been clicked by user.
      */
     helpChange(): void {
+        if (this.difficulty === 3) return;
         this.help = !this.help;
         if (this.help) {
             this.pause = true;
@@ -196,12 +214,15 @@ export class ControlPanel {
         this.controlPlay.changeColor(this.currentColor);
         this.controlHelp.changeColor(this.currentColor);
         this.controlHelp.show();
+        this.controlSave.changeColor(this.currentColor);
+        this.controlSave.show();
         this.panelBorder.visible = true;
     }
     /**
      * Alerts control panel that pause button has been clicked by user.
      */
     pauseChange(): void {
+        if (this.difficulty === 3) return;
         this.pause = !this.pause;
         if (this.pause) {
             this.controlPlay.show();
@@ -211,5 +232,8 @@ export class ControlPanel {
             this.controlPlay.hide();
             if (this.help) this.helpChange();
         }
+    }
+    save() {
+        // Activate Save!!!
     }
 }

@@ -33,8 +33,8 @@ export class ControlHelp {
      * @param size          size modifier for button.
      * @param color         color to use for button and button material.
      * @param color         color to use for button and button material.
-     * @param btnMat        consistent button material used for all control panel buttons.
      * @param clkMat        consistent click material used for all control panel buttons.
+     * @param font          game font to use for creating the question mark.
      * @hidden
      */
     constructor(

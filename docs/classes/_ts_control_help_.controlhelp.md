@@ -35,7 +35,7 @@
 
 **● helpButton**: *`Mesh`*
 
-*Defined in [ts/control-help.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-help.ts#L24)*
+*Defined in [ts/control-help.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/control-help.ts#L24)*
 
 Mesh for the help button.
 
@@ -46,7 +46,7 @@ ___
 
 **● helpButtonBorderMaterial**: *`LineBasicMaterial`*
 
-*Defined in [ts/control-help.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-help.ts#L28)*
+*Defined in [ts/control-help.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/control-help.ts#L28)*
 
 Controls the help button's border material.
 
@@ -57,7 +57,7 @@ ___
 
 **● questionMarkMaterial**: *`any`*
 
-*Defined in [ts/control-help.ts:20](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-help.ts#L20)*
+*Defined in [ts/control-help.ts:20](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/control-help.ts#L20)*
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 ▸ **activate**(): `void`
 
-*Defined in [ts/control-help.ts:95](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-help.ts#L95)*
+*Defined in [ts/control-help.ts:95](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/control-help.ts#L95)*
 
 **Returns:** `void`
 
@@ -80,7 +80,7 @@ ___
 
 ▸ **changeColor**(color: *`Color`*): `void`
 
-*Defined in [ts/control-help.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-help.ts#L102)*
+*Defined in [ts/control-help.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/control-help.ts#L102)*
 
 Changes button material to match new level color.
 
@@ -99,7 +99,7 @@ ___
 
 ▸ **changeOpacity**(opacity: *`number`*): `void`
 
-*Defined in [ts/control-help.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-help.ts#L110)*
+*Defined in [ts/control-help.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/control-help.ts#L110)*
 
 Changes button opacity.
 
@@ -118,7 +118,7 @@ ___
 
 ▸ **deactivate**(): `void`
 
-*Defined in [ts/control-help.ts:114](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-help.ts#L114)*
+*Defined in [ts/control-help.ts:114](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/control-help.ts#L114)*
 
 **Returns:** `void`
 
@@ -129,7 +129,7 @@ ___
 
 ▸ **hide**(): `void`
 
-*Defined in [ts/control-help.ts:121](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-help.ts#L121)*
+*Defined in [ts/control-help.ts:121](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/control-help.ts#L121)*
 
 Hide the help button (state related). Default is to show.
 
@@ -142,7 +142,7 @@ ___
 
 ▸ **show**(): `void`
 
-*Defined in [ts/control-help.ts:128](https://github.com/WilliamRADFunk/planet-funk/blob/a234299/src/ts/control-help.ts#L128)*
+*Defined in [ts/control-help.ts:128](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/control-help.ts#L128)*
 
 Show the help button (state related). Default is to show.
 
