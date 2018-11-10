@@ -6,6 +6,7 @@ import {
     LineBasicMaterial,
     Mesh,
     MeshBasicMaterial,
+    Path,
     PlaneGeometry,
     Scene,
     Shape,
@@ -66,15 +67,31 @@ export class ControlSave {
             opacity: 1,
             side: DoubleSide,
             transparent: true });
-        const xPlay = (0.0625 * size);
+        // Starting coordinates for the disk
+        const xPlay = (-0.125 * size);
         const yPlay = (0.375 * size);
-        const playTriangle = new Shape();
-        playTriangle.moveTo( xPlay, yPlay );
-        playTriangle.lineTo( xPlay + (0.45 * size), yPlay - (0.375 * size) );
-        playTriangle.lineTo( xPlay, yPlay - (0.75 * size) );
-        playTriangle.lineTo( xPlay, yPlay );
-        const playTriangleGeometry = new ShapeGeometry(playTriangle);
-        const saveDisk = new Mesh( playTriangleGeometry, this.saveDiskMaterial );
+        // Solid form of disk
+        const saveShape = new Shape();
+        saveShape.moveTo(xPlay + (0.75 * size), yPlay - (0.75 * size));
+        saveShape.lineTo(xPlay + (0.75 * size), yPlay - (0.25 * size));
+        saveShape.lineTo(xPlay + (0.6 * size), yPlay);
+        saveShape.lineTo(xPlay, yPlay);
+        saveShape.lineTo(xPlay, yPlay - (0.75 * size));
+        // Ractangular hole in disk
+        const holeRec = new Path();
+        holeRec.moveTo(xPlay + (0.5 * size), yPlay - (0.375 * size));
+        holeRec.lineTo(xPlay + (0.5 * size), yPlay - (0.075 * size));
+        holeRec.lineTo(xPlay + (0.075 * size), yPlay - (0.075 * size));
+        holeRec.lineTo(xPlay + (0.075 * size), yPlay - (0.375 * size));
+        saveShape.holes.push(holeRec);
+        // Circular hole in disk
+        const holeCirc = new Path();
+        holeCirc.moveTo(xPlay + (0.5 * size), yPlay - (0.55 * size));
+        holeCirc.absellipse(xPlay + (0.4 * size), yPlay - (0.55 * size), (0.1 * size), (0.1 * size), 0, Math.PI * 2, true, 0);
+        saveShape.holes.push(holeCirc);
+        // Convert shapes into geometry
+        const saveShapeGeometry = new ShapeGeometry(saveShape, 32);
+        const saveDisk = new Mesh( saveShapeGeometry, this.saveDiskMaterial );
         saveDisk.position.set((0.25 * size), 0, (0.508333333334 * size));
         saveDisk.rotation.set(-1.5708, 0, 0);
         // The melding of the complete save button.

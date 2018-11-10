@@ -53,7 +53,7 @@
 
 **● currentPoint**: *`number`[]*
 
-*Defined in [ts/saucer.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L19)*
+*Defined in [ts/saucer.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L19)*
 
 Keeps track of the x,z point the saucer is at currently.
 
@@ -64,7 +64,7 @@ ___
 
 **● distanceTraveled**: *`number`*
 
-*Defined in [ts/saucer.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L23)*
+*Defined in [ts/saucer.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L23)*
 
 Tracks the distance traveled thus far to update the calculateNextPoint calculation.
 
@@ -75,7 +75,7 @@ ___
 
 **● endingPoint**: *`number`[]*
 
-*Defined in [ts/saucer.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L27)*
+*Defined in [ts/saucer.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L27)*
 
 Keeps track of the x,z point of saucer's destination point.
 
@@ -86,7 +86,7 @@ ___
 
 **● explosion**: *[Explosion](_ts_explosion_.explosion.md)*
 
-*Defined in [ts/saucer.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L31)*
+*Defined in [ts/saucer.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L31)*
 
 Explosion from impacted saucer
 
@@ -97,7 +97,7 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in [ts/saucer.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L36)*
+*Defined in [ts/saucer.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L36)*
 
 Flag to signal if saucer has been destroyed or not. True = not destroyed. False = destroyed.
 
@@ -108,7 +108,7 @@ ___
 
 **● originalStartingPoint**: *`number`[]*
 
-*Defined in [ts/saucer.ts:40](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L40)*
+*Defined in [ts/saucer.ts:40](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L40)*
 
 Keeps track of the x,z point where saucer fired from.
 
@@ -119,7 +119,7 @@ ___
 
 **● saucer**: *`Mesh`*
 
-*Defined in [ts/saucer.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L52)*
+*Defined in [ts/saucer.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L52)*
 
 Controls the overall rendering of the saucer
 
@@ -130,7 +130,7 @@ ___
 
 **● saucerGeometry**: *`CircleGeometry`*
 
-*Defined in [ts/saucer.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L44)*
+*Defined in [ts/saucer.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L44)*
 
 Controls size and shape of the saucer
 
@@ -141,7 +141,7 @@ ___
 
 **● saucerMaterial**: *`MeshPhongMaterial`*
 
-*Defined in [ts/saucer.ts:48](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L48)*
+*Defined in [ts/saucer.ts:48](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L48)*
 
 Controls the color of the saucer material
 
@@ -152,7 +152,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/saucer.ts:56](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L56)*
+*Defined in [ts/saucer.ts:56](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L56)*
 
 Reference to the scene, used to remove saucer from rendering cycle once destroyed.
 
@@ -163,7 +163,7 @@ ___
 
 **● speed**: *`number`* = 0.008
 
-*Defined in [ts/saucer.ts:60](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L60)*
+*Defined in [ts/saucer.ts:60](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L60)*
 
 The speed at which the saucer travels.
 
@@ -174,7 +174,7 @@ ___
 
 **● totalDistance**: *`number`*
 
-*Defined in [ts/saucer.ts:64](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L64)*
+*Defined in [ts/saucer.ts:64](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L64)*
 
 The total distance from saucer to final destination.
 
@@ -185,7 +185,7 @@ ___
 
 **● waitToFire**: *`number`* = 0
 
-*Defined in [ts/saucer.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L69)*
+*Defined in [ts/saucer.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L69)*
 
 The wait number of iterations before loosing the saucer. Prevents new level creation from saucer immediately.
 
@@ -199,7 +199,7 @@ ___
 
 ▸ **activate**(): `void`
 
-*Defined in [ts/saucer.ts:108](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L108)*
+*Defined in [ts/saucer.ts:108](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L108)*
 
 (Re)activates the saucer, usually at beginning of new level.
 
@@ -212,7 +212,7 @@ ___
 
 ▸ **addToScene**(): `void`
 
-*Defined in [ts/saucer.ts:118](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L118)*
+*Defined in [ts/saucer.ts:118](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L118)*
 
 Adds saucer object to the three.js scene.
 
@@ -225,7 +225,7 @@ ___
 
 ▸ **calculateNextPoint**(): `void`
 
-*Defined in [ts/saucer.ts:124](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L124)*
+*Defined in [ts/saucer.ts:124](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L124)*
 
 Calculates the next point in the saucer's path.
 
@@ -238,7 +238,7 @@ ___
 
 ▸ **createExplosion**(isInert: *`boolean`*): `void`
 
-*Defined in [ts/saucer.ts:141](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L141)*
+*Defined in [ts/saucer.ts:141](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L141)*
 
 Creates an explosion during collision and adds it to the collildables list.
 
@@ -257,7 +257,7 @@ ___
 
 ▸ **endCycle**(): `boolean`
 
-*Defined in [ts/saucer.ts:149](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L149)*
+*Defined in [ts/saucer.ts:149](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L149)*
 
 At the end of each loop iteration, move the saucer a little.
 
@@ -271,7 +271,7 @@ ___
 
 ▸ **getActive**(): `boolean`
 
-*Defined in [ts/saucer.ts:172](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L172)*
+*Defined in [ts/saucer.ts:172](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L172)*
 
 Gets the viability of the object.
 
@@ -285,7 +285,7 @@ ___
 
 ▸ **getCollisionRadius**(): `number`
 
-*Defined in [ts/saucer.ts:179](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L179)*
+*Defined in [ts/saucer.ts:179](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L179)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 
@@ -299,7 +299,7 @@ ___
 
 ▸ **getCurrentPosition**(): `number`[]
 
-*Defined in [ts/saucer.ts:186](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L186)*
+*Defined in [ts/saucer.ts:186](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L186)*
 
 Gets the current position of the collidable object.
 
@@ -313,7 +313,7 @@ ___
 
 ▸ **getName**(): `string`
 
-*Defined in [ts/saucer.ts:193](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L193)*
+*Defined in [ts/saucer.ts:193](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L193)*
 
 Gets the name of the saucer.
 
@@ -327,7 +327,7 @@ ___
 
 ▸ **impact**(self: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*, otherThing: *`string`*): `boolean`
 
-*Defined in [ts/saucer.ts:202](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L202)*
+*Defined in [ts/saucer.ts:202](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L202)*
 
 Called when something collides with saucer, which destroys it.
 
@@ -348,7 +348,7 @@ ___
 
 ▸ **isPassive**(): `boolean`
 
-*Defined in [ts/saucer.ts:214](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L214)*
+*Defined in [ts/saucer.ts:214](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L214)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 
@@ -362,7 +362,7 @@ ___
 
 ▸ **removeFromScene**(scene: *`Scene`*): `void`
 
-*Defined in [ts/saucer.ts:221](https://github.com/WilliamRADFunk/planet-funk/blob/2cfc051/src/ts/saucer.ts#L221)*
+*Defined in [ts/saucer.ts:221](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/saucer.ts#L221)*
 
 Removes saucer object from the 'visible' scene by sending it back to its starting location.
 
