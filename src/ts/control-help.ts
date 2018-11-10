@@ -17,7 +17,6 @@ import {
  * Help button that draws and maintains click area for help button.
  */
 export class ControlHelp {
-    questionMarkMaterial;
     /**
      * Mesh for the help button.
      */
@@ -26,6 +25,10 @@ export class ControlHelp {
      * Controls the help button's border material.
      */
     private helpButtonBorderMaterial: LineBasicMaterial;
+    /**
+     * Controls the help button's question mark material.
+     */
+    private questionMarkMaterial: MeshBasicMaterial;
     /**
      * Constructor for the ControlHelp class
      * @param scene         graphic rendering scene object. Used each iteration to redraw things contained in scene.
@@ -92,7 +95,10 @@ export class ControlHelp {
         this.helpButton.add(questionMark);
         scene.add(this.helpButton);
     }
-    activate() {
+    /**
+     * Makes necessary changes to help button when help mode is activated.
+     */
+    activate(): void {
         this.changeOpacity(0.5);
     }
     /**
@@ -111,7 +117,10 @@ export class ControlHelp {
         this.helpButtonBorderMaterial.opacity = opacity;
         this.questionMarkMaterial.opacity = opacity;
     }
-    deactivate() {
+    /**
+     * Makes necessary changes to help button when help mode is deactivated.
+     */
+    deactivate(): void {
         this.changeOpacity(1);
     }
     /**

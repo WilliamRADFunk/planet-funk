@@ -33,7 +33,7 @@
 
 **● saveButton**: *`Mesh`*
 
-*Defined in [ts/control-save.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/control-save.ts#L24)*
+*Defined in [ts/control-save.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/db602a2/src/ts/control-save.ts#L24)*
 
 Mesh for the save button.
 
@@ -44,7 +44,7 @@ ___
 
 **● saveButtonBorderMaterial**: *`LineBasicMaterial`*
 
-*Defined in [ts/control-save.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/control-save.ts#L32)*
+*Defined in [ts/control-save.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/db602a2/src/ts/control-save.ts#L32)*
 
 Controls the save button's border material.
 
@@ -55,7 +55,7 @@ ___
 
 **● saveDiskMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/control-save.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/control-save.ts#L28)*
+*Defined in [ts/control-save.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/db602a2/src/ts/control-save.ts#L28)*
 
 Material for the disk portion of the button.
 
@@ -69,7 +69,7 @@ ___
 
 ▸ **changeColor**(color: *`Color`*): `void`
 
-*Defined in [ts/control-save.ts:108](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/control-save.ts#L108)*
+*Defined in [ts/control-save.ts:108](https://github.com/WilliamRADFunk/planet-funk/blob/db602a2/src/ts/control-save.ts#L108)*
 
 Changes button material to match new level color.
 
@@ -88,7 +88,7 @@ ___
 
 ▸ **changeOpacity**(opacity: *`number`*): `void`
 
-*Defined in [ts/control-save.ts:116](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/control-save.ts#L116)*
+*Defined in [ts/control-save.ts:116](https://github.com/WilliamRADFunk/planet-funk/blob/db602a2/src/ts/control-save.ts#L116)*
 
 Changes button opacity.
 
@@ -107,7 +107,7 @@ ___
 
 ▸ **hide**(): `void`
 
-*Defined in [ts/control-save.ts:124](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/control-save.ts#L124)*
+*Defined in [ts/control-save.ts:124](https://github.com/WilliamRADFunk/planet-funk/blob/db602a2/src/ts/control-save.ts#L124)*
 
 Hide the save button (state related). Default is to show.
 
@@ -120,7 +120,7 @@ ___
 
 ▸ **show**(): `void`
 
-*Defined in [ts/control-save.ts:131](https://github.com/WilliamRADFunk/planet-funk/blob/8aaa3ac/src/ts/control-save.ts#L131)*
+*Defined in [ts/control-save.ts:131](https://github.com/WilliamRADFunk/planet-funk/blob/db602a2/src/ts/control-save.ts#L131)*
 
 Show the save button (state related). Default is to show.
 
