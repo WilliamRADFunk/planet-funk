@@ -1,8 +1,8 @@
 import { Color, Scene } from 'three';
 
-import { CollisionatorSingleton } from './collisionator';
-import { ScoreHandler } from './score-handler';
-import { Projectile } from './projectile';
+import { CollisionatorSingleton } from '../collisionator';
+import { ScoreHandler } from '../displays/score-handler';
+import { Projectile } from '../weapons/projectile';
 /**
  * @class
  * Makes, Moves, and Scores the missiles and their resulting destruction.

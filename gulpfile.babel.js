@@ -171,7 +171,7 @@ gulp.task('reload', () => {
 
 gulp.task('watch', () => {
   gulp.watch('src/assets/**/*', ['assets']);
-  gulp.watch('src/ts/*.ts', ['scripts:reload']);
+  gulp.watch('src/ts/**/*.ts', ['scripts:reload']);
   gulp.watch('src/scss/**/*.scss', ['sass']);
   gulp.watch('src/index.html', ['html']);
 });

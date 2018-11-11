@@ -1,8 +1,8 @@
 import { Scene, Texture } from 'three';
 
 import { Asteroid } from './asteroid';
-import { CollisionatorSingleton } from './collisionator';
-import { ScoreHandler } from './score-handler';
+import { CollisionatorSingleton } from '../collisionator';
+import { ScoreHandler } from '../displays/score-handler';
 /**
  * @class
  * Makes, Moves, and Scores the asteroids and their resulting destruction.

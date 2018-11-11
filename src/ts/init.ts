@@ -17,15 +17,15 @@ import {
     Camera} from 'three';
 
 import { CollisionatorSingleton } from './collisionator';
-import { Planet } from './planet';
-import { Shield } from './shield';
-import { AsteroidGenerator } from './asteroid-generator';
-import { ScoreHandler } from './score-handler';
-import { EnemyMissileGenerator } from './enemy-missile-generator';
-import { LevelHandler } from './level-handler';
-import { SaucerGenerator } from './saucer-generator';
-import { Menu } from './menu';
-import { ControlPanel } from './control-panel';
+import { Planet } from './player/planet';
+import { Shield } from './player/shield';
+import { AsteroidGenerator } from './asteroids/asteroid-generator';
+import { ScoreHandler } from './displays/score-handler';
+import { EnemyMissileGenerator } from './enemies/enemy-missile-generator';
+import { LevelHandler } from './displays/level-handler';
+import { SaucerGenerator } from './enemies/saucer-generator';
+import { Menu } from './displays/menu';
+import { ControlPanel } from './controls/control-panel';
 
 /**
  * Loads the graphic for asteroid.
@@ -247,19 +247,22 @@ const loadMenu = () => {
                 setTimeout(() => {
                     if (validLoad) {
                         console.log('Transitioning to load menu...');
-                        menu.returnToMainMenu('Load');
+                        menu.returnToMainMenu();
                     }
                 }, 750);
             } else if (el.object.name === 'Help') {
+                console.log('Transitioning to help menu...');
                 menu.pressedHelp();
+            } else if (el.object.name === 'Return') {
+                console.log('Transitioning to menu...');
+                menu.pressedReturn();
                 setTimeout(() => {
-                    console.log('Transitioning to help menu...');
-                    menu.returnToMainMenu('Help');
-                }, 750);
+                    menu.returnToMainMenu();
+                }, 250);
             }
         });
     };
-    menu = new Menu(sceneMenu, gameFont);
+    menu = new Menu(sceneMenu, gameFont, saucerTextures, asteroidTexture);
     startMenuRendering();
 };
 const startMenuRendering = () => {

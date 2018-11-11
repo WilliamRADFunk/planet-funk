@@ -6,9 +6,9 @@ import {
     Scene,
     Vector3 } from 'three';
 
-import { Projectile } from './projectile';
-import { Collidable } from './collidable';
-import { CollisionatorSingleton } from './collisionator';
+import { Projectile } from '../weapons/projectile';
+import { Collidable } from '../collidable';
+import { CollisionatorSingleton } from '../collisionator';
 /**
  * Makes instatiateing the satellite's color by index easier and cleaner to read.
  */

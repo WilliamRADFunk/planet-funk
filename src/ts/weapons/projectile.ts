@@ -9,9 +9,9 @@ import {
     Scene,
     Vector3 } from 'three';
 
-import { Collidable } from './collidable';
+import { Collidable } from '../collidable';
 import { Explosion } from './explosion';
-import { CollisionatorSingleton } from './collisionator';
+import { CollisionatorSingleton } from '../collisionator';
 /**
  * Static index to help name one projectile differenly than another.
  */
@@ -160,6 +160,18 @@ export class Projectile implements Collidable {
     private createExplosion(isInert: boolean): void {
         this.explosion = new Explosion(this.scene, this.headMesh.position.x, this.headMesh.position.z, 0.12, isInert);
         if (!isInert) CollisionatorSingleton.add(this.explosion);
+    }
+    /**
+     * Call to eliminate regardless of current state.
+     * Mainly used for non-game instantiations of this (ie. help screen animations).
+     */
+    destroy() {
+        if (this.explosion) {
+            CollisionatorSingleton.remove(this.explosion);
+            this.scene.remove(this.explosion.getMesh());
+            this.explosion = null;
+        }
+        this.removeFromScene(this.scene);
     }
     /**
      * At the end of each loop iteration, move the projectile a little.

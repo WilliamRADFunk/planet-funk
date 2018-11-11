@@ -9,7 +9,7 @@ import {
     SphericalReflectionMapping,
     TextureLoader } from 'three';
 
-import { Collidable } from './collidable';
+import { Collidable } from '../collidable';
 /**
  * @class
  * Transluscent shield that helps protect player's unit (planet)

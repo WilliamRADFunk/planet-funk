@@ -1,8 +1,8 @@
 import { Scene, Texture } from 'three';
 
 import { Saucer } from './saucer';
-import { CollisionatorSingleton } from './collisionator';
-import { ScoreHandler } from './score-handler';
+import { CollisionatorSingleton } from '../collisionator';
+import { ScoreHandler } from '../displays/score-handler';
 
 const saucerStartingPositions: number[][] = [
     [-10, -3], // Left Upper

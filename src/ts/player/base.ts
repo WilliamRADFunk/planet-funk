@@ -8,8 +8,8 @@ import {
     Texture,
     Vector3 } from 'three';
 
-import { Collidable } from './collidable';
-import { CollisionatorSingleton } from './collisionator';
+import { Collidable } from '../collidable';
+import { CollisionatorSingleton } from '../collisionator';
 /**
  * Makes instatiateing the base's position by index easier and cleaner to read.
  */

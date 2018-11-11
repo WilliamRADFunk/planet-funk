@@ -8,14 +8,47 @@ import {
     PointLight,
     Scene,
     TextGeometry,
-    Object3D, 
-    TextGeometryParameters} from 'three';
+    TextGeometryParameters,
+    Texture } from 'three';
+import { HelpHandler } from '../help-handler';
 
 /**
  * @class
  * Keeps track of all things menu related.
  */
 export class Menu {
+    /**
+     * Click surface for the Easy button.
+     */
+    private barrierEasy: Mesh;
+    /**
+     * Click surface for the Hard button.
+     */
+    private barrierHard: Mesh;
+    /**
+     * Click surface for the Hardcore button.
+     */
+    private barrierHardcore: Mesh;
+    /**
+     * Click surface for the Help button.
+     */
+    private barrierHelp: Mesh;
+    /**
+     * Click surface for the Load button.
+     */
+    private barrierLoad: Mesh;
+    /**
+     * Click surface for the Normal button.
+     */
+    private barrierNormal: Mesh;
+    /**
+     * Click surface for the Return button.
+     */
+    private barrierReturn: Mesh;
+    /**
+     * Click surface for the Start button.
+     */
+    private barrierStart: Mesh;
     /**
      * Controls the background click surface of buttons.
      */
@@ -69,6 +102,10 @@ export class Menu {
      */
     private helpGeometry: TextGeometry;
     /**
+     * Paints the help screen.
+     */
+    private helpHandler: HelpHandler;
+    /**
      * Controls the overall rendering of the load button display
      */
     private load: Mesh;
@@ -101,6 +138,13 @@ export class Menu {
      */
     private menuSelectedMaterial: MeshLambertMaterial;
     /**
+     * Keeps track of menu mode.
+     * 0 --> Menu options
+     * 1 --> Help screen
+     * 2 --> Load screen
+     */
+    private mode: number = 0;
+    /**
      * Controls the overall rendering of the normal button display
      */
     private normal: Mesh;
@@ -108,6 +152,14 @@ export class Menu {
      * Controls size and shape of the normal button text
      */
     private normalGeometry: TextGeometry;
+    /**
+     * Controls the overall rendering of the return button display
+     */
+    private return: Mesh;
+    /**
+     * Controls size and shape of the return button text
+     */
+    private returnGeometry: TextGeometry;
     /**
      * Reference to the scene, used to remove and reinstall text geometries.
      */
@@ -130,7 +182,7 @@ export class Menu {
      * @param menuFont loaded font to use for menu button text.
      * @hidden
      */
-    constructor(scene: Scene, menuFont: Font) {
+    constructor(scene: Scene, menuFont: Font, saucerTextures: Texture[], asteroidTexture: Texture) {
         this.menuFont = menuFont;
         this.scene = scene;
         this.fontDifficultyBtnParams = {
@@ -158,53 +210,60 @@ export class Menu {
         this.clickMaterial = new MeshBasicMaterial( {opacity: 0, transparent: true, side: DoubleSide} );
         // Create the start collision layer
         const startBarrierGeometry = new PlaneGeometry( 1.5, 0.8, 0, 0 );
-        const startBarrier = new Mesh( startBarrierGeometry, this.clickMaterial );
-        startBarrier.name = 'Start';
-        startBarrier.position.set(0, 0, -1);
-        startBarrier.rotation.set(1.5708, 0, 0);
-        this.scene.add(startBarrier);
+        this.barrierStart = new Mesh( startBarrierGeometry, this.clickMaterial );
+        this.barrierStart.name = 'Start';
+        this.barrierStart.position.set(0, 0, -1);
+        this.barrierStart.rotation.set(1.5708, 0, 0);
+        this.scene.add(this.barrierStart);
         // Create the easy collision layer
         const easyBarrierGeometry = new PlaneGeometry( 1.4, 0.8, 0, 0 );
-        const easyBarrier = new Mesh( easyBarrierGeometry, this.clickMaterial );
-        easyBarrier.name = 'Easy';
-        easyBarrier.position.set(-3.2, 0, 0);
-        easyBarrier.rotation.set(1.5708, 0, 0);
-        this.scene.add(easyBarrier);
+        this.barrierEasy = new Mesh( easyBarrierGeometry, this.clickMaterial );
+        this.barrierEasy.name = 'Easy';
+        this.barrierEasy.position.set(-3.2, 0, 0);
+        this.barrierEasy.rotation.set(1.5708, 0, 0);
+        this.scene.add(this.barrierEasy);
         // Create the normal collision layer
         const normalBarrierGeometry = new PlaneGeometry( 1.9, 0.8, 0, 0 );
-        const normalBarrier = new Mesh( normalBarrierGeometry, this.clickMaterial );
-        normalBarrier.name = 'Normal';
-        normalBarrier.position.set(-1.35, 0, 0);
-        normalBarrier.rotation.set(1.5708, 0, 0);
-        this.scene.add(normalBarrier);
+        this.barrierNormal = new Mesh( normalBarrierGeometry, this.clickMaterial );
+        this.barrierNormal.name = 'Normal';
+        this.barrierNormal.position.set(-1.35, 0, 0);
+        this.barrierNormal.rotation.set(1.5708, 0, 0);
+        this.scene.add(this.barrierNormal);
         // Create the hard collision layer
         const hardBarrierGeometry = new PlaneGeometry( 1.4, 0.8, 0, 0 );
-        const hardBarrier = new Mesh( hardBarrierGeometry, this.clickMaterial );
-        hardBarrier.name = 'Hard';
-        hardBarrier.position.set(0.5, 0, 0);
-        hardBarrier.rotation.set(1.5708, 0, 0);
-        this.scene.add(hardBarrier);
+        this.barrierHard = new Mesh( hardBarrierGeometry, this.clickMaterial );
+        this.barrierHard.name = 'Hard';
+        this.barrierHard.position.set(0.5, 0, 0);
+        this.barrierHard.rotation.set(1.5708, 0, 0);
+        this.scene.add(this.barrierHard);
         // Create the hardcore collision layer
         const hardcoreBarrierGeometry = new PlaneGeometry( 2.6, 0.8, 0, 0 );
-        const hardcoreBarrier = new Mesh( hardcoreBarrierGeometry, this.clickMaterial );
-        hardcoreBarrier.name = 'Hardcore';
-        hardcoreBarrier.position.set(2.7, 0, 0);
-        hardcoreBarrier.rotation.set(1.5708, 0, 0);
-        this.scene.add(hardcoreBarrier);
+        this.barrierHardcore = new Mesh( hardcoreBarrierGeometry, this.clickMaterial );
+        this.barrierHardcore.name = 'Hardcore';
+        this.barrierHardcore.position.set(2.7, 0, 0);
+        this.barrierHardcore.rotation.set(1.5708, 0, 0);
+        this.scene.add(this.barrierHardcore);
         // Create the load collision layer
         const loadBarrierGeometry = new PlaneGeometry( 1.5, 0.8, 0, 0 );
-        const loadBarrier = new Mesh( loadBarrierGeometry, this.clickMaterial );
-        loadBarrier.name = 'Load';
-        loadBarrier.position.set(0, 0, 1);
-        loadBarrier.rotation.set(1.5708, 0, 0);
-        this.scene.add(loadBarrier);
+        this.barrierLoad = new Mesh( loadBarrierGeometry, this.clickMaterial );
+        this.barrierLoad.name = 'Load';
+        this.barrierLoad.position.set(0, 0, 1);
+        this.barrierLoad.rotation.set(1.5708, 0, 0);
+        this.scene.add(this.barrierLoad);
         // Create the help collision layer
         const helpBarrierGeometry = new PlaneGeometry( 1.5, 0.8, 0, 0 );
-        const helpBarrier = new Mesh( helpBarrierGeometry, this.clickMaterial );
-        helpBarrier.name = 'Help';
-        helpBarrier.position.set(0, 0, 2);
-        helpBarrier.rotation.set(1.5708, 0, 0);
-        this.scene.add(helpBarrier);
+        this.barrierHelp = new Mesh( helpBarrierGeometry, this.clickMaterial );
+        this.barrierHelp.name = 'Help';
+        this.barrierHelp.position.set(0, 0, 2);
+        this.barrierHelp.rotation.set(1.5708, 0, 0);
+        this.scene.add(this.barrierHelp);
+        // Create the help collision layer
+        const returnBarrierGeometry = new PlaneGeometry( 2, 0.8, 0, 0 );
+        this.barrierReturn = new Mesh( returnBarrierGeometry, this.clickMaterial );
+        this.barrierReturn.name = 'Return';
+        this.barrierReturn.position.set(0, 0, 3);
+        this.barrierReturn.rotation.set(1.5708, 0, 0);
+        this.scene.add(this.barrierReturn);
         // Main Banner button text
         this.mainBannerGeometry = new TextGeometry(`Planet Funk`,
             {
@@ -263,6 +322,16 @@ export class Menu {
         this.help.position.set(-0.5, -0.5, 2.2);
         this.help.rotation.x = -1.5708;
         this.scene.add(this.help);
+        // Return button text
+        this.returnGeometry = new TextGeometry(`Return`, this.fontDifficultyBtnParams);
+        this.return = new Mesh( this.returnGeometry, this.menuMaterial );
+        this.return.position.set(-0.8, -0.5, 3.2);
+        this.return.rotation.x = -1.5708;
+        this.scene.add(this.return);
+
+        this.return.visible = false;
+
+        this.helpHandler = new HelpHandler(this.scene, this.menuFont, saucerTextures, asteroidTexture);
     }
     /**
      * Changes difficulty level, and instigates the altering of the button texts associated with that choice.
@@ -341,16 +410,47 @@ export class Menu {
     /**
      * Moves the point light from left to right a little every frame.
      */
-    endCycle(): void{
-        if (this.shimmer.position.x > 20) {
-            this.shimmer.position.x = -20
+    endCycle(): void {
+        if (this.mode === 1) {
+            this.shimmer.position.x = 0;
+            this.helpHandler.endCycle();
+        } else {
+            if (this.shimmer.position.x > 20) {
+                this.shimmer.position.x = -20;
+            }
+            this.shimmer.position.x += 0.2;
         }
-        this.shimmer.position.x += 0.2;
     }
     /**
+     * Turns visibility for menu items to be unseen.
+     */
+    hideMenu() {
+        this.shimmer.color.set(0xFFFFFF);
+        this.shimmer.intensity = 3.5;
+        // this.mainBanner.visible = false;
+        this.start.visible = false;
+        this.easy.visible = false;
+        this.normal.visible = false;
+        this.hard.visible = false;
+        this.hardcore.visible = false;
+        this.load.visible = false;
+        this.help.visible = false;
+        this.barrierEasy.visible = false;
+        this.barrierHard.visible = false;
+        this.barrierHardcore.visible = false;
+        this.barrierHelp.visible = false;
+        this.barrierLoad.visible = false;
+        this.barrierNormal.visible = false;
+        this.barrierStart.visible = false;
+
+        this.barrierReturn.visible = true;
+    }
+    /**
+     * Transitions to help screen.
      * Changes the help menu button text when clicked to signal to user that their click worked.
      */
     pressedHelp(): void {
+        this.barrierHelp.visible = false;
         this.scene.remove(this.help);
         // Selected help button text
         this.helpGeometry = new TextGeometry(`Help`, this.fontDifficultyBtnParams);
@@ -358,6 +458,12 @@ export class Menu {
         this.help.position.set(-0.5, -0.5, 2.2);
         this.help.rotation.x = -1.5708;
         this.scene.add(this.help);
+        setTimeout(() => {
+            this.mode = 1;
+            this.hideMenu();
+            this.helpHandler.activate();
+            this.return.visible = true;
+        }, 250);
     }
     /**
      * Changes the load menu button text when clicked to signal to user that their click worked (if not hardcore difficulty).
@@ -377,6 +483,18 @@ export class Menu {
         return true;
     }
     /**
+     * Changes the return menu button text when clicked to signal to user that their click worked.
+     */
+    pressedReturn(): void {
+        this.scene.remove(this.return);
+        // Selected return button text
+        this.returnGeometry = new TextGeometry(`Return`, this.fontDifficultyBtnParams);
+        this.return = new Mesh( this.returnGeometry, this.menuSelectedMaterial );
+        this.return.position.set(-0.8, -0.5, 3.2);
+        this.return.rotation.x = -1.5708;
+        this.scene.add(this.return);
+    }
+    /**
      * Changes the start menu button text when clicked to signal to user that their click worked.
      * @returns difficulty level chosen before start was pressed (to be used in game difficulty checks)
      */
@@ -392,10 +510,17 @@ export class Menu {
     }
     /**
      * Reactivates main menu options.
-     * @param returnedFrom helps to distinguish which button had been pressed to leave menu in first place.
      */
-    returnToMainMenu(returnedFrom: string): void {
-        if (returnedFrom === 'Load') {
+    returnToMainMenu(): void {
+        this.scene.remove(this.return);
+        // Selected return button text
+        this.returnGeometry = new TextGeometry(`Return`, this.fontDifficultyBtnParams);
+        this.return = new Mesh( this.returnGeometry, this.menuMaterial );
+        this.return.position.set(-0.8, -0.5, 3.2);
+        this.return.rotation.x = -1.5708;
+        this.scene.add(this.return);
+        this.return.visible = false;
+        if (this.mode === 2) {
             this.scene.remove(this.load);
             // Selected load button text
             this.loadGeometry = new TextGeometry(`Load`, this.fontDifficultyBtnParams);
@@ -403,8 +528,10 @@ export class Menu {
             this.load = new Mesh( this.loadGeometry, this.loadMaterial );
             this.load.position.set(-0.6, -0.5, 1.2);
             this.load.rotation.x = -1.5708;
+            this.mode = 0;
+            this.showMenu();
             this.scene.add(this.load);
-        } else if (returnedFrom === 'Help') {
+        } else if (this.mode === 1) {
             this.scene.remove(this.help);
             // Selected help button text
             this.helpGeometry = new TextGeometry(`Help`, this.fontDifficultyBtnParams);
@@ -412,6 +539,9 @@ export class Menu {
             this.help.position.set(-0.5, -0.5, 2.2);
             this.help.rotation.x = -1.5708;
             this.scene.add(this.help);
+            this.mode = 0;
+            this.showMenu();
+            this.helpHandler.deactivate();
         }
         this.createDifficultyButtons(0, this.menuMaterial, true);
         this.createDifficultyButtons(1, this.menuMaterial, true);
@@ -419,5 +549,26 @@ export class Menu {
         this.createDifficultyButtons(3, this.menuMaterial, true);
         
         this.createDifficultyButtons(this.difficultyLevel, this.menuSelectedMaterial, true);
+    }
+    showMenu() {
+        this.shimmer.color.set(0x3333FF);
+        this.shimmer.intensity = 2;
+        // this.mainBanner.visible = true;
+        this.start.visible = true;
+        this.easy.visible = true;
+        this.normal.visible = true;
+        this.hard.visible = true;
+        this.hardcore.visible = true;
+        this.load.visible = true;
+        this.help.visible = true;
+        this.barrierEasy.visible = true;
+        this.barrierHard.visible = true;
+        this.barrierHardcore.visible = true;
+        this.barrierHelp.visible = true;
+        this.barrierLoad.visible = true;
+        this.barrierNormal.visible = true;
+        this.barrierStart.visible = true;
+
+        this.barrierReturn.visible = false;
     }
 }

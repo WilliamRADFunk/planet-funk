@@ -10,8 +10,8 @@ import {
 
 import { Satellite } from './satellite';
 import { Base } from './base';
-import { Collidable } from './collidable';
-import { CollisionatorSingleton } from './collisionator';
+import { Collidable } from '../collidable';
+import { CollisionatorSingleton } from '../collisionator';
 /**
  * Simple type to represent status of all four populated areas. Cumulatively equals player's health.
  */
