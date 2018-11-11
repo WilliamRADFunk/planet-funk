@@ -262,7 +262,7 @@ const loadMenu = () => {
             }
         });
     };
-    menu = new Menu(sceneMenu, gameFont, saucerTextures, asteroidTexture);
+    menu = new Menu(sceneMenu, gameFont, saucerTextures, asteroidTexture, buildingTextures, specMap);
     startMenuRendering();
 };
 const startMenuRendering = () => {

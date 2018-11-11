@@ -63,6 +63,8 @@ export class Base implements Collidable{
     /**
      * Constructor for the Base class
      * @param index order of creation, used for position 1/2 o'clock and clockwise, and appearance.
+     * @param buildingTexture texture image for this base instance.
+     * @param specMap texture image to help give the dead base its glossed over appearance.
      * @hidden
      */
     constructor(index: number, buildingTexture: Texture, specMap: Texture) {

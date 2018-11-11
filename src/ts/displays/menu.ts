@@ -180,9 +180,13 @@ export class Menu {
      * Constructor for the Menu class
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param menuFont loaded font to use for menu button text.
+     * @param saucerTextures texture images for the flying saucers.
+     * @param asteroidTexture texture image for the asteroid.
+     * @param buildingTextures texture images for the 4 bases.
+     * @param specMap texture image to help give the dead base its glossed over appearance.
      * @hidden
      */
-    constructor(scene: Scene, menuFont: Font, saucerTextures: Texture[], asteroidTexture: Texture) {
+    constructor(scene: Scene, menuFont: Font, saucerTextures: Texture[], asteroidTexture: Texture, buildingTextures: Texture[], specMap: Texture) {
         this.menuFont = menuFont;
         this.scene = scene;
         this.fontDifficultyBtnParams = {
@@ -331,7 +335,7 @@ export class Menu {
 
         this.return.visible = false;
 
-        this.helpHandler = new HelpHandler(this.scene, this.menuFont, saucerTextures, asteroidTexture);
+        this.helpHandler = new HelpHandler(this.scene, this.menuFont, saucerTextures, asteroidTexture, buildingTextures, specMap);
     }
     /**
      * Changes difficulty level, and instigates the altering of the button texts associated with that choice.
