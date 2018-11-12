@@ -51,9 +51,10 @@ export class Explosion implements Collidable {
      * @param z coordinate on z-axis where explosion should instantiate.
      * @param radius starting size of the explosions, used for collision reference.
      * @param renderedInert if created as result of shield strike, it's not collidable and color is different.
+     * @param y optional y value for explosion (for help screen demo).
      * @hidden
      */
-    constructor(scene: Scene, x:number, z: number, radius: number, renderedInert?: boolean) {
+    constructor(scene: Scene, x:number, z: number, radius: number, renderedInert?: boolean, y?: number) {
         this.scene = scene;
         this.radius = radius;
         index++;
@@ -64,7 +65,7 @@ export class Explosion implements Collidable {
             transparent: true
         });
         this.explosion = new Mesh(this.explosionGeometry, this.explosionMaterial);
-        this.explosion.position.set(x, -0.25, z);
+        this.explosion.position.set(x, (y || -0.25), z);
         this.explosion.rotation.set(-1.5708, 0, 0);
         this.explosion.name = `explosion-${index}`;
         this.scene.add(this.explosion);

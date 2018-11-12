@@ -1,0 +1,60 @@
+[planet-funk](../README.md) > ["ts/player/planet"](../modules/_ts_player_planet_.md) > [PlanetStatus](../interfaces/_ts_player_planet_.planetstatus.md)
+
+# Interface: PlanetStatus
+
+Simple type to represent status of all four populated areas. Cumulatively equals player's health.
+
+## Hierarchy
+
+**PlanetStatus**
+
+## Index
+
+### Properties
+
+* [quadrantBlue](_ts_player_planet_.planetstatus.md#quadrantblue)
+* [quadrantGreen](_ts_player_planet_.planetstatus.md#quadrantgreen)
+* [quadrantPurple](_ts_player_planet_.planetstatus.md#quadrantpurple)
+* [quadrantYellow](_ts_player_planet_.planetstatus.md#quadrantyellow)
+
+---
+
+## Properties
+
+<a id="quadrantblue"></a>
+
+###  quadrantBlue
+
+**● quadrantBlue**: *`boolean`*
+
+*Defined in [ts/player/planet.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/9a85fb9/src/ts/player/planet.ts#L19)*
+
+___
+<a id="quadrantgreen"></a>
+
+###  quadrantGreen
+
+**● quadrantGreen**: *`boolean`*
+
+*Defined in [ts/player/planet.ts:20](https://github.com/WilliamRADFunk/planet-funk/blob/9a85fb9/src/ts/player/planet.ts#L20)*
+
+___
+<a id="quadrantpurple"></a>
+
+###  quadrantPurple
+
+**● quadrantPurple**: *`boolean`*
+
+*Defined in [ts/player/planet.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/9a85fb9/src/ts/player/planet.ts#L21)*
+
+___
+<a id="quadrantyellow"></a>
+
+###  quadrantYellow
+
+**● quadrantYellow**: *`boolean`*
+
+*Defined in [ts/player/planet.ts:22](https://github.com/WilliamRADFunk/planet-funk/blob/9a85fb9/src/ts/player/planet.ts#L22)*
+
+___
+

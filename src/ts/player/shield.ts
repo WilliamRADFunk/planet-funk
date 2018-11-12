@@ -46,7 +46,7 @@ export class Shield implements Collidable {
     /**
      * Starting position.
      */
-    private startPosition: [number, number] = [0, 0];
+    private startPosition: [number, number, number] = [0, -10, 0];
     /**
      * Controls size and shape of the energy meter
      */
@@ -59,7 +59,7 @@ export class Shield implements Collidable {
      * Constructor for Shield class
      * @hidden
      */
-    constructor(startPosition?: [number, number]) {
+    constructor(startPosition?: [number, number, number]) {
         if (startPosition) {
             this.startPosition = startPosition;
         }
@@ -75,7 +75,7 @@ export class Shield implements Collidable {
             transparent: true
         });
         this.shield = new Mesh(this.shieldGeometry, this.shieldMaterial);
-        this.shield.position.set(this.startPosition[0], 0, this.startPosition[1]);
+        this.shield.position.set(this.startPosition[0], this.startPosition[1], this.startPosition[2]);
         this.shield.name = 'Shield';
         // Creates and places the energy meter beads in a ring around the shield.
         this.energyBars = new Object3D();
@@ -86,7 +86,7 @@ export class Shield implements Collidable {
 			const minuteTick = new Mesh(this.timeGeometry, this.timeMaterial.clone());
 			const x_coord = 1 * Math.cos( i * (Math.PI / 30) );
 			const z_coord = 1 * Math.sin( i * (Math.PI / 30) );
-			minuteTick.position.set((x_coord + this.startPosition[0]), 0, (z_coord + this.startPosition[1]));
+			minuteTick.position.set((x_coord + this.startPosition[0]), this.startPosition[1] + 10, (z_coord + this.startPosition[2]));
 			this.energyBars.add(minuteTick);
         }
     }

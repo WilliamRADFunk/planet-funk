@@ -26,6 +26,7 @@ import { LevelHandler } from './displays/level-handler';
 import { SaucerGenerator } from './enemies/saucer-generator';
 import { Menu } from './displays/menu';
 import { ControlPanel } from './controls/control-panel';
+import { HelpHandler } from './help-handler';
 
 /**
  * Loads the graphic for asteroid.
@@ -254,11 +255,7 @@ const loadMenu = () => {
                 console.log('Transitioning to help menu...');
                 menu.pressedHelp();
             } else if (el.object.name === 'Return') {
-                console.log('Transitioning to menu...');
-                menu.pressedReturn();
-                setTimeout(() => {
-                    menu.returnToMainMenu();
-                }, 250);
+                menu.returnToMainMenu();
             }
         });
     };
@@ -370,12 +367,26 @@ const loadGame = (difficulty: number) => {
         // Detection for player clicked on pause button
         thingsTouched.forEach(el => {
             if (el.object.name === 'Pause Button') {
+                if (controlPanel.isHelp()) {
+                    helpHandler.deactivate();
+                }
                 controlPanel.pauseChange();
                 launchFlag = false;
                 return;
             }
             if (el.object.name === 'Help Button') {
                 controlPanel.helpChange();
+                if (controlPanel.isHelp()) {
+                    helpHandler.activate();
+                } else {
+                    helpHandler.deactivate();
+                }
+                launchFlag = false;
+                return;
+            }
+            if (el.object.name === 'Return') {
+                controlPanel.helpChange();
+                helpHandler.deactivate();
                 launchFlag = false;
                 return;
             }
@@ -407,6 +418,9 @@ const loadGame = (difficulty: number) => {
             }
         }
     };
+
+    
+    const helpHandler = new HelpHandler(scene, gameFont, saucerTextures, asteroidTexture, buildingTextures, specMap, planetTextures);
     
     let jobCounter = 0;
     let noMissiles = false;
@@ -419,7 +433,9 @@ const loadGame = (difficulty: number) => {
         jobCounter++;
         if (jobCounter > 10) jobCounter = 0;
 
-        if (controlPanel.isPaused()) {
+        if (controlPanel.isHelp()) {
+            helpHandler.endCycle();
+        } else if (controlPanel.isPaused()) {
             // When paused, do nothing but render.
         // Only run operations allowed during a fluctuating banner animation.
         } else if (levelHandler.isAnimating()) {

@@ -54,6 +54,10 @@ export class Projectile implements Collidable {
      */
     private headMesh: Mesh;
     /**
+     * Allows for a variable y value in head of missile
+     */
+    private headY: number;
+    /**
      * Flag to signal if the missile has been destroyed.
      * True is not destroyed. False is destroyed.
      */
@@ -92,6 +96,10 @@ export class Projectile implements Collidable {
      */
     private tailMesh: Line;
     /**
+     * Allows for a variable y value in tail of missile
+     */
+    private tailY: number;
+    /**
      * The total distance from satellite to player's click point.
      */
     private totalDistance: number;
@@ -110,10 +118,23 @@ export class Projectile implements Collidable {
      * @param dist               total distance the missile must travel.
      * @param color              color of the missile's fiery tail (matches satellite body color from which it came).
      * @param colllidableAtBirth Enemy missiles need to be destructable before hitting target, where player's don't.
+     * @param y                  optional y value for missile (for help screen demo).
      * @hidden
      */
-    constructor(scene: Scene, x1: number, z1: number, x2: number, z2: number, dist: number, color: Color, colllidableAtBirth?: boolean, speed?: number) {
+    constructor(
+        scene: Scene,
+        x1: number,
+        z1: number,
+        x2: number,
+        z2: number,
+        dist: number,
+        color: Color,
+        colllidableAtBirth?: boolean,
+        speed?: number,
+        y?: number) {
         index++;
+        this.headY = y || 0.51;
+        this.tailY = (y && (y + 0.04)) || 0.55;
         this.color = color;
         this.speed = speed || this.speed;
         this.isCollidable = !!colllidableAtBirth;
@@ -134,7 +155,7 @@ export class Projectile implements Collidable {
             transparent: true
         });
         this.headMesh = new Mesh(this.headGeometry, this.headMaterial);
-        this.headMesh.position.set(this.currentPoint[0], 0.51, this.currentPoint[1]);
+        this.headMesh.position.set(this.currentPoint[0], this.headY, this.currentPoint[1]);
         this.headMesh.rotation.set(-1.5708, 0, 0);
         this.headMesh.name = `Projectile-${index}`;
         if (this.isEnemyMissile) {
@@ -158,7 +179,7 @@ export class Projectile implements Collidable {
      * @param isInert flag to let explosion know it isn't a 'real' explosion (hit shield).
      */
     private createExplosion(isInert: boolean): void {
-        this.explosion = new Explosion(this.scene, this.headMesh.position.x, this.headMesh.position.z, 0.12, isInert);
+        this.explosion = new Explosion(this.scene, this.headMesh.position.x, this.headMesh.position.z, 0.12, isInert, this.headY + 0.26);
         if (!isInert) CollisionatorSingleton.add(this.explosion);
     }
     /**
@@ -198,8 +219,8 @@ export class Projectile implements Collidable {
                 // Creates the missile's fiery trail.
                 this.tailGeometry = new Geometry();
                 this.tailGeometry.vertices.push(
-                    new Vector3(this.currentPoint[0], 0.55, this.currentPoint[1]),
-                    new Vector3(this.currentPoint[0], 0.55, this.currentPoint[1]));
+                    new Vector3(this.currentPoint[0], this.tailY, this.currentPoint[1]),
+                    new Vector3(this.currentPoint[0], this.tailY, this.currentPoint[1]));
                 this.tailMaterial = new LineBasicMaterial({color: this.color});
                 this.tailMesh = new Line(this.tailGeometry, this.tailMaterial);
                 this.scene.add(this.tailMesh);
@@ -208,7 +229,7 @@ export class Projectile implements Collidable {
                 this.tailGeometry.vertices[1].x = this.currentPoint[0];
                 this.tailGeometry.vertices[1].z = this.currentPoint[1];
                 this.tailGeometry.verticesNeedUpdate = true;
-                this.headMesh.position.set(this.currentPoint[0], 0.51, this.currentPoint[1]);
+                this.headMesh.position.set(this.currentPoint[0], this.headY, this.currentPoint[1]);
             }
             if (this.distanceTraveled >= this.totalDistance) {
                 this.createExplosion(false);

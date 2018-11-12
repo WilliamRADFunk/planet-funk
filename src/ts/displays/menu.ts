@@ -42,10 +42,6 @@ export class Menu {
      */
     private barrierNormal: Mesh;
     /**
-     * Click surface for the Return button.
-     */
-    private barrierReturn: Mesh;
-    /**
      * Click surface for the Start button.
      */
     private barrierStart: Mesh;
@@ -153,14 +149,6 @@ export class Menu {
      */
     private normalGeometry: TextGeometry;
     /**
-     * Controls the overall rendering of the return button display
-     */
-    private return: Mesh;
-    /**
-     * Controls size and shape of the return button text
-     */
-    private returnGeometry: TextGeometry;
-    /**
      * Reference to the scene, used to remove and reinstall text geometries.
      */
     private scene: Scene;
@@ -262,13 +250,6 @@ export class Menu {
         this.barrierHelp.position.set(0, 0, 2);
         this.barrierHelp.rotation.set(1.5708, 0, 0);
         this.scene.add(this.barrierHelp);
-        // Create the help collision layer
-        const returnBarrierGeometry = new PlaneGeometry( 2, 0.8, 0, 0 );
-        this.barrierReturn = new Mesh( returnBarrierGeometry, this.clickMaterial );
-        this.barrierReturn.name = 'Return';
-        this.barrierReturn.position.set(0, 0, 4);
-        this.barrierReturn.rotation.set(1.5708, 0, 0);
-        this.scene.add(this.barrierReturn);
         // Main Banner button text
         this.mainBannerGeometry = new TextGeometry(`Planet Funk`,
             {
@@ -327,14 +308,6 @@ export class Menu {
         this.help.position.set(-0.5, -0.5, 2.2);
         this.help.rotation.x = -1.5708;
         this.scene.add(this.help);
-        // Return button text
-        this.returnGeometry = new TextGeometry(`Return`, this.fontDifficultyBtnParams);
-        this.return = new Mesh( this.returnGeometry, this.menuMaterial );
-        this.return.position.set(-0.8, -0.5, 4.2);
-        this.return.rotation.x = -1.5708;
-        this.scene.add(this.return);
-
-        this.return.visible = false;
 
         this.helpHandler = new HelpHandler(this.scene, this.menuFont, saucerTextures, asteroidTexture, buildingTextures, specMap, planetTextures);
     }
@@ -432,6 +405,7 @@ export class Menu {
     hideMenu() {
         this.shimmer.color.set(0xCCCCCC);
         this.shimmer.intensity = 3.2;
+        this.shimmer.position.y = -10;
         // this.mainBanner.visible = false;
         this.start.visible = false;
         this.easy.visible = false;
@@ -447,8 +421,6 @@ export class Menu {
         this.barrierLoad.visible = false;
         this.barrierNormal.visible = false;
         this.barrierStart.visible = false;
-
-        this.barrierReturn.visible = true;
     }
     /**
      * Transitions to help screen.
@@ -467,7 +439,6 @@ export class Menu {
             this.mode = 1;
             this.hideMenu();
             this.helpHandler.activate();
-            this.return.visible = true;
         }, 250);
     }
     /**
@@ -488,18 +459,6 @@ export class Menu {
         return true;
     }
     /**
-     * Changes the return menu button text when clicked to signal to user that their click worked.
-     */
-    pressedReturn(): void {
-        this.scene.remove(this.return);
-        // Selected return button text
-        this.returnGeometry = new TextGeometry(`Return`, this.fontDifficultyBtnParams);
-        this.return = new Mesh( this.returnGeometry, this.menuSelectedMaterial );
-        this.return.position.set(-0.8, -0.5, 4.2);;
-        this.return.rotation.x = -1.5708;
-        this.scene.add(this.return);
-    }
-    /**
      * Changes the start menu button text when clicked to signal to user that their click worked.
      * @returns difficulty level chosen before start was pressed (to be used in game difficulty checks)
      */
@@ -517,14 +476,6 @@ export class Menu {
      * Reactivates main menu options.
      */
     returnToMainMenu(): void {
-        this.scene.remove(this.return);
-        // Selected return button text
-        this.returnGeometry = new TextGeometry(`Return`, this.fontDifficultyBtnParams);
-        this.return = new Mesh( this.returnGeometry, this.menuMaterial );
-        this.return.position.set(-0.8, -0.5, 4.2);;
-        this.return.rotation.x = -1.5708;
-        this.scene.add(this.return);
-        this.return.visible = false;
         if (this.mode === 2) {
             this.scene.remove(this.load);
             // Selected load button text
@@ -558,6 +509,7 @@ export class Menu {
     showMenu() {
         this.shimmer.color.set(0x3333FF);
         this.shimmer.intensity = 2;
+        this.shimmer.position.y = 2;
         // this.mainBanner.visible = true;
         this.start.visible = true;
         this.easy.visible = true;
@@ -573,7 +525,5 @@ export class Menu {
         this.barrierLoad.visible = true;
         this.barrierNormal.visible = true;
         this.barrierStart.visible = true;
-
-        this.barrierReturn.visible = false;
     }
 }

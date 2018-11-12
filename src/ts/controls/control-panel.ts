@@ -192,6 +192,16 @@ export class ControlPanel {
         }
     }
     /**
+     * Getter for game help state.
+     * @returns TRUE --> game is in help screen | FALSE --> game is not in help screen.
+     */
+    isHelp(): boolean {
+        if (this.difficulty < 3) {
+            return this.help;
+        }
+        return false;
+    }
+    /**
      * Getter for game pause state.
      * @returns TRUE --> game is paused | FALSE --> game is not paused.
      */
