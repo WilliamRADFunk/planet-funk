@@ -184,9 +184,10 @@ export class Menu {
      * @param asteroidTexture texture image for the asteroid.
      * @param buildingTextures texture images for the 4 bases.
      * @param specMap texture image to help give the dead base its glossed over appearance.
+     * @param planetTextures texture images for the planet.
      * @hidden
      */
-    constructor(scene: Scene, menuFont: Font, saucerTextures: Texture[], asteroidTexture: Texture, buildingTextures: Texture[], specMap: Texture) {
+    constructor(scene: Scene, menuFont: Font, saucerTextures: Texture[], asteroidTexture: Texture, buildingTextures: Texture[], specMap: Texture, planetTextures: Texture[]) {
         this.menuFont = menuFont;
         this.scene = scene;
         this.fontDifficultyBtnParams = {
@@ -265,7 +266,7 @@ export class Menu {
         const returnBarrierGeometry = new PlaneGeometry( 2, 0.8, 0, 0 );
         this.barrierReturn = new Mesh( returnBarrierGeometry, this.clickMaterial );
         this.barrierReturn.name = 'Return';
-        this.barrierReturn.position.set(0, 0, 3);
+        this.barrierReturn.position.set(0, 0, 4);
         this.barrierReturn.rotation.set(1.5708, 0, 0);
         this.scene.add(this.barrierReturn);
         // Main Banner button text
@@ -329,13 +330,13 @@ export class Menu {
         // Return button text
         this.returnGeometry = new TextGeometry(`Return`, this.fontDifficultyBtnParams);
         this.return = new Mesh( this.returnGeometry, this.menuMaterial );
-        this.return.position.set(-0.8, -0.5, 3.2);
+        this.return.position.set(-0.8, -0.5, 4.2);
         this.return.rotation.x = -1.5708;
         this.scene.add(this.return);
 
         this.return.visible = false;
 
-        this.helpHandler = new HelpHandler(this.scene, this.menuFont, saucerTextures, asteroidTexture, buildingTextures, specMap);
+        this.helpHandler = new HelpHandler(this.scene, this.menuFont, saucerTextures, asteroidTexture, buildingTextures, specMap, planetTextures);
     }
     /**
      * Changes difficulty level, and instigates the altering of the button texts associated with that choice.
@@ -429,8 +430,8 @@ export class Menu {
      * Turns visibility for menu items to be unseen.
      */
     hideMenu() {
-        this.shimmer.color.set(0xFFFFFF);
-        this.shimmer.intensity = 3.5;
+        this.shimmer.color.set(0xCCCCCC);
+        this.shimmer.intensity = 3.2;
         // this.mainBanner.visible = false;
         this.start.visible = false;
         this.easy.visible = false;
@@ -494,7 +495,7 @@ export class Menu {
         // Selected return button text
         this.returnGeometry = new TextGeometry(`Return`, this.fontDifficultyBtnParams);
         this.return = new Mesh( this.returnGeometry, this.menuSelectedMaterial );
-        this.return.position.set(-0.8, -0.5, 3.2);
+        this.return.position.set(-0.8, -0.5, 4.2);;
         this.return.rotation.x = -1.5708;
         this.scene.add(this.return);
     }
@@ -520,7 +521,7 @@ export class Menu {
         // Selected return button text
         this.returnGeometry = new TextGeometry(`Return`, this.fontDifficultyBtnParams);
         this.return = new Mesh( this.returnGeometry, this.menuMaterial );
-        this.return.position.set(-0.8, -0.5, 3.2);
+        this.return.position.set(-0.8, -0.5, 4.2);;
         this.return.rotation.x = -1.5708;
         this.scene.add(this.return);
         this.return.visible = false;

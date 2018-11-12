@@ -44,6 +44,10 @@ export class Shield implements Collidable {
      */
     private shield: Mesh;
     /**
+     * Starting position.
+     */
+    private startPosition: [number, number] = [0, 0];
+    /**
      * Controls size and shape of the energy meter
      */
     private timeGeometry: CylinderGeometry;
@@ -55,7 +59,10 @@ export class Shield implements Collidable {
      * Constructor for Shield class
      * @hidden
      */
-    constructor() {
+    constructor(startPosition?: [number, number]) {
+        if (startPosition) {
+            this.startPosition = startPosition;
+        }
         // Creates the semi-transparent shield over the planet and it's populated areas.
         this.shieldGeometry = new SphereGeometry(1, 32, 32);
         const envMap = new TextureLoader().load('assets/images/shiny.png');
@@ -68,7 +75,7 @@ export class Shield implements Collidable {
             transparent: true
         });
         this.shield = new Mesh(this.shieldGeometry, this.shieldMaterial);
-        this.shield.position.set(0, -10, 0);
+        this.shield.position.set(this.startPosition[0], 0, this.startPosition[1]);
         this.shield.name = 'Shield';
         // Creates and places the energy meter beads in a ring around the shield.
         this.energyBars = new Object3D();
@@ -79,7 +86,7 @@ export class Shield implements Collidable {
 			const minuteTick = new Mesh(this.timeGeometry, this.timeMaterial.clone());
 			const x_coord = 1 * Math.cos( i * (Math.PI / 30) );
 			const z_coord = 1 * Math.sin( i * (Math.PI / 30) );
-			minuteTick.position.set(x_coord, 0, z_coord);
+			minuteTick.position.set((x_coord + this.startPosition[0]), 0, (z_coord + this.startPosition[1]));
 			this.energyBars.add(minuteTick);
         }
     }
@@ -112,6 +119,14 @@ export class Shield implements Collidable {
             this.shieldMaterial.opacity = 0;
         }
         this.isActive = false;
+    }
+    /**
+     * Wipe from scene. Used for help screen.
+     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     */
+    destroy(scene: Scene) {
+        scene.remove(this.energyBars);
+        scene.remove(this.shield);
     }
     /**
      * At the end of each loop iteration, planet expends energy if the shield is up,

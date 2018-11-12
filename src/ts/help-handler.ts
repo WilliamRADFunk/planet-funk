@@ -21,6 +21,8 @@ import {
     Texture,
     Vector3 } from "three";
 import { Projectile } from "./weapons/projectile";
+import { Planet } from "./player/planet";
+import { Shield } from "./player/shield";
 
 export class HelpHandler {
     /**
@@ -39,6 +41,10 @@ export class HelpHandler {
      * Controls the overall rendering of the destroyed buildings
      */
     private buildingsDead: Mesh[] = [];
+    /**
+     * Base texture images
+     */
+    private buildingTextures: Texture[];
     /**
      * Controls the overall rendering of the missile head
      */
@@ -59,6 +65,14 @@ export class HelpHandler {
      * Mouse pointer
      */
     private mouse: Mesh;
+    /**
+     * Planet demonstration
+     */
+    private planet: Planet;
+    /**
+     * Planet texture images
+     */
+    private planetTextures: Texture[];
     /**
      * Controls the overall rendering of the saucer
      */
@@ -104,6 +118,14 @@ export class HelpHandler {
      */
     private sections: Mesh[] = [];
     /**
+     * Shield demonstration
+     */
+    private shield: Shield;
+    /**
+     * Texture image to help give the dead base its glossed over appearance.
+     */
+    private specMap: Texture;
+    /**
      * Controls the overall rendering of the missile tail
      */
     private tailMesh: Line;
@@ -127,11 +149,22 @@ export class HelpHandler {
      * @param asteroidTexture texture image for the asteroid.
      * @param buildingTextures texture images for the 4 bases.
      * @param specMap texture image to help give the dead base its glossed over appearance.
+     * @param planetTextures texture images for the planet.
      * @hidden
      */
-    constructor(scene: Scene, helpFont: Font, saucerTextures: Texture[], asteroidTexture: Texture, buildingTextures: Texture[], specMap: Texture) {
+    constructor(
+        scene: Scene,
+        helpFont: Font,
+        saucerTextures: Texture[],
+        asteroidTexture: Texture,
+        buildingTextures: Texture[],
+        specMap: Texture,
+        planetTextures: Texture[]) {
         this.helpFont = helpFont;
         this.scene = scene;
+        this.buildingTextures = buildingTextures;
+        this.planetTextures = planetTextures;
+        this.specMap = specMap;
 
         this.sectionMaterial = new MeshBasicMaterial( {color: 0x111111, opacity: 1, transparent: false, side: DoubleSide} );
         this.sectionMaterialGlow = new MeshPhongMaterial( {color: 0x0955FF, opacity: 0.2, transparent: true, side: DoubleSide} );
@@ -207,7 +240,7 @@ export class HelpHandler {
         
         const buildingGeometry = new BoxGeometry(0.5, 0.0001, 0.5);
 
-        this.makeBox3(buildingGeometry, buildingTextures);
+        this.makeBox3(buildingGeometry);
 
         this.makeBox4(
             satelliteBodyGeometry,
@@ -218,12 +251,11 @@ export class HelpHandler {
             satelliteEnergyMaterial,
             satelliteContainerGeometry,
             satelliteContainerMaterial,
-            buildingGeometry,
-            buildingTextures);
+            buildingGeometry);
 
         this.makeBox5();
 
-        this.makeBox6(buildingGeometry, buildingTextures, specMap);
+        this.makeBox6(buildingGeometry);
 
         this.deactivate();
     }
@@ -241,6 +273,11 @@ export class HelpHandler {
         this.buildingsDead.filter(x => x.visible = true);
         this.sections.filter(x => x.visible = true);
         this.texts.filter(x => x.visible = true);
+
+        this.planet = new Planet([-0.9, 2]);
+        this.planet.addToScene(this.scene, this.planetTextures, this.buildingTextures, this.specMap);
+        this.shield = new Shield([-0.9, 2]);
+        this.shield.addToScene(this.scene);
     }
     deactivate() {
         this.asteroid.visible = false;
@@ -256,6 +293,13 @@ export class HelpHandler {
         this.buildingsDead.filter(x => x.visible = false);
         this.sections.filter(x => x.visible = false);
         this.texts.filter(x => x.visible = false);
+
+        if (this.planet) {
+            this.planet.removeFromScene(this.scene);
+        }
+        if (this.shield) {
+            this.shield.destroy(this.scene);
+        }
     }
     /**
      * Moves the animated help items.
@@ -265,6 +309,8 @@ export class HelpHandler {
             this.missileExample1.removeFromScene(this.scene);
             this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), false, 0.02);
         }
+        this.planet.endCycle();
+        this.shield.endCycle(this.planet.getPowerRegenRate());
     }
     private makeBox1(sTex: Texture[], astTex: Texture) {
         this.sections[0] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
@@ -399,7 +445,7 @@ export class HelpHandler {
         this.mouse.rotation.set(-1.5708, 0, 0);
         this.scene.add(this.mouse);
     }
-    private makeBox3(bg: BoxGeometry, buildingTextures: Texture[]) {
+    private makeBox3(bg: BoxGeometry) {
         this.sections[4] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
         this.sections[4].position.set(4.25, 1, -1.4);
         this.sections[4].rotation.set(1.5708, 0, 0);
@@ -417,22 +463,22 @@ export class HelpHandler {
         this.scene.add(this.texts[5]);
         
         const building1Material = new MeshPhongMaterial();
-        building1Material.map = buildingTextures[0];
+        building1Material.map = this.buildingTextures[0];
         building1Material.map.minFilter = LinearFilter;
         building1Material.shininess = 0;
         building1Material.transparent = true;
         const building2Material = new MeshPhongMaterial();
-        building2Material.map = buildingTextures[1];
+        building2Material.map = this.buildingTextures[1];
         building2Material.map.minFilter = LinearFilter;
         building2Material.shininess = 0;
         building2Material.transparent = true;
         const building3Material = new MeshPhongMaterial();
-        building3Material.map = buildingTextures[2];
+        building3Material.map = this.buildingTextures[2];
         building3Material.map.minFilter = LinearFilter;
         building3Material.shininess = 0;
         building3Material.transparent = true;
         const building4Material = new MeshPhongMaterial();
-        building4Material.map = buildingTextures[3];
+        building4Material.map = this.buildingTextures[3];
         building4Material.map.minFilter = LinearFilter;
         building4Material.shininess = 0;
         building4Material.transparent = true;
@@ -481,8 +527,7 @@ export class HelpHandler {
         sem: MeshBasicMaterial,
         scg: BoxGeometry,
         scm: MeshBasicMaterial,
-        bg: BoxGeometry,
-        buildingTextures: Texture[]) {
+        bg: BoxGeometry) {
         this.sections[6] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
         this.sections[6].position.set(-4.25, 1, 1.3);
         this.sections[6].rotation.set(1.5708, 0, 0);
@@ -506,7 +551,7 @@ export class HelpHandler {
         this.scene.add(this.texts[10]);
 
         const building1Material = new MeshPhongMaterial();
-        building1Material.map = buildingTextures[0];
+        building1Material.map = this.buildingTextures[0];
         building1Material.map.minFilter = LinearFilter;
         building1Material.shininess = 0;
         building1Material.transparent = true;
@@ -539,17 +584,26 @@ export class HelpHandler {
         this.scene.add(this.satelliteContainer2);
     }
     private makeBox5() {
-        this.sections[8] = new Mesh( this.sectionBackingGeometryMiddle, this.sectionMaterial );
-        this.sections[8].position.set(0, 1, 1.3);
+        const sectionBackingGeometryMiddle = new PlaneGeometry( 4.5, 3.2, 0, 0 );
+        const sectionGlowGeometryMiddle = new PlaneGeometry( 4.7, 3.3, 0, 0 );
+
+        this.sections[8] = new Mesh( sectionBackingGeometryMiddle, this.sectionMaterial );
+        this.sections[8].position.set(0, 1, 1.75);
         this.sections[8].rotation.set(1.5708, 0, 0);
         this.scene.add(this.sections[8]);
 
-        this.sections[9] = new Mesh( this.sectionGlowGeometryMiddle, this.sectionMaterialGlow );
-        this.sections[9].position.set(0, 1.1, 1.3);
+        this.sections[9] = new Mesh( sectionGlowGeometryMiddle, this.sectionMaterialGlow );
+        this.sections[9].position.set(0, 1.1, 1.75);
         this.sections[9].rotation.set(1.5708, 0, 0);
         this.scene.add(this.sections[9]);
+
+        const ShieldGeometry = new TextGeometry(`Click in Ring for Shield`, this.textHeaderParams);
+        this.texts[12] = new Mesh( ShieldGeometry, this.helpMaterial );
+        this.texts[12].position.set(-2.1, 0.6, 0.5);
+        this.texts[12].rotation.x = -1.5708;
+        this.scene.add(this.texts[12]);
     }
-    private makeBox6(bg: BoxGeometry, buildingTextures: Texture[], specMap: Texture) {
+    private makeBox6(bg: BoxGeometry) {
         this.sections[10] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
         this.sections[10].position.set(4.25, 1, 1.3);
         this.sections[10].rotation.set(1.5708, 0, 0);
@@ -561,56 +615,56 @@ export class HelpHandler {
         this.scene.add(this.sections[11]);
 
         const Base1Geometry = new TextGeometry(`All Bases Dead`, this.textHeaderParams);
-        this.texts[12] = new Mesh( Base1Geometry, this.helpMaterial );
-        this.texts[12].position.set(3, 0.6, 0.5);
-        this.texts[12].rotation.x = -1.5708;
-        this.scene.add(this.texts[12]);
-
-        const Base2Geometry = new TextGeometry(`=`, this.textpParams);
-        this.texts[13] = new Mesh( Base2Geometry, this.helpMaterial );
-        this.texts[13].position.set(4.2, 0.6, 1.8);
+        this.texts[13] = new Mesh( Base1Geometry, this.helpMaterial );
+        this.texts[13].position.set(3, 0.6, 0.5);
         this.texts[13].rotation.x = -1.5708;
         this.scene.add(this.texts[13]);
+
+        const Base2Geometry = new TextGeometry(`=`, this.textpParams);
+        this.texts[14] = new Mesh( Base2Geometry, this.helpMaterial );
+        this.texts[14].position.set(4.2, 0.6, 1.8);
+        this.texts[14].rotation.x = -1.5708;
+        this.scene.add(this.texts[14]);
 
         const gameOverMaterial = new MeshLambertMaterial( {color: 0xFF0055, opacity: 1, transparent: true} );
 
         const Base3Geometry = new TextGeometry(`Game Over`, this.textHeaderParams);
-        this.texts[14] = new Mesh( Base3Geometry, gameOverMaterial );
-        this.texts[14].position.set(3.4, 0.6, 2.2);
-        this.texts[14].rotation.x = -1.5708;
-        this.scene.add(this.texts[14]);
+        this.texts[15] = new Mesh( Base3Geometry, gameOverMaterial );
+        this.texts[15].position.set(3.4, 0.6, 2.2);
+        this.texts[15].rotation.x = -1.5708;
+        this.scene.add(this.texts[15]);
         
         const building5Material = new MeshPhongMaterial();
-        building5Material.map = buildingTextures[0];
+        building5Material.map = this.buildingTextures[0];
         building5Material.map.minFilter = LinearFilter;
-        building5Material.specularMap = specMap;
+        building5Material.specularMap = this.specMap;
 		building5Material.specularMap.minFilter = LinearFilter;
         building5Material.specular  = new Color(0x333333);
         building5Material.shininess = 0;
         building5Material.transparent = true;
         building5Material.opacity = 0.2;
         const building6Material = new MeshPhongMaterial();
-        building6Material.map = buildingTextures[1];
+        building6Material.map = this.buildingTextures[1];
         building6Material.map.minFilter = LinearFilter;
-        building6Material.specularMap = specMap;
+        building6Material.specularMap = this.specMap;
 		building6Material.specularMap.minFilter = LinearFilter;
         building6Material.specular  = new Color(0x333333);
         building6Material.shininess = 0;
         building6Material.transparent = true;
         building6Material.opacity = 0.2;
         const building7Material = new MeshPhongMaterial();
-        building7Material.map = buildingTextures[2];
+        building7Material.map = this.buildingTextures[2];
         building7Material.map.minFilter = LinearFilter;
-        building7Material.specularMap = specMap;
+        building7Material.specularMap = this.specMap;
 		building7Material.specularMap.minFilter = LinearFilter;
         building7Material.specular  = new Color(0x333333);
         building7Material.shininess = 0;
         building7Material.transparent = true;
         building7Material.opacity = 0.2;
         const building8Material = new MeshPhongMaterial();
-        building8Material.map = buildingTextures[3];
+        building8Material.map = this.buildingTextures[3];
         building8Material.map.minFilter = LinearFilter;
-        building8Material.specularMap = specMap;
+        building8Material.specularMap = this.specMap;
 		building8Material.specularMap.minFilter = LinearFilter;
         building8Material.specular  = new Color(0x333333);
         building8Material.shininess = 0;

@@ -108,10 +108,19 @@ export class Planet implements Collidable {
      */
     private satellites: Satellite[] = [];
     /**
+     * Starting position.
+     */
+    private startPosition: [number, number] = [0, 0];
+    /**
      * Constructor for the Planet class
+     * @param startPosition allows creation of planet in a variable location (help screen mostly)
      * @hidden
      */
-    constructor() {}
+    constructor(startPosition?: [number, number]) {
+        if (startPosition) {
+            this.startPosition = startPosition;
+        }
+    }
     /**
      * Adds planet object to the three.js scene.
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
@@ -171,7 +180,7 @@ export class Planet implements Collidable {
 		this.funkMaterial.specular  = new Color(0xFFFFFF);
         this.funkMaterial.shininess = 10;
         this.funk = new Mesh(this.funkGeometry, this.funkMaterial);
-        this.funk.position.set(0, 0, 0);
+        this.funk.position.set(this.startPosition[0], 0, this.startPosition[1]);
         this.funk.rotation.set(0, -1.57079644, 0);
         this.funk.name = 'Planet';
         this.deadPlanetTexture = planetTextures[2];
