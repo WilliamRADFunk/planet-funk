@@ -40,12 +40,13 @@ export class ControlSave {
      * @param clkMat        consistent click material used for all control panel buttons.
      * @hidden
      */
-    constructor(scene: Scene, pos: [number, number], size: number, color: Color, clkMat: MeshBasicMaterial) {
+    constructor(scene: Scene, pos: [number, number, number], size: number, color: Color, clkMat: MeshBasicMaterial) {
+        const yPos = pos[1] || 1;
         // Save button click barrier.
         const saveBarrierGeometry = new PlaneGeometry( size, size, 0, 0 );
         const saveBarrier = new Mesh( saveBarrierGeometry, clkMat );
         saveBarrier.name = 'Save Button';
-        saveBarrier.position.set(pos[0] + (size / 2) + (0.25 * size), 1, pos[1] + (size / 2) + (0.25 * size));
+        saveBarrier.position.set(pos[0] + (size / 2) + (0.25 * size), yPos, pos[2] + (size / 2) + (0.25 * size));
         saveBarrier.rotation.set(1.5708, 0, 0);
         scene.add(saveBarrier);
         // Save button border.
@@ -96,7 +97,7 @@ export class ControlSave {
         saveDisk.rotation.set(-1.5708, 0, 0);
         // The melding of the complete save button.
         this.saveButton = new Mesh();
-        this.saveButton.position.set(pos[0] + (0.25 * size), 0, pos[1] + (0.25 * size));
+        this.saveButton.position.set(pos[0] + (0.25 * size), yPos - 1, pos[2] + (0.25 * size));
         this.saveButton.add(saveButtonBorder);
         this.saveButton.add(saveDisk);
         scene.add(this.saveButton);

@@ -19,10 +19,12 @@ import {
     TextGeometry,
     TextGeometryParameters,
     Texture,
-    Vector3 } from "three";
+    Vector3, 
+    SphereGeometry} from "three";
 import { Projectile } from "./weapons/projectile";
 import { Planet } from "./player/planet";
 import { Shield } from "./player/shield";
+import { ControlSave } from "./controls/control-save";
 
 export class HelpHandler {
     /**
@@ -62,6 +64,10 @@ export class HelpHandler {
      */
     private helpMaterial: MeshLambertMaterial;
     /**
+     * Click surface for the shield example.
+     */
+    private helpShieldBarrier: Mesh;
+    /**
      * First example missile
      */
     private missileExample1: Projectile;
@@ -98,6 +104,10 @@ export class HelpHandler {
      */
     private satelliteContainer2: Mesh;
     /**
+     * The save button graphic
+     */
+    private saveControl: ControlSave;
+    /**
      * Reference to the scene, used to remove and reinstall text geometries.
      */
     private scene: Scene;
@@ -132,7 +142,7 @@ export class HelpHandler {
     /**
      * Shield demonstration
      */
-    private shield: Shield;
+    private shields: Shield[] = [];
     /**
      * Texture image to help give the dead base its glossed over appearance.
      */
@@ -204,7 +214,7 @@ export class HelpHandler {
 
         this.textHeaderParams = {
             font: this.helpFont,
-            size: 0.2,
+            size: 0.199,
             height: 0.2,
             curveSegments: 12,
             bevelEnabled: false,
@@ -285,9 +295,13 @@ export class HelpHandler {
         this.makeBox5();
 
         this.makeBox6(buildingGeometry);
+
+        this.makeBox7();
+
+        this.makeBox8(clickMaterial);
         
         // Return button text
-        this.returnGeometry = new TextGeometry(`RETURN`, this.textHeaderParams);
+        this.returnGeometry = new TextGeometry('RETURN', this.textHeaderParams);
         this.return = new Mesh( this.returnGeometry, this.helpMaterial );
         this.return.position.set(-0.6, -11, 4.2);
         this.return.rotation.x = -1.5708;
@@ -307,15 +321,22 @@ export class HelpHandler {
         this.satelliteContainer.visible = true;
         this.satelliteContainer2.visible = true;
         this.tailMesh.visible = true;
+        this.helpShieldBarrier.visible = true;
+        this.saveControl.show();
         this.buildingsAlive.filter(x => x.visible = true);
         this.buildingsDead.filter(x => x.visible = true);
         this.sections.filter(x => x.visible = true);
         this.texts.filter(x => x.visible = true);
 
-        this.planet = new Planet([-0.9, -12, 2]);
+        this.planet = new Planet([0, -12, 2]);
         this.planet.addToScene(this.scene, this.planetTextures, this.buildingTextures, this.specMap);
-        this.shield = new Shield([-0.9, -22, 2]);
-        this.shield.addToScene(this.scene);
+        this.shields.push(new Shield([0, -20, 2]));
+        this.shields[0].addToScene(this.scene);
+        this.shields.push(new Shield([-4.28, -20, 4], 0.6));
+        this.shields[1].addToScene(this.scene);
+        setTimeout(() => {
+            this.shields[1].activate();
+        }, 101);
     }
     deactivate() {
         this.asteroid.visible = false;
@@ -329,6 +350,8 @@ export class HelpHandler {
         this.satelliteContainer.visible = false;
         this.satelliteContainer2.visible = false;
         this.tailMesh.visible = false;
+        this.helpShieldBarrier.visible = false;
+        this.saveControl.hide();
         this.buildingsAlive.filter(x => x.visible = false);
         this.buildingsDead.filter(x => x.visible = false);
         this.sections.filter(x => x.visible = false);
@@ -337,8 +360,9 @@ export class HelpHandler {
         if (this.planet) {
             this.planet.removeFromScene(this.scene);
         }
-        if (this.shield) {
-            this.shield.destroy(this.scene);
+        if (this.shields.length) {
+            this.shields.forEach(s => s.destroy(this.scene));
+            this.shields = [];
         }
     }
     /**
@@ -350,7 +374,13 @@ export class HelpHandler {
             this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), false, 0.02, -11.5);
         }
         this.planet.endCycle();
-        this.shield.endCycle(this.planet.getPowerRegenRate());
+        this.shields.forEach(s => s.endCycle(1));
+        if (!this.shields[1].getActive() && this.shields[1].getEnergyLevel() >= 500) {
+            this.shields[1].activate();
+        }
+    }
+    getShield() {
+        return this.shields[0];
     }
     private makeBox1(sTex: Texture[], astTex: Texture) {
         this.sections[1] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
@@ -372,7 +402,7 @@ export class HelpHandler {
         this.saucer = new Mesh(saucerGeometry, saucerMaterial);
         this.saucer.position.set(-5.3, -11.4, -1.8);
         this.saucer.rotation.set(-1.5708, 0, 0);
-        this.saucer.name = `Help-Saucer`;
+        this.saucer.name = 'Help-Saucer';
         this.scene.add(this.saucer);
 
         const asteroidGeometry = new CircleGeometry(0.2, 16, 16);
@@ -384,7 +414,7 @@ export class HelpHandler {
         this.asteroid = new Mesh(asteroidGeometry, asteroidMaterial);
         this.asteroid.position.set(-5.3, -11.4, -1.2);
         this.asteroid.rotation.set(-1.5708, 0, 0);
-        this.asteroid.name = `Help-Asteroid`;
+        this.asteroid.name = 'Help-Asteroid';
         this.scene.add(this.asteroid);
 
         const headGeometry = new CircleGeometry(0.06, 32);
@@ -396,7 +426,7 @@ export class HelpHandler {
         this.headMesh = new Mesh(headGeometry, headMaterial);
         this.headMesh.position.set(-5.2, -11.4, -0.7);
         this.headMesh.rotation.set(-1.5708, 0, 0);
-        this.headMesh.name = `Help-Missile`;
+        this.headMesh.name = 'Help-Missile';
         this.scene.add(this.headMesh);
 
         const tailGeometry = new Geometry();
@@ -407,25 +437,25 @@ export class HelpHandler {
         this.tailMesh = new Line(tailGeometry, tailMaterial);
         this.scene.add(this.tailMesh);
 
-        const pointsGeometry = new TextGeometry(`Points`, this.textHeaderParams);
+        const pointsGeometry = new TextGeometry('Points', this.textHeaderParams);
         this.texts[0] = new Mesh( pointsGeometry, this.helpMaterial );
         this.texts[0].position.set(-4.8, -11.4, -2.2);
         this.texts[0].rotation.x = -1.5708;
         this.scene.add(this.texts[0]);
 
-        const pointsSaucerGeometry = new TextGeometry(`50 x difficulty`, this.textpParams);
+        const pointsSaucerGeometry = new TextGeometry('50 x difficulty', this.textpParams);
         this.texts[1] = new Mesh( pointsSaucerGeometry, this.helpMaterial );
         this.texts[1].position.set(-4.8, -11.4, -1.7);
         this.texts[1].rotation.x = -1.5708;
         this.scene.add(this.texts[1]);
 
-        const pointsAsteroidGeometry = new TextGeometry(`5 x difficulty`, this.textpParams);
+        const pointsAsteroidGeometry = new TextGeometry('5 x difficulty', this.textpParams);
         this.texts[2] = new Mesh( pointsAsteroidGeometry, this.helpMaterial );
         this.texts[2].position.set(-4.8, -11.4, -1.1);
         this.texts[2].rotation.x = -1.5708;
         this.scene.add(this.texts[2]);
 
-        const pointsMissileGeometry = new TextGeometry(`10 x difficulty`, this.textpParams);
+        const pointsMissileGeometry = new TextGeometry('10 x difficulty', this.textpParams);
         this.texts[3] = new Mesh( pointsMissileGeometry, this.helpMaterial );
         this.texts[3].position.set(-4.8, -11.4, -0.5);
         this.texts[3].rotation.x = -1.5708;
@@ -452,7 +482,7 @@ export class HelpHandler {
         this.sections[4].rotation.set(1.5708, 0, 0);
         this.scene.add(this.sections[4]);
 
-        const FireGeometry = new TextGeometry(`Left Click to Fire`, this.textHeaderParams);
+        const FireGeometry = new TextGeometry('Left Click to Fire', this.textHeaderParams);
         this.texts[4] = new Mesh( FireGeometry, this.helpMaterial );
         this.texts[4].position.set(-1.6, -11.4, -2.2);
         this.texts[4].rotation.x = -1.5708;
@@ -475,7 +505,7 @@ export class HelpHandler {
         this.satelliteContainer = new Mesh(scg, scm);
         this.satelliteContainer.position.set(-2, -11.5, -0.5);
         this.satelliteContainer.rotation.y = -0.785398;
-        this.satelliteContainer.name = `Help-Satellite`;
+        this.satelliteContainer.name = 'Help-Satellite';
         // Adds container, and by proxy, all satellite pieces, to the scene.
         this.satelliteContainer.add(satelliteBody);
         this.scene.add(this.satelliteContainer);
@@ -496,7 +526,7 @@ export class HelpHandler {
         this.sections[6].rotation.set(1.5708, 0, 0);
         this.scene.add(this.sections[6]);
 
-        const BaseGeometry = new TextGeometry(`Protect Bases`, this.textHeaderParams);
+        const BaseGeometry = new TextGeometry('Protect Bases', this.textHeaderParams);
         this.texts[5] = new Mesh( BaseGeometry, this.helpMaterial );
         this.texts[5].position.set(3, -11.4, -2.2);
         this.texts[5].rotation.x = -1.5708;
@@ -525,34 +555,34 @@ export class HelpHandler {
 
         this.buildingsAlive.push(new Mesh(bg, building1Material));
         this.buildingsAlive[0].position.set(3.2, -11.4, -1.6);
-        this.buildingsAlive[0].name = `Help-Base-Protect-1`;
+        this.buildingsAlive[0].name = 'Help-Base-Protect-1';
         this.scene.add(this.buildingsAlive[0]);
         this.buildingsAlive.push(new Mesh(bg, building2Material));
         this.buildingsAlive[1].position.set(3.9, -11.4, -1.6);
-        this.buildingsAlive[1].name = `Help-Base-Protect-2`;
+        this.buildingsAlive[1].name = 'Help-Base-Protect-2';
         this.scene.add(this.buildingsAlive[1]);
         this.buildingsAlive.push(new Mesh(bg, building3Material));
         this.buildingsAlive[2].position.set(4.6, -11.4, -1.6);
-        this.buildingsAlive[2].name = `Help-Base-Protect-3`;
+        this.buildingsAlive[2].name = 'Help-Base-Protect-3';
         this.scene.add(this.buildingsAlive[2]);
         this.buildingsAlive.push(new Mesh(bg, building4Material));
         this.buildingsAlive[3].position.set(5.3, -11.4, -1.6);
-        this.buildingsAlive[3].name = `Help-Base-Protect-4`;
+        this.buildingsAlive[3].name = 'Help-Base-Protect-4';
         this.scene.add(this.buildingsAlive[3]);
 
-        const Regen1Geometry = new TextGeometry(`More Bases = Faster`, this.textpParams);
+        const Regen1Geometry = new TextGeometry('More Bases = Faster', this.textpParams);
         this.texts[6] = new Mesh( Regen1Geometry, this.helpMaterial );
         this.texts[6].position.set(3, -11.4, -1);
         this.texts[6].rotation.x = -1.5708;
         this.scene.add(this.texts[6]);
     
-        const Regen2Geometry = new TextGeometry(`Satellite & Shield`, this.textpParams);
+        const Regen2Geometry = new TextGeometry('Satellite & Shield', this.textpParams);
         this.texts[7] = new Mesh( Regen2Geometry, this.helpMaterial );
         this.texts[7].position.set(3.2, -11.4, -0.7);
         this.texts[7].rotation.x = -1.5708;
         this.scene.add(this.texts[7]);
     
-        const Regen3Geometry = new TextGeometry(`Regeneration`, this.textpParams);
+        const Regen3Geometry = new TextGeometry('Regeneration', this.textpParams);
         this.texts[8] = new Mesh( Regen3Geometry, this.helpMaterial );
         this.texts[8].position.set(3.4, -11.4, -0.4);
         this.texts[8].rotation.x = -1.5708;
@@ -578,13 +608,13 @@ export class HelpHandler {
         this.sections[8].rotation.set(1.5708, 0, 0);
         this.scene.add(this.sections[8]);
 
-        const recoverGeometry = new TextGeometry(`Points Recover`, this.textHeaderParams);
+        const recoverGeometry = new TextGeometry('Points Recover', this.textHeaderParams);
         this.texts[9] = new Mesh( recoverGeometry, this.helpMaterial );
         this.texts[9].position.set(-5.55, -11.4, 0.5);
         this.texts[9].rotation.x = -1.5708;
         this.scene.add(this.texts[9]);
 
-        const pointsBuildingGeometry = new TextGeometry(`100,000 =`, this.textpParams);
+        const pointsBuildingGeometry = new TextGeometry('100,000 =', this.textpParams);
         this.texts[10] = new Mesh( pointsBuildingGeometry, this.helpMaterial );
         this.texts[10].position.set(-5.1, -11.4, 1.2);
         this.texts[10].rotation.x = -1.5708;
@@ -598,10 +628,10 @@ export class HelpHandler {
 
         this.building = new Mesh(bg, building1Material);
         this.building.position.set(-3.5, -11.4, 1.1);
-        this.building.name = `Help-Base-Points`;
+        this.building.name = 'Help-Base-Points';
         this.scene.add(this.building);
 
-        const pointsSatelliteGeometry = new TextGeometry(`50,000 =`, this.textpParams);
+        const pointsSatelliteGeometry = new TextGeometry('50,000 =', this.textpParams);
         this.texts[11] = new Mesh( pointsSatelliteGeometry, this.helpMaterial );
         this.texts[11].position.set(-5.1, -11.4, 2);
         this.texts[11].rotation.x = -1.5708;
@@ -618,7 +648,7 @@ export class HelpHandler {
         satelliteBody2.add(satelliteEnergy2);
         this.satelliteContainer2 = new Mesh(scg, scm);
         this.satelliteContainer2.position.set(-3.5, -11.4, 1.9);
-        this.satelliteContainer2.name = `Help-Satellite-2`;
+        this.satelliteContainer2.name = 'Help-Satellite-2';
         // Adds container, and by proxy, all satellite pieces, to the scene.
         this.satelliteContainer2.add(satelliteBody2);
         this.scene.add(this.satelliteContainer2);
@@ -637,11 +667,21 @@ export class HelpHandler {
         this.sections[10].rotation.set(1.5708, 0, 0);
         this.scene.add(this.sections[10]);
 
-        const ShieldGeometry = new TextGeometry(`Click in Ring for Shield`, this.textHeaderParams);
+        const ShieldGeometry = new TextGeometry('Click in Ring for Shield', this.textHeaderParams);
         this.texts[12] = new Mesh( ShieldGeometry, this.helpMaterial );
         this.texts[12].position.set(-2.1, -11.4, 0.5);
         this.texts[12].rotation.x = -1.5708;
         this.scene.add(this.texts[12]);
+
+        const helpShieldGeometry = new SphereGeometry(1, 32, 32);
+        const helpShieldMaterial = new MeshBasicMaterial({
+            opacity: 0,
+            transparent: true
+        });
+        this.helpShieldBarrier = new Mesh(helpShieldGeometry, helpShieldMaterial);
+        this.helpShieldBarrier.name = 'Help Shield';
+        this.helpShieldBarrier.position.set(0, -12, 2);
+        this.scene.add(this.helpShieldBarrier);
     }
     private makeBox6(bg: BoxGeometry) {
         this.sections[11] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
@@ -654,13 +694,13 @@ export class HelpHandler {
         this.sections[12].rotation.set(1.5708, 0, 0);
         this.scene.add(this.sections[12]);
 
-        const Base1Geometry = new TextGeometry(`All Bases Dead`, this.textHeaderParams);
+        const Base1Geometry = new TextGeometry('All Bases Dead', this.textHeaderParams);
         this.texts[13] = new Mesh( Base1Geometry, this.helpMaterial );
         this.texts[13].position.set(3, -11.4, 0.5);
         this.texts[13].rotation.x = -1.5708;
         this.scene.add(this.texts[13]);
 
-        const Base2Geometry = new TextGeometry(`=`, this.textpParams);
+        const Base2Geometry = new TextGeometry('=', this.textpParams);
         this.texts[14] = new Mesh( Base2Geometry, this.helpMaterial );
         this.texts[14].position.set(4.2, -11.4, 1.8);
         this.texts[14].rotation.x = -1.5708;
@@ -668,7 +708,7 @@ export class HelpHandler {
 
         const gameOverMaterial = new MeshLambertMaterial( {color: 0xFF0055, opacity: 1, transparent: true} );
 
-        const Base3Geometry = new TextGeometry(`Game Over`, this.textHeaderParams);
+        const Base3Geometry = new TextGeometry('Game Over', this.textHeaderParams);
         this.texts[15] = new Mesh( Base3Geometry, gameOverMaterial );
         this.texts[15].position.set(3.4, -11.4, 2.2);
         this.texts[15].rotation.x = -1.5708;
@@ -713,19 +753,71 @@ export class HelpHandler {
 
         this.buildingsDead.push(new Mesh(bg, building5Material));
         this.buildingsDead[0].position.set(3.2, -11.4, 1.1);
-        this.buildingsDead[0].name = `Help-Base-Protect-5`;
+        this.buildingsDead[0].name = 'Help-Base-Protect-5';
         this.scene.add(this.buildingsDead[0]);
         this.buildingsDead.push(new Mesh(bg, building6Material));
         this.buildingsDead[1].position.set(3.9, -11.4, 1.1);
-        this.buildingsDead[1].name = `Help-Base-Protect-6`;
+        this.buildingsDead[1].name = 'Help-Base-Protect-6';
         this.scene.add(this.buildingsDead[1]);
         this.buildingsDead.push(new Mesh(bg, building7Material));
         this.buildingsDead[2].position.set(4.6, -11.4, 1.1);
-        this.buildingsDead[2].name = `Help-Base-Protect-7`;
+        this.buildingsDead[2].name = 'Help-Base-Protect-7';
         this.scene.add(this.buildingsDead[2]);
         this.buildingsDead.push(new Mesh(bg, building8Material));
         this.buildingsDead[3].position.set(5.3, -11.4, 1.1);
-        this.buildingsDead[3].name = `Help-Base-Protect-8`;
+        this.buildingsDead[3].name = 'Help-Base-Protect-8';
         this.scene.add(this.buildingsDead[3]);
+    }
+
+    private makeBox7() {
+        
+        this.sections[13] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
+        this.sections[13].position.set(-4.25, -11, 4);
+        this.sections[13].rotation.set(1.5708, 0, 0);
+        this.scene.add(this.sections[13]);
+
+        this.sections[14] = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
+        this.sections[14].position.set(-4.25, -10.9, 4);
+        this.sections[14].rotation.set(1.5708, 0, 0);
+        this.scene.add(this.sections[14]);
+
+        const energyGeometry = new TextGeometry('Energy = Shield', this.textHeaderParams);
+        this.texts[16] = new Mesh( energyGeometry, this.helpMaterial );
+        this.texts[16].position.set(-5.6, -11.4, 3.2);
+        this.texts[16].rotation.x = -1.5708;
+        this.scene.add(this.texts[16]);
+
+        const energy2Geometry = new TextGeometry('Turn On >= Green', this.textHeaderParams);
+        this.texts[17] = new Mesh( energy2Geometry, this.helpMaterial );
+        this.texts[17].position.set(-5.77, -11.4, 5);
+        this.texts[17].rotation.x = -1.5708;
+        this.scene.add(this.texts[17]);
+    }
+
+    private makeBox8(clkMat: MeshBasicMaterial) {
+        
+        this.sections[15] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
+        this.sections[15].position.set(4.25, -11, 4);
+        this.sections[15].rotation.set(1.5708, 0, 0);
+        this.scene.add(this.sections[15]);
+
+        this.sections[16] = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
+        this.sections[16].position.set(4.25, -10.9, 4);
+        this.sections[16].rotation.set(1.5708, 0, 0);
+        this.scene.add(this.sections[16]);
+
+        const save1Geometry = new TextGeometry('Save Starts At', this.textHeaderParams);
+        this.texts[18] = new Mesh( save1Geometry, this.helpMaterial );
+        this.texts[18].position.set(2.95, -11.4, 3.2);
+        this.texts[18].rotation.x = -1.5708;
+        this.scene.add(this.texts[18]);
+
+        const save2Geometry = new TextGeometry('Level\'s Beginning', this.textHeaderParams);
+        this.texts[19] = new Mesh( save2Geometry, this.helpMaterial );
+        this.texts[19].position.set(2.79, -11.4, 5);
+        this.texts[19].rotation.x = -1.5708;
+        this.scene.add(this.texts[19]);
+
+        this.saveControl = new ControlSave(this.scene, [3.7, -12.5, 3.4], 0.7, new Color(0x00B39F), clkMat);
     }
 }

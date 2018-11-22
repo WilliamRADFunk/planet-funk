@@ -312,6 +312,12 @@ export class Menu {
         this.helpHandler = new HelpHandler(this.scene, this.menuFont, saucerTextures, asteroidTexture, buildingTextures, specMap, planetTextures);
     }
     /**
+     * Activates the specific shield in the help screen display.
+     */
+    private activateHelpShield() {
+        this.helpHandler.getShield().activate();
+    }
+    /**
      * Changes difficulty level, and instigates the altering of the button texts associated with that choice.
      * @param diff the selected diffulty choice (0 --> easy, 1 --> normal, 2 --> hard, 3 --> hardcore)
      */
@@ -384,6 +390,12 @@ export class Menu {
             }
             default: {}
         }
+    }
+    /**
+     * Deactivates the specific shield in the help screen display.
+     */
+    private deactivateHelpShield() {
+        this.helpHandler.getShield().deactivate();
     }
     /**
      * Moves the point light from left to right a little every frame.
@@ -525,5 +537,15 @@ export class Menu {
         this.barrierLoad.visible = true;
         this.barrierNormal.visible = true;
         this.barrierStart.visible = true;
+    }
+    /**
+     * Toggles the specific shield in the help screen display.
+     */
+    toggleHelpShield() {
+        if(this.helpHandler.getShield().getActive()) {
+            this.deactivateHelpShield();
+        } else {
+            this.activateHelpShield();
+        }
     }
 }

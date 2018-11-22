@@ -59,12 +59,13 @@ export class Shield implements Collidable {
      * Constructor for Shield class
      * @hidden
      */
-    constructor(startPosition?: [number, number, number]) {
+    constructor(startPosition?: [number, number, number], size?: number) {
+        const shieldSize = size || 1;
         if (startPosition) {
             this.startPosition = startPosition;
         }
         // Creates the semi-transparent shield over the planet and it's populated areas.
-        this.shieldGeometry = new SphereGeometry(1, 32, 32);
+        this.shieldGeometry = new SphereGeometry(shieldSize, 32, 32);
         const envMap = new TextureLoader().load('assets/images/shiny.png');
         envMap.mapping = SphericalReflectionMapping;
         this.shieldMaterial = new MeshStandardMaterial({
@@ -84,9 +85,9 @@ export class Shield implements Collidable {
 		for(let i = 0; i < 60; i++)
 		{
 			const minuteTick = new Mesh(this.timeGeometry, this.timeMaterial.clone());
-			const x_coord = 1 * Math.cos( i * (Math.PI / 30) );
-			const z_coord = 1 * Math.sin( i * (Math.PI / 30) );
-			minuteTick.position.set((x_coord + this.startPosition[0]), this.startPosition[1] + 10, (z_coord + this.startPosition[2]));
+			const x_coord = shieldSize * Math.cos( i * (Math.PI / 30) );
+			const z_coord = shieldSize * Math.sin( i * (Math.PI / 30) );
+			minuteTick.position.set((x_coord + this.startPosition[0]), this.startPosition[1] + 8, (z_coord + this.startPosition[2]));
 			this.energyBars.add(minuteTick);
         }
     }
@@ -173,6 +174,13 @@ export class Shield implements Collidable {
      */
     getCurrentPosition(): number[] {
         return [0, 0];
+    }
+    /**
+     * Returns the current energy level for this shield instance.
+     * @returns remaining energy in a whole number 0 - 1000.
+     */
+    getEnergyLevel(): number {
+        return this.energyLevel;
     }
     /**
      * Gets the name of the shield.

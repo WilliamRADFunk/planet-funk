@@ -117,7 +117,7 @@ export class ScoreHandler {
         this.score = new Mesh( this.scoreGeometry, this.scoreMaterial );
         this.score.position.x = -5.5;
         this.score.position.y = 0.75;
-        this.score.position.z = -5.1;
+        this.score.position.z = -5.3;
         this.score.rotation.x = -1.5708;
         this.scene.add(this.score);
         
@@ -137,7 +137,7 @@ export class ScoreHandler {
                 this.scores[i][j] = new Mesh( this.scoreGeometries[i][j], this.scoreMaterial );
                 this.scores[i][j].position.x = positionIndex[i];
                 this.scores[i][j].position.y = 0.75;
-                this.scores[i][j].position.z = -5.08;
+                this.scores[i][j].position.z = -5.28;
                 this.scores[i][j].rotation.x = -1.5708;
                 this.scores[i][j].visible = false;
                 this.scene.add(this.scores[i][j]);

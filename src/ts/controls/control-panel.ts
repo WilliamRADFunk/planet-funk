@@ -142,7 +142,7 @@ export class ControlPanel {
         //
         this.controlSave = new ControlSave(
             this.scene,
-            [x + (2.5 * BUTTON_SIZE), z],
+            [x + (2.5 * BUTTON_SIZE), 1, z],
             BUTTON_SIZE,
             this.currentColor,
             clickMaterial);
