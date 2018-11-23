@@ -74,7 +74,7 @@
 
 **● barrierEasy**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L23)*
+*Defined in [ts/displays/menu.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L23)*
 
 Click surface for the Easy button.
 
@@ -85,7 +85,7 @@ ___
 
 **● barrierHard**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L27)*
+*Defined in [ts/displays/menu.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L27)*
 
 Click surface for the Hard button.
 
@@ -96,7 +96,7 @@ ___
 
 **● barrierHardcore**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L31)*
+*Defined in [ts/displays/menu.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L31)*
 
 Click surface for the Hardcore button.
 
@@ -107,7 +107,7 @@ ___
 
 **● barrierHelp**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L35)*
+*Defined in [ts/displays/menu.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L35)*
 
 Click surface for the Help button.
 
@@ -118,7 +118,7 @@ ___
 
 **● barrierLoad**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L39)*
+*Defined in [ts/displays/menu.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L39)*
 
 Click surface for the Load button.
 
@@ -129,7 +129,7 @@ ___
 
 **● barrierNormal**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L43)*
+*Defined in [ts/displays/menu.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L43)*
 
 Click surface for the Normal button.
 
@@ -140,7 +140,7 @@ ___
 
 **● barrierStart**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L47)*
+*Defined in [ts/displays/menu.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L47)*
 
 Click surface for the Start button.
 
@@ -151,7 +151,7 @@ ___
 
 **● clickMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/displays/menu.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L51)*
+*Defined in [ts/displays/menu.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L51)*
 
 Controls the background click surface of buttons.
 
@@ -162,7 +162,7 @@ ___
 
 **● copyright**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:55](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L55)*
+*Defined in [ts/displays/menu.ts:55](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L55)*
 
 Controls the overall rendering of the copyright display
 
@@ -173,7 +173,7 @@ ___
 
 **● copyrightGeometry**: *`TextGeometry`*
 
-*Defined in [ts/displays/menu.ts:59](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L59)*
+*Defined in [ts/displays/menu.ts:59](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L59)*
 
 Controls size and shape of the copyright text
 
@@ -184,7 +184,7 @@ ___
 
 **● difficultyLevel**: *`number`* = 3
 
-*Defined in [ts/displays/menu.ts:63](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L63)*
+*Defined in [ts/displays/menu.ts:63](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L63)*
 
 Easy, Medium, Hard, Hardcore
 
@@ -195,7 +195,7 @@ ___
 
 **● easy**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:67](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L67)*
+*Defined in [ts/displays/menu.ts:67](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L67)*
 
 Controls the overall rendering of the easy button display
 
@@ -206,7 +206,7 @@ ___
 
 **● easyGeometry**: *`TextGeometry`*
 
-*Defined in [ts/displays/menu.ts:71](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L71)*
+*Defined in [ts/displays/menu.ts:71](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L71)*
 
 Controls size and shape of the easy button text
 
@@ -217,7 +217,7 @@ ___
 
 **● fontDifficultyBtnParams**: *`TextGeometryParameters`*
 
-*Defined in [ts/displays/menu.ts:75](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L75)*
+*Defined in [ts/displays/menu.ts:75](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L75)*
 
 Since most of the text on the menu has same parameters, use one variable.
 
@@ -228,7 +228,7 @@ ___
 
 **● hard**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:79](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L79)*
+*Defined in [ts/displays/menu.ts:79](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L79)*
 
 Controls the overall rendering of the hard button display
 
@@ -239,7 +239,7 @@ ___
 
 **● hardGeometry**: *`TextGeometry`*
 
-*Defined in [ts/displays/menu.ts:83](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L83)*
+*Defined in [ts/displays/menu.ts:83](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L83)*
 
 Controls size and shape of the hard button text
 
@@ -250,7 +250,7 @@ ___
 
 **● hardcore**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:87](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L87)*
+*Defined in [ts/displays/menu.ts:87](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L87)*
 
 Controls the overall rendering of the hardcore button display
 
@@ -261,7 +261,7 @@ ___
 
 **● hardcoreGeometry**: *`TextGeometry`*
 
-*Defined in [ts/displays/menu.ts:91](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L91)*
+*Defined in [ts/displays/menu.ts:91](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L91)*
 
 Controls size and shape of the hardcore button text
 
@@ -272,7 +272,7 @@ ___
 
 **● help**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:95](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L95)*
+*Defined in [ts/displays/menu.ts:95](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L95)*
 
 Controls the overall rendering of the help button display
 
@@ -283,7 +283,7 @@ ___
 
 **● helpGeometry**: *`TextGeometry`*
 
-*Defined in [ts/displays/menu.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L99)*
+*Defined in [ts/displays/menu.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L99)*
 
 Controls size and shape of the help button text
 
@@ -294,7 +294,7 @@ ___
 
 **● helpHandler**: *[HelpHandler](_ts_help_handler_.helphandler.md)*
 
-*Defined in [ts/displays/menu.ts:103](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L103)*
+*Defined in [ts/displays/menu.ts:103](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L103)*
 
 Paints the help screen.
 
@@ -305,7 +305,7 @@ ___
 
 **● load**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:107](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L107)*
+*Defined in [ts/displays/menu.ts:107](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L107)*
 
 Controls the overall rendering of the load button display
 
@@ -316,7 +316,7 @@ ___
 
 **● loadGeometry**: *`TextGeometry`*
 
-*Defined in [ts/displays/menu.ts:111](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L111)*
+*Defined in [ts/displays/menu.ts:111](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L111)*
 
 Controls size and shape of the load button text
 
@@ -327,7 +327,7 @@ ___
 
 **● loadMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/displays/menu.ts:115](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L115)*
+*Defined in [ts/displays/menu.ts:115](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L115)*
 
 Controls the color of the load button text material
 
@@ -338,7 +338,7 @@ ___
 
 **● mainBanner**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:119](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L119)*
+*Defined in [ts/displays/menu.ts:119](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L119)*
 
 Controls the overall rendering of the main banner display
 
@@ -349,7 +349,7 @@ ___
 
 **● mainBannerGeometry**: *`TextGeometry`*
 
-*Defined in [ts/displays/menu.ts:123](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L123)*
+*Defined in [ts/displays/menu.ts:123](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L123)*
 
 Controls size and shape of the main banner text
 
@@ -360,7 +360,7 @@ ___
 
 **● menuFont**: *`Font`*
 
-*Defined in [ts/displays/menu.ts:127](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L127)*
+*Defined in [ts/displays/menu.ts:127](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L127)*
 
 Loaded font for menu text.
 
@@ -371,7 +371,7 @@ ___
 
 **● menuMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/displays/menu.ts:131](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L131)*
+*Defined in [ts/displays/menu.ts:131](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L131)*
 
 Controls the color of the untouched button display material
 
@@ -382,7 +382,7 @@ ___
 
 **● menuSelectedMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/displays/menu.ts:135](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L135)*
+*Defined in [ts/displays/menu.ts:135](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L135)*
 
 Controls the color of the selected button display material
 
@@ -393,7 +393,7 @@ ___
 
 **● mode**: *`number`* = 0
 
-*Defined in [ts/displays/menu.ts:142](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L142)*
+*Defined in [ts/displays/menu.ts:142](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L142)*
 
 Keeps track of menu mode. 0 --> Menu options 1 --> Help screen 2 --> Load screen
 
@@ -404,7 +404,7 @@ ___
 
 **● normal**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:146](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L146)*
+*Defined in [ts/displays/menu.ts:146](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L146)*
 
 Controls the overall rendering of the normal button display
 
@@ -415,7 +415,7 @@ ___
 
 **● normalGeometry**: *`TextGeometry`*
 
-*Defined in [ts/displays/menu.ts:150](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L150)*
+*Defined in [ts/displays/menu.ts:150](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L150)*
 
 Controls size and shape of the normal button text
 
@@ -426,7 +426,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/displays/menu.ts:154](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L154)*
+*Defined in [ts/displays/menu.ts:154](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L154)*
 
 Reference to the scene, used to remove and reinstall text geometries.
 
@@ -437,7 +437,7 @@ ___
 
 **● shimmer**: *`PointLight`*
 
-*Defined in [ts/displays/menu.ts:158](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L158)*
+*Defined in [ts/displays/menu.ts:158](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L158)*
 
 Controls the light that give the text its shine.
 
@@ -448,7 +448,7 @@ ___
 
 **● start**: *`Mesh`*
 
-*Defined in [ts/displays/menu.ts:162](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L162)*
+*Defined in [ts/displays/menu.ts:162](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L162)*
 
 Controls the overall rendering of the start button display
 
@@ -459,7 +459,7 @@ ___
 
 **● startGeometry**: *`TextGeometry`*
 
-*Defined in [ts/displays/menu.ts:166](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L166)*
+*Defined in [ts/displays/menu.ts:166](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L166)*
 
 Controls size and shape of the start button text
 
@@ -473,7 +473,7 @@ ___
 
 ▸ **activateHelpShield**(): `void`
 
-*Defined in [ts/displays/menu.ts:317](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L317)*
+*Defined in [ts/displays/menu.ts:317](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L317)*
 
 Activates the specific shield in the help screen display.
 
@@ -486,7 +486,7 @@ ___
 
 ▸ **changeDifficulty**(diff: *`number`*): `void`
 
-*Defined in [ts/displays/menu.ts:324](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L324)*
+*Defined in [ts/displays/menu.ts:324](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L324)*
 
 Changes difficulty level, and instigates the altering of the button texts associated with that choice.
 
@@ -505,7 +505,7 @@ ___
 
 ▸ **createDifficultyButtons**(buttonIndex: *`number`*, material: *`MeshLambertMaterial`*, removeFirst: *`boolean`*): `void`
 
-*Defined in [ts/displays/menu.ts:341](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L341)*
+*Defined in [ts/displays/menu.ts:341](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L341)*
 
 Called to (re)create difficulty menu button text
 
@@ -526,7 +526,7 @@ ___
 
 ▸ **deactivateHelpShield**(): `void`
 
-*Defined in [ts/displays/menu.ts:397](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L397)*
+*Defined in [ts/displays/menu.ts:397](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L397)*
 
 Deactivates the specific shield in the help screen display.
 
@@ -539,7 +539,7 @@ ___
 
 ▸ **endCycle**(): `void`
 
-*Defined in [ts/displays/menu.ts:403](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L403)*
+*Defined in [ts/displays/menu.ts:403](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L403)*
 
 Moves the point light from left to right a little every frame.
 
@@ -552,7 +552,7 @@ ___
 
 ▸ **hideMenu**(): `void`
 
-*Defined in [ts/displays/menu.ts:417](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L417)*
+*Defined in [ts/displays/menu.ts:417](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L417)*
 
 Turns visibility for menu items to be unseen.
 
@@ -565,7 +565,7 @@ ___
 
 ▸ **pressedHelp**(): `void`
 
-*Defined in [ts/displays/menu.ts:441](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L441)*
+*Defined in [ts/displays/menu.ts:441](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L441)*
 
 Transitions to help screen. Changes the help menu button text when clicked to signal to user that their click worked.
 
@@ -578,7 +578,7 @@ ___
 
 ▸ **pressedLoad**(): `boolean`
 
-*Defined in [ts/displays/menu.ts:460](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L460)*
+*Defined in [ts/displays/menu.ts:460](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L460)*
 
 Changes the load menu button text when clicked to signal to user that their click worked (if not hardcore difficulty).
 
@@ -592,7 +592,7 @@ ___
 
 ▸ **pressedStart**(): `number`
 
-*Defined in [ts/displays/menu.ts:477](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L477)*
+*Defined in [ts/displays/menu.ts:477](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L477)*
 
 Changes the start menu button text when clicked to signal to user that their click worked.
 
@@ -606,7 +606,7 @@ ___
 
 ▸ **returnToMainMenu**(): `void`
 
-*Defined in [ts/displays/menu.ts:490](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L490)*
+*Defined in [ts/displays/menu.ts:490](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L490)*
 
 Reactivates main menu options.
 
@@ -619,7 +619,7 @@ ___
 
 ▸ **showMenu**(): `void`
 
-*Defined in [ts/displays/menu.ts:521](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L521)*
+*Defined in [ts/displays/menu.ts:521](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L521)*
 
 **Returns:** `void`
 
@@ -630,7 +630,7 @@ ___
 
 ▸ **toggleHelpShield**(): `void`
 
-*Defined in [ts/displays/menu.ts:544](https://github.com/WilliamRADFunk/planet-funk/blob/7d8bccd/src/ts/displays/menu.ts#L544)*
+*Defined in [ts/displays/menu.ts:544](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/menu.ts#L544)*
 
 Toggles the specific shield in the help screen display.
 

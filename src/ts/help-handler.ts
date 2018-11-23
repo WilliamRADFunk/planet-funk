@@ -164,6 +164,10 @@ export class HelpHandler {
      */
     private texts: Mesh[] = [];
     /**
+     * Tracks current z baseline coordinate off which all items are based.
+     */
+    private zSpot: number = 0.1;
+    /**
      * Constructor for the HelpHandler class
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param helpFont loaded font to use for help display text.
@@ -196,19 +200,20 @@ export class HelpHandler {
         this.sectionGlowGeometryMiddle = new PlaneGeometry( 4.7, 2.4, 0, 0 );
 
         const totalMaterial = new MeshBasicMaterial( {color: 0x000000, opacity: 1, transparent: false, side: DoubleSide} );
-        const totalBackingGeometry = new PlaneGeometry( 12, 10, 0, 0 );
+        const totalBackingGeometry = new PlaneGeometry( 12, 10.55, 0, 0 );
 
-        this.sections[0] = new Mesh( totalBackingGeometry, totalMaterial );
-        this.sections[0].position.set(0, -10.1, 0);
-        this.sections[0].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[0]);
+        let section = new Mesh( totalBackingGeometry, totalMaterial );
+        section.position.set(0, -10.1, this.zSpot);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
         
         // Create the help collision layer
         const clickMaterial = new MeshBasicMaterial( {opacity: 0, transparent: true, side: DoubleSide} );
         const returnBarrierGeometry = new PlaneGeometry( 2, 0.8, 0, 0 );
         this.barrierReturn = new Mesh( returnBarrierGeometry, clickMaterial );
         this.barrierReturn.name = 'Return';
-        this.barrierReturn.position.set(0.1, 0, 4);
+        this.barrierReturn.position.set(0.1, 0, this.zSpot + 4);
         this.barrierReturn.rotation.set(1.5708, 0, 0);
         this.scene.add(this.barrierReturn);
 
@@ -233,7 +238,9 @@ export class HelpHandler {
             bevelSegments: 3
         };
         this.helpMaterial = new MeshLambertMaterial( {color: 0x00B39F, opacity: 1, transparent: true} );
-
+        // Long top box
+        this.makeBox0();
+        // 2nd row left side
         this.makeBox1(saucerTextures, asteroidTexture);
 
         const satelliteBodyGeometry = new BoxGeometry(0.1, 0.1, 0.1);
@@ -264,7 +271,7 @@ export class HelpHandler {
         mouse.lineTo( xPlay + 0.1, yPlay - 0.20 );
         mouse.lineTo( xPlay + 0.15, yPlay - 0.20 );
         const mouseGeometry = new ShapeGeometry(mouse);
-
+        // 2nd row middle
         this.makeBox2(
             satelliteBodyGeometry,
             satelliteBodyMaterial,
@@ -278,9 +285,9 @@ export class HelpHandler {
             mouseGeometry);
         
         const buildingGeometry = new BoxGeometry(0.5, 0.0001, 0.5);
-
+        // 2nd row right side
         this.makeBox3(buildingGeometry);
-
+        // 3rd row left side
         this.makeBox4(
             satelliteBodyGeometry,
             satelliteBodyMaterial,
@@ -291,25 +298,27 @@ export class HelpHandler {
             satelliteContainerGeometry,
             satelliteContainerMaterial,
             buildingGeometry);
-
+        // 3rd row middle
         this.makeBox5();
-
+        // 3rd row right side
         this.makeBox6(buildingGeometry);
-
+        // 4th row left side
         this.makeBox7();
-
+        // 3rd row right side
         this.makeBox8(clickMaterial);
-        
         // Return button text
         this.returnGeometry = new TextGeometry('RETURN', this.textHeaderParams);
         this.return = new Mesh( this.returnGeometry, this.helpMaterial );
-        this.return.position.set(-0.6, -11, 4.2);
+        this.return.position.set(-0.6, -11, this.zSpot + 4.2);
         this.return.rotation.x = -1.5708;
         this.scene.add(this.return);
 
         this.deactivate();
     }
-    activate() {
+    /**
+     * Turns on all help screen related graphics
+     */
+    activate(): void {
         this.asteroid.visible = true;
         this.barrierReturn.visible = true;
         this.building.visible = true;
@@ -338,7 +347,10 @@ export class HelpHandler {
             this.shields[1].activate();
         }, 101);
     }
-    deactivate() {
+    /**
+     * Turns off all help screen related graphics
+     */
+    deactivate(): void {
         this.asteroid.visible = false;
         this.barrierReturn.visible = false;
         this.building.visible = false;
@@ -379,19 +391,49 @@ export class HelpHandler {
             this.shields[1].activate();
         }
     }
-    getShield() {
+    /**
+     * Returns the center shield to allow menu to toggle/click it.
+     * @returns the centered help screen shield for clicking on and off.
+     */
+    getShield(): Shield {
         return this.shields[0];
     }
-    private makeBox1(sTex: Texture[], astTex: Texture) {
-        this.sections[1] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
-        this.sections[1].position.set(-4.25, -11, -1.4);
-        this.sections[1].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[1]);
+    /**
+     * Builds the box and graphics for the long top section.
+     */
+    private makeBox0(): void {
+        const sectionBackingGeometryTop = new PlaneGeometry( 11.5, 2.3, 0, 0 );
+        const sectionGlowGeometryTop = new PlaneGeometry( 11.7, 2.4, 0, 0 );
 
-        this.sections[2] = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
-        this.sections[2].position.set(-4.25, -10.9, -1.4);
-        this.sections[2].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[2]);
+        let section = new Mesh( sectionBackingGeometryTop, this.sectionMaterial );
+        section.position.set(0, -11, this.zSpot - 4.1);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
+
+        section = new Mesh( sectionGlowGeometryTop, this.sectionMaterialGlow );
+        section.position.set(0, -10.9, this.zSpot - 4.1);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
+    }
+    /**
+     * Builds the box and graphics for the 2nd row left section.
+     * @param sTex      flying saucer tectures
+     * @param astTex    asteroid tectures
+     */
+    private makeBox1(sTex: Texture[], astTex: Texture): void {
+        let section = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
+        section.position.set(-4.25, -11, this.zSpot - 1.4);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
+
+        section = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
+        section.position.set(-4.25, -10.9, this.zSpot - 1.4);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
 
         const saucerGeometry = new CircleGeometry(0.2, 16, 16);
         const saucerMaterial = new MeshPhongMaterial();
@@ -400,7 +442,7 @@ export class HelpHandler {
         saucerMaterial.shininess = 0;
         saucerMaterial.transparent = true;
         this.saucer = new Mesh(saucerGeometry, saucerMaterial);
-        this.saucer.position.set(-5.3, -11.4, -1.8);
+        this.saucer.position.set(-5.3, -11.4, this.zSpot - 1.8);
         this.saucer.rotation.set(-1.5708, 0, 0);
         this.saucer.name = 'Help-Saucer';
         this.scene.add(this.saucer);
@@ -412,7 +454,7 @@ export class HelpHandler {
         asteroidMaterial.shininess = 0;
         asteroidMaterial.transparent = true;
         this.asteroid = new Mesh(asteroidGeometry, asteroidMaterial);
-        this.asteroid.position.set(-5.3, -11.4, -1.2);
+        this.asteroid.position.set(-5.3, -11.4, this.zSpot - 1.2);
         this.asteroid.rotation.set(-1.5708, 0, 0);
         this.asteroid.name = 'Help-Asteroid';
         this.scene.add(this.asteroid);
@@ -424,43 +466,60 @@ export class HelpHandler {
             transparent: true
         });
         this.headMesh = new Mesh(headGeometry, headMaterial);
-        this.headMesh.position.set(-5.2, -11.4, -0.7);
+        this.headMesh.position.set(-5.2, -11.4, this.zSpot - 0.7);
         this.headMesh.rotation.set(-1.5708, 0, 0);
         this.headMesh.name = 'Help-Missile';
         this.scene.add(this.headMesh);
 
         const tailGeometry = new Geometry();
         tailGeometry.vertices.push(
-            new Vector3(-5.2, -11.3, -0.7),
-            new Vector3(-5.4, -11.3, -0.5));
+            new Vector3(-5.2, -11.3, this.zSpot - 0.7),
+            new Vector3(-5.4, -11.3, this.zSpot - 0.5));
         const tailMaterial = new LineBasicMaterial({color: 0x00B39F});
         this.tailMesh = new Line(tailGeometry, tailMaterial);
         this.scene.add(this.tailMesh);
+        
+        let textGeo = new TextGeometry('Points', this.textHeaderParams);
+        let text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-4.8, -11.4, this.zSpot - 2.2);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
 
-        const pointsGeometry = new TextGeometry('Points', this.textHeaderParams);
-        this.texts[0] = new Mesh( pointsGeometry, this.helpMaterial );
-        this.texts[0].position.set(-4.8, -11.4, -2.2);
-        this.texts[0].rotation.x = -1.5708;
-        this.scene.add(this.texts[0]);
+        textGeo = new TextGeometry('50 x difficulty', this.textpParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-4.8, -11.4, this.zSpot - 1.7);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
 
-        const pointsSaucerGeometry = new TextGeometry('50 x difficulty', this.textpParams);
-        this.texts[1] = new Mesh( pointsSaucerGeometry, this.helpMaterial );
-        this.texts[1].position.set(-4.8, -11.4, -1.7);
-        this.texts[1].rotation.x = -1.5708;
-        this.scene.add(this.texts[1]);
+        textGeo = new TextGeometry('5 x difficulty', this.textpParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-4.8, -11.4, this.zSpot - 1.1);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
 
-        const pointsAsteroidGeometry = new TextGeometry('5 x difficulty', this.textpParams);
-        this.texts[2] = new Mesh( pointsAsteroidGeometry, this.helpMaterial );
-        this.texts[2].position.set(-4.8, -11.4, -1.1);
-        this.texts[2].rotation.x = -1.5708;
-        this.scene.add(this.texts[2]);
-
-        const pointsMissileGeometry = new TextGeometry('10 x difficulty', this.textpParams);
-        this.texts[3] = new Mesh( pointsMissileGeometry, this.helpMaterial );
-        this.texts[3].position.set(-4.8, -11.4, -0.5);
-        this.texts[3].rotation.x = -1.5708;
-        this.scene.add(this.texts[3]);
+        textGeo = new TextGeometry('10 x difficulty', this.textpParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-4.8, -11.4, this.zSpot - 0.5);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
     }
+    /**
+     * Builds the box and graphics for the 2nd row middle section.
+     * @param sbg       satellite body geometry
+     * @param sbm       satellite body material
+     * @param swg       satellite wing geometry
+     * @param swm       satellite wing material
+     * @param seg       satellite energy bar geometry
+     * @param sem       satellite energy bar material
+     * @param scg       satellite container geometry
+     * @param scm       satellite container material
+     * @param mouseMat  mouse cursor material
+     * @param mouseGeom mouse cursor geometry
+     */
     private makeBox2(
         sbg: BoxGeometry,
         sbm: MeshBasicMaterial,
@@ -471,22 +530,25 @@ export class HelpHandler {
         scg: BoxGeometry,
         scm: MeshBasicMaterial,
         mouseMat: MeshBasicMaterial,
-        mouseGeom: ShapeGeometry) {
-        this.sections[3] = new Mesh( this.sectionBackingGeometryMiddle, this.sectionMaterial );
-        this.sections[3].position.set(0, -11, -1.4);
-        this.sections[3].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[3]);
+        mouseGeom: ShapeGeometry): void {
+        let section = new Mesh( this.sectionBackingGeometryMiddle, this.sectionMaterial );
+        section.position.set(0, -11, this.zSpot - 1.4);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
 
-        this.sections[4] = new Mesh( this.sectionGlowGeometryMiddle, this.sectionMaterialGlow );
-        this.sections[4].position.set(0, -10.9, -1.4);
-        this.sections[4].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[4]);
-
-        const FireGeometry = new TextGeometry('Left Click to Fire', this.textHeaderParams);
-        this.texts[4] = new Mesh( FireGeometry, this.helpMaterial );
-        this.texts[4].position.set(-1.6, -11.4, -2.2);
-        this.texts[4].rotation.x = -1.5708;
-        this.scene.add(this.texts[4]);
+        section = new Mesh( this.sectionGlowGeometryMiddle, this.sectionMaterialGlow );
+        section.position.set(0, -10.9, this.zSpot - 1.4);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
+        
+        let textGeo = new TextGeometry('Left Click to Fire', this.textHeaderParams);
+        let text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-1.6, -11.4, this.zSpot - 2.2);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
         // The missile and its built in animation
         this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), false, 0.02, -11.5);
         // The square bulk of the satellite
@@ -503,7 +565,7 @@ export class HelpHandler {
         satelliteBody.add(satelliteEnergy);
         // Container for all the pieces of the satellite, to allow them all to be updated at same time.
         this.satelliteContainer = new Mesh(scg, scm);
-        this.satelliteContainer.position.set(-2, -11.5, -0.5);
+        this.satelliteContainer.position.set(-2, -11.5, this.zSpot - 0.5);
         this.satelliteContainer.rotation.y = -0.785398;
         this.satelliteContainer.name = 'Help-Satellite';
         // Adds container, and by proxy, all satellite pieces, to the scene.
@@ -511,26 +573,33 @@ export class HelpHandler {
         this.scene.add(this.satelliteContainer);
 
         this.mouse = new Mesh( mouseGeom, mouseMat );
-        this.mouse.position.set(1.5, -11.1, -1.7);
+        this.mouse.position.set(1.5, -11.1, this.zSpot - 1.7);
         this.mouse.rotation.set(-1.5708, 0, 0);
         this.scene.add(this.mouse);
     }
-    private makeBox3(bg: BoxGeometry) {
-        this.sections[5] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
-        this.sections[5].position.set(4.25, -11, -1.4);
-        this.sections[5].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[5]);
+    /**
+     * Builds the box and graphics for the 2nd row right section.
+     * @param bg building geometry
+     */
+    private makeBox3(bg: BoxGeometry): void {
+        let section = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
+        section.position.set(4.25, -11, this.zSpot - 1.4);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
 
-        this.sections[6] = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
-        this.sections[6].position.set(4.25, -10.9, -1.4);
-        this.sections[6].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[6]);
-
-        const BaseGeometry = new TextGeometry('Protect Bases', this.textHeaderParams);
-        this.texts[5] = new Mesh( BaseGeometry, this.helpMaterial );
-        this.texts[5].position.set(3, -11.4, -2.2);
-        this.texts[5].rotation.x = -1.5708;
-        this.scene.add(this.texts[5]);
+        section = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
+        section.position.set(4.25, -10.9, this.zSpot - 1.4);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
+        
+        let textGeo = new TextGeometry('Protect Bases', this.textHeaderParams);
+        let text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(3, -11.4, this.zSpot - 2.2);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
         
         const building1Material = new MeshPhongMaterial();
         building1Material.map = this.buildingTextures[0];
@@ -554,40 +623,55 @@ export class HelpHandler {
         building4Material.transparent = true;
 
         this.buildingsAlive.push(new Mesh(bg, building1Material));
-        this.buildingsAlive[0].position.set(3.2, -11.4, -1.6);
+        this.buildingsAlive[0].position.set(3.2, -11.4, this.zSpot - 1.6);
         this.buildingsAlive[0].name = 'Help-Base-Protect-1';
         this.scene.add(this.buildingsAlive[0]);
         this.buildingsAlive.push(new Mesh(bg, building2Material));
-        this.buildingsAlive[1].position.set(3.9, -11.4, -1.6);
+        this.buildingsAlive[1].position.set(3.9, -11.4, this.zSpot - 1.6);
         this.buildingsAlive[1].name = 'Help-Base-Protect-2';
         this.scene.add(this.buildingsAlive[1]);
         this.buildingsAlive.push(new Mesh(bg, building3Material));
-        this.buildingsAlive[2].position.set(4.6, -11.4, -1.6);
+        this.buildingsAlive[2].position.set(4.6, -11.4, this.zSpot - 1.6);
         this.buildingsAlive[2].name = 'Help-Base-Protect-3';
         this.scene.add(this.buildingsAlive[2]);
         this.buildingsAlive.push(new Mesh(bg, building4Material));
-        this.buildingsAlive[3].position.set(5.3, -11.4, -1.6);
+        this.buildingsAlive[3].position.set(5.3, -11.4, this.zSpot - 1.6);
         this.buildingsAlive[3].name = 'Help-Base-Protect-4';
         this.scene.add(this.buildingsAlive[3]);
-
-        const Regen1Geometry = new TextGeometry('More Bases = Faster', this.textpParams);
-        this.texts[6] = new Mesh( Regen1Geometry, this.helpMaterial );
-        this.texts[6].position.set(3, -11.4, -1);
-        this.texts[6].rotation.x = -1.5708;
-        this.scene.add(this.texts[6]);
-    
-        const Regen2Geometry = new TextGeometry('Satellite & Shield', this.textpParams);
-        this.texts[7] = new Mesh( Regen2Geometry, this.helpMaterial );
-        this.texts[7].position.set(3.2, -11.4, -0.7);
-        this.texts[7].rotation.x = -1.5708;
-        this.scene.add(this.texts[7]);
-    
-        const Regen3Geometry = new TextGeometry('Regeneration', this.textpParams);
-        this.texts[8] = new Mesh( Regen3Geometry, this.helpMaterial );
-        this.texts[8].position.set(3.4, -11.4, -0.4);
-        this.texts[8].rotation.x = -1.5708;
-        this.scene.add(this.texts[8]);
+        
+        textGeo = new TextGeometry('More Bases = Faster', this.textpParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(3, -11.4, this.zSpot - 1);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+        
+        textGeo = new TextGeometry('Satellite & Shield', this.textpParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(3.2, -11.4, this.zSpot - 0.7);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+        
+        textGeo = new TextGeometry('Regeneration', this.textpParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(3.4, -11.4, this.zSpot - 0.4);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
     }
+    /**
+     * Builds the box and graphics for the 3rd row left section.
+     * @param sbg   satellite body geometry
+     * @param sbm   satellite body material
+     * @param swg   satellite wing geometry
+     * @param swm   satellite wing material
+     * @param seg   satellite energy bar geometry
+     * @param sem   satellite energy bar material
+     * @param scg   satellite container geometry
+     * @param scm   satellite container material
+     * @param bg    building geometry
+     */
     private makeBox4(
         sbg: BoxGeometry,
         sbm: MeshBasicMaterial,
@@ -597,28 +681,32 @@ export class HelpHandler {
         sem: MeshBasicMaterial,
         scg: BoxGeometry,
         scm: MeshBasicMaterial,
-        bg: BoxGeometry) {
-        this.sections[7] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
-        this.sections[7].position.set(-4.25, -11, 1.3);
-        this.sections[7].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[7]);
+        bg: BoxGeometry): void {
+        let section = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
+        section.position.set(-4.25, -11, this.zSpot + 1.3);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
 
-        this.sections[8] = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
-        this.sections[8].position.set(-4.25, -10.9, 1.3);
-        this.sections[8].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[8]);
-
-        const recoverGeometry = new TextGeometry('Points Recover', this.textHeaderParams);
-        this.texts[9] = new Mesh( recoverGeometry, this.helpMaterial );
-        this.texts[9].position.set(-5.55, -11.4, 0.5);
-        this.texts[9].rotation.x = -1.5708;
-        this.scene.add(this.texts[9]);
-
-        const pointsBuildingGeometry = new TextGeometry('100,000 =', this.textpParams);
-        this.texts[10] = new Mesh( pointsBuildingGeometry, this.helpMaterial );
-        this.texts[10].position.set(-5.1, -11.4, 1.2);
-        this.texts[10].rotation.x = -1.5708;
-        this.scene.add(this.texts[10]);
+        section = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
+        section.position.set(-4.25, -10.9, this.zSpot + 1.3);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
+        
+        let textGeo = new TextGeometry('Points Recover', this.textHeaderParams);
+        let text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-5.55, -11.4, this.zSpot + 0.5);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+        
+        textGeo = new TextGeometry('100,000 =', this.textpParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-5.1, -11.4, this.zSpot + 1.2);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
 
         const building1Material = new MeshPhongMaterial();
         building1Material.map = this.buildingTextures[0];
@@ -627,15 +715,16 @@ export class HelpHandler {
         building1Material.transparent = true;
 
         this.building = new Mesh(bg, building1Material);
-        this.building.position.set(-3.5, -11.4, 1.1);
+        this.building.position.set(-3.5, -11.4, this.zSpot + 1.1);
         this.building.name = 'Help-Base-Points';
         this.scene.add(this.building);
-
-        const pointsSatelliteGeometry = new TextGeometry('50,000 =', this.textpParams);
-        this.texts[11] = new Mesh( pointsSatelliteGeometry, this.helpMaterial );
-        this.texts[11].position.set(-5.1, -11.4, 2);
-        this.texts[11].rotation.x = -1.5708;
-        this.scene.add(this.texts[11]);
+        
+        textGeo = new TextGeometry('50,000 =', this.textpParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-5.1, -11.4, this.zSpot + 2);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
 
         const satelliteBody2 = new Mesh(sbg, sbm);
         const satelliteWings2 = new Mesh(swg, swm);
@@ -647,31 +736,37 @@ export class HelpHandler {
         satelliteBody2.add(satelliteWings2);
         satelliteBody2.add(satelliteEnergy2);
         this.satelliteContainer2 = new Mesh(scg, scm);
-        this.satelliteContainer2.position.set(-3.5, -11.4, 1.9);
+        this.satelliteContainer2.position.set(-3.5, -11.4, this.zSpot + 1.9);
         this.satelliteContainer2.name = 'Help-Satellite-2';
         // Adds container, and by proxy, all satellite pieces, to the scene.
         this.satelliteContainer2.add(satelliteBody2);
         this.scene.add(this.satelliteContainer2);
     }
-    private makeBox5() {
+    /**
+     * Builds the box and graphics for the 3rd row middle section.
+     */
+    private makeBox5(): void {
         const sectionBackingGeometryMiddle = new PlaneGeometry( 4.5, 3.2, 0, 0 );
         const sectionGlowGeometryMiddle = new PlaneGeometry( 4.7, 3.3, 0, 0 );
 
-        this.sections[9] = new Mesh( sectionBackingGeometryMiddle, this.sectionMaterial );
-        this.sections[9].position.set(0, -11, 1.75);
-        this.sections[9].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[9]);
+        let section = new Mesh( sectionBackingGeometryMiddle, this.sectionMaterial );
+        section.position.set(0, -11, this.zSpot + 1.75);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
 
-        this.sections[10] = new Mesh( sectionGlowGeometryMiddle, this.sectionMaterialGlow );
-        this.sections[10].position.set(0, -10.9, 1.75);
-        this.sections[10].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[10]);
-
-        const ShieldGeometry = new TextGeometry('Click in Ring for Shield', this.textHeaderParams);
-        this.texts[12] = new Mesh( ShieldGeometry, this.helpMaterial );
-        this.texts[12].position.set(-2.1, -11.4, 0.5);
-        this.texts[12].rotation.x = -1.5708;
-        this.scene.add(this.texts[12]);
+        section = new Mesh( sectionGlowGeometryMiddle, this.sectionMaterialGlow );
+        section.position.set(0, -10.9, this.zSpot + 1.75);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
+        
+        let textGeo = new TextGeometry('Click in Ring for Shield', this.textHeaderParams);
+        let text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-2.1, -11.4, this.zSpot + 0.5);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
 
         const helpShieldGeometry = new SphereGeometry(1, 32, 32);
         const helpShieldMaterial = new MeshBasicMaterial({
@@ -680,39 +775,47 @@ export class HelpHandler {
         });
         this.helpShieldBarrier = new Mesh(helpShieldGeometry, helpShieldMaterial);
         this.helpShieldBarrier.name = 'Help Shield';
-        this.helpShieldBarrier.position.set(0, -12, 2);
+        this.helpShieldBarrier.position.set(0, -12, this.zSpot + 2);
         this.scene.add(this.helpShieldBarrier);
     }
-    private makeBox6(bg: BoxGeometry) {
-        this.sections[11] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
-        this.sections[11].position.set(4.25, -11, 1.3);
-        this.sections[11].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[11]);
+    /**
+     * Builds the box and graphics for the 3rd row right section.
+     * @param bg    building geometry
+     */
+    private makeBox6(bg: BoxGeometry): void {
+        let section = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
+        section.position.set(4.25, -11, this.zSpot + 1.3);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
 
-        this.sections[12] = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
-        this.sections[12].position.set(4.25, -10.9, 1.3);
-        this.sections[12].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[12]);
-
-        const Base1Geometry = new TextGeometry('All Bases Dead', this.textHeaderParams);
-        this.texts[13] = new Mesh( Base1Geometry, this.helpMaterial );
-        this.texts[13].position.set(3, -11.4, 0.5);
-        this.texts[13].rotation.x = -1.5708;
-        this.scene.add(this.texts[13]);
-
-        const Base2Geometry = new TextGeometry('=', this.textpParams);
-        this.texts[14] = new Mesh( Base2Geometry, this.helpMaterial );
-        this.texts[14].position.set(4.2, -11.4, 1.8);
-        this.texts[14].rotation.x = -1.5708;
-        this.scene.add(this.texts[14]);
+        section = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
+        section.position.set(4.25, -10.9, this.zSpot + 1.3);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
+        
+        let textGeo = new TextGeometry('All Bases Dead', this.textHeaderParams);
+        let text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(3, -11.4, this.zSpot + 0.5);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+        
+        textGeo = new TextGeometry('=', this.textpParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(4.2, -11.4, this.zSpot + 1.8);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
 
         const gameOverMaterial = new MeshLambertMaterial( {color: 0xFF0055, opacity: 1, transparent: true} );
-
-        const Base3Geometry = new TextGeometry('Game Over', this.textHeaderParams);
-        this.texts[15] = new Mesh( Base3Geometry, gameOverMaterial );
-        this.texts[15].position.set(3.4, -11.4, 2.2);
-        this.texts[15].rotation.x = -1.5708;
-        this.scene.add(this.texts[15]);
+        textGeo = new TextGeometry('Game Over', this.textHeaderParams);
+        text = new Mesh( textGeo, gameOverMaterial );
+        text.position.set(3.4, -11.4, this.zSpot + 2.2);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
         
         const building5Material = new MeshPhongMaterial();
         building5Material.map = this.buildingTextures[0];
@@ -752,71 +855,82 @@ export class HelpHandler {
         building8Material.opacity = 0.2;
 
         this.buildingsDead.push(new Mesh(bg, building5Material));
-        this.buildingsDead[0].position.set(3.2, -11.4, 1.1);
+        this.buildingsDead[0].position.set(3.2, -11.4, this.zSpot + 1.1);
         this.buildingsDead[0].name = 'Help-Base-Protect-5';
         this.scene.add(this.buildingsDead[0]);
         this.buildingsDead.push(new Mesh(bg, building6Material));
-        this.buildingsDead[1].position.set(3.9, -11.4, 1.1);
+        this.buildingsDead[1].position.set(3.9, -11.4, this.zSpot + 1.1);
         this.buildingsDead[1].name = 'Help-Base-Protect-6';
         this.scene.add(this.buildingsDead[1]);
         this.buildingsDead.push(new Mesh(bg, building7Material));
-        this.buildingsDead[2].position.set(4.6, -11.4, 1.1);
+        this.buildingsDead[2].position.set(4.6, -11.4, this.zSpot + 1.1);
         this.buildingsDead[2].name = 'Help-Base-Protect-7';
         this.scene.add(this.buildingsDead[2]);
         this.buildingsDead.push(new Mesh(bg, building8Material));
-        this.buildingsDead[3].position.set(5.3, -11.4, 1.1);
+        this.buildingsDead[3].position.set(5.3, -11.4, this.zSpot + 1.1);
         this.buildingsDead[3].name = 'Help-Base-Protect-8';
         this.scene.add(this.buildingsDead[3]);
     }
+    /**
+     * Builds the box and graphics for the 4th row left section.
+     */
+    private makeBox7(): void {
+        let section = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
+        section.position.set(-4.25, -11, this.zSpot + 4);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
 
-    private makeBox7() {
+        section = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
+        section.position.set(-4.25, -10.9, this.zSpot + 4);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
         
-        this.sections[13] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
-        this.sections[13].position.set(-4.25, -11, 4);
-        this.sections[13].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[13]);
-
-        this.sections[14] = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
-        this.sections[14].position.set(-4.25, -10.9, 4);
-        this.sections[14].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[14]);
-
-        const energyGeometry = new TextGeometry('Energy = Shield', this.textHeaderParams);
-        this.texts[16] = new Mesh( energyGeometry, this.helpMaterial );
-        this.texts[16].position.set(-5.6, -11.4, 3.2);
-        this.texts[16].rotation.x = -1.5708;
-        this.scene.add(this.texts[16]);
-
-        const energy2Geometry = new TextGeometry('Turn On >= Green', this.textHeaderParams);
-        this.texts[17] = new Mesh( energy2Geometry, this.helpMaterial );
-        this.texts[17].position.set(-5.77, -11.4, 5);
-        this.texts[17].rotation.x = -1.5708;
-        this.scene.add(this.texts[17]);
+        let textGeo = new TextGeometry('Energy = Shield', this.textHeaderParams);
+        let text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-5.6, -11.4, this.zSpot + 3.2);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+        
+        textGeo = new TextGeometry('Turn On >= Green', this.textHeaderParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-5.77, -11.4, this.zSpot + 5);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
     }
+    /**
+     * Builds the box and graphics for the 4th row right section.
+     * @param clkMat Spherical click material for shield interaction.
+     */
+    private makeBox8(clkMat: MeshBasicMaterial): void {  
+        let section = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
+        section.position.set(4.25, -11, this.zSpot + 4);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
 
-    private makeBox8(clkMat: MeshBasicMaterial) {
+        section = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
+        section.position.set(4.25, -10.9, this.zSpot + 4);
+        section.rotation.set(1.5708, 0, 0);
+        this.scene.add(section);
+        this.sections.push(section);
         
-        this.sections[15] = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
-        this.sections[15].position.set(4.25, -11, 4);
-        this.sections[15].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[15]);
-
-        this.sections[16] = new Mesh( this.sectionGlowGeometrySides, this.sectionMaterialGlow );
-        this.sections[16].position.set(4.25, -10.9, 4);
-        this.sections[16].rotation.set(1.5708, 0, 0);
-        this.scene.add(this.sections[16]);
-
-        const save1Geometry = new TextGeometry('Save Starts At', this.textHeaderParams);
-        this.texts[18] = new Mesh( save1Geometry, this.helpMaterial );
-        this.texts[18].position.set(2.95, -11.4, 3.2);
-        this.texts[18].rotation.x = -1.5708;
-        this.scene.add(this.texts[18]);
-
-        const save2Geometry = new TextGeometry('Level\'s Beginning', this.textHeaderParams);
-        this.texts[19] = new Mesh( save2Geometry, this.helpMaterial );
-        this.texts[19].position.set(2.79, -11.4, 5);
-        this.texts[19].rotation.x = -1.5708;
-        this.scene.add(this.texts[19]);
+        let textGeo = new TextGeometry('Save Starts At', this.textHeaderParams);
+        let text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(2.95, -11.4, this.zSpot + 3.2);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+        
+        textGeo = new TextGeometry('Level\'s Beginning', this.textHeaderParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(2.79, -11.4, this.zSpot + 5);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
 
         this.saveControl = new ControlSave(this.scene, [3.7, -12.5, 3.4], 0.7, new Color(0x00B39F), clkMat);
     }

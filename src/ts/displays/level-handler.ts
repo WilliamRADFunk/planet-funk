@@ -199,7 +199,7 @@ export class LevelHandler {
         this.level = new Mesh( this.levelGeometry, this.levelMaterial );
         this.level.position.x = -5.5;
         this.level.position.y = 0.5;
-        this.level.position.z = 5.7;
+        this.level.position.z = 5.8;
         this.level.rotation.x = -1.5708;
         this.scene.add(this.level);
         // Only remove lediffTextvel if it was added before.
@@ -218,7 +218,7 @@ export class LevelHandler {
         }
         this.diffTextGeometry = new TextGeometry(`Mode: ${mode}`, this.fontLowerTextParams);
         this.diffText = new Mesh( this.diffTextGeometry, this.levelMaterial );
-        this.diffText.position.set(xPos, 0.5, 5.7);
+        this.diffText.position.set(xPos, 0.5, 5.8);
         this.diffText.rotation.x = -1.5708;
         this.scene.add(this.diffText);
     }
