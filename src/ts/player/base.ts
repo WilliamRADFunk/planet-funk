@@ -49,14 +49,6 @@ export class Base implements Collidable{
      */
     private buildingDead: Mesh;
     /**
-     * Keeps track of planet's rotation to help calc satellite's position.
-     */
-    private currentRotation: number;
-    /**
-     * Number in the creation order. Needed later to scale energy bar.
-     */
-    private index: number;
-    /**
      * Flag to signal if base has been destroyed or not. True = not destroyed. False = destroyed.
      */
     private isActive: boolean = true;
@@ -65,10 +57,10 @@ export class Base implements Collidable{
      * @param index order of creation, used for position 1/2 o'clock and clockwise, and appearance.
      * @param buildingTexture texture image for this base instance.
      * @param specMap texture image to help give the dead base its glossed over appearance.
+     * @param startAlive 1 --> start base as active | 0 --> start with base destroyed.
      * @hidden
      */
-    constructor(index: number, buildingTexture: Texture, specMap: Texture) {
-        this.index = index;
+    constructor(index: number, buildingTexture: Texture, specMap: Texture, startAlive: number) {
         // Creates the bright, still alive, portion of the populated area.
         this.buildingGeometry = new BoxGeometry(0.5, 0.0001, 0.5);
         this.buildingMaterial = new MeshPhongMaterial();
@@ -94,23 +86,15 @@ export class Base implements Collidable{
         this.buildingDead = new Mesh(this.buildingDeadGeometry, this.buildingDeadMaterial);
         this.buildingDead.rotation.set(0, positionArray[index-1].ry, 0);
         this.buildingDead.position.set(positionArray[index-1].xb, 0.0001, positionArray[index-1].zb);
-        this.buildingDead.visible = false;
-    }
-    /**
-     * Adds base object to the three.js scene
-     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     */
-    addToScene(scene: Scene): void {
-        scene.add(this.building);
-        scene.add(this.buildingDead);
+        // Depending on load data, this base might already be dead.
+        this.isActive = !!startAlive;
+        this.building.visible = !!startAlive;
+        this.buildingDead.visible = !startAlive;
     }
     /**
      * At the end of each loop iteration, base updates planet's known rotation.
-     * @param rotation of planet to base current position off of.
      */
-    endCycle(rotation: number): void {
-        this.currentRotation = rotation;
-    }
+    endCycle(): void {}
     /**
      * Gets the viability of the base.
      * @returns flag to signal non-destruction. True = not destroyed. False = destroyed.

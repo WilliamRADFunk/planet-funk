@@ -42,7 +42,7 @@
 
 **● asteroidLoader**: *`TextureLoader`* =  new TextureLoader()
 
-*Defined in [ts/init.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L34)*
+*Defined in [ts/init.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L35)*
 
 Loads the graphic for asteroid.
 
@@ -53,7 +53,7 @@ ___
 
 **● asteroidTexture**: *`Texture`*
 
-*Defined in [ts/init.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L38)*
+*Defined in [ts/init.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L39)*
 
 The loaded texture, used for the asteroids.
 
@@ -69,7 +69,7 @@ ___
     new TextureLoader()
 ]
 
-*Defined in [ts/init.ts:42](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L42)*
+*Defined in [ts/init.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L43)*
 
 Loads the graphics for buildings.
 
@@ -80,7 +80,7 @@ ___
 
 **● buildingTextures**: *`Texture`[]* =  []
 
-*Defined in [ts/init.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L51)*
+*Defined in [ts/init.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L52)*
 
 The loaded textures, used for the buildings.
 
@@ -91,7 +91,7 @@ ___
 
 **● cameraMenu**: *`Camera`*
 
-*Defined in [ts/init.ts:55](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L55)*
+*Defined in [ts/init.ts:56](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L56)*
 
 The camera for main menu
 
@@ -102,7 +102,7 @@ ___
 
 **● fontLoader**: *`FontLoader`* =  new FontLoader()
 
-*Defined in [ts/init.ts:59](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L59)*
+*Defined in [ts/init.ts:60](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L60)*
 
 Loads the font from a json file.
 
@@ -113,7 +113,7 @@ ___
 
 **● gameFont**: *`Font`*
 
-*Defined in [ts/init.ts:63](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L63)*
+*Defined in [ts/init.ts:64](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L64)*
 
 The loaded font, used for the scoreboard.
 
@@ -124,7 +124,7 @@ ___
 
 **● isMenuMode**: *`boolean`* = true
 
-*Defined in [ts/init.ts:67](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L67)*
+*Defined in [ts/init.ts:68](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L68)*
 
 Flag to allow menu rendering to continue.
 
@@ -135,7 +135,7 @@ ___
 
 **● menu**: *[Menu](../classes/_ts_displays_menu_.menu.md)*
 
-*Defined in [ts/init.ts:71](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L71)*
+*Defined in [ts/init.ts:72](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L72)*
 
 Instance of Menu for controlling buttons and menu lighting.
 
@@ -150,7 +150,7 @@ ___
     new TextureLoader()
 ]
 
-*Defined in [ts/init.ts:75](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L75)*
+*Defined in [ts/init.ts:76](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L76)*
 
 Loads the graphics for planet.
 
@@ -161,7 +161,7 @@ ___
 
 **● planetTextures**: *`Texture`[]* =  []
 
-*Defined in [ts/init.ts:83](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L83)*
+*Defined in [ts/init.ts:84](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L84)*
 
 The loaded textures, used for the planet.
 
@@ -173,7 +173,7 @@ ___
 **● rendererMenu**: * `WebGLRenderer` &#124; `CanvasRenderer`
 *
 
-*Defined in [ts/init.ts:87](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L87)*
+*Defined in [ts/init.ts:88](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L88)*
 
 The renderer for main menu
 
@@ -190,7 +190,7 @@ ___
     new TextureLoader()
 ]
 
-*Defined in [ts/init.ts:91](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L91)*
+*Defined in [ts/init.ts:92](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L92)*
 
 Loads the graphics for saucers.
 
@@ -201,7 +201,7 @@ ___
 
 **● saucerTextures**: *`Texture`[]* =  []
 
-*Defined in [ts/init.ts:101](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L101)*
+*Defined in [ts/init.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L102)*
 
 The loaded textures, used for the saucers.
 
@@ -212,7 +212,7 @@ ___
 
 **● sceneMenu**: *`Scene`*
 
-*Defined in [ts/init.ts:105](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L105)*
+*Defined in [ts/init.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L106)*
 
 The scene for main menu.
 
@@ -223,7 +223,7 @@ ___
 
 **● specMap**: *`Texture`*
 
-*Defined in [ts/init.ts:113](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L113)*
+*Defined in [ts/init.ts:114](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L114)*
 
 The loaded font, used for the scoreboard.
 
@@ -234,7 +234,7 @@ ___
 
 **● specMapLoader**: *`TextureLoader`* =  new TextureLoader()
 
-*Defined in [ts/init.ts:109](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L109)*
+*Defined in [ts/init.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L110)*
 
 Loads the graphics for specMap.
 
@@ -248,7 +248,7 @@ ___
 
 ▸ **checkAssetsLoaded**(): `void`
 
-*Defined in [ts/init.ts:167](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L167)*
+*Defined in [ts/init.ts:168](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L168)*
 
 Checks to see if all assets are finished loaded. If so, start rendering the game.
 
@@ -261,7 +261,7 @@ ___
 
 ▸ **loadAssets**(): `void`
 
-*Defined in [ts/init.ts:118](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L118)*
+*Defined in [ts/init.ts:119](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L119)*
 
 Passes the callback functions to font and texture loaders, each fitted with their chance to check if all others are done.
 
@@ -272,9 +272,9 @@ ___
 
 ### `<Const>` loadGame
 
-▸ **loadGame**(difficulty: *`number`*): `void`
+▸ **loadGame**(difficulty: *`number`*, gld?: *[GameLoadData](../interfaces/_ts_models_game_load_data_.gameloaddata.md)*): `void`
 
-*Defined in [ts/init.ts:285](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L285)*
+*Defined in [ts/init.ts:286](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L286)*
 
 All things game related. Only starts when all assets are finished loading.
 
@@ -283,6 +283,7 @@ All things game related. Only starts when all assets are finished loading.
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | difficulty | `number` |  player's choice in difficulty level. |
+| `Optional` gld | [GameLoadData](../interfaces/_ts_models_game_load_data_.gameloaddata.md) |
 
 **Returns:** `void`
 
@@ -293,7 +294,7 @@ ___
 
 ▸ **loadMenu**(): `void`
 
-*Defined in [ts/init.ts:175](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L175)*
+*Defined in [ts/init.ts:176](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L176)*
 
 **Returns:** `void`
 
@@ -304,7 +305,7 @@ ___
 
 ▸ **startMenuRendering**(): `void`
 
-*Defined in [ts/init.ts:266](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/init.ts#L266)*
+*Defined in [ts/init.ts:267](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/init.ts#L267)*
 
 **Returns:** `void`
 

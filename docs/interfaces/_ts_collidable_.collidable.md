@@ -41,7 +41,7 @@
 
 **● getActive**: *`function`*
 
-*Defined in [ts/collidable.ts:11](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/collidable.ts#L11)*
+*Defined in [ts/collidable.ts:11](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/collidable.ts#L11)*
 
 Gets the viability of the object.
 *__returns__*: flag to signal non-destruction. True = not destroyed. False = destroyed.
@@ -58,7 +58,7 @@ ___
 
 **● getCollisionRadius**: *`function`*
 
-*Defined in [ts/collidable.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/collidable.ts#L16)*
+*Defined in [ts/collidable.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/collidable.ts#L16)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 *__returns__*: number to represent pixel distance from object center to edge of bounding box.
@@ -75,7 +75,7 @@ ___
 
 **● getCurrentPosition**: *`function`*
 
-*Defined in [ts/collidable.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/collidable.ts#L21)*
+*Defined in [ts/collidable.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/collidable.ts#L21)*
 
 Gets the current position of the collidable object.
 *__returns__*: the array is of length 2 with x coordinate being first, and then z coordinate.
@@ -92,7 +92,7 @@ ___
 
 **● getName**: *`function`*
 
-*Defined in [ts/collidable.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/collidable.ts#L26)*
+*Defined in [ts/collidable.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/collidable.ts#L26)*
 
 Gets the name of the collidable object.
 *__returns__*: the name of the object.
@@ -109,7 +109,7 @@ ___
 
 **● impact**: *`function`*
 
-*Defined in [ts/collidable.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/collidable.ts#L33)*
+*Defined in [ts/collidable.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/collidable.ts#L33)*
 
 Call to collidable object that it has been struck.
 *__param__*: the thing to remove from collidables...and scene.
@@ -137,7 +137,7 @@ ___
 
 **● isPassive**: *`function`*
 
-*Defined in [ts/collidable.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/collidable.ts#L38)*
+*Defined in [ts/collidable.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/collidable.ts#L38)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 *__returns__*: True is passive | False is not passive
@@ -154,7 +154,7 @@ ___
 
 **● removeFromScene**: *`function`*
 
-*Defined in [ts/collidable.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/collidable.ts#L43)*
+*Defined in [ts/collidable.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/collidable.ts#L43)*
 
 Removes asteroid object from the three.js scene.
 *__param__*: graphic rendering scene object. Used each iteration to redraw things contained in scene.

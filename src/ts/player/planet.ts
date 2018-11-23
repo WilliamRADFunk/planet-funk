@@ -12,6 +12,7 @@ import { Satellite } from './satellite';
 import { Base } from './base';
 import { Collidable } from '../collidable';
 import { CollisionatorSingleton } from '../collisionator';
+import { GameLoadData } from '../models/game-load-data';
 /**
  * Simple type to represent status of all four populated areas. Cumulatively equals player's health.
  */
@@ -67,6 +68,10 @@ export class Planet implements Collidable {
      */
     private funk: Mesh;
     /**
+     * Load data to determine which satellites and buildings should start destroyed.
+     */
+    private gameLoadData: GameLoadData;
+    /**
      * Flag to signal if player has been defeated or not.
      * True = not defeated. False = defeated.
      */
@@ -113,12 +118,14 @@ export class Planet implements Collidable {
     private startPosition: [number, number, number] = [0, 0, 0];
     /**
      * Constructor for the Planet class
-     * @param startPosition allows creation of planet in a variable location (help screen mostly)
+     * @param startPosition allows creation of planet in a variable location (help screen mostly).
+     * @param gameLoadData  game state to use from load data.
      * @hidden
      */
-    constructor(startPosition?: [number, number, number]) {
+    constructor(startPosition: [number, number, number], gameLoadData: GameLoadData) {
+        this.startPosition = startPosition;
         if (startPosition) {
-            this.startPosition = startPosition;
+            this.gameLoadData = gameLoadData;
         }
     }
     /**
@@ -139,26 +146,26 @@ export class Planet implements Collidable {
     constructBases(buildtexture: Texture[], specMap: Texture) {
         // Build the planet's four populated bases, and
         // attach the alive and dead meshes to make orbit a simple thing.
-        this.base1 = new Base(1, buildtexture[0], specMap);
+        this.base1 = new Base(1, buildtexture[0], specMap, this.gameLoadData.b1);
         let meshes = this.base1.getMeshes();
         this.funk.add(meshes[0]);
         this.funk.add(meshes[1]);
-        CollisionatorSingleton.add(this.base1);
-        this.base2 = new Base(2, buildtexture[1], specMap);
+        if (this.gameLoadData.b1) CollisionatorSingleton.add(this.base1);
+        this.base2 = new Base(2, buildtexture[1], specMap, this.gameLoadData.b2);
         meshes = this.base2.getMeshes();
         this.funk.add(meshes[0]);
         this.funk.add(meshes[1]);
-        CollisionatorSingleton.add(this.base2);
-        this.base3 = new Base(3, buildtexture[2], specMap);
+        if (this.gameLoadData.b2) CollisionatorSingleton.add(this.base2);
+        this.base3 = new Base(3, buildtexture[2], specMap, this.gameLoadData.b3);
         meshes = this.base3.getMeshes();
         this.funk.add(meshes[0]);
         this.funk.add(meshes[1]);
-        CollisionatorSingleton.add(this.base3);
-        this.base4 = new Base(4, buildtexture[3], specMap);
+        if (this.gameLoadData.b3) CollisionatorSingleton.add(this.base3);
+        this.base4 = new Base(4, buildtexture[3], specMap, this.gameLoadData.b4);
         meshes = this.base4.getMeshes();
         this.funk.add(meshes[0]);
         this.funk.add(meshes[1]);
-        CollisionatorSingleton.add(this.base4);
+        if (this.gameLoadData.b4) CollisionatorSingleton.add(this.base4);
         this.bases = [this.base1, this.base2, this.base3, this.base4];
     }
     /**
@@ -191,22 +198,22 @@ export class Planet implements Collidable {
     constructSatellites() {
         // Build the planet's four defensive satellite weapons, and
         // attach the meshes to make orbit a simple thing.
-        this.satellite1 = new Satellite(1);
+        this.satellite1 = new Satellite(1, this.gameLoadData.sat1);
         this.satellites.push(this.satellite1);
         this.funk.add(this.satellite1.getMesh());
-        CollisionatorSingleton.add(this.satellite1);
-        this.satellite2 = new Satellite(2);
+        if (this.gameLoadData.sat1) CollisionatorSingleton.add(this.satellite1);
+        this.satellite2 = new Satellite(2, this.gameLoadData.sat2);
         this.satellites.push(this.satellite2);
         this.funk.add(this.satellite2.getMesh());
-        CollisionatorSingleton.add(this.satellite2);
-        this.satellite3 = new Satellite(3);
+        if (this.gameLoadData.sat2) CollisionatorSingleton.add(this.satellite2);
+        this.satellite3 = new Satellite(3, this.gameLoadData.sat3);
         this.satellites.push(this.satellite3);
         this.funk.add(this.satellite3.getMesh());
-        CollisionatorSingleton.add(this.satellite3);
-        this.satellite4 = new Satellite(4);
+        if (this.gameLoadData.sat3) CollisionatorSingleton.add(this.satellite3);
+        this.satellite4 = new Satellite(4, this.gameLoadData.sat4);
         this.satellites.push(this.satellite4);
         this.funk.add(this.satellite4.getMesh());
-        CollisionatorSingleton.add(this.satellite4);
+        if (this.gameLoadData.sat4) CollisionatorSingleton.add(this.satellite4);
     }
     /**
      * At the end of each loop iteration, satellite regains a little energy.
@@ -214,10 +221,10 @@ export class Planet implements Collidable {
     endCycle(): void {
         this.rotate();
         for (let i = 0; i < this.satellites.length; i++) {
-            this.satellites[i].endCycle(this.funk.rotation.y);
+            this.satellites[i].endCycle();
         }
         for (let j = 0; j < this.bases.length; j++) {
-            this.bases[j].endCycle(this.funk.rotation.y);
+            this.bases[j].endCycle();
         }
         if (this.isActive) {
             this.quadrantBlue = this.base1.getActive();
@@ -246,7 +253,7 @@ export class Planet implements Collidable {
         if (this.isActive) {
             const distancesToTarget: number[] = [];
             for (let i = 0; i < 4; i++) {
-                distancesToTarget.push(this.satellites[i].getDistanceToTarget(point, this.funk.rotation.y));
+                distancesToTarget.push(this.satellites[i].getDistanceToTarget(point));
             }
             const indexOfMinValue = distancesToTarget.reduce((iMin, x, i, arr) => x < arr[iMin] ? i : iMin, 0);
             this.satellites[indexOfMinValue].fire(scene, point);

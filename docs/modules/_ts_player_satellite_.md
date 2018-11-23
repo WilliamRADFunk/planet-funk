@@ -28,7 +28,7 @@
     new Color(0x31E4DE)
 ]
 
-*Defined in [ts/player/satellite.ts:15](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/player/satellite.ts#L15)*
+*Defined in [ts/player/satellite.ts:15](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/player/satellite.ts#L15)*
 
 Makes instatiateing the satellite's color by index easier and cleaner to read.
 
@@ -44,7 +44,7 @@ ___
     {xb: -1.25, zb: 0, xc: 0.05, zc: 0.3}
 ]
 
-*Defined in [ts/player/satellite.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/player/satellite.ts#L24)*
+*Defined in [ts/player/satellite.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/player/satellite.ts#L24)*
 
 Makes instatiateing the satellite's position by index easier and cleaner to read.
 

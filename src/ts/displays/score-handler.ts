@@ -5,6 +5,7 @@ import {
     MeshLambertMaterial,
     Scene,
     TextGeometry} from 'three';
+import { GameLoadData } from '../models/game-load-data';
 
 export type ScoreGeometries = TextGeometry[];
 export type ScoreDigits = Mesh[];
@@ -56,14 +57,16 @@ export class ScoreHandler {
     private scores: ScoreDigits[] = [[], [], [], [], [], [], [], [], [], []];
     /**
      * Constructor for the ScoreHandler class
-     * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     * @param color level color, grabbed from the LevelHandler.
+     * @param scene         graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param color         level color, grabbed from the LevelHandler.
+     * @param gameLoadData  game state to use from load data.
      * @hidden
      */
-    constructor(scene: Scene, color: Color, scoreFont: Font) {
+    constructor(scene: Scene, color: Color, scoreFont: Font, gameLoadData: GameLoadData) {
         this.scene = scene;
         this.scoreFont = scoreFont;
         this.currentColor = color;
+        this.currentScore = gameLoadData.score;
         this.scoreMaterial = new MeshLambertMaterial( {color: color || 0x084E70} );
         this.createText();
     }

@@ -41,10 +41,6 @@ export class Satellite implements Collidable {
      */
     private currentOrigin: number[];
     /**
-     * Keeps track of planet's rotation to help calc satellite's position.
-     */
-    private currentRotation: number;
-    /**
      * Max energy amount
      */
     private energyMax: number = 1000;
@@ -116,9 +112,10 @@ export class Satellite implements Collidable {
     /**
      * Constructor for the Satellite class
      * @param index order of creation, used for position 12 o'clock and clockwise, and appearance.
+     * @param startAlive 1 --> start satellite as active | 0 --> start with satellite destroyed.
      * @hidden
      */
-    constructor(index: number) {
+    constructor(index: number, startAlive: number) {
         this.index = index;
         // The square bulk of the satellite
         this.satelliteBodyGeometry = new BoxGeometry(0.1, 0.1, 0.1);
@@ -148,13 +145,15 @@ export class Satellite implements Collidable {
         this.satelliteContainer.name = `satellite${index}`;
         // Adds container, and by proxy, all satellite pieces, to the scene.
         this.satelliteContainer.add(this.satelliteBody);
+        // Depending on load data, this satellite might already be dead.
+        this.isActive = !!startAlive;
+        if (!startAlive) (this.satelliteBody.material as any).color.setHex(0x333333);
+        this.satelliteEnergy.visible = !!startAlive;
     }
     /**
      * At the end of each loop iteration, satellite regains a little energy.
-     * @param rotation of planet to base current position off of.
      */
-    endCycle(rotation: number): void {
-        this.currentRotation = rotation;
+    endCycle(): void {
         if (this.isActive) {
             this.energyLevel += 1;
             this.updateEnergyBar();
@@ -227,11 +226,9 @@ export class Satellite implements Collidable {
     /**
      * Calculate distance 'as the crow flies' from satellite to target.
      * @param targetPoint   coordinates of game area that player clicked/touched.
-     * @param rotation      current rotation amount of planetary body.
      * @returns             number of pixels from satellite to target.
      */
-    getDistanceToTarget(targetPoint: Vector3, rotation: number): number {
-        this.currentRotation = rotation;
+    getDistanceToTarget(targetPoint: Vector3): number {
         // If sat is dead or out of juice, return absurdly high number for distance.
         if (!this.isActive || this.energyLevel < 250) {
             return 1000;

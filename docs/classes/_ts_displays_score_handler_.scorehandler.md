@@ -41,7 +41,7 @@
 
 **● currentColor**: *`Color`*
 
-*Defined in [ts/displays/score-handler.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L24)*
+*Defined in [ts/displays/score-handler.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L25)*
 
 Keeps track of level's current color
 
@@ -52,7 +52,7 @@ ___
 
 **● currentScore**: *`number`* = 0
 
-*Defined in [ts/displays/score-handler.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L28)*
+*Defined in [ts/displays/score-handler.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L29)*
 
 Keeps track of player's current score
 
@@ -63,7 +63,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/displays/score-handler.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L32)*
+*Defined in [ts/displays/score-handler.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L33)*
 
 Reference to the scene, used to remove text in order to change it.
 
@@ -74,7 +74,7 @@ ___
 
 **● score**: *`Mesh`*
 
-*Defined in [ts/displays/score-handler.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L52)*
+*Defined in [ts/displays/score-handler.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L53)*
 
 Controls the overall rendering of the score
 
@@ -85,7 +85,7 @@ ___
 
 **● scoreFont**: *`Font`*
 
-*Defined in [ts/displays/score-handler.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L36)*
+*Defined in [ts/displays/score-handler.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L37)*
 
 The loaded font, used for the scoreboard.
 
@@ -96,7 +96,7 @@ ___
 
 **● scoreGeometries**: *[ScoreGeometries](../modules/_ts_displays_score_handler_.md#scoregeometries)[]* =  [[], [], [], [], [], [], [], [], [], []]
 
-*Defined in [ts/displays/score-handler.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L44)*
+*Defined in [ts/displays/score-handler.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L45)*
 
 A better way to iterate through the digit geometries.
 
@@ -107,7 +107,7 @@ ___
 
 **● scoreGeometry**: *`TextGeometry`*
 
-*Defined in [ts/displays/score-handler.ts:40](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L40)*
+*Defined in [ts/displays/score-handler.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L41)*
 
 Controls size and shape of the score
 
@@ -118,7 +118,7 @@ ___
 
 **● scoreMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/displays/score-handler.ts:48](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L48)*
+*Defined in [ts/displays/score-handler.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L49)*
 
 Controls the color of the score material
 
@@ -129,7 +129,7 @@ ___
 
 **● scores**: *[ScoreDigits](../modules/_ts_displays_score_handler_.md#scoredigits)[]* =  [[], [], [], [], [], [], [], [], [], []]
 
-*Defined in [ts/displays/score-handler.ts:56](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L56)*
+*Defined in [ts/displays/score-handler.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L57)*
 
 A better way to iterate through the digit meshes.
 
@@ -143,7 +143,7 @@ ___
 
 ▸ **addPoints**(points: *`number`*): `void`
 
-*Defined in [ts/displays/score-handler.ts:74](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L74)*
+*Defined in [ts/displays/score-handler.ts:77](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L77)*
 
 Adds points when blowing up asteroids, enemy missiles, and ufos.
 
@@ -162,7 +162,7 @@ ___
 
 ▸ **changeScore**(): `void`
 
-*Defined in [ts/displays/score-handler.ts:83](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L83)*
+*Defined in [ts/displays/score-handler.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L86)*
 
 Flips only score relevent digits to visible.
 
@@ -175,7 +175,7 @@ ___
 
 ▸ **createText**(): `void`
 
-*Defined in [ts/displays/score-handler.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L99)*
+*Defined in [ts/displays/score-handler.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L102)*
 
 Creates the text in one place to obey the DRY rule.
 
@@ -188,7 +188,7 @@ ___
 
 ▸ **endCycle**(hide?: *`boolean`*): `void`
 
-*Defined in [ts/displays/score-handler.ts:152](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L152)*
+*Defined in [ts/displays/score-handler.ts:155](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L155)*
 
 At the end of each loop iteration, score updates with time increase.
 
@@ -207,7 +207,7 @@ ___
 
 ▸ **nextLevel**(color: *`Color`*): `void`
 
-*Defined in [ts/displays/score-handler.ts:171](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L171)*
+*Defined in [ts/displays/score-handler.ts:174](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L174)*
 
 Only recreate the digits with the new color
 
@@ -226,7 +226,7 @@ ___
 
 ▸ **removePreviousDigits**(): `void`
 
-*Defined in [ts/displays/score-handler.ts:179](https://github.com/WilliamRADFunk/planet-funk/blob/ed6fc60/src/ts/displays/score-handler.ts#L179)*
+*Defined in [ts/displays/score-handler.ts:182](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/displays/score-handler.ts#L182)*
 
 Removes all previously created score text and digits to change color.
 

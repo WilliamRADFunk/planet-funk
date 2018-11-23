@@ -6,6 +6,7 @@ import {
     Scene,
     TextGeometry,
     TextGeometryParameters } from 'three';
+import { GameLoadData } from '../models/game-load-data';
 
 const randomColor = require('randomcolor');
 /**
@@ -89,11 +90,12 @@ export class LevelHandler {
      * Constructor for the LevelHandler class
      * @param scene         graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param levelFont     loaded font to use for score text.
-     * @param difficulty    level of difficulty chosen by player.
+     * @param gameLoadData  game state to use from load data.
      * @hidden
      */
-    constructor(scene: Scene, levelFont: Font, difficulty: number) {
-        this.difficultyLevel = difficulty
+    constructor(scene: Scene, levelFont: Font, gameLoadData: GameLoadData) {
+        this.difficultyLevel = gameLoadData.difficulty;
+        this.currentLevel = gameLoadData.level;
         this.levelFont = levelFont;
         this.fontLowerTextParams = {
             font: this.levelFont,

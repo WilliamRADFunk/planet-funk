@@ -337,7 +337,13 @@ export class HelpHandler {
         this.sections.filter(x => x.visible = true);
         this.texts.filter(x => x.visible = true);
 
-        this.planet = new Planet([0, -12, 2]);
+        this.planet = new Planet([0, -12, 2], {
+            b1: 1, b2: 1, b3: 1, b4: 1,
+            difficulty: 0,
+            level: 1,
+            sat1: 1, sat2: 1, sat3: 1, sat4: 1,
+            score: 0
+        });
         this.planet.addToScene(this.scene, this.planetTextures, this.buildingTextures, this.specMap);
         this.shields.push(new Shield([0, -20, 2]));
         this.shields[0].addToScene(this.scene);

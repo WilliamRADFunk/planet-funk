@@ -27,6 +27,7 @@ import { SaucerGenerator } from './enemies/saucer-generator';
 import { Menu } from './displays/menu';
 import { ControlPanel } from './controls/control-panel';
 import { HelpHandler } from './help-handler';
+import { GameLoadData } from './models/game-load-data';
 
 /**
  * Loads the graphic for asteroid.
@@ -282,7 +283,24 @@ const startMenuRendering = () => {
  * All things game related. Only starts when all assets are finished loading.
  * @param difficulty player's choice in difficulty level.
  */
-const loadGame = (difficulty: number) => {
+const loadGame = (difficulty: number, gld?: GameLoadData) => {
+    const gameLoadData: GameLoadData = gld || {
+        b1: 1, b2: 1, b3: 1, b4: 1,
+        difficulty: difficulty,
+        level: 1,
+        sat1: 1, sat2: 1, sat3: 1, sat4: 1,
+        score: 0
+    };
+    // const char = [];
+    // const convertToHex = function(c) {
+    //     if (c > 9) return c += 65 - 10;
+    //     return c += 48;
+    // };
+    // char.push(convertToHex(gameLoadData.b4 * 1 + gameLoadData.b3 * 2 + gameLoadData.b2 * 4 + gameLoadData.b1 * 8));
+    // char.push(convertToHex(gameLoadData.sat4 * 1 + gameLoadData.sat3 * 2 + gameLoadData.sat2 * 4 + gameLoadData.sat1 * 8));
+    // char.push(convertToHex(gameLoadData.difficulty));
+    // char.push(convertToHex(gameLoadData.difficulty));
+    // console.log(String.fromCharCode(char[0]));
     let isGameLive = true;
     // Establish initial window size.
     let WIDTH: number = window.innerWidth * 0.99;
@@ -321,7 +339,7 @@ const loadGame = (difficulty: number) => {
     onWindowResize();
     window.addEventListener( 'resize', onWindowResize, false);
     // Create player's planet, which will also create its four satellites.
-    const planet = new Planet();
+    const planet = new Planet([0, 0, 0], gameLoadData);
     planet.addToScene(scene, planetTextures, buildingTextures, specMap);
     CollisionatorSingleton.add(planet);
     // Create shield around the planet.
@@ -338,14 +356,14 @@ const loadGame = (difficulty: number) => {
     scene.add(clickBarrier);
 
     // Create Score and Level handlers 
-    const levelHandler = new LevelHandler(scene, gameFont, difficulty);
-    const scoreboard = new ScoreHandler(scene, levelHandler.getColor(), gameFont);
+    const levelHandler = new LevelHandler(scene, gameFont, gameLoadData);
+    const scoreboard = new ScoreHandler(scene, levelHandler.getColor(), gameFont, gameLoadData);
     // Create all unit generators that can be dangerous to player
-    const asteroidGenerator = new AsteroidGenerator(scene, scoreboard, asteroidTexture, difficulty);
-    const saucerGenerator = new SaucerGenerator(scene, scoreboard, saucerTextures, difficulty);
-    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor(), difficulty);
+    const asteroidGenerator = new AsteroidGenerator(scene, scoreboard, asteroidTexture, gameLoadData.difficulty);
+    const saucerGenerator = new SaucerGenerator(scene, scoreboard, saucerTextures, gameLoadData.difficulty);
+    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor(), gameLoadData.difficulty);
     // Create control panel in upper right corner of screen.
-    const controlPanel = new ControlPanel(scene, 3.95, -5.8, difficulty, levelHandler.getColor(), gameFont);
+    const controlPanel = new ControlPanel(scene, 3.95, -5.8, gameLoadData.difficulty, levelHandler.getColor(), gameFont);
 
     // Click event listener that turns shield on or off if player clicks on planet. Fire weapon otherwise.
     const raycaster = new Raycaster();

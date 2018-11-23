@@ -135,6 +135,7 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 * ["ts/enemies/saucer-generator"](modules/_ts_enemies_saucer_generator_.md)
 * ["ts/help-handler"](modules/_ts_help_handler_.md)
 * ["ts/init"](modules/_ts_init_.md)
+* ["ts/models/game-load-data"](modules/_ts_models_game_load_data_.md)
 * ["ts/player/base"](modules/_ts_player_base_.md)
 * ["ts/player/planet"](modules/_ts_player_planet_.md)
 * ["ts/player/satellite"](modules/_ts_player_satellite_.md)
