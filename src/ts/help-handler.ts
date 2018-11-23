@@ -202,7 +202,7 @@ export class HelpHandler {
         const totalMaterial = new MeshBasicMaterial( {color: 0x000000, opacity: 1, transparent: false, side: DoubleSide} );
         const totalBackingGeometry = new PlaneGeometry( 12, 10.55, 0, 0 );
 
-        let section = new Mesh( totalBackingGeometry, totalMaterial );
+        const section = new Mesh( totalBackingGeometry, totalMaterial );
         section.position.set(0, -10.1, this.zSpot);
         section.rotation.set(1.5708, 0, 0);
         this.scene.add(section);
@@ -543,8 +543,8 @@ export class HelpHandler {
         this.scene.add(section);
         this.sections.push(section);
         
-        let textGeo = new TextGeometry('Left Click to Fire', this.textHeaderParams);
-        let text = new Mesh( textGeo, this.helpMaterial );
+        const textGeo = new TextGeometry('Left Click to Fire', this.textHeaderParams);
+        const text = new Mesh( textGeo, this.helpMaterial );
         text.position.set(-1.6, -11.4, this.zSpot - 2.2);
         text.rotation.x = -1.5708;
         this.scene.add(text);
@@ -761,8 +761,8 @@ export class HelpHandler {
         this.scene.add(section);
         this.sections.push(section);
         
-        let textGeo = new TextGeometry('Click in Ring for Shield', this.textHeaderParams);
-        let text = new Mesh( textGeo, this.helpMaterial );
+        const textGeo = new TextGeometry('Click in Ring for Shield', this.textHeaderParams);
+        const text = new Mesh( textGeo, this.helpMaterial );
         text.position.set(-2.1, -11.4, this.zSpot + 0.5);
         text.rotation.x = -1.5708;
         this.scene.add(text);
