@@ -348,6 +348,14 @@ export class Planet implements Collidable {
      */
     removeFromScene(scene: Scene): void {
         scene.remove(this.funk);
+        CollisionatorSingleton.remove(this.base1);
+        CollisionatorSingleton.remove(this.base2);
+        CollisionatorSingleton.remove(this.base3);
+        CollisionatorSingleton.remove(this.base4);
+        CollisionatorSingleton.remove(this.satellite1);
+        CollisionatorSingleton.remove(this.satellite2);
+        CollisionatorSingleton.remove(this.satellite3);
+        CollisionatorSingleton.remove(this.satellite4);
     }
     /**
      * Spins planet at its set rate.
