@@ -168,6 +168,13 @@ export class ScoreHandler {
         }
     }
     /**
+     * Passes current score value back to caller.
+     * @returns the current score at time of function call.
+     */
+    getScore(): number {
+        return this.currentScore;
+    }
+    /**
      * Only recreate the digits with the new color
      * @param color level color, grabbed from the LevelHandler
      */

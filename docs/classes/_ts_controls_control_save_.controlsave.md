@@ -18,8 +18,10 @@
 
 ### Methods
 
+* [activate](_ts_controls_control_save_.controlsave.md#activate)
 * [changeColor](_ts_controls_control_save_.controlsave.md#changecolor)
 * [changeOpacity](_ts_controls_control_save_.controlsave.md#changeopacity)
+* [deactivate](_ts_controls_control_save_.controlsave.md#deactivate)
 * [hide](_ts_controls_control_save_.controlsave.md#hide)
 * [show](_ts_controls_control_save_.controlsave.md#show)
 
@@ -33,7 +35,7 @@
 
 **● saveButton**: *`Mesh`*
 
-*Defined in [ts/controls/control-save.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/controls/control-save.ts#L24)*
+*Defined in [ts/controls/control-save.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/controls/control-save.ts#L24)*
 
 Mesh for the save button.
 
@@ -44,7 +46,7 @@ ___
 
 **● saveButtonBorderMaterial**: *`LineBasicMaterial`*
 
-*Defined in [ts/controls/control-save.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/controls/control-save.ts#L32)*
+*Defined in [ts/controls/control-save.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/controls/control-save.ts#L32)*
 
 Controls the save button's border material.
 
@@ -55,7 +57,7 @@ ___
 
 **● saveDiskMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/controls/control-save.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/controls/control-save.ts#L28)*
+*Defined in [ts/controls/control-save.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/controls/control-save.ts#L28)*
 
 Material for the disk portion of the button.
 
@@ -63,13 +65,26 @@ ___
 
 ## Methods
 
+<a id="activate"></a>
+
+###  activate
+
+▸ **activate**(): `void`
+
+*Defined in [ts/controls/control-save.ts:115](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/controls/control-save.ts#L115)*
+
+Makes necessary changes to save button when save mode is activated.
+
+**Returns:** `void`
+
+___
 <a id="changecolor"></a>
 
 ###  changeColor
 
 ▸ **changeColor**(color: *`Color`*): `void`
 
-*Defined in [ts/controls/control-save.ts:109](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/controls/control-save.ts#L109)*
+*Defined in [ts/controls/control-save.ts:122](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/controls/control-save.ts#L122)*
 
 Changes button material to match new level color.
 
@@ -88,7 +103,7 @@ ___
 
 ▸ **changeOpacity**(opacity: *`number`*): `void`
 
-*Defined in [ts/controls/control-save.ts:117](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/controls/control-save.ts#L117)*
+*Defined in [ts/controls/control-save.ts:130](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/controls/control-save.ts#L130)*
 
 Changes button opacity.
 
@@ -101,13 +116,26 @@ Changes button opacity.
 **Returns:** `void`
 
 ___
+<a id="deactivate"></a>
+
+###  deactivate
+
+▸ **deactivate**(): `void`
+
+*Defined in [ts/controls/control-save.ts:137](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/controls/control-save.ts#L137)*
+
+Makes necessary changes to save button when save mode is deactivated.
+
+**Returns:** `void`
+
+___
 <a id="hide"></a>
 
 ###  hide
 
 ▸ **hide**(): `void`
 
-*Defined in [ts/controls/control-save.ts:125](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/controls/control-save.ts#L125)*
+*Defined in [ts/controls/control-save.ts:144](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/controls/control-save.ts#L144)*
 
 Hide the save button (state related). Default is to show.
 
@@ -120,7 +148,7 @@ ___
 
 ▸ **show**(): `void`
 
-*Defined in [ts/controls/control-save.ts:132](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/controls/control-save.ts#L132)*
+*Defined in [ts/controls/control-save.ts:151](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/controls/control-save.ts#L151)*
 
 Show the save button (state related). Default is to show.
 

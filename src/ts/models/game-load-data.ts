@@ -1,3 +1,6 @@
+/**
+ * Mandatory structure of the decoded game state data for save and load.
+ */
 export interface GameLoadData {
     b1: number;
     b2: number;

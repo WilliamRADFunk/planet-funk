@@ -1,6 +1,8 @@
-[planet-funk](../README.md) > ["ts/help-handler"](../modules/_ts_help_handler_.md) > [HelpHandler](../classes/_ts_help_handler_.helphandler.md)
+[planet-funk](../README.md) > ["ts/displays/help-handler"](../modules/_ts_displays_help_handler_.md) > [HelpHandler](../classes/_ts_displays_help_handler_.helphandler.md)
 
 # Class: HelpHandler
+
+*__class__*: Help screen that handles all of the animated instructions on how to play.
 
 ## Hierarchy
 
@@ -10,57 +12,57 @@
 
 ### Properties
 
-* [asteroid](_ts_help_handler_.helphandler.md#asteroid)
-* [barrierReturn](_ts_help_handler_.helphandler.md#barrierreturn)
-* [building](_ts_help_handler_.helphandler.md#building)
-* [buildingTextures](_ts_help_handler_.helphandler.md#buildingtextures)
-* [buildingsAlive](_ts_help_handler_.helphandler.md#buildingsalive)
-* [buildingsDead](_ts_help_handler_.helphandler.md#buildingsdead)
-* [headMesh](_ts_help_handler_.helphandler.md#headmesh)
-* [helpFont](_ts_help_handler_.helphandler.md#helpfont)
-* [helpMaterial](_ts_help_handler_.helphandler.md#helpmaterial)
-* [helpShieldBarrier](_ts_help_handler_.helphandler.md#helpshieldbarrier)
-* [missileExample1](_ts_help_handler_.helphandler.md#missileexample1)
-* [mouse](_ts_help_handler_.helphandler.md#mouse)
-* [planet](_ts_help_handler_.helphandler.md#planet)
-* [planetTextures](_ts_help_handler_.helphandler.md#planettextures)
-* [return](_ts_help_handler_.helphandler.md#return)
-* [returnGeometry](_ts_help_handler_.helphandler.md#returngeometry)
-* [satelliteContainer](_ts_help_handler_.helphandler.md#satellitecontainer)
-* [satelliteContainer2](_ts_help_handler_.helphandler.md#satellitecontainer2)
-* [saucer](_ts_help_handler_.helphandler.md#saucer)
-* [saveControl](_ts_help_handler_.helphandler.md#savecontrol)
-* [scene](_ts_help_handler_.helphandler.md#scene)
-* [sectionBackingGeometryMiddle](_ts_help_handler_.helphandler.md#sectionbackinggeometrymiddle)
-* [sectionBackingGeometrySides](_ts_help_handler_.helphandler.md#sectionbackinggeometrysides)
-* [sectionGlowGeometryMiddle](_ts_help_handler_.helphandler.md#sectionglowgeometrymiddle)
-* [sectionGlowGeometrySides](_ts_help_handler_.helphandler.md#sectionglowgeometrysides)
-* [sectionMaterial](_ts_help_handler_.helphandler.md#sectionmaterial)
-* [sectionMaterialGlow](_ts_help_handler_.helphandler.md#sectionmaterialglow)
-* [sections](_ts_help_handler_.helphandler.md#sections)
-* [shields](_ts_help_handler_.helphandler.md#shields)
-* [specMap](_ts_help_handler_.helphandler.md#specmap)
-* [tailMesh](_ts_help_handler_.helphandler.md#tailmesh)
-* [textHeaderParams](_ts_help_handler_.helphandler.md#textheaderparams)
-* [textpParams](_ts_help_handler_.helphandler.md#textpparams)
-* [texts](_ts_help_handler_.helphandler.md#texts)
-* [zSpot](_ts_help_handler_.helphandler.md#zspot)
+* [asteroid](_ts_displays_help_handler_.helphandler.md#asteroid)
+* [barrierReturn](_ts_displays_help_handler_.helphandler.md#barrierreturn)
+* [building](_ts_displays_help_handler_.helphandler.md#building)
+* [buildingTextures](_ts_displays_help_handler_.helphandler.md#buildingtextures)
+* [buildingsAlive](_ts_displays_help_handler_.helphandler.md#buildingsalive)
+* [buildingsDead](_ts_displays_help_handler_.helphandler.md#buildingsdead)
+* [headMesh](_ts_displays_help_handler_.helphandler.md#headmesh)
+* [helpFont](_ts_displays_help_handler_.helphandler.md#helpfont)
+* [helpMaterial](_ts_displays_help_handler_.helphandler.md#helpmaterial)
+* [helpShieldBarrier](_ts_displays_help_handler_.helphandler.md#helpshieldbarrier)
+* [missileExample1](_ts_displays_help_handler_.helphandler.md#missileexample1)
+* [mouse](_ts_displays_help_handler_.helphandler.md#mouse)
+* [planet](_ts_displays_help_handler_.helphandler.md#planet)
+* [planetTextures](_ts_displays_help_handler_.helphandler.md#planettextures)
+* [return](_ts_displays_help_handler_.helphandler.md#return)
+* [returnGeometry](_ts_displays_help_handler_.helphandler.md#returngeometry)
+* [satelliteContainer](_ts_displays_help_handler_.helphandler.md#satellitecontainer)
+* [satelliteContainer2](_ts_displays_help_handler_.helphandler.md#satellitecontainer2)
+* [saucer](_ts_displays_help_handler_.helphandler.md#saucer)
+* [saveControl](_ts_displays_help_handler_.helphandler.md#savecontrol)
+* [scene](_ts_displays_help_handler_.helphandler.md#scene)
+* [sectionBackingGeometryMiddle](_ts_displays_help_handler_.helphandler.md#sectionbackinggeometrymiddle)
+* [sectionBackingGeometrySides](_ts_displays_help_handler_.helphandler.md#sectionbackinggeometrysides)
+* [sectionGlowGeometryMiddle](_ts_displays_help_handler_.helphandler.md#sectionglowgeometrymiddle)
+* [sectionGlowGeometrySides](_ts_displays_help_handler_.helphandler.md#sectionglowgeometrysides)
+* [sectionMaterial](_ts_displays_help_handler_.helphandler.md#sectionmaterial)
+* [sectionMaterialGlow](_ts_displays_help_handler_.helphandler.md#sectionmaterialglow)
+* [sections](_ts_displays_help_handler_.helphandler.md#sections)
+* [shields](_ts_displays_help_handler_.helphandler.md#shields)
+* [specMap](_ts_displays_help_handler_.helphandler.md#specmap)
+* [tailMesh](_ts_displays_help_handler_.helphandler.md#tailmesh)
+* [textHeaderParams](_ts_displays_help_handler_.helphandler.md#textheaderparams)
+* [textpParams](_ts_displays_help_handler_.helphandler.md#textpparams)
+* [texts](_ts_displays_help_handler_.helphandler.md#texts)
+* [zSpot](_ts_displays_help_handler_.helphandler.md#zspot)
 
 ### Methods
 
-* [activate](_ts_help_handler_.helphandler.md#activate)
-* [deactivate](_ts_help_handler_.helphandler.md#deactivate)
-* [endCycle](_ts_help_handler_.helphandler.md#endcycle)
-* [getShield](_ts_help_handler_.helphandler.md#getshield)
-* [makeBox0](_ts_help_handler_.helphandler.md#makebox0)
-* [makeBox1](_ts_help_handler_.helphandler.md#makebox1)
-* [makeBox2](_ts_help_handler_.helphandler.md#makebox2)
-* [makeBox3](_ts_help_handler_.helphandler.md#makebox3)
-* [makeBox4](_ts_help_handler_.helphandler.md#makebox4)
-* [makeBox5](_ts_help_handler_.helphandler.md#makebox5)
-* [makeBox6](_ts_help_handler_.helphandler.md#makebox6)
-* [makeBox7](_ts_help_handler_.helphandler.md#makebox7)
-* [makeBox8](_ts_help_handler_.helphandler.md#makebox8)
+* [activate](_ts_displays_help_handler_.helphandler.md#activate)
+* [deactivate](_ts_displays_help_handler_.helphandler.md#deactivate)
+* [endCycle](_ts_displays_help_handler_.helphandler.md#endcycle)
+* [getShield](_ts_displays_help_handler_.helphandler.md#getshield)
+* [makeBox0](_ts_displays_help_handler_.helphandler.md#makebox0)
+* [makeBox1](_ts_displays_help_handler_.helphandler.md#makebox1)
+* [makeBox2](_ts_displays_help_handler_.helphandler.md#makebox2)
+* [makeBox3](_ts_displays_help_handler_.helphandler.md#makebox3)
+* [makeBox4](_ts_displays_help_handler_.helphandler.md#makebox4)
+* [makeBox5](_ts_displays_help_handler_.helphandler.md#makebox5)
+* [makeBox6](_ts_displays_help_handler_.helphandler.md#makebox6)
+* [makeBox7](_ts_displays_help_handler_.helphandler.md#makebox7)
+* [makeBox8](_ts_displays_help_handler_.helphandler.md#makebox8)
 
 ---
 
@@ -72,7 +74,7 @@
 
 **● asteroid**: *`Mesh`*
 
-*Defined in [ts/help-handler.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L33)*
+*Defined in ts/displays/help-handler.ts:37*
 
 Controls the overall rendering of the asteroid
 
@@ -83,7 +85,7 @@ ___
 
 **● barrierReturn**: *`Mesh`*
 
-*Defined in [ts/help-handler.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L37)*
+*Defined in ts/displays/help-handler.ts:41*
 
 Click surface for the Return button.
 
@@ -94,7 +96,7 @@ ___
 
 **● building**: *`Mesh`*
 
-*Defined in [ts/help-handler.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L41)*
+*Defined in ts/displays/help-handler.ts:45*
 
 Controls the overall rendering of the building
 
@@ -105,7 +107,7 @@ ___
 
 **● buildingTextures**: *`Texture`[]*
 
-*Defined in [ts/help-handler.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L53)*
+*Defined in ts/displays/help-handler.ts:57*
 
 Base texture images
 
@@ -116,7 +118,7 @@ ___
 
 **● buildingsAlive**: *`Mesh`[]* =  []
 
-*Defined in [ts/help-handler.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L45)*
+*Defined in ts/displays/help-handler.ts:49*
 
 Controls the overall rendering of the not destroyed buildings
 
@@ -127,7 +129,7 @@ ___
 
 **● buildingsDead**: *`Mesh`[]* =  []
 
-*Defined in [ts/help-handler.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L49)*
+*Defined in ts/displays/help-handler.ts:53*
 
 Controls the overall rendering of the destroyed buildings
 
@@ -138,7 +140,7 @@ ___
 
 **● headMesh**: *`Mesh`*
 
-*Defined in [ts/help-handler.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L57)*
+*Defined in ts/displays/help-handler.ts:61*
 
 Controls the overall rendering of the missile head
 
@@ -149,7 +151,7 @@ ___
 
 **● helpFont**: *`Font`*
 
-*Defined in [ts/help-handler.ts:61](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L61)*
+*Defined in ts/displays/help-handler.ts:65*
 
 Loaded font for display text.
 
@@ -160,7 +162,7 @@ ___
 
 **● helpMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/help-handler.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L65)*
+*Defined in ts/displays/help-handler.ts:69*
 
 Controls the color of the text display material
 
@@ -171,7 +173,7 @@ ___
 
 **● helpShieldBarrier**: *`Mesh`*
 
-*Defined in [ts/help-handler.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L69)*
+*Defined in ts/displays/help-handler.ts:73*
 
 Click surface for the shield example.
 
@@ -182,7 +184,7 @@ ___
 
 **● missileExample1**: *[Projectile](_ts_weapons_projectile_.projectile.md)*
 
-*Defined in [ts/help-handler.ts:73](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L73)*
+*Defined in ts/displays/help-handler.ts:77*
 
 First example missile
 
@@ -193,7 +195,7 @@ ___
 
 **● mouse**: *`Mesh`*
 
-*Defined in [ts/help-handler.ts:77](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L77)*
+*Defined in ts/displays/help-handler.ts:81*
 
 Mouse pointer
 
@@ -204,7 +206,7 @@ ___
 
 **● planet**: *[Planet](_ts_player_planet_.planet.md)*
 
-*Defined in [ts/help-handler.ts:81](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L81)*
+*Defined in ts/displays/help-handler.ts:85*
 
 Planet demonstration
 
@@ -215,7 +217,7 @@ ___
 
 **● planetTextures**: *`Texture`[]*
 
-*Defined in [ts/help-handler.ts:85](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L85)*
+*Defined in ts/displays/help-handler.ts:89*
 
 Planet texture images
 
@@ -226,7 +228,7 @@ ___
 
 **● return**: *`Mesh`*
 
-*Defined in [ts/help-handler.ts:89](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L89)*
+*Defined in ts/displays/help-handler.ts:93*
 
 Controls the overall rendering of the return button display
 
@@ -237,7 +239,7 @@ ___
 
 **● returnGeometry**: *`TextGeometry`*
 
-*Defined in [ts/help-handler.ts:93](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L93)*
+*Defined in ts/displays/help-handler.ts:97*
 
 Controls size and shape of the return button text
 
@@ -248,7 +250,7 @@ ___
 
 **● satelliteContainer**: *`Mesh`*
 
-*Defined in [ts/help-handler.ts:101](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L101)*
+*Defined in ts/displays/help-handler.ts:105*
 
 Controls the overall rendering of the satellite
 
@@ -259,7 +261,7 @@ ___
 
 **● satelliteContainer2**: *`Mesh`*
 
-*Defined in [ts/help-handler.ts:105](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L105)*
+*Defined in ts/displays/help-handler.ts:109*
 
 Controls the overall rendering of the second satellite
 
@@ -270,7 +272,7 @@ ___
 
 **● saucer**: *`Mesh`*
 
-*Defined in [ts/help-handler.ts:97](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L97)*
+*Defined in ts/displays/help-handler.ts:101*
 
 Controls the overall rendering of the saucer
 
@@ -281,7 +283,7 @@ ___
 
 **● saveControl**: *[ControlSave](_ts_controls_control_save_.controlsave.md)*
 
-*Defined in [ts/help-handler.ts:109](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L109)*
+*Defined in ts/displays/help-handler.ts:113*
 
 The save button graphic
 
@@ -292,7 +294,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/help-handler.ts:113](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L113)*
+*Defined in ts/displays/help-handler.ts:117*
 
 Reference to the scene, used to remove and reinstall text geometries.
 
@@ -303,7 +305,7 @@ ___
 
 **● sectionBackingGeometryMiddle**: *`PlaneGeometry`*
 
-*Defined in [ts/help-handler.ts:121](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L121)*
+*Defined in ts/displays/help-handler.ts:125*
 
 Geometry for middle help section backings
 
@@ -314,7 +316,7 @@ ___
 
 **● sectionBackingGeometrySides**: *`PlaneGeometry`*
 
-*Defined in [ts/help-handler.ts:117](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L117)*
+*Defined in ts/displays/help-handler.ts:121*
 
 Geometry for side help section backings
 
@@ -325,7 +327,7 @@ ___
 
 **● sectionGlowGeometryMiddle**: *`PlaneGeometry`*
 
-*Defined in [ts/help-handler.ts:129](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L129)*
+*Defined in ts/displays/help-handler.ts:133*
 
 Geometry for middle help section borders
 
@@ -336,7 +338,7 @@ ___
 
 **● sectionGlowGeometrySides**: *`PlaneGeometry`*
 
-*Defined in [ts/help-handler.ts:125](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L125)*
+*Defined in ts/displays/help-handler.ts:129*
 
 Geometry for side help section borders
 
@@ -347,7 +349,7 @@ ___
 
 **● sectionMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/help-handler.ts:133](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L133)*
+*Defined in ts/displays/help-handler.ts:137*
 
 Blackish background material for each help section.
 
@@ -358,7 +360,7 @@ ___
 
 **● sectionMaterialGlow**: *`MeshPhongMaterial`*
 
-*Defined in [ts/help-handler.ts:137](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L137)*
+*Defined in ts/displays/help-handler.ts:141*
 
 Bluish background border material for each help section.
 
@@ -369,7 +371,7 @@ ___
 
 **● sections**: *`Mesh`[]* =  []
 
-*Defined in [ts/help-handler.ts:141](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L141)*
+*Defined in ts/displays/help-handler.ts:145*
 
 All the background sections of the help screen.
 
@@ -380,7 +382,7 @@ ___
 
 **● shields**: *[Shield](_ts_player_shield_.shield.md)[]* =  []
 
-*Defined in [ts/help-handler.ts:145](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L145)*
+*Defined in ts/displays/help-handler.ts:149*
 
 Shield demonstration
 
@@ -391,7 +393,7 @@ ___
 
 **● specMap**: *`Texture`*
 
-*Defined in [ts/help-handler.ts:149](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L149)*
+*Defined in ts/displays/help-handler.ts:153*
 
 Texture image to help give the dead base its glossed over appearance.
 
@@ -402,7 +404,7 @@ ___
 
 **● tailMesh**: *`Line`*
 
-*Defined in [ts/help-handler.ts:153](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L153)*
+*Defined in ts/displays/help-handler.ts:157*
 
 Controls the overall rendering of the missile tail
 
@@ -413,7 +415,7 @@ ___
 
 **● textHeaderParams**: *`TextGeometryParameters`*
 
-*Defined in [ts/help-handler.ts:157](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L157)*
+*Defined in ts/displays/help-handler.ts:161*
 
 Since most of the text on the menu has same parameters, use one variable.
 
@@ -424,7 +426,7 @@ ___
 
 **● textpParams**: *`TextGeometryParameters`*
 
-*Defined in [ts/help-handler.ts:161](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L161)*
+*Defined in ts/displays/help-handler.ts:165*
 
 Since most of the text on the menu has same parameters, use one variable.
 
@@ -435,7 +437,7 @@ ___
 
 **● texts**: *`Mesh`[]* =  []
 
-*Defined in [ts/help-handler.ts:165](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L165)*
+*Defined in ts/displays/help-handler.ts:169*
 
 All the texts of the help screen.
 
@@ -446,7 +448,7 @@ ___
 
 **● zSpot**: *`number`* = 0.1
 
-*Defined in [ts/help-handler.ts:169](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L169)*
+*Defined in ts/displays/help-handler.ts:173*
 
 Tracks current z baseline coordinate off which all items are based.
 
@@ -460,7 +462,7 @@ ___
 
 ▸ **activate**(): `void`
 
-*Defined in [ts/help-handler.ts:321](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L321)*
+*Defined in ts/displays/help-handler.ts:325*
 
 Turns on all help screen related graphics
 
@@ -473,7 +475,7 @@ ___
 
 ▸ **deactivate**(): `void`
 
-*Defined in [ts/help-handler.ts:359](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L359)*
+*Defined in ts/displays/help-handler.ts:363*
 
 Turns off all help screen related graphics
 
@@ -486,7 +488,7 @@ ___
 
 ▸ **endCycle**(): `void`
 
-*Defined in [ts/help-handler.ts:389](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L389)*
+*Defined in ts/displays/help-handler.ts:393*
 
 Moves the animated help items.
 
@@ -499,7 +501,7 @@ ___
 
 ▸ **getShield**(): [Shield](_ts_player_shield_.shield.md)
 
-*Defined in [ts/help-handler.ts:404](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L404)*
+*Defined in ts/displays/help-handler.ts:408*
 
 Returns the center shield to allow menu to toggle/click it.
 
@@ -513,7 +515,7 @@ ___
 
 ▸ **makeBox0**(): `void`
 
-*Defined in [ts/help-handler.ts:410](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L410)*
+*Defined in ts/displays/help-handler.ts:414*
 
 Builds the box and graphics for the long top section.
 
@@ -526,7 +528,7 @@ ___
 
 ▸ **makeBox1**(sTex: *`Texture`[]*, astTex: *`Texture`*): `void`
 
-*Defined in [ts/help-handler.ts:431](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L431)*
+*Defined in ts/displays/help-handler.ts:435*
 
 Builds the box and graphics for the 2nd row left section.
 
@@ -546,7 +548,7 @@ ___
 
 ▸ **makeBox2**(sbg: *`BoxGeometry`*, sbm: *`MeshBasicMaterial`*, swg: *`BoxGeometry`*, swm: *`MeshBasicMaterial`*, seg: *`BoxGeometry`*, sem: *`MeshBasicMaterial`*, scg: *`BoxGeometry`*, scm: *`MeshBasicMaterial`*, mouseMat: *`MeshBasicMaterial`*, mouseGeom: *`ShapeGeometry`*): `void`
 
-*Defined in [ts/help-handler.ts:529](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L529)*
+*Defined in ts/displays/help-handler.ts:533*
 
 Builds the box and graphics for the 2nd row middle section.
 
@@ -574,7 +576,7 @@ ___
 
 ▸ **makeBox3**(bg: *`BoxGeometry`*): `void`
 
-*Defined in [ts/help-handler.ts:590](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L590)*
+*Defined in ts/displays/help-handler.ts:594*
 
 Builds the box and graphics for the 2nd row right section.
 
@@ -593,7 +595,7 @@ ___
 
 ▸ **makeBox4**(sbg: *`BoxGeometry`*, sbm: *`MeshBasicMaterial`*, swg: *`BoxGeometry`*, swm: *`MeshBasicMaterial`*, seg: *`BoxGeometry`*, sem: *`MeshBasicMaterial`*, scg: *`BoxGeometry`*, scm: *`MeshBasicMaterial`*, bg: *`BoxGeometry`*): `void`
 
-*Defined in [ts/help-handler.ts:681](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L681)*
+*Defined in ts/displays/help-handler.ts:685*
 
 Builds the box and graphics for the 3rd row left section.
 
@@ -620,7 +622,7 @@ ___
 
 ▸ **makeBox5**(): `void`
 
-*Defined in [ts/help-handler.ts:754](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L754)*
+*Defined in ts/displays/help-handler.ts:758*
 
 Builds the box and graphics for the 3rd row middle section.
 
@@ -633,7 +635,7 @@ ___
 
 ▸ **makeBox6**(bg: *`BoxGeometry`*): `void`
 
-*Defined in [ts/help-handler.ts:791](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L791)*
+*Defined in ts/displays/help-handler.ts:795*
 
 Builds the box and graphics for the 3rd row right section.
 
@@ -652,7 +654,7 @@ ___
 
 ▸ **makeBox7**(): `void`
 
-*Defined in [ts/help-handler.ts:883](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L883)*
+*Defined in ts/displays/help-handler.ts:887*
 
 Builds the box and graphics for the 4th row left section.
 
@@ -665,7 +667,7 @@ ___
 
 ▸ **makeBox8**(clkMat: *`MeshBasicMaterial`*): `void`
 
-*Defined in [ts/help-handler.ts:914](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/help-handler.ts#L914)*
+*Defined in ts/displays/help-handler.ts:918*
 
 Builds the box and graphics for the 4th row right section.
 

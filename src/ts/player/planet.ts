@@ -17,10 +17,14 @@ import { GameLoadData } from '../models/game-load-data';
  * Simple type to represent status of all four populated areas. Cumulatively equals player's health.
  */
 export interface PlanetStatus {
-    quadrantBlue: boolean;
-    quadrantGreen: boolean;
-    quadrantPurple: boolean;
-    quadrantYellow: boolean;
+    quadrant1: boolean;
+    quadrant2: boolean;
+    quadrant3: boolean;
+    quadrant4: boolean;
+    sat1: boolean;
+    sat2: boolean;
+    sat3: boolean;
+    sat4: boolean;
 }
 /**
  * @class
@@ -79,19 +83,19 @@ export class Planet implements Collidable {
     /**
      * Populated section of the planet. Once hit, false signifies inactive.
      */
-    private quadrantBlue: boolean = true;
+    private quadrant1: boolean = true;
     /**
      * Populated section of the planet. Once hit, false signifies inactive.
      */
-    private quadrantGreen: boolean = true;
+    private quadrant2: boolean = true;
     /**
      * Populated section of the planet. Once hit, false signifies inactive.
      */
-    private quadrantPurple: boolean = true;
+    private quadrant3: boolean = true;
     /**
      * Populated section of the planet. Once hit, false signifies inactive.
      */
-    private quadrantYellow: boolean = true;
+    private quadrant4: boolean = true;
     /**
      * Satellite that starts at 3 o'clock
      */
@@ -227,11 +231,11 @@ export class Planet implements Collidable {
             this.bases[j].endCycle();
         }
         if (this.isActive) {
-            this.quadrantBlue = this.base1.getActive();
-            this.quadrantGreen = this.base2.getActive();
-            this.quadrantPurple = this.base3.getActive();
-            this.quadrantYellow = this.base4.getActive();
-            this.isActive = this.quadrantBlue || this.quadrantGreen || this.quadrantPurple || this.quadrantYellow;
+            this.quadrant1 = this.base1.getActive();
+            this.quadrant2 = this.base2.getActive();
+            this.quadrant3 = this.base3.getActive();
+            this.quadrant4 = this.base4.getActive();
+            this.isActive = this.quadrant1 || this.quadrant2 || this.quadrant3 || this.quadrant4;
             if (!this.isActive) {
                 // Game over...Show dead planet.
                 this.funkMaterial.map = this.deadPlanetTexture;
@@ -302,16 +306,16 @@ export class Planet implements Collidable {
     getPowerRegenRate(): number {
         if (!this.isActive) return -5;
         let rate = 0;
-        if (this.quadrantBlue) {
+        if (this.quadrant1) {
             rate += 0.25;
         }
-        if (this.quadrantGreen) {
+        if (this.quadrant2) {
             rate += 0.25;
         }
-        if (this.quadrantPurple) {
+        if (this.quadrant3) {
             rate += 0.25;
         }
-        if (this.quadrantYellow) {
+        if (this.quadrant4) {
             rate += 0.25;
         }
         return rate;
@@ -322,10 +326,14 @@ export class Planet implements Collidable {
      */
     getStatus(): PlanetStatus {
         return {
-            quadrantBlue: this.quadrantBlue,
-            quadrantGreen: this.quadrantGreen,
-            quadrantPurple: this.quadrantPurple,
-            quadrantYellow: this.quadrantYellow,
+            quadrant1: this.quadrant1,
+            quadrant2: this.quadrant2,
+            quadrant3: this.quadrant3,
+            quadrant4: this.quadrant4,
+            sat1: this.base1.getActive(),
+            sat2: this.base2.getActive(),
+            sat3: this.base3.getActive(),
+            sat4: this.base4.getActive(),
         };
     }
     /**

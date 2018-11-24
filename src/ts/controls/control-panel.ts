@@ -66,6 +66,10 @@ export class ControlPanel {
      */
     private pause: boolean = false;
     /**
+     * Tracks state of game save menu.
+     */
+    private save: boolean = false;
+    /**
      * Reference to the scene, used to remove asteroid from rendering cycle once destroyed.
      */
     private scene: Scene;
@@ -156,7 +160,6 @@ export class ControlPanel {
             this.controlHelp.changeOpacity(0.5);
             this.controlSave.changeOpacity(0.5);
         }
-        this.controlSave.changeOpacity(0.5); // TODO: Connect save functionality, and delete this.
         this.controlPlay.hide();
     }
     /**
@@ -175,20 +178,15 @@ export class ControlPanel {
     }
     /**
      * Alerts control panel that help button has been clicked by user.
+     * @param newState new state for isHelp.
      */
-    helpChange(): void {
+    helpChange(newState: boolean): void {
         if (this.difficulty === 3) return;
-        this.help = !this.help;
+        this.resume();
+        this.help = newState;
         if (this.help) {
-            this.pause = true;
-            this.controlPlay.show();
-            this.controlPause.hide();
             this.controlHelp.activate();
-        } else {
-            this.pause = false;
-            this.controlPause.show();
-            this.controlPlay.hide();
-            this.controlHelp.deactivate();
+            this.pauseChange();
         }
     }
     /**
@@ -208,6 +206,16 @@ export class ControlPanel {
     isPaused(): boolean {
         if (this.difficulty < 3) {
             return this.pause;
+        }
+        return false;
+    }
+    /**
+     * Getter for game save state.
+     * @returns TRUE --> game is in save screen | FALSE --> game is not in save screen.
+     */
+    isSave(): boolean {
+        if (this.difficulty < 3) {
+            return this.save;
         }
         return false;
     }
@@ -237,13 +245,33 @@ export class ControlPanel {
         if (this.pause) {
             this.controlPlay.show();
             this.controlPause.hide();
-        } else {
-            this.controlPause.show();
-            this.controlPlay.hide();
-            if (this.help) this.helpChange();
+            return;
         }
+        this.resume();
     }
-    save() {
-        // Activate Save!!!
+    resume() {
+        if (this.save) {
+            this.save = !this.save;
+            this.controlSave.deactivate();
+        } else if (this.help) {
+            this.help = !this.help;
+            this.controlHelp.deactivate();
+        }
+        this.pause = false;
+        this.controlPlay.hide();
+        this.controlPause.show();
+    }
+    /**
+     * Alerts control panel that save button has been clicked by user.
+     * @param newState new state for isSave.
+     */
+    saveChange(newState: boolean): void {
+        if (this.difficulty === 3) return;
+        this.resume();
+        this.save = newState;
+        if (this.save) {
+            this.controlSave.activate();
+            this.pauseChange();
+        }
     }
 }

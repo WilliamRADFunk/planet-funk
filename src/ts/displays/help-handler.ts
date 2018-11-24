@@ -21,11 +21,15 @@ import {
     Texture,
     Vector3, 
     SphereGeometry} from "three";
-import { Projectile } from "./weapons/projectile";
-import { Planet } from "./player/planet";
-import { Shield } from "./player/shield";
-import { ControlSave } from "./controls/control-save";
 
+import { Projectile } from "../weapons/projectile";
+import { Planet } from "../player/planet";
+import { Shield } from "../player/shield";
+import { ControlSave } from "../controls/control-save";
+/**
+ * @class
+ * Help screen that handles all of the animated instructions on how to play.
+ */
 export class HelpHandler {
     /**
      * Controls the overall rendering of the asteroid
@@ -212,7 +216,7 @@ export class HelpHandler {
         const clickMaterial = new MeshBasicMaterial( {opacity: 0, transparent: true, side: DoubleSide} );
         const returnBarrierGeometry = new PlaneGeometry( 2, 0.8, 0, 0 );
         this.barrierReturn = new Mesh( returnBarrierGeometry, clickMaterial );
-        this.barrierReturn.name = 'Return';
+        this.barrierReturn.name = 'Return Help';
         this.barrierReturn.position.set(0.1, 0, this.zSpot + 4);
         this.barrierReturn.rotation.set(1.5708, 0, 0);
         this.scene.add(this.barrierReturn);
@@ -938,6 +942,6 @@ export class HelpHandler {
         this.scene.add(text);
         this.texts.push(text);
 
-        this.saveControl = new ControlSave(this.scene, [3.7, -12.5, 3.4], 0.7, new Color(0x00B39F), clkMat);
+        this.saveControl = new ControlSave(this.scene, [3.7, -12.5, 3.4], 0.7, new Color(0x00B39F), clkMat, 'Help ');
     }
 }

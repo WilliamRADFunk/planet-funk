@@ -22,7 +22,7 @@
 
 **● index**: *`number`* = 0
 
-*Defined in [ts/weapons/projectile.ts:18](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/weapons/projectile.ts#L18)*
+*Defined in [ts/weapons/projectile.ts:18](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/weapons/projectile.ts#L18)*
 
 Static index to help name one projectile differenly than another.
 

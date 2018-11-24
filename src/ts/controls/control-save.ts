@@ -38,14 +38,21 @@ export class ControlSave {
      * @param color         color to use for button and button material.
      * @param color         color to use for button and button material.
      * @param clkMat        consistent click material used for all control panel buttons.
+     * @param moreText      Additional label text to differentiate in-game save control from any other.
      * @hidden
      */
-    constructor(scene: Scene, pos: [number, number, number], size: number, color: Color, clkMat: MeshBasicMaterial) {
+    constructor(
+        scene: Scene,
+        pos: [number, number, number],
+        size: number,
+        color: Color,
+        clkMat: MeshBasicMaterial,
+        moreText?: string) {
         const yPos = pos[1] || 1;
         // Save button click barrier.
         const saveBarrierGeometry = new PlaneGeometry( size, size, 0, 0 );
         const saveBarrier = new Mesh( saveBarrierGeometry, clkMat );
-        saveBarrier.name = 'Save Button';
+        saveBarrier.name = `Save ${moreText || ''}Button`;
         saveBarrier.position.set(pos[0] + (size / 2) + (0.25 * size), yPos, pos[2] + (size / 2) + (0.25 * size));
         saveBarrier.rotation.set(1.5708, 0, 0);
         scene.add(saveBarrier);
@@ -103,6 +110,12 @@ export class ControlSave {
         scene.add(this.saveButton);
     }
     /**
+     * Makes necessary changes to save button when save mode is activated.
+     */
+    activate(): void {
+        this.changeOpacity(0.5);
+    }
+    /**
      * Changes button material to match new level color.
      * @param color threeJS color value to use on button
      */
@@ -117,6 +130,12 @@ export class ControlSave {
     changeOpacity(opacity: number): void {
         this.saveButtonBorderMaterial.opacity = opacity;
         this.saveDiskMaterial.opacity = opacity;
+    }
+    /**
+     * Makes necessary changes to save button when save mode is deactivated.
+     */
+    deactivate(): void {
+        this.changeOpacity(1);
     }
     /**
      * Hide the save button (state related).

@@ -12,49 +12,89 @@ Simple type to represent status of all four populated areas. Cumulatively equals
 
 ### Properties
 
-* [quadrantBlue](_ts_player_planet_.planetstatus.md#quadrantblue)
-* [quadrantGreen](_ts_player_planet_.planetstatus.md#quadrantgreen)
-* [quadrantPurple](_ts_player_planet_.planetstatus.md#quadrantpurple)
-* [quadrantYellow](_ts_player_planet_.planetstatus.md#quadrantyellow)
+* [quadrant1](_ts_player_planet_.planetstatus.md#quadrant1)
+* [quadrant2](_ts_player_planet_.planetstatus.md#quadrant2)
+* [quadrant3](_ts_player_planet_.planetstatus.md#quadrant3)
+* [quadrant4](_ts_player_planet_.planetstatus.md#quadrant4)
+* [sat1](_ts_player_planet_.planetstatus.md#sat1)
+* [sat2](_ts_player_planet_.planetstatus.md#sat2)
+* [sat3](_ts_player_planet_.planetstatus.md#sat3)
+* [sat4](_ts_player_planet_.planetstatus.md#sat4)
 
 ---
 
 ## Properties
 
-<a id="quadrantblue"></a>
+<a id="quadrant1"></a>
 
-###  quadrantBlue
+###  quadrant1
 
-**● quadrantBlue**: *`boolean`*
+**● quadrant1**: *`boolean`*
 
-*Defined in [ts/player/planet.ts:20](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/player/planet.ts#L20)*
-
-___
-<a id="quadrantgreen"></a>
-
-###  quadrantGreen
-
-**● quadrantGreen**: *`boolean`*
-
-*Defined in [ts/player/planet.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/player/planet.ts#L21)*
+*Defined in [ts/player/planet.ts:20](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/player/planet.ts#L20)*
 
 ___
-<a id="quadrantpurple"></a>
+<a id="quadrant2"></a>
 
-###  quadrantPurple
+###  quadrant2
 
-**● quadrantPurple**: *`boolean`*
+**● quadrant2**: *`boolean`*
 
-*Defined in [ts/player/planet.ts:22](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/player/planet.ts#L22)*
+*Defined in [ts/player/planet.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/player/planet.ts#L21)*
 
 ___
-<a id="quadrantyellow"></a>
+<a id="quadrant3"></a>
 
-###  quadrantYellow
+###  quadrant3
 
-**● quadrantYellow**: *`boolean`*
+**● quadrant3**: *`boolean`*
 
-*Defined in [ts/player/planet.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/e9ae4fe/src/ts/player/planet.ts#L23)*
+*Defined in [ts/player/planet.ts:22](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/player/planet.ts#L22)*
+
+___
+<a id="quadrant4"></a>
+
+###  quadrant4
+
+**● quadrant4**: *`boolean`*
+
+*Defined in [ts/player/planet.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/player/planet.ts#L23)*
+
+___
+<a id="sat1"></a>
+
+###  sat1
+
+**● sat1**: *`boolean`*
+
+*Defined in [ts/player/planet.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/player/planet.ts#L24)*
+
+___
+<a id="sat2"></a>
+
+###  sat2
+
+**● sat2**: *`boolean`*
+
+*Defined in [ts/player/planet.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/player/planet.ts#L25)*
+
+___
+<a id="sat3"></a>
+
+###  sat3
+
+**● sat3**: *`boolean`*
+
+*Defined in [ts/player/planet.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/player/planet.ts#L26)*
+
+___
+<a id="sat4"></a>
+
+###  sat4
+
+**● sat4**: *`boolean`*
+
+*Defined in [ts/player/planet.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/player/planet.ts#L27)*
 
 ___
 

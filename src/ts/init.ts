@@ -26,8 +26,10 @@ import { LevelHandler } from './displays/level-handler';
 import { SaucerGenerator } from './enemies/saucer-generator';
 import { Menu } from './displays/menu';
 import { ControlPanel } from './controls/control-panel';
-import { HelpHandler } from './help-handler';
+import { HelpHandler } from './displays/help-handler';
 import { GameLoadData } from './models/game-load-data';
+import { CreateSaveCode } from './utils/create-save-code';
+import { SaveHandler } from './displays/save-handler';
 
 /**
  * Loads the graphic for asteroid.
@@ -245,16 +247,13 @@ const loadMenu = () => {
             } else if (el.object.name === 'Hardcore') {
                 menu.changeDifficulty(3);
             } else if (el.object.name === 'Load') {
-                const validLoad = menu.pressedLoad();
+                menu.pressedLoad();
                 setTimeout(() => {
-                    if (validLoad) {
-                        console.log('Transitioning to load menu...');
-                        menu.returnToMainMenu();
-                    }
+                    menu.returnToMainMenu();
                 }, 750);
             } else if (el.object.name === 'Help') {
                 menu.pressedHelp();
-            } else if (el.object.name === 'Return') {
+            } else if (el.object.name === 'Return Help') {
                 menu.returnToMainMenu();
             } else if (el.object.name === 'Help Shield') {
                 menu.toggleHelpShield();
@@ -284,23 +283,13 @@ const startMenuRendering = () => {
  * @param difficulty player's choice in difficulty level.
  */
 const loadGame = (difficulty: number, gld?: GameLoadData) => {
-    const gameLoadData: GameLoadData = gld || {
+    const gameLoadData: GameLoadData = (gld && gld.difficulty < 3) ? gld : {
         b1: 1, b2: 1, b3: 1, b4: 1,
         difficulty: difficulty,
         level: 1,
         sat1: 1, sat2: 1, sat3: 1, sat4: 1,
         score: 0
     };
-    // const char = [];
-    // const convertToHex = function(c) {
-    //     if (c > 9) return c += 65 - 10;
-    //     return c += 48;
-    // };
-    // char.push(convertToHex(gameLoadData.b4 * 1 + gameLoadData.b3 * 2 + gameLoadData.b2 * 4 + gameLoadData.b1 * 8));
-    // char.push(convertToHex(gameLoadData.sat4 * 1 + gameLoadData.sat3 * 2 + gameLoadData.sat2 * 4 + gameLoadData.sat1 * 8));
-    // char.push(convertToHex(gameLoadData.difficulty));
-    // char.push(convertToHex(gameLoadData.difficulty));
-    // console.log(String.fromCharCode(char[0]));
     let isGameLive = true;
     // Establish initial window size.
     let WIDTH: number = window.innerWidth * 0.99;
@@ -388,13 +377,16 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
             if (el.object.name === 'Pause Button') {
                 if (controlPanel.isHelp()) {
                     helpHandler.deactivate();
+                } else if (controlPanel.isSave()) {
+                    saveHandler.deactivate();
                 }
                 controlPanel.pauseChange();
                 launchFlag = false;
                 return;
             }
             if (el.object.name === 'Help Button') {
-                controlPanel.helpChange();
+                controlPanel.helpChange(!controlPanel.isHelp());
+                saveHandler.deactivate();
                 if (controlPanel.isHelp()) {
                     helpHandler.activate();
                 } else {
@@ -403,15 +395,30 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
                 launchFlag = false;
                 return;
             }
-            if (el.object.name === 'Return') {
-                controlPanel.helpChange();
-                helpHandler.deactivate();
+            if (el.object.name === 'Return Help') {
+                if (controlPanel.isHelp()) {
+                    controlPanel.helpChange(!controlPanel.isHelp());
+                    helpHandler.deactivate();
+                }
+                launchFlag = false;
+                return;
+            }
+            if (el.object.name === 'Return Save') {
+                if (controlPanel.isSave()) {
+                    controlPanel.saveChange(!controlPanel.isSave());
+                    saveHandler.deactivate();
+                }
                 launchFlag = false;
                 return;
             }
             if (el.object.name === 'Save Button') {
-                console.log('Save!');
-                controlPanel.save();
+                controlPanel.saveChange(!controlPanel.isSave());
+                helpHandler.deactivate();
+                if (controlPanel.isSave()) {
+                    saveHandler.activate(CreateSaveCode(gameLoadData));
+                } else {
+                    saveHandler.deactivate();
+                }
                 launchFlag = false;
                 return;
             }
@@ -447,6 +454,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
 
     
     const helpHandler = new HelpHandler(scene, gameFont, saucerTextures, asteroidTexture, buildingTextures, specMap, planetTextures);
+    const saveHandler = new SaveHandler(scene, gameFont);
     
     let jobCounter = 0;
     let noMissiles = false;
@@ -461,6 +469,8 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
 
         if (controlPanel.isHelp()) {
             helpHandler.endCycle();
+        } else if (controlPanel.isSave()) {
+            saveHandler.endCycle();
         } else if (controlPanel.isPaused()) {
             // When paused, do nothing but render.
         // Only run operations allowed during a fluctuating banner animation.
@@ -494,7 +504,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
             // Checks to make sure game isn't over.
             if (isGameLive) {
                 const status = planet.getStatus();
-                isGameLive = status.quadrantBlue || status.quadrantGreen || status.quadrantPurple || status.quadrantYellow;
+                isGameLive = status.quadrant1 || status.quadrant2 || status.quadrant3 || status.quadrant4;
                 // No matter what let control panel be visible again.
                 controlPanel.endCycle();
                 // If game is over, stop increasing the score.
@@ -518,6 +528,19 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
                 levelHandler.nextLevel();
                 scoreboard.endCycle(true);
                 controlPanel.endCycle(true);
+                // Adjust game save data.
+                const status = planet.getStatus();
+                gameLoadData.b1 = (status.quadrant1) ? 1 : 0;
+                gameLoadData.b2 = (status.quadrant2) ? 1 : 0;
+                gameLoadData.b3 = (status.quadrant3) ? 1 : 0;
+                gameLoadData.b4 = (status.quadrant4) ? 1 : 0;
+                gameLoadData.level = levelHandler.getLevel();
+                gameLoadData.sat1 = (status.sat1) ? 1 : 0;
+                gameLoadData.sat2 = (status.sat2) ? 1 : 0;
+                gameLoadData.sat3 = (status.sat3) ? 1 : 0;
+                gameLoadData.sat4 = (status.sat4) ? 1 : 0;
+                gameLoadData.score = scoreboard.getScore();
+                // Start the next wave of enemies.
                 asteroidGenerator.refreshLevel(levelHandler.getLevel());
                 saucerGenerator.refreshLevel(levelHandler.getLevel());
                 enemyMissileGenerator.refreshLevel(levelHandler.getLevel(), levelHandler.getColor());
