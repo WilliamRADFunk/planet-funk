@@ -129,6 +129,7 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 * ["ts/controls/control-save"](modules/_ts_controls_control_save_.md)
 * ["ts/displays/help-handler"](modules/_ts_displays_help_handler_.md)
 * ["ts/displays/level-handler"](modules/_ts_displays_level_handler_.md)
+* ["ts/displays/load-handler"](modules/_ts_displays_load_handler_.md)
 * ["ts/displays/menu"](modules/_ts_displays_menu_.md)
 * ["ts/displays/save-handler"](modules/_ts_displays_save_handler_.md)
 * ["ts/displays/score-handler"](modules/_ts_displays_score_handler_.md)
@@ -142,7 +143,9 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 * ["ts/player/satellite"](modules/_ts_player_satellite_.md)
 * ["ts/player/shield"](modules/_ts_player_shield_.md)
 * ["ts/utils/convert-to-hex"](modules/_ts_utils_convert_to_hex_.md)
+* ["ts/utils/convert-to-int"](modules/_ts_utils_convert_to_int_.md)
 * ["ts/utils/create-save-code"](modules/_ts_utils_create_save_code_.md)
+* ["ts/utils/decipher-save-code"](modules/_ts_utils_decipher_save_code_.md)
 * ["ts/weapons/explosion"](modules/_ts_weapons_explosion_.md)
 * ["ts/weapons/projectile"](modules/_ts_weapons_projectile_.md)
 

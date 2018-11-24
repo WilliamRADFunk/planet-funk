@@ -111,7 +111,7 @@ gulp.task('typescript', () => {
     .pipe(typescript({
       noImplicitAny: true,
       sourceMap: true,
-      module: "commonjs",
+      module: "commonjs"
     }))
       .on('error', gutil.log)
     .pipe(gulp.dest('dist/js-pure'));

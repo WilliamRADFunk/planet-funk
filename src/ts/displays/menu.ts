@@ -12,6 +12,8 @@ import {
     Texture } from 'three';
 
 import { HelpHandler } from './help-handler';
+import { LoadHandler } from './load-handler';
+import { GameLoadData } from '../models/game-load-data';
 
 /**
  * @class
@@ -110,6 +112,10 @@ export class Menu {
      * Controls size and shape of the load button text
      */
     private loadGeometry: TextGeometry;
+    /**
+     * Paints the load screen.
+     */
+    private loadHandler: LoadHandler;
     /**
      * Controls the overall rendering of the main banner display
      */
@@ -306,6 +312,7 @@ export class Menu {
         this.scene.add(this.help);
 
         this.helpHandler = new HelpHandler(this.scene, this.menuFont, saucerTextures, asteroidTexture, buildingTextures, specMap, planetTextures);
+        this.loadHandler = new LoadHandler(this.scene, this.menuFont);
     }
     /**
      * Activates the specific shield in the help screen display.
@@ -322,6 +329,13 @@ export class Menu {
         this.createDifficultyButtons(this.difficultyLevel, this.menuMaterial, true);
         this.difficultyLevel = diff;
         this.createDifficultyButtons(this.difficultyLevel, this.menuSelectedMaterial, true);
+    }
+    /**
+     * Passes load char onto the loadHandler.
+     * @param char player clicked on a specific char. This is that char 0-F
+     */
+    charEntered(char: string): void {
+        this.loadHandler.charEntered(char);
     }
     /**
      * Called to (re)create difficulty menu button text
@@ -401,6 +415,21 @@ export class Menu {
             }
             this.shimmer.position.x += 0.2;
         }
+        this.loadHandler.endCycle();
+    }
+    /**
+     * Retrieves the currently chosen difficulty level.
+     * @returns the difficulty level currently selected in the menu.
+     */
+    getDifficulty(): number {
+        return this.difficultyLevel;
+    }
+    /**
+     * Gets the game load data fom load code. If load code is invalid, it returns null.
+     * @returns game load data from load code or null to start from a default set.
+     */
+    getGameData(): GameLoadData|null {
+        return this.loadHandler.getGameData();
     }
     /**
      * Turns visibility for menu items to be unseen.
@@ -409,7 +438,6 @@ export class Menu {
         this.shimmer.color.set(0xCCCCCC);
         this.shimmer.intensity = 3.2;
         this.shimmer.position.y = -10;
-        // this.mainBanner.visible = false;
         this.start.visible = false;
         this.easy.visible = false;
         this.normal.visible = false;
@@ -458,8 +486,8 @@ export class Menu {
         this.scene.add(this.load);
         setTimeout(() => {
             this.mode = 2;
-            // this.hideMenu();
-            // this.loadHandler.activate();
+            this.hideMenu();
+            this.loadHandler.activate();
         }, 250);
     }
     /**
@@ -487,9 +515,10 @@ export class Menu {
             this.load = new Mesh( this.loadGeometry, this.menuMaterial );
             this.load.position.set(-0.6, -0.5, 1.2);
             this.load.rotation.x = -1.5708;
+            this.scene.add(this.load);
             this.mode = 0;
             this.showMenu();
-            this.scene.add(this.load);
+            this.loadHandler.deactivate();
         } else if (this.mode === 1) {
             this.scene.remove(this.help);
             // Selected help button text
@@ -509,11 +538,13 @@ export class Menu {
         
         this.createDifficultyButtons(this.difficultyLevel, this.menuSelectedMaterial, true);
     }
+    /**
+     * Turns visibility for menu items to be seen.
+     */
     showMenu() {
         this.shimmer.color.set(0x3333FF);
         this.shimmer.intensity = 2;
         this.shimmer.position.y = 2;
-        // this.mainBanner.visible = true;
         this.start.visible = true;
         this.easy.visible = true;
         this.normal.visible = true;

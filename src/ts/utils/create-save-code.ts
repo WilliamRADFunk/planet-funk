@@ -43,18 +43,21 @@ export const CreateSaveCode = function(gld: GameLoadData) {
     remainder = remainder - (total7thHex * 16);
     const total8thHex = Math.floor(remainder / 1);
     // Convert each caluclated value into a single hex digit.
+    char.push(ConvertToHex(14));
     char.push(ConvertToHex(total8thHex));
     char.push(ConvertToHex(gld.sat4 * 1 + gld.sat3 * 2 + gld.sat2 * 4 + gld.sat1 * 8));
     char.push(ConvertToHex(total5thHex));
     char.push(ConvertToHex(((gld.difficulty + 1) * 4) + Math.floor(Math.random() * 3)));
     char.push(ConvertToHex(total6thHex));
     char.push(ConvertToHex(Math.floor(gld.level / 16)));
+    char.push(ConvertToHex(7));
     char.push(ConvertToHex(total3rdHex));
     char.push(ConvertToHex(gld.b4 * 1 + gld.b3 * 2 + gld.b2 * 4 + gld.b1 * 8));
     char.push(ConvertToHex(total7thHex));
     char.push(ConvertToHex(total1stHex));
     char.push(ConvertToHex(Math.floor(gld.level % 16)));
     char.push(ConvertToHex(total4thHex));
+    char.push(ConvertToHex(10));
     char.push(ConvertToHex(total2ndHex));
 
     return char.slice().map(c => String.fromCharCode(c));

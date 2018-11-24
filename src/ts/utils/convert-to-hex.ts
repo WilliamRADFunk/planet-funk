@@ -1,4 +1,4 @@
 export const ConvertToHex = function(c: number): number {
-    if (c > 9) return c += 65 - 10;
-    return c += 48;
+    if (c > 9) return (c + 55);
+    return (c + 48);
 };

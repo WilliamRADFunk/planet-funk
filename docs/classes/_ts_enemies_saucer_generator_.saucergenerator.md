@@ -26,6 +26,7 @@
 
 * [endCycle](_ts_enemies_saucer_generator_.saucergenerator.md#endcycle)
 * [makeSaucer](_ts_enemies_saucer_generator_.saucergenerator.md#makesaucer)
+* [makeSaucersFromLoad](_ts_enemies_saucer_generator_.saucergenerator.md#makesaucersfromload)
 * [refreshLevel](_ts_enemies_saucer_generator_.saucergenerator.md#refreshlevel)
 
 ---
@@ -38,7 +39,7 @@
 
 **● currentLevel**: *`number`* = 1
 
-*Defined in [ts/enemies/saucer-generator.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/enemies/saucer-generator.ts#L25)*
+*Defined in [ts/enemies/saucer-generator.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L26)*
 
 Current level player is on, effects max saucers and points per saucer destroyed.
 
@@ -49,7 +50,7 @@ ___
 
 **● difficulty**: *`number`*
 
-*Defined in [ts/enemies/saucer-generator.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/enemies/saucer-generator.ts#L29)*
+*Defined in [ts/enemies/saucer-generator.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L30)*
 
 Player chosen level of difficulty
 
@@ -60,7 +61,7 @@ ___
 
 **● isGameActive**: *`boolean`* = true
 
-*Defined in [ts/enemies/saucer-generator.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/enemies/saucer-generator.ts#L33)*
+*Defined in [ts/enemies/saucer-generator.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L34)*
 
 Flag to let generator know if game is not lost..
 
@@ -71,7 +72,7 @@ ___
 
 **● maxSaucers**: *`number`* = 1
 
-*Defined in [ts/enemies/saucer-generator.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/enemies/saucer-generator.ts#L37)*
+*Defined in [ts/enemies/saucer-generator.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L38)*
 
 Maximum number of saucers that can exist at one time.
 
@@ -82,7 +83,7 @@ ___
 
 **● saucerPoints**: *`number`* = 50
 
-*Defined in [ts/enemies/saucer-generator.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/enemies/saucer-generator.ts#L45)*
+*Defined in [ts/enemies/saucer-generator.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L46)*
 
 Points multiplier per saucer destroyed.
 
@@ -93,7 +94,7 @@ ___
 
 **● saucerTextures**: *`Texture`[]*
 
-*Defined in [ts/enemies/saucer-generator.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/enemies/saucer-generator.ts#L49)*
+*Defined in [ts/enemies/saucer-generator.ts:50](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L50)*
 
 The loaded textures, used for the saucers.
 
@@ -104,7 +105,7 @@ ___
 
 **● saucers**: *[Saucer](_ts_enemies_saucer_.saucer.md)[]* =  []
 
-*Defined in [ts/enemies/saucer-generator.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/enemies/saucer-generator.ts#L41)*
+*Defined in [ts/enemies/saucer-generator.ts:42](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L42)*
 
 Saucer array for ease of iteration
 
@@ -115,7 +116,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/enemies/saucer-generator.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/enemies/saucer-generator.ts#L53)*
+*Defined in [ts/enemies/saucer-generator.ts:54](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L54)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -126,7 +127,7 @@ ___
 
 **● scoreboard**: *[ScoreHandler](_ts_displays_score_handler_.scorehandler.md)*
 
-*Defined in [ts/enemies/saucer-generator.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/enemies/saucer-generator.ts#L57)*
+*Defined in [ts/enemies/saucer-generator.ts:58](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L58)*
 
 Reference to the scorekeeper for adding points on saucer destruction.
 
@@ -140,7 +141,7 @@ ___
 
 ▸ **endCycle**(isGameActive: *`boolean`*): `boolean`
 
-*Defined in [ts/enemies/saucer-generator.ts:80](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/enemies/saucer-generator.ts#L80)*
+*Defined in [ts/enemies/saucer-generator.ts:81](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L81)*
 
 At the end of each loop iteration, iterate endCycle through all saucers.
 
@@ -160,12 +161,25 @@ ___
 
 ▸ **makeSaucer**(): [Saucer](_ts_enemies_saucer_.saucer.md)
 
-*Defined in [ts/enemies/saucer-generator.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/enemies/saucer-generator.ts#L99)*
+*Defined in [ts/enemies/saucer-generator.ts:100](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L100)*
 
 Saucer generation in one place to avoid breaking DRY.
 
 **Returns:** [Saucer](_ts_enemies_saucer_.saucer.md)
 the created saucer to be added to list at index of choice.
+
+___
+<a id="makesaucersfromload"></a>
+
+### `<Private>` makeSaucersFromLoad
+
+▸ **makeSaucersFromLoad**(): `void`
+
+*Defined in [ts/enemies/saucer-generator.ts:125](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L125)*
+
+Saucer generation in one place to avoid breaking DRY, with increasing speeds because of load.
+
+**Returns:** `void`
 
 ___
 <a id="refreshlevel"></a>
@@ -174,7 +188,7 @@ ___
 
 ▸ **refreshLevel**(level: *`number`*): `void`
 
-*Defined in [ts/enemies/saucer-generator.ts:125](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/enemies/saucer-generator.ts#L125)*
+*Defined in [ts/enemies/saucer-generator.ts:138](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/enemies/saucer-generator.ts#L138)*
 
 Start of new level means reactivating saucers, and creating new ones.
 

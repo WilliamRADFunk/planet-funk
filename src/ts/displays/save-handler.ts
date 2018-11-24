@@ -13,7 +13,7 @@ import {
  * Iterable list of x positions for each digit of the save code.
  * Necessary since constantly recreating TextGeometries with each new score is very costly.
  */
-const positionIndex = [ -3.2, -2.7, -2.2, -1.7, -1.2, -0.7, -0.2, 0.3, 0.8, 1.3, 1.8, 2.3, 2.8 ];
+const positionIndex = [ -3.2, -2.7, -2.2, -1.7, -1.2, -0.7, -0.2, 0.3, 0.8, 1.3, 1.8, 2.3, 2.8, 3.3, 3.8, 4.3 ];
 /**
  * @class
  * Save code screen that handles the shimmer effect and the displaying of save code.
@@ -124,12 +124,12 @@ export class SaveHandler {
         }
         const codeBackingGeometry = new PlaneGeometry( 0.5, 0.8, 0, 0 );
         // Material backings 
-        for (let k = 0; k < 13; k++) {
+        for (let k = 0; k < 16; k++) {
             const codeMat = new MeshLambertMaterial({color: 0xFFB6C1, opacity: 1, transparent: true, side: DoubleSide});
             const codeBack = new Mesh(codeBackingGeometry, codeMat);
             this.codeMaterials.push(codeMat);
             this.codeBackings.push(codeBack);
-            codeBack.position.set(this.startPos[0] + positionIndex[k] + 0.215, this.startPos[1] - 11.4, this.startPos[2] - 1.35);
+            codeBack.position.set(this.startPos[0] + positionIndex[k] - 0.55, this.startPos[1] - 11.4, this.startPos[2] - 1.35);
             codeBack.rotation.set(1.5708, 0, 0);
             this.scene.add(codeBack);
         }
@@ -169,7 +169,7 @@ export class SaveHandler {
      */
     endCycle(): void {
         // End of the line, start at beginning and swith opacity directions
-        if (this.activeMaterial >= 13) {
+        if (this.activeMaterial >= 16) {
             this.activeMaterial = 0;
             this.opacityDirection *= -1;
         }
@@ -196,7 +196,7 @@ export class SaveHandler {
         code.forEach((c, i) => {
             const charIndex = (c.charCodeAt(0) < 58) ? Number(c) : (c.charCodeAt(0) - 55); // 0-9 : A-F
             const char = new Mesh( this.digits[charIndex], this.saveMaterial );
-            char.position.set(this.startPos[0] + positionIndex[i], this.startPos[1] - 12.4, this.startPos[2] - 1);
+            char.position.set(this.startPos[0] + positionIndex[i] - 0.75, this.startPos[1] - 12.4, this.startPos[2] - 1);
             char.rotation.x = -1.5708;
             this.scene.add(char);
             this.code.push(char);

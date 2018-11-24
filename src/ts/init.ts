@@ -238,6 +238,12 @@ const loadMenu = () => {
                     container.removeChild( (rendererMenu as any).domElement );
                     loadGame(difficulty);
                 }, 750);
+            } else if (el.object.name === 'Load Code') {
+                setTimeout(() => {
+                    isMenuMode = false;
+                    container.removeChild( (rendererMenu as any).domElement );
+                    loadGame(menu.getDifficulty(), menu.getGameData());
+                }, 250);
             } else if (el.object.name === 'Easy') {
                 menu.changeDifficulty(0);
             } else if (el.object.name === 'Normal') {
@@ -248,15 +254,17 @@ const loadMenu = () => {
                 menu.changeDifficulty(3);
             } else if (el.object.name === 'Load') {
                 menu.pressedLoad();
-                setTimeout(() => {
-                    menu.returnToMainMenu();
-                }, 750);
             } else if (el.object.name === 'Help') {
                 menu.pressedHelp();
             } else if (el.object.name === 'Return Help') {
                 menu.returnToMainMenu();
+            } else if (el.object.name === 'Return Load') {
+                menu.returnToMainMenu();
             } else if (el.object.name === 'Help Shield') {
                 menu.toggleHelpShield();
+            } else if (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+                .some(test => test === el.object.name)) {
+                menu.charEntered(el.object.name);
             }
         });
     };
@@ -348,9 +356,9 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
     const levelHandler = new LevelHandler(scene, gameFont, gameLoadData);
     const scoreboard = new ScoreHandler(scene, levelHandler.getColor(), gameFont, gameLoadData);
     // Create all unit generators that can be dangerous to player
-    const asteroidGenerator = new AsteroidGenerator(scene, scoreboard, asteroidTexture, gameLoadData.difficulty);
-    const saucerGenerator = new SaucerGenerator(scene, scoreboard, saucerTextures, gameLoadData.difficulty);
-    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor(), gameLoadData.difficulty);
+    const asteroidGenerator = new AsteroidGenerator(scene, scoreboard, asteroidTexture, gameLoadData);
+    const saucerGenerator = new SaucerGenerator(scene, scoreboard, saucerTextures, gameLoadData);
+    const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor(), gameLoadData);
     // Create control panel in upper right corner of screen.
     const controlPanel = new ControlPanel(scene, 3.95, -5.8, gameLoadData.difficulty, levelHandler.getColor(), gameFont);
 

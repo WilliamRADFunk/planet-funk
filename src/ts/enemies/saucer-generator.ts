@@ -3,6 +3,7 @@ import { Scene, Texture } from 'three';
 import { Saucer } from './saucer';
 import { CollisionatorSingleton } from '../collisionator';
 import { ScoreHandler } from '../displays/score-handler';
+import { GameLoadData } from '../models/game-load-data';
 
 const saucerStartingPositions: number[][] = [
     [-10, -3], // Left Upper
@@ -57,20 +58,20 @@ export class SaucerGenerator {
     private scoreboard: ScoreHandler;
     /**
      * Constructor for the SaucerGenerator class
-     * @param scene      graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     * @param scoreboard reference to the scorekeeper for adding points on saucer destruction.
-     * @param difficulty level of difficulty chosen by player.
+     * @param scene          graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param scoreboard     reference to the scorekeeper for adding points on saucer destruction.
+     * @param saucerTextures textures for the four saucers.
+     * @param gld            contains level of difficulty and level chosen by player.
      * @hidden
      */
-    constructor(scene: Scene, scoreboard: ScoreHandler, saucerTextures: Texture[], difficulty: number) {
-        this.difficulty = difficulty;
+    constructor(scene: Scene, scoreboard: ScoreHandler, saucerTextures: Texture[], gld: GameLoadData) {
+        this.difficulty = gld.difficulty;
+        this.currentLevel = gld.level;
         this.saucerPoints = (this.difficulty + 1) * this.saucerPoints;
         this.saucerTextures = saucerTextures;
         this.scene = scene;
         this.scoreboard = scoreboard;
-        for (let i = 0; i < this.maxSaucers; i++) {
-            this.saucers.push(this.makeSaucer());
-        }
+        this.makeSaucersFromLoad();
     }
     /**
      * At the end of each loop iteration, iterate endCycle through all saucers.
@@ -117,6 +118,18 @@ export class SaucerGenerator {
         saucer.addToScene();
         CollisionatorSingleton.add(saucer);
         return saucer;
+    }
+    /**
+     * Saucer generation in one place to avoid breaking DRY, with increasing speeds because of load.
+     */
+    private makeSaucersFromLoad() {
+        for (let i = 0; i < this.maxSaucers; i++) {
+            this.saucers.push(this.makeSaucer());
+        }
+        for (let j = 1; j < this.currentLevel; j++) {
+            this.maxSaucers += Math.floor(((this.difficulty + 1) + j) / 4);
+            this.saucers.push(this.makeSaucer());
+        }
     }
     /**
      * Start of new level means reactivating saucers, and creating new ones.

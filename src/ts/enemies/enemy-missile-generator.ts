@@ -3,6 +3,7 @@ import { Color, Scene } from 'three';
 import { CollisionatorSingleton } from '../collisionator';
 import { ScoreHandler } from '../displays/score-handler';
 import { Projectile } from '../weapons/projectile';
+import { GameLoadData } from '../models/game-load-data';
 /**
  * @class
  * Makes, Moves, and Scores the missiles and their resulting destruction.
@@ -49,18 +50,17 @@ export class EnemyMissileGenerator {
      * @param scene      graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param scoreboard reference to the scorekeeper for adding points on enemy missile destruction.
      * @param color      level color, grabbed from the LevelHandler.
-     * @param difficulty level of difficulty chosen by player.
+     * @param gld        contains level of difficulty and level chosen by player.
      * @hidden
      */
-    constructor(scene: Scene, scoreboard: ScoreHandler, color: Color, difficulty: number) {
-        this.difficulty = difficulty;
+    constructor(scene: Scene, scoreboard: ScoreHandler, color: Color, gld: GameLoadData) {
+        this.difficulty = gld.difficulty;
+        this.currentLevel = gld.level;
         this.missilePoints = (this.difficulty + 1) * this.missilePoints;
         this.scene = scene;
         this.scoreboard = scoreboard;
         this.currentColor = color;
-        for (let i = this.missiles.length; i < this.maxMissiles; i++) {
-            this.makeMissile();
-        }
+        this.makeMissilesFromLoad();
     }
     /**
      * At the end of each loop iteration, iterate endCycle through all missiless.
@@ -122,6 +122,19 @@ export class EnemyMissileGenerator {
             true,
             (0.005 + ((this.currentLevel / 1000) + (this.difficulty / 1000) / 2))));
         CollisionatorSingleton.add(this.missiles[this.missiles.length - 1]);
+    }
+    
+    /**
+     * Missiles generation in one place to avoid breaking DRY, with increasing speeds because of load.
+     */
+    private makeMissilesFromLoad(): void {
+        for (let i = this.missiles.length; i < this.maxMissiles; i++) {
+            this.makeMissile();
+        }
+        for (let j = 1; j < this.currentLevel; j++) {
+            this.maxMissiles += (this.difficulty + 1);
+            this.makeMissile();
+        }
     }
     /**
      * Start of new level means rebuilding missiles.

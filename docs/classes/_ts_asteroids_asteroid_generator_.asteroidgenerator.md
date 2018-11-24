@@ -26,6 +26,7 @@
 
 * [endCycle](_ts_asteroids_asteroid_generator_.asteroidgenerator.md#endcycle)
 * [makeAsteroid](_ts_asteroids_asteroid_generator_.asteroidgenerator.md#makeasteroid)
+* [makeAsteroidsFromLoad](_ts_asteroids_asteroid_generator_.asteroidgenerator.md#makeasteroidsfromload)
 * [refreshLevel](_ts_asteroids_asteroid_generator_.asteroidgenerator.md#refreshlevel)
 
 ---
@@ -38,7 +39,7 @@
 
 **● aTexture**: *`Texture`*
 
-*Defined in [ts/asteroids/asteroid-generator.ts:18](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/asteroids/asteroid-generator.ts#L18)*
+*Defined in [ts/asteroids/asteroid-generator.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L19)*
 
 The loaded texture, used for the asteroids.
 
@@ -49,7 +50,7 @@ ___
 
 **● asteroidPoints**: *`number`* = 5
 
-*Defined in [ts/asteroids/asteroid-generator.ts:22](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/asteroids/asteroid-generator.ts#L22)*
+*Defined in [ts/asteroids/asteroid-generator.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L23)*
 
 Points multiplier per asteroid destroyed.
 
@@ -60,7 +61,7 @@ ___
 
 **● asteroids**: *[Asteroid](_ts_asteroids_asteroid_.asteroid.md)[]* =  []
 
-*Defined in [ts/asteroids/asteroid-generator.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/asteroids/asteroid-generator.ts#L14)*
+*Defined in [ts/asteroids/asteroid-generator.ts:15](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L15)*
 
 Asteroid array for ease of iteration
 
@@ -71,7 +72,7 @@ ___
 
 **● currentLevel**: *`number`* = 1
 
-*Defined in [ts/asteroids/asteroid-generator.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/asteroids/asteroid-generator.ts#L26)*
+*Defined in [ts/asteroids/asteroid-generator.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L27)*
 
 Current level player is on, effects max asteroids and points per asteroid destroyed.
 
@@ -82,7 +83,7 @@ ___
 
 **● difficulty**: *`number`*
 
-*Defined in [ts/asteroids/asteroid-generator.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/asteroids/asteroid-generator.ts#L30)*
+*Defined in [ts/asteroids/asteroid-generator.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L31)*
 
 Player chosen level of difficulty
 
@@ -93,7 +94,7 @@ ___
 
 **● isGameActive**: *`boolean`* = true
 
-*Defined in [ts/asteroids/asteroid-generator.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/asteroids/asteroid-generator.ts#L34)*
+*Defined in [ts/asteroids/asteroid-generator.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L35)*
 
 Flag to let generator know if game is not lost.
 
@@ -104,7 +105,7 @@ ___
 
 **● maxAsteroids**: *`number`* = 10
 
-*Defined in [ts/asteroids/asteroid-generator.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/asteroids/asteroid-generator.ts#L38)*
+*Defined in [ts/asteroids/asteroid-generator.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L39)*
 
 Maximum number of asteroids that can exist at one time.
 
@@ -115,7 +116,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/asteroids/asteroid-generator.ts:42](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/asteroids/asteroid-generator.ts#L42)*
+*Defined in [ts/asteroids/asteroid-generator.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L43)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -126,7 +127,7 @@ ___
 
 **● scoreboard**: *[ScoreHandler](_ts_displays_score_handler_.scorehandler.md)*
 
-*Defined in [ts/asteroids/asteroid-generator.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/asteroids/asteroid-generator.ts#L46)*
+*Defined in [ts/asteroids/asteroid-generator.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L47)*
 
 Reference to the scorekeeper for adding points on asteroid destruction.
 
@@ -140,7 +141,7 @@ ___
 
 ▸ **endCycle**(isGameActive: *`boolean`*): `boolean`
 
-*Defined in [ts/asteroids/asteroid-generator.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/asteroids/asteroid-generator.ts#L69)*
+*Defined in [ts/asteroids/asteroid-generator.ts:70](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L70)*
 
 At the end of each loop iteration, iterate endCycle through all asteroids.
 
@@ -160,12 +161,25 @@ ___
 
 ▸ **makeAsteroid**(): [Asteroid](_ts_asteroids_asteroid_.asteroid.md)
 
-*Defined in [ts/asteroids/asteroid-generator.ts:88](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/asteroids/asteroid-generator.ts#L88)*
+*Defined in [ts/asteroids/asteroid-generator.ts:89](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L89)*
 
 Asteroid generation in one place to avoid breaking DRY.
 
 **Returns:** [Asteroid](_ts_asteroids_asteroid_.asteroid.md)
-the created asteroid to be added to list at index of choice.
+the created asteroid.
+
+___
+<a id="makeasteroidsfromload"></a>
+
+### `<Private>` makeAsteroidsFromLoad
+
+▸ **makeAsteroidsFromLoad**(): `void`
+
+*Defined in [ts/asteroids/asteroid-generator.ts:111](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L111)*
+
+Asteroid generation in one place to avoid breaking DRY, with increasing speeds because of load.
+
+**Returns:** `void`
 
 ___
 <a id="refreshlevel"></a>
@@ -174,7 +188,7 @@ ___
 
 ▸ **refreshLevel**(level: *`number`*): `void`
 
-*Defined in [ts/asteroids/asteroid-generator.ts:111](https://github.com/WilliamRADFunk/planet-funk/blob/2ca110e/src/ts/asteroids/asteroid-generator.ts#L111)*
+*Defined in [ts/asteroids/asteroid-generator.ts:124](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/asteroids/asteroid-generator.ts#L124)*
 
 Start of new level means reactivating asteroids, and creating new ones.
 

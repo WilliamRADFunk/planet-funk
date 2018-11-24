@@ -18,7 +18,7 @@
 
 ▸ **CreateSaveCode**(gld: *[GameLoadData](../interfaces/_ts_models_game_load_data_.gameloaddata.md)*): `string`[]
 
-*Defined in ts/utils/create-save-code.ts:27*
+*Defined in [ts/utils/create-save-code.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/7de9660/src/ts/utils/create-save-code.ts#L27)*
 
 Creates a 13 digit hex character array of the game state at each new level.
 

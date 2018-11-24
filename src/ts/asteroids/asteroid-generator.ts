@@ -3,6 +3,7 @@ import { Scene, Texture } from 'three';
 import { Asteroid } from './asteroid';
 import { CollisionatorSingleton } from '../collisionator';
 import { ScoreHandler } from '../displays/score-handler';
+import { GameLoadData } from '../models/game-load-data';
 /**
  * @class
  * Makes, Moves, and Scores the asteroids and their resulting destruction.
@@ -46,20 +47,20 @@ export class AsteroidGenerator {
     private scoreboard: ScoreHandler;
     /**
      * Constructor for the AsteroidGenerator class
-     * @param scene      graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     * @param scoreboard reference to the scorekeeper for adding points on asteroid destruction.
-     * @param difficulty level of difficulty chosen by player.
+     * @param scene           graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param scoreboard      reference to the scorekeeper for adding points on asteroid destruction.
+     * @param asteroidTexture texture for the asteroid.
+     * @param gld             contains level of difficulty and level chosen by player.
      * @hidden
      */
-    constructor(scene: Scene, scoreboard: ScoreHandler, asteroidTexture: Texture, difficulty: number) {
-        this.difficulty = difficulty;
+    constructor(scene: Scene, scoreboard: ScoreHandler, asteroidTexture: Texture, gld: GameLoadData) {
+        this.difficulty = gld.difficulty;
+        this.currentLevel = gld.level;
         this.asteroidPoints = (this.difficulty + 1) * this.asteroidPoints;
         this.scene = scene;
         this.scoreboard = scoreboard;
         this.aTexture = asteroidTexture;
-        for (let i = 0; i < this.maxAsteroids; i++) {
-            this.asteroids.push(this.makeAsteroid());
-        }
+        this.makeAsteroidsFromLoad();
     }
     /**
      * At the end of each loop iteration, iterate endCycle through all asteroids.
@@ -83,7 +84,7 @@ export class AsteroidGenerator {
     }
     /**
      * Asteroid generation in one place to avoid breaking DRY.
-     * @returns the created asteroid to be added to list at index of choice.
+     * @returns the created asteroid.
      */
     private makeAsteroid(): Asteroid {
         const altRand = Math.random();
@@ -103,6 +104,18 @@ export class AsteroidGenerator {
         asteroid.addToScene();
         CollisionatorSingleton.add(asteroid);
         return asteroid;
+    }
+    /**
+     * Asteroid generation in one place to avoid breaking DRY, with increasing speeds because of load.
+     */
+    private makeAsteroidsFromLoad(): void {
+        for (let i = 0; i < this.maxAsteroids; i++) {
+            this.asteroids.push(this.makeAsteroid());
+        }
+        for (let j = 1; j < this.currentLevel; j++) {
+            this.maxAsteroids += (this.difficulty + 1);
+            this.asteroids.push(this.makeAsteroid());
+        }
     }
     /**
      * Start of new level means reactivating asteroids, and creating new ones.
