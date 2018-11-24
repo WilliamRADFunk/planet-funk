@@ -12,6 +12,7 @@ import { ControlPause } from "./control-pause";
 import { ControlPlay } from "./control-play";
 import { ControlHelp } from "./control-help";
 import { ControlSave } from "./control-save";
+import { ControlExit } from "./control-exit";
 /**
  * A constant size / position modifier to shrink or expand the entire panel symmetrically from one variable.
  */
@@ -25,6 +26,10 @@ export class ControlPanel {
      * Controls the buttons material.
      */
     private buttonMaterial: MeshBasicMaterial;
+    /**
+     * Controls the exit button.
+     */
+    private controlExit: ControlExit;
     /**
      * Controls the help button.
      */
@@ -53,6 +58,10 @@ export class ControlPanel {
      * Tracks state of game help menu.
      */
     private help: boolean = false;
+    /**
+     * Tracks state of game exiting.
+     */
+    private exit: boolean = false;
     /**
      * Line mesh for border of entire panel.
      */
@@ -101,8 +110,8 @@ export class ControlPanel {
         const panelBorderGeometry = new Geometry();
         panelBorderGeometry.vertices.push(
             new Vector3(x, 0, z),
-            new Vector3(x + (4 * BUTTON_SIZE), 0, z),
-            new Vector3(x + (4 * BUTTON_SIZE), 0, z + (1.5 * BUTTON_SIZE)),
+            new Vector3(x + (5.25 * BUTTON_SIZE), 0, z),
+            new Vector3(x + (5.25 * BUTTON_SIZE), 0, z + (1.5 * BUTTON_SIZE)),
             new Vector3(x, 0, z + (1.5 * BUTTON_SIZE)),
             new Vector3(x, 0, z));
         this.panelBorderMaterial = new LineBasicMaterial({
@@ -151,6 +160,15 @@ export class ControlPanel {
             this.currentColor,
             clickMaterial);
         //
+        // Exit Button
+        //
+        this.controlExit = new ControlExit(
+            this.scene,
+            [x + (3.75 * BUTTON_SIZE), 1, z],
+            BUTTON_SIZE,
+            this.currentColor,
+            clickMaterial);
+        //
         // If hardcore difficulty, play button is inaccessible.
         //
         if (difficulty === 3) {
@@ -172,9 +190,16 @@ export class ControlPanel {
             this.controlPlay.hide();
             this.controlHelp.hide();
             this.controlSave.hide();
+            this.controlExit.hide();
             this.panelBorder.visible = false;
             return;
         }
+    }
+    /**
+     * Turns exit on.
+     */
+    exitChange() {
+        this.exit = true;
     }
     /**
      * Alerts control panel that help button has been clicked by user.
@@ -188,6 +213,13 @@ export class ControlPanel {
             this.controlHelp.activate();
             this.pauseChange();
         }
+    }
+    /**
+     * Getter for game exit state.
+     * @returns TRUE --> game is exiting | FALSE --> game is not exiting.
+     */
+    isExit(): boolean {
+        return this.exit;
     }
     /**
      * Getter for game help state.
@@ -234,6 +266,8 @@ export class ControlPanel {
         this.controlHelp.show();
         this.controlSave.changeColor(this.currentColor);
         this.controlSave.show();
+        this.controlExit.changeColor(this.currentColor);
+        this.controlExit.show();
         this.panelBorder.visible = true;
     }
     /**

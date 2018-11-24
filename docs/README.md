@@ -122,6 +122,7 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 * ["ts/asteroids/asteroid-generator"](modules/_ts_asteroids_asteroid_generator_.md)
 * ["ts/collidable"](modules/_ts_collidable_.md)
 * ["ts/collisionator"](modules/_ts_collisionator_.md)
+* ["ts/controls/control-exit"](modules/_ts_controls_control_exit_.md)
 * ["ts/controls/control-help"](modules/_ts_controls_control_help_.md)
 * ["ts/controls/control-panel"](modules/_ts_controls_control_panel_.md)
 * ["ts/controls/control-pause"](modules/_ts_controls_control_pause_.md)

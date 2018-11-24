@@ -176,6 +176,7 @@ const checkAssetsLoaded = () => {
     }
 };
 const loadMenu = () => {
+    isMenuMode = true;
     // Establish initial window size.
     let WIDTH: number = window.innerWidth * 0.99;
     let HEIGHT: number = window.innerHeight * 0.99;
@@ -235,12 +236,14 @@ const loadMenu = () => {
                 const difficulty = menu.pressedStart();
                 setTimeout(() => {
                     isMenuMode = false;
+                    window.removeEventListener( 'resize', onWindowResize, false);
                     container.removeChild( (rendererMenu as any).domElement );
                     loadGame(difficulty);
                 }, 750);
             } else if (el.object.name === 'Load Code') {
                 setTimeout(() => {
                     isMenuMode = false;
+                    window.removeEventListener( 'resize', onWindowResize, false);
                     container.removeChild( (rendererMenu as any).domElement );
                     loadGame(menu.getDifficulty(), menu.getGameData());
                 }, 250);
@@ -360,7 +363,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
     const saucerGenerator = new SaucerGenerator(scene, scoreboard, saucerTextures, gameLoadData);
     const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor(), gameLoadData);
     // Create control panel in upper right corner of screen.
-    const controlPanel = new ControlPanel(scene, 3.95, -5.8, gameLoadData.difficulty, levelHandler.getColor(), gameFont);
+    const controlPanel = new ControlPanel(scene, 3.45, -5.8, gameLoadData.difficulty, levelHandler.getColor(), gameFont);
 
     // Click event listener that turns shield on or off if player clicks on planet. Fire weapon otherwise.
     const raycaster = new Raycaster();
@@ -400,6 +403,14 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
                 } else {
                     helpHandler.deactivate();
                 }
+                launchFlag = false;
+                return;
+            }
+            if (el.object.name === 'Exit Button') {
+                controlPanel.resume();
+                saveHandler.deactivate();
+                helpHandler.deactivate();
+                controlPanel.exitChange();
                 launchFlag = false;
                 return;
             }
@@ -475,7 +486,12 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
         jobCounter++;
         if (jobCounter > 10) jobCounter = 0;
 
-        if (controlPanel.isHelp()) {
+        if (controlPanel.isExit()) {
+            window.removeEventListener( 'resize', onWindowResize, false);
+            container.removeChild( (renderer as any).domElement );
+            loadMenu();
+            return;
+        } else if (controlPanel.isHelp()) {
             helpHandler.endCycle();
         } else if (controlPanel.isSave()) {
             saveHandler.endCycle();

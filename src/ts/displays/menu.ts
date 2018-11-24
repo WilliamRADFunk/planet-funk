@@ -178,7 +178,14 @@ export class Menu {
      * @param planetTextures texture images for the planet.
      * @hidden
      */
-    constructor(scene: Scene, menuFont: Font, saucerTextures: Texture[], asteroidTexture: Texture, buildingTextures: Texture[], specMap: Texture, planetTextures: Texture[]) {
+    constructor(
+        scene: Scene,
+        menuFont: Font,
+        saucerTextures: Texture[],
+        asteroidTexture: Texture,
+        buildingTextures: Texture[],
+        specMap: Texture,
+        planetTextures: Texture[]) {
         this.menuFont = menuFont;
         this.scene = scene;
         this.fontDifficultyBtnParams = {
