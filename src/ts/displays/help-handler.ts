@@ -351,7 +351,7 @@ export class HelpHandler {
         this.planet.addToScene(this.scene, this.planetTextures, this.buildingTextures, this.specMap);
         this.shields.push(new Shield([0, -20, 2]));
         this.shields[0].addToScene(this.scene);
-        this.shields.push(new Shield([-4.28, -20, 4], 0.6));
+        this.shields.push(new Shield([-4.28, -20, 4.1], 0.6));
         this.shields[1].addToScene(this.scene);
         setTimeout(() => {
             this.shields[1].activate();
@@ -942,6 +942,6 @@ export class HelpHandler {
         this.scene.add(text);
         this.texts.push(text);
 
-        this.saveControl = new ControlSave(this.scene, [3.7, -12.5, 3.4], 0.7, new Color(0x00B39F), clkMat, 'Help ');
+        this.saveControl = new ControlSave(this.scene, [3.75, -12.5, 3.55], 0.7, new Color(0x00B39F), clkMat, 'Help ');
     }
 }
