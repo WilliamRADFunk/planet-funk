@@ -161,7 +161,7 @@ export class LoadHandler {
         }
         // Clickable backing for 0-7 controls
         for (let m = 0; m < 8; m++) {
-            let controlBarrier = new Mesh( codeBackingGeometry, clickMaterial );
+            const controlBarrier = new Mesh( codeBackingGeometry, clickMaterial );
             controlBarrier.name = m.toString();
             controlBarrier.position.set(this.startPos[0] + positionIndex[m] + 1.5, this.startPos[1] - 11.4, this.startPos[2] - 4.35);
             controlBarrier.rotation.set(1.5708, 0, 0);
@@ -177,7 +177,7 @@ export class LoadHandler {
         }
         // Clickable backing for 8-9 controls
         for (let n = 71; n < 73; n++) {
-            let controlBarrier = new Mesh( codeBackingGeometry, clickMaterial );
+            const controlBarrier = new Mesh( codeBackingGeometry, clickMaterial );
             controlBarrier.name = (n - 63).toString();
             controlBarrier.position.set(this.startPos[0] + positionIndex[n - 71] + 1.5, this.startPos[1] - 11.4, this.startPos[2] - 3.35);
             controlBarrier.rotation.set(1.5708, 0, 0);
@@ -193,7 +193,7 @@ export class LoadHandler {
         }
         // Clickable backing for A-F controls
         for (let p = 65; p < 71; p++) {
-            let controlBarrier = new Mesh( codeBackingGeometry, clickMaterial );
+            const controlBarrier = new Mesh( codeBackingGeometry, clickMaterial );
             controlBarrier.name = String.fromCharCode(p);
             controlBarrier.position.set(this.startPos[0] + positionIndex[p - 63] + 1.5, this.startPos[1] - 11.4, this.startPos[2] - 3.35);
             controlBarrier.rotation.set(1.5708, 0, 0);
