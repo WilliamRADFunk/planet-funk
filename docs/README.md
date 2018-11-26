@@ -143,10 +143,12 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 * ["ts/player/planet"](modules/_ts_player_planet_.md)
 * ["ts/player/satellite"](modules/_ts_player_satellite_.md)
 * ["ts/player/shield"](modules/_ts_player_shield_.md)
+* ["ts/utils/check-color-brightness"](modules/_ts_utils_check_color_brightness_.md)
 * ["ts/utils/convert-to-hex"](modules/_ts_utils_convert_to_hex_.md)
 * ["ts/utils/convert-to-int"](modules/_ts_utils_convert_to_int_.md)
 * ["ts/utils/create-save-code"](modules/_ts_utils_create_save_code_.md)
 * ["ts/utils/decipher-save-code"](modules/_ts_utils_decipher_save_code_.md)
+* ["ts/weapons/drone"](modules/_ts_weapons_drone_.md)
 * ["ts/weapons/explosion"](modules/_ts_weapons_explosion_.md)
 * ["ts/weapons/projectile"](modules/_ts_weapons_projectile_.md)
 

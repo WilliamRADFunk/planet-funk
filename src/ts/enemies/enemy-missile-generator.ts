@@ -77,7 +77,7 @@ export class EnemyMissileGenerator {
                 CollisionatorSingleton.remove(this.missiles[i]);
                 this.missiles[i] = null;
                 if (isGameActive) {
-                    this.scoreboard.addPoints(this.currentLevel * this.missilePoints);
+                    this.scoreboard.addPoints((this.difficulty + 1) * this.missilePoints);
                 }
             }
             missile = this.missiles[i];

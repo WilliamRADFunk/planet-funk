@@ -4,6 +4,7 @@ import { Saucer } from './saucer';
 import { CollisionatorSingleton } from '../collisionator';
 import { ScoreHandler } from '../displays/score-handler';
 import { GameLoadData } from '../models/game-load-data';
+import { Drone } from '../weapons/drone';
 
 const saucerStartingPositions: number[][] = [
     [-10, -3], // Left Upper
@@ -29,9 +30,17 @@ export class SaucerGenerator {
      */
     private difficulty: number;
     /**
+     * Drone array for ease of iteration
+     */
+    private drones: Drone[] = [];
+    /**
      * Flag to let generator know if game is not lost..
      */
     private isGameActive: boolean = true;
+    /**
+     * Maximum number of drones that can exist at one time.
+     */
+    private maxDrones: number = 1;
     /**
      * Maximum number of saucers that can exist at one time.
      */
@@ -84,21 +93,48 @@ export class SaucerGenerator {
         for (let i = 0; i < this.saucers.length; i++) {
             if (this.saucers[i]) {
                 if (!this.saucers[i].endCycle() && isGameActive) {
-                    this.scoreboard.addPoints(this.currentLevel * this.saucerPoints);
+                    this.scoreboard.addPoints((this.difficulty + 1) * this.saucerPoints);
                 }
-                if (this.saucers[i].getActive()) {
+                if (this.saucers[i].getActive() && isGameActive) {
                     saucersRemain = true;
+                    const sPos = this.saucers[i].getCurrentPosition();
+                    // When in range, saucers can launch missile drones.
+                    if (this.drones.length < this.maxDrones &&
+                        sPos[0] > -4 && 4 > sPos[0] &&
+                        sPos[1] > -4 && 4 > sPos[1] &&
+                        Math.random() < 0.01) {
+                        const drone = new Drone(this.scene, this.scoreboard, sPos[0], sPos[1], 10);
+                        drone.addToScene();
+                        CollisionatorSingleton.add(drone);
+                        this.drones.push(drone);
+                    }
                 }
             }
         }
-        return !saucersRemain;
+        let tempDrones: Drone[] = [];
+        for (let j = 0; j < this.drones.length; j++) {
+            let drone = this.drones[j];
+            if (drone && !drone.endCycle(isGameActive)) {
+                this.drones[j] = null;
+                if (isGameActive) {
+                    this.scoreboard.addPoints((this.difficulty + 1) * this.saucerPoints / 2);
+                }
+            }
+            drone = this.drones[j];
+            if (drone) {
+                tempDrones.push(drone);
+            }
+            this.drones = tempDrones.slice();
+            tempDrones = null;
+        }
+        return !saucersRemain && !this.drones.length;
     }
     /**
      * Saucer generation in one place to avoid breaking DRY.
      * @returns the created saucer to be added to list at index of choice.
      */
     private makeSaucer(): Saucer {
-        const positionRand = Math.floor((Math.random() * 7) + 0);
+        const positionRand = Math.floor((Math.random() * 6) + 0);
         const isXNegative = Math.random() < 0.5 ? -1 : 1;
         const isZNegative = Math.random() < 0.5 ? -1 : 1;
         const altRand = (Math.random() * 1.8) + 0;
@@ -140,6 +176,7 @@ export class SaucerGenerator {
         // Only increment new saucers if game is still going.
         if (this.isGameActive) {
             this.maxSaucers += Math.floor(((this.difficulty + 1) + level) / 4);
+            this.maxDrones = this.maxSaucers;
         }
         // Instantiates new saucers for new level
         for (let i = this.saucers.length; i < this.maxSaucers; i++) {

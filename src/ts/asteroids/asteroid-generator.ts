@@ -73,7 +73,7 @@ export class AsteroidGenerator {
         for (let i = 0; i < this.asteroids.length; i++) {
             if (this.asteroids[i]) {
                 if (!this.asteroids[i].endCycle() && isGameActive) {
-                    this.scoreboard.addPoints(this.currentLevel * this.asteroidPoints);
+                    this.scoreboard.addPoints((this.difficulty + 1) * this.asteroidPoints);
                 }
                 if (this.asteroids[i].getActive()) {
                     asteroidsRemain = true;

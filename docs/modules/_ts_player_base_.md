@@ -27,7 +27,7 @@
     {xb: -0.49, zb: -0.49, ry: 0.785398}
 ]
 
-*Defined in [ts/player/base.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/4b09769/src/ts/player/base.ts#L16)*
+*Defined in [ts/player/base.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/player/base.ts#L16)*
 
 Makes instatiateing the base's position by index easier and cleaner to read.
 

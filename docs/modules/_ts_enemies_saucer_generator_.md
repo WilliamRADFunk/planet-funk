@@ -31,7 +31,7 @@
     [3, 10], // Down Right
 ]
 
-*Defined in [ts/enemies/saucer-generator.ts:8](https://github.com/WilliamRADFunk/planet-funk/blob/4b09769/src/ts/enemies/saucer-generator.ts#L8)*
+*Defined in [ts/enemies/saucer-generator.ts:9](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/enemies/saucer-generator.ts#L9)*
 
 ___
 

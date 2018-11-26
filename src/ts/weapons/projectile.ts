@@ -119,6 +119,7 @@ export class Projectile implements Collidable {
      * @param color              color of the missile's fiery tail (matches satellite body color from which it came).
      * @param colllidableAtBirth Enemy missiles need to be destructable before hitting target, where player's don't.
      * @param y                  optional y value for missile (for help screen demo).
+     * @param waitToFire         optional wait time (instead of randomized wait time).
      * @hidden
      */
     constructor(
@@ -131,7 +132,8 @@ export class Projectile implements Collidable {
         color: Color,
         colllidableAtBirth?: boolean,
         speed?: number,
-        y?: number) {
+        y?: number,
+        waitToFire?: number) {
         index++;
         this.headY = y || 0.51;
         this.tailY = (y && (y + 0.04)) || 0.55;
@@ -160,7 +162,7 @@ export class Projectile implements Collidable {
         this.headMesh.name = `Projectile-${index}`;
         if (this.isEnemyMissile) {
             this.headMesh.name = `Projectile-${index}-enemy`;
-            this.waitToFire = Math.floor((Math.random() * 900) + 1);
+            this.waitToFire = waitToFire || Math.floor((Math.random() * 900) + 1);
         }
         scene.add(this.headMesh);
     }
@@ -175,7 +177,7 @@ export class Projectile implements Collidable {
         this.currentPoint[1] = ((1 - t) * this.originalStartingPoint[1]) + (t * this.endingPoint[1]);
     }
     /**
-     * Creates an explosion during collision and adds it to the collildables list.
+     * Creates an explosion during collision and adds it to the collidables list.
      * @param isInert flag to let explosion know it isn't a 'real' explosion (hit shield).
      */
     private createExplosion(isInert: boolean): void {

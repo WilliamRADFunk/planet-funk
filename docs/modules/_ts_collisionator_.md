@@ -22,7 +22,7 @@
 
 **● CollisionatorSingleton**: *[Collisionator](../classes/_ts_collisionator_.collisionator.md)* =  new Collisionator()
 
-*Defined in [ts/collisionator.ts:92](https://github.com/WilliamRADFunk/planet-funk/blob/4b09769/src/ts/collisionator.ts#L92)*
+*Defined in [ts/collisionator.ts:105](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/collisionator.ts#L105)*
 
 ___
 

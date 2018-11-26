@@ -47,15 +47,28 @@ class Collisionator {
                 // Two unexploding asteroids shouldn't collide.
                 if (!entityI.getName().indexOf('Asteroid') &&
                     !entityJ.getName().indexOf('Asteroid')) continue;
+                // Two unexploding drones shouldn't collide.
+                if (!entityI.getName().indexOf('Drone') &&
+                    !entityJ.getName().indexOf('Drone')) continue;
                 // Unexploded enemy missiles and asteroids should not collide.
                 if ((!entityI.getName().indexOf('Asteroid') ||
                     !entityJ.getName().indexOf('Asteroid')) && isEnemyMissile) continue;
+                // Unexploded enemy missiles and drones should not collide.
+                if ((!entityI.getName().indexOf('Drone') ||
+                    !entityJ.getName().indexOf('Drone')) && isEnemyMissile) continue;
                 // Unexploded enemy missiles and saucers should not collide.
                 if ((!entityI.getName().indexOf('Saucer') ||
                     !entityJ.getName().indexOf('Saucer')) && isEnemyMissile) continue;
                 // Asteroids and saucers should not collide.
                 if ((!entityI.getName().indexOf('Saucer') && !entityJ.getName().indexOf('Asteroid')) || 
                     (!entityI.getName().indexOf('Asteroid') && !entityJ.getName().indexOf('Saucer'))) continue;
+                // Drones and saucers should not collide.
+                if ((!entityI.getName().indexOf('Saucer') && !entityJ.getName().indexOf('Drone')) || 
+                    (!entityI.getName().indexOf('Drone') && !entityJ.getName().indexOf('Saucer'))) continue;
+                // Drones and asteroids should not collide.
+                if ((!entityI.getName().indexOf('Asteroid') && !entityJ.getName().indexOf('Drone')) || 
+                    (!entityI.getName().indexOf('Drone') && !entityJ.getName().indexOf('Asteroid'))) continue;
+
                 const posI = entityI.getCurrentPosition();
                 const posJ = entityJ.getCurrentPosition();
                 const radI = entityI.getCollisionRadius();
