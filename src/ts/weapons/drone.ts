@@ -1,4 +1,4 @@
-import { CircleGeometry, Mesh, MeshPhongMaterial, Scene, Vector3, LinearFilter, Color, SphereGeometry } from "three";
+import { Mesh, MeshPhongMaterial, Scene, Color, SphereGeometry } from "three";
 
 import { Collidable } from "../collidable";
 import { Explosion } from '../weapons/explosion';
@@ -6,7 +6,6 @@ import { CollisionatorSingleton } from '../collisionator';
 import { Projectile } from "./projectile";
 import { CheckColorBrighness } from '../utils/check-color-brightness';
 import { ScoreHandler } from "../displays/score-handler";
-import { notStrictEqual } from "assert";
 
 const randomColor = require('randomcolor');
 
@@ -45,7 +44,7 @@ export class Drone implements Collidable {
     /**
      * Controls how often drone can fire a new missile.
      */
-    private lastFired: number = 1000;
+    private lastFired: number = 240;
     /**
      * Keeps track of live missiles, to pass along endCycle signals, and destroy calls.
      */
@@ -73,8 +72,10 @@ export class Drone implements Collidable {
     /**
      * Constructor for the Drone class
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     * @param x1        origin point x of where the drone starts.
-     * @param z1        origin point z of where the drone starts.
+     * @param scoreboard reference to score handler to add points when missiles blow.
+     * @param x1         origin point x of where the drone starts.
+     * @param z1         origin point z of where the drone starts.
+     * @param points     points to give for destroyed missiles.
      * @hidden
      */
     constructor(scene: Scene, scoreboard: ScoreHandler, x1:number, z1: number, points: number) {
@@ -88,11 +89,26 @@ export class Drone implements Collidable {
 		this.droneGeometry = new SphereGeometry(0.1, 32, 32);
         this.droneMaterial = new MeshPhongMaterial({
             color: 0xC0C0C0,
+            opacity: 0.75,
             specular: 0x505050,
-            shininess: 100});
+            shininess: 100,
+            transparent: true
+        });
+        const droneRingGeometry = new SphereGeometry(0.15, 32, 32);
+        const droneRingMaterial = new MeshPhongMaterial({
+            color: 0x0055FF,
+            opacity: 0.75,
+            specular: 0x505050,
+            shininess: 100,
+            transparent: true
+        });
+        const droneRing = new Mesh(droneRingGeometry, droneRingMaterial);
+        droneRing.position.y = 0.5;
+        droneRing.name = `Drone-Ring-${index}`;
         this.drone = new Mesh(this.droneGeometry, this.droneMaterial);
         this.drone.position.set(this.currentPoint[0], 0.3, this.currentPoint[1]);
         this.drone.name = `Drone-${index}`;
+        this.drone.add(droneRing);
 
         this.orbitRadius = this.getDistanceToTarget();
         this.currentTheta = Math.atan2(this.currentPoint[1], this.currentPoint[0]);
@@ -140,10 +156,12 @@ export class Drone implements Collidable {
      */
     endCycle(isGameActive: boolean): boolean {
         if (this.isActive) {
+            this.calculateNextPoint();
+            this.drone.position.set(this.currentPoint[0], 0.3, this.currentPoint[1]);
             const pos = this.getCurrentPosition();
             this.lastFired--;
             if (this.lastFired < 0) {
-                this.lastFired = 1000;
+                this.lastFired = 240;
                 let color;
                 do {
                     const colorHex = randomColor();
@@ -163,8 +181,6 @@ export class Drone implements Collidable {
                 this.missiles.push(miss);
                 CollisionatorSingleton.add(miss);
             }
-            this.calculateNextPoint();
-            this.drone.position.set(this.currentPoint[0], 0.3, this.currentPoint[1]);
         }
         if (this.missiles.length) {
             let tempMissiles = [];
@@ -188,7 +204,7 @@ export class Drone implements Collidable {
                 this.explosion = null;
             }
         }
-        if (!this.explosion && !this.missiles.length) {
+        if (!this.isActive && !this.explosion && !this.missiles.length) {
             return false;
         }
         return true;
@@ -205,7 +221,7 @@ export class Drone implements Collidable {
      * @returns number to represent pixel distance from object center to edge of bounding box.
      */
     getCollisionRadius(): number {
-        return 0.1;
+        return 0.15;
     }
     /**
      * Gets the current position of the collidable object.

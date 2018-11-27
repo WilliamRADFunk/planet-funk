@@ -51,7 +51,7 @@
 
 **● activeMaterial**: *`number`* = 0
 
-*Defined in [ts/displays/load-handler.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L27)*
+*Defined in [ts/displays/load-handler.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L27)*
 
 Counter for which digit backing material to change opacity for.
 
@@ -62,7 +62,7 @@ ___
 
 **● barrierLoad**: *`Mesh`*
 
-*Defined in [ts/displays/load-handler.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L31)*
+*Defined in [ts/displays/load-handler.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L31)*
 
 Click surface for the Load Code button.
 
@@ -73,7 +73,7 @@ ___
 
 **● barrierReturn**: *`Mesh`*
 
-*Defined in [ts/displays/load-handler.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L35)*
+*Defined in [ts/displays/load-handler.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L35)*
 
 Click surface for the Return button.
 
@@ -84,7 +84,7 @@ ___
 
 **● code**: *`Mesh`[]* =  []
 
-*Defined in [ts/displays/load-handler.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L39)*
+*Defined in [ts/displays/load-handler.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L39)*
 
 All the digits of the load code from left to right.
 
@@ -95,7 +95,7 @@ ___
 
 **● codeBackings**: *`Mesh`[]* =  []
 
-*Defined in [ts/displays/load-handler.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L43)*
+*Defined in [ts/displays/load-handler.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L43)*
 
 All the digit backings behind the load code from left to right.
 
@@ -106,7 +106,7 @@ ___
 
 **● codeMaterials**: *`MeshLambertMaterial`[]* =  []
 
-*Defined in [ts/displays/load-handler.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L47)*
+*Defined in [ts/displays/load-handler.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L47)*
 
 All the digit backing materials behind the load code from left to right.
 
@@ -117,7 +117,7 @@ ___
 
 **● controlTexts**: *`Mesh`[]* =  []
 
-*Defined in [ts/displays/load-handler.ts:55](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L55)*
+*Defined in [ts/displays/load-handler.ts:55](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L55)*
 
 The char controls player uses to enter load code.
 
@@ -128,7 +128,7 @@ ___
 
 **● controls**: *`Mesh`[]* =  []
 
-*Defined in [ts/displays/load-handler.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L51)*
+*Defined in [ts/displays/load-handler.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L51)*
 
 The clickable char controls player uses to enter load code.
 
@@ -139,7 +139,7 @@ ___
 
 **● currentEnteredCode**: *`string`[]* =  []
 
-*Defined in [ts/displays/load-handler.ts:59](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L59)*
+*Defined in [ts/displays/load-handler.ts:59](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L59)*
 
 All the hexidecimal characters the player has entered thus far.
 
@@ -150,7 +150,7 @@ ___
 
 **● digits**: *`TextGeometry`[]* =  []
 
-*Defined in [ts/displays/load-handler.ts:63](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L63)*
+*Defined in [ts/displays/load-handler.ts:63](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L63)*
 
 All the digits of the load code in order (0, 1, 2, 3, ..., C, D, E, F).
 
@@ -161,7 +161,7 @@ ___
 
 **● load**: *`Mesh`*
 
-*Defined in [ts/displays/load-handler.ts:67](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L67)*
+*Defined in [ts/displays/load-handler.ts:67](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L67)*
 
 Controls the overall rendering of the load button display
 
@@ -172,7 +172,7 @@ ___
 
 **● loadBacking**: *`Mesh`*
 
-*Defined in [ts/displays/load-handler.ts:71](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L71)*
+*Defined in [ts/displays/load-handler.ts:71](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L71)*
 
 The background section of the load screen.
 
@@ -183,7 +183,7 @@ ___
 
 **● loadFont**: *`Font`*
 
-*Defined in [ts/displays/load-handler.ts:75](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L75)*
+*Defined in [ts/displays/load-handler.ts:75](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L75)*
 
 Loaded font for display text.
 
@@ -194,7 +194,7 @@ ___
 
 **● loadMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/displays/load-handler.ts:79](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L79)*
+*Defined in [ts/displays/load-handler.ts:79](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L79)*
 
 Controls the color of the text display material
 
@@ -205,7 +205,7 @@ ___
 
 **● opacityDirection**: *`number`* = 1
 
-*Defined in [ts/displays/load-handler.ts:83](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L83)*
+*Defined in [ts/displays/load-handler.ts:83](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L83)*
 
 Multiplier to decrease by current number or increase, using the sign of this variable.
 
@@ -216,7 +216,7 @@ ___
 
 **● return**: *`Mesh`*
 
-*Defined in [ts/displays/load-handler.ts:87](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L87)*
+*Defined in [ts/displays/load-handler.ts:87](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L87)*
 
 Controls the overall rendering of the return button display
 
@@ -227,7 +227,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/displays/load-handler.ts:91](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L91)*
+*Defined in [ts/displays/load-handler.ts:91](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L91)*
 
 Reference to the scene, used to remove and reinstall text geometries.
 
@@ -238,7 +238,7 @@ ___
 
 **● startPos**: *[`number`, `number`, `number`]* =  [0, 0, 0]
 
-*Defined in [ts/displays/load-handler.ts:95](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L95)*
+*Defined in [ts/displays/load-handler.ts:95](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L95)*
 
 Tracks starting coordinates off which all items are based.
 
@@ -249,7 +249,7 @@ ___
 
 **● textHeaderParams**: *`TextGeometryParameters`*
 
-*Defined in [ts/displays/load-handler.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L99)*
+*Defined in [ts/displays/load-handler.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L99)*
 
 Since most of the text on the menu has same parameters, use one variable.
 
@@ -263,7 +263,7 @@ ___
 
 ▸ **activate**(): `void`
 
-*Defined in [ts/displays/load-handler.ts:229](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L229)*
+*Defined in [ts/displays/load-handler.ts:229](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L229)*
 
 Turns on all load screen related graphics
 
@@ -276,7 +276,7 @@ ___
 
 ▸ **charEntered**(char: *`string`*): `void`
 
-*Defined in [ts/displays/load-handler.ts:245](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L245)*
+*Defined in [ts/displays/load-handler.ts:245](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L245)*
 
 Adds player's choice of char to the list of load code chars.
 
@@ -295,7 +295,7 @@ ___
 
 ▸ **deactivate**(): `void`
 
-*Defined in [ts/displays/load-handler.ts:259](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L259)*
+*Defined in [ts/displays/load-handler.ts:259](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L259)*
 
 Turns off all load screen related graphics
 
@@ -308,7 +308,7 @@ ___
 
 ▸ **endCycle**(): `void`
 
-*Defined in [ts/displays/load-handler.ts:273](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L273)*
+*Defined in [ts/displays/load-handler.ts:273](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L273)*
 
 Creates the shimmer behind the load code.
 
@@ -321,7 +321,7 @@ ___
 
 ▸ **getGameData**():  [GameLoadData](../interfaces/_ts_models_game_load_data_.gameloaddata.md) &#124; `null`
 
-*Defined in [ts/displays/load-handler.ts:289](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L289)*
+*Defined in [ts/displays/load-handler.ts:289](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L289)*
 
 Deciphers the load code and returns it if valid, or null if not.
 
@@ -336,7 +336,7 @@ ___
 
 ▸ **showLoadCode**(): `void`
 
-*Defined in [ts/displays/load-handler.ts:296](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/displays/load-handler.ts#L296)*
+*Defined in [ts/displays/load-handler.ts:296](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/displays/load-handler.ts#L296)*
 
 Paints the screen with the load code characters.
 

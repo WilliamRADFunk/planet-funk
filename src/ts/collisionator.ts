@@ -47,6 +47,9 @@ class Collisionator {
                 // Two unexploding asteroids shouldn't collide.
                 if (!entityI.getName().indexOf('Asteroid') &&
                     !entityJ.getName().indexOf('Asteroid')) continue;
+                // Two unexploding saucers shouldn't collide.
+                if (!entityI.getName().indexOf('Saucer') &&
+                    !entityJ.getName().indexOf('Saucer')) continue;
                 // Two unexploding drones shouldn't collide.
                 if (!entityI.getName().indexOf('Drone') &&
                     !entityJ.getName().indexOf('Drone')) continue;

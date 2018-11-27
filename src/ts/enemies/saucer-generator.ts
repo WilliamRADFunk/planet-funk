@@ -38,6 +38,10 @@ export class SaucerGenerator {
      */
     private isGameActive: boolean = true;
     /**
+     * Puts some space between each drone creation.
+     */
+    private lastDropped: number = 180;
+    /**
      * Maximum number of drones that can exist at one time.
      */
     private maxDrones: number = 1;
@@ -89,34 +93,21 @@ export class SaucerGenerator {
      */
     endCycle(isGameActive: boolean): boolean {
         this.isGameActive = isGameActive;
-        let saucersRemain = false;
-        for (let i = 0; i < this.saucers.length; i++) {
-            if (this.saucers[i]) {
-                if (!this.saucers[i].endCycle() && isGameActive) {
-                    this.scoreboard.addPoints((this.difficulty + 1) * this.saucerPoints);
-                }
-                if (this.saucers[i].getActive() && isGameActive) {
-                    saucersRemain = true;
-                    const sPos = this.saucers[i].getCurrentPosition();
-                    // When in range, saucers can launch missile drones.
-                    if (this.drones.length < this.maxDrones &&
-                        sPos[0] > -4 && 4 > sPos[0] &&
-                        sPos[1] > -4 && 4 > sPos[1] &&
-                        Math.random() < 0.01) {
-                        const drone = new Drone(this.scene, this.scoreboard, sPos[0], sPos[1], 10);
-                        drone.addToScene();
-                        CollisionatorSingleton.add(drone);
-                        this.drones.push(drone);
-                    }
-                }
-            }
-        }
+        this.lastDropped--;
+        this.handleDrones();
+        return !this.handleSaucers() && !this.drones.length;
+    }
+    /**
+     * Cycles through the drones to see if they've been destroyed,
+     * if so, award points while game is still active and remove dead drones from list.
+     */
+    private handleDrones() {
         let tempDrones: Drone[] = [];
         for (let j = 0; j < this.drones.length; j++) {
             let drone = this.drones[j];
-            if (drone && !drone.endCycle(isGameActive)) {
+            if (drone && !drone.endCycle(this.isGameActive)) {
                 this.drones[j] = null;
-                if (isGameActive) {
+                if (this.isGameActive) {
                     this.scoreboard.addPoints((this.difficulty + 1) * this.saucerPoints / 2);
                 }
             }
@@ -124,10 +115,41 @@ export class SaucerGenerator {
             if (drone) {
                 tempDrones.push(drone);
             }
-            this.drones = tempDrones.slice();
-            tempDrones = null;
         }
-        return !saucersRemain && !this.drones.length;
+        this.drones = tempDrones.slice();
+        tempDrones = null;
+    }
+    /**
+     * Cycles through the saucers to see if they've been destroyed,
+     * if so, award points while game is still active and remove dead drones from list.
+     * Also, drops drones periodically if conditions are just right.
+     * @returns TRUE --> at least one saucer is alive | FALSE --> all saucers destroyed.
+     */
+    private handleSaucers(): boolean {
+        let saucersRemain = false;
+        for (let i = 0; i < this.saucers.length; i++) {
+            if (this.saucers[i]) {
+                if (!this.saucers[i].endCycle() && this.isGameActive) {
+                    this.scoreboard.addPoints((this.difficulty + 1) * this.saucerPoints);
+                }
+                if (this.saucers[i].getActive() && this.isGameActive) {
+                    saucersRemain = true;
+                    const sPos = this.saucers[i].getCurrentPosition();
+                    // When in range, saucers can launch missile drones.
+                    if (this.drones.length < this.maxDrones &&
+                        sPos[0] > -4 && 4 > sPos[0] &&
+                        sPos[1] > -4 && 4 > sPos[1] &&
+                        Math.random() < 0.01 && this.lastDropped <= 0) {
+                        const drone = new Drone(this.scene, this.scoreboard, sPos[0], sPos[1], 10);
+                        drone.addToScene();
+                        CollisionatorSingleton.add(drone);
+                        this.drones.push(drone);
+                        this.lastDropped = 180;
+                    }
+                }
+            }
+        }
+        return saucersRemain;
     }
     /**
      * Saucer generation in one place to avoid breaking DRY.
@@ -166,12 +188,14 @@ export class SaucerGenerator {
             this.maxSaucers += Math.floor(((this.difficulty + 1) + j) / 4);
             this.saucers.push(this.makeSaucer());
         }
+        this.maxDrones = this.maxSaucers;
     }
     /**
      * Start of new level means reactivating saucers, and creating new ones.
      * @param level level number, grabbed from the LevelHandler.
      */
     refreshLevel(level: number): void {
+        this.lastDropped = 180;
         this.currentLevel = level;
         // Only increment new saucers if game is still going.
         if (this.isGameActive) {

@@ -55,7 +55,7 @@
 
 **● currentPoint**: *`number`[]*
 
-*Defined in [ts/weapons/drone.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L31)*
+*Defined in [ts/weapons/drone.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L30)*
 
 Keeps track of the x,z point the drone is at currently.
 
@@ -66,7 +66,7 @@ ___
 
 **● currentTheta**: *`number`*
 
-*Defined in [ts/weapons/drone.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L35)*
+*Defined in [ts/weapons/drone.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L34)*
 
 Keeps track of the theta angle of the drone to be used in movement mechanics.
 
@@ -77,7 +77,7 @@ ___
 
 **● drone**: *`Mesh`*
 
-*Defined in [ts/weapons/drone.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L27)*
+*Defined in [ts/weapons/drone.ts:26](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L26)*
 
 Controls the overall rendering of the drone
 
@@ -88,7 +88,7 @@ ___
 
 **● droneGeometry**: *`SphereGeometry`*
 
-*Defined in [ts/weapons/drone.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L19)*
+*Defined in [ts/weapons/drone.ts:18](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L18)*
 
 Controls size and shape of the drone
 
@@ -99,7 +99,7 @@ ___
 
 **● droneMaterial**: *`MeshPhongMaterial`*
 
-*Defined in [ts/weapons/drone.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L23)*
+*Defined in [ts/weapons/drone.ts:22](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L22)*
 
 Controls the color of the drone material
 
@@ -110,7 +110,7 @@ ___
 
 **● explosion**: *[Explosion](_ts_weapons_explosion_.explosion.md)*
 
-*Defined in [ts/weapons/drone.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L39)*
+*Defined in [ts/weapons/drone.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L38)*
 
 Explosion from impacted drone
 
@@ -121,7 +121,7 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in [ts/weapons/drone.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L44)*
+*Defined in [ts/weapons/drone.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L43)*
 
 Flag to signal if drone has been destroyed or not. True = not destroyed. False = destroyed.
 
@@ -130,9 +130,9 @@ ___
 
 ### `<Private>` lastFired
 
-**● lastFired**: *`number`* = 1000
+**● lastFired**: *`number`* = 240
 
-*Defined in [ts/weapons/drone.ts:48](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L48)*
+*Defined in [ts/weapons/drone.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L47)*
 
 Controls how often drone can fire a new missile.
 
@@ -143,7 +143,7 @@ ___
 
 **● missiles**: *[Projectile](_ts_weapons_projectile_.projectile.md)[]* =  []
 
-*Defined in [ts/weapons/drone.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L52)*
+*Defined in [ts/weapons/drone.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L51)*
 
 Keeps track of live missiles, to pass along endCycle signals, and destroy calls.
 
@@ -154,7 +154,7 @@ ___
 
 **● orbitRadius**: *`number`*
 
-*Defined in [ts/weapons/drone.ts:56](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L56)*
+*Defined in [ts/weapons/drone.ts:55](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L55)*
 
 Distance from drone to center of planet (0, 0);
 
@@ -165,7 +165,7 @@ ___
 
 **● points**: *`number`*
 
-*Defined in [ts/weapons/drone.ts:60](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L60)*
+*Defined in [ts/weapons/drone.ts:59](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L59)*
 
 Amount of points for a destroyed drone missile.
 
@@ -176,7 +176,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/weapons/drone.ts:64](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L64)*
+*Defined in [ts/weapons/drone.ts:63](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L63)*
 
 Reference to the scene, used to remove drone from rendering cycle once destroyed.
 
@@ -187,7 +187,7 @@ ___
 
 **● scoreboard**: *[ScoreHandler](_ts_displays_score_handler_.scorehandler.md)*
 
-*Defined in [ts/weapons/drone.ts:68](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L68)*
+*Defined in [ts/weapons/drone.ts:67](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L67)*
 
 Reference to the scorekeeper for adding points on enemy missile destruction.
 
@@ -198,7 +198,7 @@ ___
 
 **● speed**: *`number`* = 0.002
 
-*Defined in [ts/weapons/drone.ts:72](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L72)*
+*Defined in [ts/weapons/drone.ts:71](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L71)*
 
 The speed at which the drone travels.
 
@@ -212,7 +212,7 @@ ___
 
 ▸ **addToScene**(): `void`
 
-*Defined in [ts/weapons/drone.ts:103](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L103)*
+*Defined in [ts/weapons/drone.ts:119](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L119)*
 
 Adds drone object to the three.js scene.
 
@@ -225,7 +225,7 @@ ___
 
 ▸ **calculateNextPoint**(): `void`
 
-*Defined in [ts/weapons/drone.ts:109](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L109)*
+*Defined in [ts/weapons/drone.ts:125](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L125)*
 
 Calculates the next point in the drone's path.
 
@@ -238,7 +238,7 @@ ___
 
 ▸ **createExplosion**(isInert: *`boolean`*): `void`
 
-*Defined in [ts/weapons/drone.ts:119](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L119)*
+*Defined in [ts/weapons/drone.ts:135](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L135)*
 
 Creates an explosion during collision and adds it to the collildables list.
 
@@ -257,7 +257,7 @@ ___
 
 ▸ **destroy**(): `void`
 
-*Defined in [ts/weapons/drone.ts:127](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L127)*
+*Defined in [ts/weapons/drone.ts:143](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L143)*
 
 Call to eliminate regardless of current state. Mainly used for non-game instantiations of this (ie. help screen animations).
 
@@ -270,7 +270,7 @@ ___
 
 ▸ **endCycle**(isGameActive: *`boolean`*): `boolean`
 
-*Defined in [ts/weapons/drone.ts:141](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L141)*
+*Defined in [ts/weapons/drone.ts:157](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L157)*
 
 At the end of each loop iteration, drone moves, decides to fire, and handles missiles.
 
@@ -290,7 +290,7 @@ ___
 
 ▸ **getActive**(): `boolean`
 
-*Defined in [ts/weapons/drone.ts:200](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L200)*
+*Defined in [ts/weapons/drone.ts:216](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L216)*
 
 Gets the viability of the drone.
 
@@ -304,7 +304,7 @@ ___
 
 ▸ **getCollisionRadius**(): `number`
 
-*Defined in [ts/weapons/drone.ts:207](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L207)*
+*Defined in [ts/weapons/drone.ts:223](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L223)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 
@@ -318,7 +318,7 @@ ___
 
 ▸ **getCurrentPosition**(): `number`[]
 
-*Defined in [ts/weapons/drone.ts:214](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L214)*
+*Defined in [ts/weapons/drone.ts:230](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L230)*
 
 Gets the current position of the collidable object.
 
@@ -332,7 +332,7 @@ ___
 
 ▸ **getDistanceToTarget**(): `number`
 
-*Defined in [ts/weapons/drone.ts:221](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L221)*
+*Defined in [ts/weapons/drone.ts:237](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L237)*
 
 Calculate distance 'as the crow flies' from drone to target.
 
@@ -346,7 +346,7 @@ ___
 
 ▸ **getName**(): `string`
 
-*Defined in [ts/weapons/drone.ts:233](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L233)*
+*Defined in [ts/weapons/drone.ts:249](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L249)*
 
 Gets the name of the drone.
 
@@ -360,7 +360,7 @@ ___
 
 ▸ **impact**(self: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*, otherThing: *`string`*): `boolean`
 
-*Defined in [ts/weapons/drone.ts:242](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L242)*
+*Defined in [ts/weapons/drone.ts:258](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L258)*
 
 Called when something collides with drone, which destroys it.
 
@@ -381,7 +381,7 @@ ___
 
 ▸ **isPassive**(): `boolean`
 
-*Defined in [ts/weapons/drone.ts:256](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L256)*
+*Defined in [ts/weapons/drone.ts:272](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L272)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 
@@ -395,7 +395,7 @@ ___
 
 ▸ **removeFromScene**(scene: *`Scene`*): `void`
 
-*Defined in [ts/weapons/drone.ts:263](https://github.com/WilliamRADFunk/planet-funk/blob/0e68866/src/ts/weapons/drone.ts#L263)*
+*Defined in [ts/weapons/drone.ts:279](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L279)*
 
 Removes missile object from the 'visible' scene by removing non-explosion parts from scene.
 
