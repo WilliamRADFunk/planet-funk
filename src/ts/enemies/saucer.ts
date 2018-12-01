@@ -68,18 +68,35 @@ export class Saucer implements Collidable {
      */
     private waitToFire: number = 0;
     /**
+     * The distance to and from the camera that the saucer should exist...its layer.
+     */
+    private yPos: number;
+    /**
      * Constructor for the Saucer class
      * @param scene     graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     * @param x1        origin point x of where the saucer starts.
-     * @param z1        origin point z of where the saucer starts.
-     * @param x2        final point x of where the saucer starts.
-     * @param z2        final point z of where the saucer starts.
-     * @param dist      total distance the saucer must travel.
-     * @param speedMod  speed modifier at time of saucer instantiation.
+     * @param x1         origin point x of where the saucer starts.
+     * @param z1         origin point z of where the saucer starts.
+     * @param x2         final point x of where the saucer starts.
+     * @param z2         final point z of where the saucer starts.
+     * @param dist       total distance the saucer must travel.
+     * @param speedMod   speed modifier at time of saucer instantiation.
+     * @param yPos       layer level for saucer to appear.
+     * @param fireNow    optional choice not to wait to have saucer start moving.
      * @hidden
      */
-    constructor(scene: Scene, saucerTextures:Texture[], x1:number, z1: number, x2: number, z2: number, dist: number, speedMod: number) {
+    constructor(
+        scene: Scene,
+        saucerTextures: Texture[],
+        x1:number,
+        z1: number,
+        x2: number,
+        z2: number,
+        dist: number,
+        speedMod: number,
+        yPos?: number,
+        fireNow?: boolean) {
         index++;
+        this.yPos = yPos || 0.6;
         this.speed += (speedMod / 1000);
         this.originalStartingPoint = [x1, z1];
         this.currentPoint = [x1, z1];
@@ -97,10 +114,10 @@ export class Saucer implements Collidable {
         this.saucerMaterial.shininess = 0;
         this.saucerMaterial.transparent = true;
         this.saucer = new Mesh(this.saucerGeometry, this.saucerMaterial);
-        this.saucer.position.set(this.currentPoint[0], 0.6, this.currentPoint[1]);
+        this.saucer.position.set(this.currentPoint[0], this.yPos, this.currentPoint[1]);
         this.saucer.rotation.set(-1.5708, 0, 0);
         this.saucer.name = `Saucer-${index}`;
-        this.waitToFire = Math.floor((Math.random() * 2000) + 1);
+        this.waitToFire = (fireNow) ? 0 : Math.floor((Math.random() * 2000) + 1);
     }
     /**
      * (Re)activates the saucer, usually at beginning of new level.
@@ -143,6 +160,19 @@ export class Saucer implements Collidable {
         if (!isInert) CollisionatorSingleton.add(this.explosion);
     }
     /**
+     * Call to eliminate regardless of current state.
+     * Mainly used for non-game instantiations of this (ie. help screen animations).
+     */
+    destroy() {
+        if (this.explosion) {
+            CollisionatorSingleton.remove(this.explosion);
+            this.scene.remove(this.explosion.getMesh());
+            this.explosion = null;
+        }
+        CollisionatorSingleton.remove(this);
+        this.scene.remove(this.saucer);
+    }
+    /**
      * At the end of each loop iteration, move the saucer a little.
      * @returns whether or not the saucer is done, and its points calculated.
      */
@@ -161,7 +191,7 @@ export class Saucer implements Collidable {
         }
         if (this.isActive) {
             this.calculateNextPoint();
-            this.saucer.position.set(this.currentPoint[0], 0.6, this.currentPoint[1]);
+            this.saucer.position.set(this.currentPoint[0], this.yPos, this.currentPoint[1]);
         }
         return true;
     }
@@ -219,7 +249,7 @@ export class Saucer implements Collidable {
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      */
     removeFromScene(scene: Scene): void {
-        this.saucer.position.set(this.originalStartingPoint[0], 0.6, this.originalStartingPoint[1]);
+        this.saucer.position.set(this.originalStartingPoint[0], this.yPos, this.originalStartingPoint[1]);
         this.currentPoint = [this.originalStartingPoint[0], this.originalStartingPoint[1]];
         this.distanceTraveled = 0;
     }

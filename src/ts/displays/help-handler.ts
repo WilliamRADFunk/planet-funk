@@ -26,6 +26,9 @@ import { Projectile } from "../weapons/projectile";
 import { Planet } from "../player/planet";
 import { Shield } from "../player/shield";
 import { ControlSave } from "../controls/control-save";
+import { Drone } from "../weapons/drone";
+import { Saucer } from "../enemies/saucer";
+import { ScoreHandler } from "./score-handler";
 /**
  * @class
  * Help screen that handles all of the animated instructions on how to play.
@@ -55,6 +58,18 @@ export class HelpHandler {
      * Base texture images
      */
     private buildingTextures: Texture[];
+    /**
+     * Image of drone for points explanation.
+     */
+    private drone: Mesh;
+    /**
+     * Drone in help menu to create and hide as menu toggles. 
+     */
+    private droneExamples: Drone[] = [];
+    /**
+     * Saucer in help menu to create and hide as menu toggles. 
+     */
+    private saucerExample: Saucer;
     /**
      * Controls the overall rendering of the missile head
      */
@@ -108,6 +123,10 @@ export class HelpHandler {
      */
     private satelliteContainer2: Mesh;
     /**
+     * texture images for the flying saucers.
+     */
+    private saucerTextures: Texture[];
+    /**
      * The save button graphic
      */
     private saveControl: ControlSave;
@@ -115,6 +134,7 @@ export class HelpHandler {
      * Reference to the scene, used to remove and reinstall text geometries.
      */
     private scene: Scene;
+    private scoreboardPlaceholder: ScoreHandler;
     /**
      * Geometry for side help section backings
      */
@@ -194,6 +214,7 @@ export class HelpHandler {
         this.scene = scene;
         this.buildingTextures = buildingTextures;
         this.planetTextures = planetTextures;
+        this.saucerTextures = saucerTextures;
         this.specMap = specMap;
 
         this.sectionMaterial = new MeshBasicMaterial( {color: 0x111111, opacity: 1, transparent: false, side: DoubleSide} );
@@ -242,10 +263,12 @@ export class HelpHandler {
             bevelSegments: 3
         };
         this.helpMaterial = new MeshLambertMaterial( {color: 0x00B39F, opacity: 1, transparent: true} );
+        // ScoreHandler without much use, but it's a required param for drones.
+        this.scoreboardPlaceholder = new ScoreHandler(scene, new Color(0x000000), helpFont, {score: 0} as any);
         // Long top box
         this.makeBox0();
         // 2nd row left side
-        this.makeBox1(saucerTextures, asteroidTexture);
+        this.makeBox1(asteroidTexture);
 
         const satelliteBodyGeometry = new BoxGeometry(0.1, 0.1, 0.1);
         const satelliteBodyMaterial = new MeshBasicMaterial({color: 0xF6C123});
@@ -326,8 +349,11 @@ export class HelpHandler {
         this.asteroid.visible = true;
         this.barrierReturn.visible = true;
         this.building.visible = true;
+        this.drone.visible = true;
         this.headMesh.visible = true;
         this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), false, 0.02, -11.5);
+        this.saucerExample = new Saucer(this.scene, this.saucerTextures, -6, this.zSpot - 4.1, 6, this.zSpot - 4.1, 12, 0.001, -11.9, true);
+        this.saucerExample.addToScene();
         this.mouse.visible = true;
         this.return.visible = true;
         this.saucer.visible = true;
@@ -364,8 +390,10 @@ export class HelpHandler {
         this.asteroid.visible = false;
         this.barrierReturn.visible = false;
         this.building.visible = false;
+        this.drone.visible = false;
         this.headMesh.visible = false;
         this.missileExample1.destroy();
+        this.saucerExample.destroy();
         this.mouse.visible = false;
         this.return.visible = false;
         this.saucer.visible = false;
@@ -395,6 +423,24 @@ export class HelpHandler {
             this.missileExample1.removeFromScene(this.scene);
             this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), false, 0.02, -11.5);
         }
+        this.saucerExample.endCycle();
+        const saucerPos = this.saucerExample.getCurrentPosition();
+        if ((saucerPos[0] >= -3 && saucerPos[0] <= -2.998) ||
+            (saucerPos[0] >= 0 && saucerPos[0] <= 0.002) ||
+            (saucerPos[0] >= 3 && saucerPos[0] <= 3.002)) {
+            const drone = new Drone(
+                this.scene,
+                this.scoreboardPlaceholder,
+                saucerPos[0],
+                saucerPos[1],
+                0,
+                [saucerPos[0] - 1,
+                saucerPos[1]],
+                -11.6);
+            this.droneExamples.push(drone);
+            drone.addToScene();
+        }
+        this.droneExamples.forEach(d => d.endCycle(true));
         this.planet.endCycle();
         this.shields.forEach(s => s.endCycle(1));
         if (!this.shields[1].getActive() && this.shields[1].getEnergyLevel() >= 500) {
@@ -426,13 +472,16 @@ export class HelpHandler {
         section.rotation.set(1.5708, 0, 0);
         this.scene.add(section);
         this.sections.push(section);
+
+        this.saucerExample = new Saucer(this.scene, this.saucerTextures, -6, this.zSpot - 4.1, 6, this.zSpot - 4.1, 12, 0.001, -11.9, true);
+        this.saucerExample.addToScene();
     }
     /**
      * Builds the box and graphics for the 2nd row left section.
      * @param sTex      flying saucer tectures
      * @param astTex    asteroid tectures
      */
-    private makeBox1(sTex: Texture[], astTex: Texture): void {
+    private makeBox1(astTex: Texture): void {
         let section = new Mesh( this.sectionBackingGeometrySides, this.sectionMaterial );
         section.position.set(-4.25, -11, this.zSpot - 1.4);
         section.rotation.set(1.5708, 0, 0);
@@ -447,12 +496,12 @@ export class HelpHandler {
 
         const saucerGeometry = new CircleGeometry(0.2, 16, 16);
         const saucerMaterial = new MeshPhongMaterial();
-        saucerMaterial.map = sTex[Math.floor((Math.random() * 5) +0)];
+        saucerMaterial.map = this.saucerTextures[Math.floor(Math.random() * 5)];
         saucerMaterial.map.minFilter = LinearFilter;
         saucerMaterial.shininess = 0;
         saucerMaterial.transparent = true;
         this.saucer = new Mesh(saucerGeometry, saucerMaterial);
-        this.saucer.position.set(-5.3, -11.4, this.zSpot - 1.8);
+        this.saucer.position.set(-5.3, -11.4, this.zSpot - 2);
         this.saucer.rotation.set(-1.5708, 0, 0);
         this.saucer.name = 'Help-Saucer';
         this.scene.add(this.saucer);
@@ -464,7 +513,7 @@ export class HelpHandler {
         asteroidMaterial.shininess = 0;
         asteroidMaterial.transparent = true;
         this.asteroid = new Mesh(asteroidGeometry, asteroidMaterial);
-        this.asteroid.position.set(-5.3, -11.4, this.zSpot - 1.2);
+        this.asteroid.position.set(-5.3, -11.4, this.zSpot - 1.5);
         this.asteroid.rotation.set(-1.5708, 0, 0);
         this.asteroid.name = 'Help-Asteroid';
         this.scene.add(this.asteroid);
@@ -476,18 +525,46 @@ export class HelpHandler {
             transparent: true
         });
         this.headMesh = new Mesh(headGeometry, headMaterial);
-        this.headMesh.position.set(-5.2, -11.4, this.zSpot - 0.7);
+        this.headMesh.position.set(-5.2, -11.4, this.zSpot - 1.1);
         this.headMesh.rotation.set(-1.5708, 0, 0);
         this.headMesh.name = 'Help-Missile';
         this.scene.add(this.headMesh);
 
         const tailGeometry = new Geometry();
         tailGeometry.vertices.push(
-            new Vector3(-5.2, -11.3, this.zSpot - 0.7),
-            new Vector3(-5.4, -11.3, this.zSpot - 0.5));
+            new Vector3(-5.2, -11.3, this.zSpot - 1.1),
+            new Vector3(-5.4, -11.3, this.zSpot - 0.9));
         const tailMaterial = new LineBasicMaterial({color: 0x00B39F});
         this.tailMesh = new Line(tailGeometry, tailMaterial);
         this.scene.add(this.tailMesh);
+
+        const droneGeometry = new CircleGeometry(0.1, 32, 32);
+        const droneMaterial =new MeshPhongMaterial({
+            color: 0xC0C0C0,
+            opacity: 0.75,
+            specular: 0x505050,
+            shininess: 100,
+            transparent: true
+        });
+        const droneRingGeometry = new CircleGeometry(0.15, 32, 32);
+        const droneRingMaterial = new MeshPhongMaterial({
+            color: 0x0055FF,
+            opacity: 0.75,
+            specular: 0x505050,
+            shininess: 100,
+            transparent: true
+        });
+        this.drone = new Mesh(droneGeometry, droneMaterial);
+        this.drone.position.set(-5.3, -11.4, this.zSpot - 0.5);
+        this.drone.rotation.set(-1.5708, 0, 0);
+        this.drone.name = 'Help-Drone';
+
+        const droneRing = new Mesh(droneRingGeometry, droneRingMaterial);
+        droneRing.position.z = 0.1;
+        droneRing.name = `Help-Drone-Ring`;
+        
+        this.drone.add(droneRing);
+        this.scene.add(this.drone);
         
         let textGeo = new TextGeometry('Points', this.textHeaderParams);
         let text = new Mesh( textGeo, this.helpMaterial );
@@ -498,21 +575,28 @@ export class HelpHandler {
 
         textGeo = new TextGeometry('50 x difficulty', this.textpParams);
         text = new Mesh( textGeo, this.helpMaterial );
-        text.position.set(-4.8, -11.4, this.zSpot - 1.7);
+        text.position.set(-4.8, -11.4, this.zSpot - 1.85);
         text.rotation.x = -1.5708;
         this.scene.add(text);
         this.texts.push(text);
 
         textGeo = new TextGeometry('5 x difficulty', this.textpParams);
         text = new Mesh( textGeo, this.helpMaterial );
-        text.position.set(-4.8, -11.4, this.zSpot - 1.1);
+        text.position.set(-4.8, -11.4, this.zSpot - 1.4);
         text.rotation.x = -1.5708;
         this.scene.add(text);
         this.texts.push(text);
 
         textGeo = new TextGeometry('10 x difficulty', this.textpParams);
         text = new Mesh( textGeo, this.helpMaterial );
-        text.position.set(-4.8, -11.4, this.zSpot - 0.5);
+        text.position.set(-4.8, -11.4, this.zSpot - 0.9);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+
+        textGeo = new TextGeometry('25 x difficulty', this.textpParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-4.8, -11.4, this.zSpot - 0.4);
         text.rotation.x = -1.5708;
         this.scene.add(text);
         this.texts.push(text);

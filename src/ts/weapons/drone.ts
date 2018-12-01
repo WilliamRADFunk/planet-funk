@@ -13,6 +13,10 @@ let index: number = 0;
 
 export class Drone implements Collidable {
     /**
+     * Point around which drone rotates.
+     */
+    private centerPoint: [ number, number ];
+    /**
      * Controls size and shape of the drone
      */
     private droneGeometry: SphereGeometry;
@@ -70,21 +74,34 @@ export class Drone implements Collidable {
      */
     private speed: number = 0.002;
     /**
+     * The distance to and from the camera that the saucer should exist...its layer.
+     */
+    private yPos: number;
+    /**
      * Constructor for the Drone class
      * @param scene graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param scoreboard reference to score handler to add points when missiles blow.
      * @param x1         origin point x of where the drone starts.
      * @param z1         origin point z of where the drone starts.
      * @param points     points to give for destroyed missiles.
+     * @param yPos       layer level for saucer to appear.
      * @hidden
      */
-    constructor(scene: Scene, scoreboard: ScoreHandler, x1:number, z1: number, points: number) {
+    constructor(
+        scene: Scene,
+        scoreboard: ScoreHandler,
+        x1:number,
+        z1: number,
+        points: number,
+        center?: [number, number],
+        yPos?: number) {
         index++;
-
         this.scene = scene;
         this.currentPoint = [x1, z1];
         this.scoreboard = scoreboard;
         this.points = points;
+        this.centerPoint = center || [0, 0];
+        this.yPos = yPos || 0.3;
         
 		this.droneGeometry = new SphereGeometry(0.1, 32, 32);
         this.droneMaterial = new MeshPhongMaterial({
@@ -106,12 +123,15 @@ export class Drone implements Collidable {
         droneRing.position.y = 0.5;
         droneRing.name = `Drone-Ring-${index}`;
         this.drone = new Mesh(this.droneGeometry, this.droneMaterial);
-        this.drone.position.set(this.currentPoint[0], 0.3, this.currentPoint[1]);
+        this.drone.position.set(this.currentPoint[0], this.yPos, this.currentPoint[1]);
         this.drone.name = `Drone-${index}`;
         this.drone.add(droneRing);
 
+        
         this.orbitRadius = this.getDistanceToTarget();
-        this.currentTheta = Math.atan2(this.currentPoint[1], this.currentPoint[0]);
+        this.currentTheta = Math.atan2(
+            (this.currentPoint[1] - this.centerPoint[1]),
+            (this.currentPoint[0] - this.centerPoint[0]));
     }
     /**
      * Adds drone object to the three.js scene.
@@ -125,8 +145,8 @@ export class Drone implements Collidable {
     private calculateNextPoint() {
         this.currentTheta += this.speed;
         if (this.currentTheta >= 2 * Math.PI) this.currentTheta = 0;
-        this.currentPoint[0] = this.orbitRadius * Math.cos(this.currentTheta);
-        this.currentPoint[1] = this.orbitRadius * Math.sin(this.currentTheta)
+        this.currentPoint[0] = this.orbitRadius * Math.cos(this.currentTheta) + this.centerPoint[0];
+        this.currentPoint[1] = this.orbitRadius * Math.sin(this.currentTheta) + this.centerPoint[1];
     }
     /**
      * Creates an explosion during collision and adds it to the collildables list.
@@ -157,7 +177,7 @@ export class Drone implements Collidable {
     endCycle(isGameActive: boolean): boolean {
         if (this.isActive) {
             this.calculateNextPoint();
-            this.drone.position.set(this.currentPoint[0], 0.3, this.currentPoint[1]);
+            this.drone.position.set(this.currentPoint[0], this.yPos, this.currentPoint[1]);
             const pos = this.getCurrentPosition();
             this.lastFired--;
             if (this.lastFired < 0) {
@@ -238,8 +258,8 @@ export class Drone implements Collidable {
         // If satellite is closest, and it has the energy, this origin point won't need to be recalculated.
         const pos = this.getCurrentPosition();
         // d = sqrt{ (x2-x1)^2 + (y2-y1)^2 }
-        const xStep = pos[0] * pos[0];
-        const zStep = pos[1] * pos[1];
+        const xStep = (this.centerPoint[0] - pos[0]) * (this.centerPoint[0] - pos[0]);
+        const zStep = (this.centerPoint[1] - pos[1]) * (this.centerPoint[1] - pos[1]);
         return Math.sqrt(xStep + zStep);
     }
     /**

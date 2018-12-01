@@ -23,7 +23,7 @@
 
 **● index**: *`number`* = 0
 
-*Defined in [ts/weapons/drone.ts:12](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L12)*
+*Defined in [ts/weapons/drone.ts:12](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/weapons/drone.ts#L12)*
 
 ___
 <a id="randomcolor"></a>
@@ -32,7 +32,7 @@ ___
 
 **● randomColor**: *`any`* =  require('randomcolor')
 
-*Defined in [ts/weapons/drone.ts:10](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/weapons/drone.ts#L10)*
+*Defined in [ts/weapons/drone.ts:10](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/weapons/drone.ts#L10)*
 
 ___
 

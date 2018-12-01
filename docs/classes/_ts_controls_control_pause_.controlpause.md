@@ -32,7 +32,7 @@
 
 **● pauseButton**: *`Mesh`*
 
-*Defined in [ts/controls/control-pause.ts:20](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/controls/control-pause.ts#L20)*
+*Defined in [ts/controls/control-pause.ts:20](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/controls/control-pause.ts#L20)*
 
 Mesh for the pause button.
 
@@ -43,7 +43,7 @@ ___
 
 **● pauseButtonBorderMaterial**: *`LineBasicMaterial`*
 
-*Defined in [ts/controls/control-pause.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/controls/control-pause.ts#L24)*
+*Defined in [ts/controls/control-pause.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/controls/control-pause.ts#L24)*
 
 Controls the pause button's border material.
 
@@ -57,7 +57,7 @@ ___
 
 ▸ **changeColor**(color: *`Color`*): `void`
 
-*Defined in [ts/controls/control-pause.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/controls/control-pause.ts#L78)*
+*Defined in [ts/controls/control-pause.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/controls/control-pause.ts#L78)*
 
 Changes button material to match new level color.
 
@@ -76,7 +76,7 @@ ___
 
 ▸ **changeOpacity**(opacity: *`number`*): `void`
 
-*Defined in [ts/controls/control-pause.ts:85](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/controls/control-pause.ts#L85)*
+*Defined in [ts/controls/control-pause.ts:85](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/controls/control-pause.ts#L85)*
 
 Changes button opacity.
 
@@ -95,7 +95,7 @@ ___
 
 ▸ **hide**(): `void`
 
-*Defined in [ts/controls/control-pause.ts:92](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/controls/control-pause.ts#L92)*
+*Defined in [ts/controls/control-pause.ts:92](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/controls/control-pause.ts#L92)*
 
 Hide the pause button (state related). Default is to show.
 
@@ -108,7 +108,7 @@ ___
 
 ▸ **show**(): `void`
 
-*Defined in [ts/controls/control-pause.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/ec9c023/src/ts/controls/control-pause.ts#L99)*
+*Defined in [ts/controls/control-pause.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/controls/control-pause.ts#L99)*
 
 Show the pause button (state related). Default is to show.
 
