@@ -9,7 +9,8 @@ import {
     Scene,
     TextGeometry,
     TextGeometryParameters,
-    Texture } from 'three';
+    Texture, 
+    AmbientLight} from 'three';
 
 import { HelpHandler } from './help-handler';
 import { LoadHandler } from './load-handler';
@@ -105,6 +106,10 @@ export class Menu {
      */
     private helpHandler: HelpHandler;
     /**
+     * Standard ambient light to better see the help menu with.
+     */
+    private helpLight: AmbientLight;
+    /**
      * Controls the overall rendering of the load button display
      */
     private load: Mesh;
@@ -151,6 +156,10 @@ export class Menu {
      * Controls size and shape of the normal button text
      */
     private normalGeometry: TextGeometry;
+    /**
+     * The distant dim light that allows the shimmer effect to happen.
+     */
+    private pointLight: PointLight;
     /**
      * Reference to the scene, used to remove and reinstall text geometries.
      */
@@ -203,9 +212,9 @@ export class Menu {
         this.shimmer.position.set(-20, 2, 0);
         this.scene.add(this.shimmer);
 
-        const light = new PointLight(0x3333FF, 1);
-        light.position.set(15, 2, 0);
-        this.scene.add(light);
+        this.pointLight = new PointLight(0x3333FF, 1);
+        this.pointLight.position.set(15, 2, 0);
+        this.scene.add(this.pointLight);
         
         this.menuMaterial = new MeshLambertMaterial( {color: 0x00B39F, opacity: 1, transparent: true} );
         this.menuSelectedMaterial = new MeshLambertMaterial( {color: 0xFF3333, opacity: 1, transparent: true} );
@@ -415,8 +424,17 @@ export class Menu {
     endCycle(): void {
         if (this.mode === 1) {
             this.shimmer.position.x = 0;
+            this.shimmer.intensity = 0;
+            this.pointLight.intensity = 0;
+            if (!this.helpLight) {
+                this.helpLight = new AmbientLight(0xCCCCCC);
+                this.scene.add(this.helpLight);
+            }
             this.helpHandler.endCycle();
         } else {
+            if (this.helpLight) {
+                this.scene.remove(this.helpLight);
+            }
             if (this.shimmer.position.x > 20) {
                 this.shimmer.position.x = -20;
             }

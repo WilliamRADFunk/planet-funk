@@ -22,7 +22,7 @@
 
 **● BUTTON_SIZE**: *`0.4`* = 0.4
 
-*Defined in [ts/controls/control-panel.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/controls/control-panel.ts#L19)*
+*Defined in [ts/controls/control-panel.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/controls/control-panel.ts#L19)*
 
 A constant size / position modifier to shrink or expand the entire panel symmetrically from one variable.
 

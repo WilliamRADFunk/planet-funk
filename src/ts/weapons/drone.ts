@@ -167,6 +167,7 @@ export class Drone implements Collidable {
             this.explosion = null;
         }
         this.missiles.filter(m => m.destroy());
+        this.missiles = [];
         this.removeFromScene(this.scene);
     }
     /**
@@ -194,10 +195,10 @@ export class Drone implements Collidable {
                 const miss = new Projectile(
                     this.scene,
                     pos[0], pos[1],
-                    0, 0,
+                    this.centerPoint[0], this.centerPoint[1],
                     this.getDistanceToTarget(),
                     color,
-                    true, 0.01, null, 1);
+                    true, 0.01, this.yPos, 1);
                 this.missiles.push(miss);
                 CollisionatorSingleton.add(miss);
             }

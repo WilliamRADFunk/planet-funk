@@ -118,6 +118,7 @@ export class Projectile implements Collidable {
      * @param dist               total distance the missile must travel.
      * @param color              color of the missile's fiery tail (matches satellite body color from which it came).
      * @param colllidableAtBirth Enemy missiles need to be destructable before hitting target, where player's don't.
+     * @param speed              optional speed modifier for missiles.
      * @param y                  optional y value for missile (for help screen demo).
      * @param waitToFire         optional wait time (instead of randomized wait time).
      * @hidden

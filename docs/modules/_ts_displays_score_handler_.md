@@ -27,7 +27,7 @@
 
 **Ƭ ScoreDigits**: *`Mesh`[]*
 
-*Defined in [ts/displays/score-handler.ts:11](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/displays/score-handler.ts#L11)*
+*Defined in [ts/displays/score-handler.ts:11](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/score-handler.ts#L11)*
 
 ___
 <a id="scoregeometries"></a>
@@ -36,7 +36,7 @@ ___
 
 **Ƭ ScoreGeometries**: *`TextGeometry`[]*
 
-*Defined in [ts/displays/score-handler.ts:10](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/displays/score-handler.ts#L10)*
+*Defined in [ts/displays/score-handler.ts:10](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/score-handler.ts#L10)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 **● positionIndex**: *`number`[]* =  [ -3.5, -3.15, -2.8, -2.45, -2.1, -1.75, -1.4, -1.05, -0.7, -0.35 ]
 
-*Defined in [ts/displays/score-handler.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/displays/score-handler.ts#L16)*
+*Defined in [ts/displays/score-handler.ts:16](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/score-handler.ts#L16)*
 
 Iterable list of x positions for each digit of the score. Necessary since constantly recreating TextGeometries with each new score is very costly.
 

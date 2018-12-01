@@ -55,7 +55,7 @@
 
 **● currentPoint**: *`number`[]*
 
-*Defined in [ts/enemies/saucer.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L19)*
+*Defined in [ts/enemies/saucer.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L19)*
 
 Keeps track of the x,z point the saucer is at currently.
 
@@ -66,7 +66,7 @@ ___
 
 **● distanceTraveled**: *`number`*
 
-*Defined in [ts/enemies/saucer.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L23)*
+*Defined in [ts/enemies/saucer.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L23)*
 
 Tracks the distance traveled thus far to update the calculateNextPoint calculation.
 
@@ -77,7 +77,7 @@ ___
 
 **● endingPoint**: *`number`[]*
 
-*Defined in [ts/enemies/saucer.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L27)*
+*Defined in [ts/enemies/saucer.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L27)*
 
 Keeps track of the x,z point of saucer's destination point.
 
@@ -88,7 +88,7 @@ ___
 
 **● explosion**: *[Explosion](_ts_weapons_explosion_.explosion.md)*
 
-*Defined in [ts/enemies/saucer.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L31)*
+*Defined in [ts/enemies/saucer.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L31)*
 
 Explosion from impacted saucer
 
@@ -99,7 +99,7 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in [ts/enemies/saucer.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L36)*
+*Defined in [ts/enemies/saucer.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L36)*
 
 Flag to signal if saucer has been destroyed or not. True = not destroyed. False = destroyed.
 
@@ -110,7 +110,7 @@ ___
 
 **● originalStartingPoint**: *`number`[]*
 
-*Defined in [ts/enemies/saucer.ts:40](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L40)*
+*Defined in [ts/enemies/saucer.ts:40](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L40)*
 
 Keeps track of the x,z point where saucer fired from.
 
@@ -121,7 +121,7 @@ ___
 
 **● saucer**: *`Mesh`*
 
-*Defined in [ts/enemies/saucer.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L52)*
+*Defined in [ts/enemies/saucer.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L52)*
 
 Controls the overall rendering of the saucer
 
@@ -132,7 +132,7 @@ ___
 
 **● saucerGeometry**: *`CircleGeometry`*
 
-*Defined in [ts/enemies/saucer.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L44)*
+*Defined in [ts/enemies/saucer.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L44)*
 
 Controls size and shape of the saucer
 
@@ -143,7 +143,7 @@ ___
 
 **● saucerMaterial**: *`MeshPhongMaterial`*
 
-*Defined in [ts/enemies/saucer.ts:48](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L48)*
+*Defined in [ts/enemies/saucer.ts:48](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L48)*
 
 Controls the color of the saucer material
 
@@ -154,7 +154,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/enemies/saucer.ts:56](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L56)*
+*Defined in [ts/enemies/saucer.ts:56](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L56)*
 
 Reference to the scene, used to remove saucer from rendering cycle once destroyed.
 
@@ -165,7 +165,7 @@ ___
 
 **● speed**: *`number`* = 0.008
 
-*Defined in [ts/enemies/saucer.ts:60](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L60)*
+*Defined in [ts/enemies/saucer.ts:60](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L60)*
 
 The speed at which the saucer travels.
 
@@ -176,7 +176,7 @@ ___
 
 **● totalDistance**: *`number`*
 
-*Defined in [ts/enemies/saucer.ts:64](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L64)*
+*Defined in [ts/enemies/saucer.ts:64](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L64)*
 
 The total distance from saucer to final destination.
 
@@ -187,7 +187,7 @@ ___
 
 **● waitToFire**: *`number`* = 0
 
-*Defined in [ts/enemies/saucer.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L69)*
+*Defined in [ts/enemies/saucer.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L69)*
 
 The wait number of iterations before loosing the saucer. Prevents new level creation from saucer immediately.
 
@@ -198,7 +198,7 @@ ___
 
 **● yPos**: *`number`*
 
-*Defined in [ts/enemies/saucer.ts:73](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L73)*
+*Defined in [ts/enemies/saucer.ts:73](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L73)*
 
 The distance to and from the camera that the saucer should exist...its layer.
 
@@ -212,7 +212,7 @@ ___
 
 ▸ **activate**(): `void`
 
-*Defined in [ts/enemies/saucer.ts:125](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L125)*
+*Defined in [ts/enemies/saucer.ts:125](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L125)*
 
 (Re)activates the saucer, usually at beginning of new level.
 
@@ -225,7 +225,7 @@ ___
 
 ▸ **addToScene**(): `void`
 
-*Defined in [ts/enemies/saucer.ts:135](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L135)*
+*Defined in [ts/enemies/saucer.ts:135](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L135)*
 
 Adds saucer object to the three.js scene.
 
@@ -238,7 +238,7 @@ ___
 
 ▸ **calculateNextPoint**(): `void`
 
-*Defined in [ts/enemies/saucer.ts:141](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L141)*
+*Defined in [ts/enemies/saucer.ts:141](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L141)*
 
 Calculates the next point in the saucer's path.
 
@@ -251,7 +251,7 @@ ___
 
 ▸ **createExplosion**(isInert: *`boolean`*): `void`
 
-*Defined in [ts/enemies/saucer.ts:158](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L158)*
+*Defined in [ts/enemies/saucer.ts:158](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L158)*
 
 Creates an explosion during collision and adds it to the collildables list.
 
@@ -270,7 +270,7 @@ ___
 
 ▸ **destroy**(): `void`
 
-*Defined in [ts/enemies/saucer.ts:166](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L166)*
+*Defined in [ts/enemies/saucer.ts:166](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L166)*
 
 Call to eliminate regardless of current state. Mainly used for non-game instantiations of this (ie. help screen animations).
 
@@ -283,7 +283,7 @@ ___
 
 ▸ **endCycle**(): `boolean`
 
-*Defined in [ts/enemies/saucer.ts:179](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L179)*
+*Defined in [ts/enemies/saucer.ts:179](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L179)*
 
 At the end of each loop iteration, move the saucer a little.
 
@@ -297,7 +297,7 @@ ___
 
 ▸ **getActive**(): `boolean`
 
-*Defined in [ts/enemies/saucer.ts:202](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L202)*
+*Defined in [ts/enemies/saucer.ts:202](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L202)*
 
 Gets the viability of the object.
 
@@ -311,7 +311,7 @@ ___
 
 ▸ **getCollisionRadius**(): `number`
 
-*Defined in [ts/enemies/saucer.ts:209](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L209)*
+*Defined in [ts/enemies/saucer.ts:209](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L209)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 
@@ -325,7 +325,7 @@ ___
 
 ▸ **getCurrentPosition**(): `number`[]
 
-*Defined in [ts/enemies/saucer.ts:216](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L216)*
+*Defined in [ts/enemies/saucer.ts:216](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L216)*
 
 Gets the current position of the collidable object.
 
@@ -339,7 +339,7 @@ ___
 
 ▸ **getName**(): `string`
 
-*Defined in [ts/enemies/saucer.ts:223](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L223)*
+*Defined in [ts/enemies/saucer.ts:223](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L223)*
 
 Gets the name of the saucer.
 
@@ -353,7 +353,7 @@ ___
 
 ▸ **impact**(self: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*, otherThing: *`string`*): `boolean`
 
-*Defined in [ts/enemies/saucer.ts:232](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L232)*
+*Defined in [ts/enemies/saucer.ts:232](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L232)*
 
 Called when something collides with saucer, which destroys it.
 
@@ -374,7 +374,7 @@ ___
 
 ▸ **isPassive**(): `boolean`
 
-*Defined in [ts/enemies/saucer.ts:244](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L244)*
+*Defined in [ts/enemies/saucer.ts:244](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L244)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 
@@ -388,7 +388,7 @@ ___
 
 ▸ **removeFromScene**(scene: *`Scene`*): `void`
 
-*Defined in [ts/enemies/saucer.ts:251](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/enemies/saucer.ts#L251)*
+*Defined in [ts/enemies/saucer.ts:251](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/enemies/saucer.ts#L251)*
 
 Removes saucer object from the 'visible' scene by sending it back to its starting location.
 

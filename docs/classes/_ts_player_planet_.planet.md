@@ -68,7 +68,7 @@
 
 **● base1**: *[Base](_ts_player_base_.base.md)*
 
-*Defined in [ts/player/planet.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L37)*
+*Defined in [ts/player/planet.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L37)*
 
 Base that starts at 1/2 o'clock
 
@@ -79,7 +79,7 @@ ___
 
 **● base2**: *[Base](_ts_player_base_.base.md)*
 
-*Defined in [ts/player/planet.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L41)*
+*Defined in [ts/player/planet.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L41)*
 
 Base that starts at 4/5 o'clock
 
@@ -90,7 +90,7 @@ ___
 
 **● base3**: *[Base](_ts_player_base_.base.md)*
 
-*Defined in [ts/player/planet.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L45)*
+*Defined in [ts/player/planet.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L45)*
 
 Base that starts at 7/8 o'clock
 
@@ -101,7 +101,7 @@ ___
 
 **● base4**: *[Base](_ts_player_base_.base.md)*
 
-*Defined in [ts/player/planet.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L49)*
+*Defined in [ts/player/planet.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L49)*
 
 Base that starts at 10/11 o'clock
 
@@ -112,7 +112,7 @@ ___
 
 **● bases**: *[Base](_ts_player_base_.base.md)[]*
 
-*Defined in [ts/player/planet.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L53)*
+*Defined in [ts/player/planet.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L53)*
 
 Iterable list of the bases.
 
@@ -123,7 +123,7 @@ ___
 
 **● currentRotation**: *`number`* = 0
 
-*Defined in [ts/player/planet.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L57)*
+*Defined in [ts/player/planet.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L57)*
 
 Keeps track of proper rotation amount to avoid the weird quarter rotation reset cycle.
 
@@ -134,7 +134,7 @@ ___
 
 **● deadPlanetTexture**: *`Texture`*
 
-*Defined in [ts/player/planet.ts:61](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L61)*
+*Defined in [ts/player/planet.ts:61](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L61)*
 
 Holds onto texture for dead planet until game over.
 
@@ -145,7 +145,7 @@ ___
 
 **● funk**: *`Mesh`*
 
-*Defined in [ts/player/planet.ts:73](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L73)*
+*Defined in [ts/player/planet.ts:73](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L73)*
 
 Controls the overall rendering of the planet
 
@@ -156,7 +156,7 @@ ___
 
 **● funkGeometry**: *`SphereGeometry`*
 
-*Defined in [ts/player/planet.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L65)*
+*Defined in [ts/player/planet.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L65)*
 
 Controls size and shape of the planet
 
@@ -167,7 +167,7 @@ ___
 
 **● funkMaterial**: *`MeshPhongMaterial`*
 
-*Defined in [ts/player/planet.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L69)*
+*Defined in [ts/player/planet.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L69)*
 
 Controls the color of the planet material
 
@@ -178,7 +178,7 @@ ___
 
 **● gameLoadData**: *[GameLoadData](../interfaces/_ts_models_game_load_data_.gameloaddata.md)*
 
-*Defined in [ts/player/planet.ts:77](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L77)*
+*Defined in [ts/player/planet.ts:77](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L77)*
 
 Load data to determine which satellites and buildings should start destroyed.
 
@@ -189,7 +189,7 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in [ts/player/planet.ts:82](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L82)*
+*Defined in [ts/player/planet.ts:82](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L82)*
 
 Flag to signal if player has been defeated or not. True = not defeated. False = defeated.
 
@@ -200,7 +200,7 @@ ___
 
 **● quadrant1**: *`boolean`* = true
 
-*Defined in [ts/player/planet.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L86)*
+*Defined in [ts/player/planet.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L86)*
 
 Populated section of the planet. Once hit, false signifies inactive.
 
@@ -211,7 +211,7 @@ ___
 
 **● quadrant2**: *`boolean`* = true
 
-*Defined in [ts/player/planet.ts:90](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L90)*
+*Defined in [ts/player/planet.ts:90](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L90)*
 
 Populated section of the planet. Once hit, false signifies inactive.
 
@@ -222,7 +222,7 @@ ___
 
 **● quadrant3**: *`boolean`* = true
 
-*Defined in [ts/player/planet.ts:94](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L94)*
+*Defined in [ts/player/planet.ts:94](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L94)*
 
 Populated section of the planet. Once hit, false signifies inactive.
 
@@ -233,7 +233,7 @@ ___
 
 **● quadrant4**: *`boolean`* = true
 
-*Defined in [ts/player/planet.ts:98](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L98)*
+*Defined in [ts/player/planet.ts:98](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L98)*
 
 Populated section of the planet. Once hit, false signifies inactive.
 
@@ -244,7 +244,7 @@ ___
 
 **● satellite1**: *[Satellite](_ts_player_satellite_.satellite.md)*
 
-*Defined in [ts/player/planet.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L102)*
+*Defined in [ts/player/planet.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L102)*
 
 Satellite that starts at 3 o'clock
 
@@ -255,7 +255,7 @@ ___
 
 **● satellite2**: *[Satellite](_ts_player_satellite_.satellite.md)*
 
-*Defined in [ts/player/planet.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L106)*
+*Defined in [ts/player/planet.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L106)*
 
 Satellite that starts at 6 o'clock
 
@@ -266,7 +266,7 @@ ___
 
 **● satellite3**: *[Satellite](_ts_player_satellite_.satellite.md)*
 
-*Defined in [ts/player/planet.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L110)*
+*Defined in [ts/player/planet.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L110)*
 
 Satellite that starts at 9 o'clock
 
@@ -277,7 +277,7 @@ ___
 
 **● satellite4**: *[Satellite](_ts_player_satellite_.satellite.md)*
 
-*Defined in [ts/player/planet.ts:114](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L114)*
+*Defined in [ts/player/planet.ts:114](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L114)*
 
 Satellite that starts at 12 o'clock
 
@@ -288,7 +288,7 @@ ___
 
 **● satellites**: *[Satellite](_ts_player_satellite_.satellite.md)[]* =  []
 
-*Defined in [ts/player/planet.ts:118](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L118)*
+*Defined in [ts/player/planet.ts:118](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L118)*
 
 Satellite array for ease of selection
 
@@ -299,7 +299,7 @@ ___
 
 **● startPosition**: *[`number`, `number`, `number`]* =  [0, 0, 0]
 
-*Defined in [ts/player/planet.ts:122](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L122)*
+*Defined in [ts/player/planet.ts:122](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L122)*
 
 Starting position.
 
@@ -313,7 +313,7 @@ ___
 
 ▸ **addToScene**(scene: *`Scene`*, planetTextures: *`Texture`[]*, buildtexture: *`Texture`[]*, specMap: *`Texture`*): `void`
 
-*Defined in [ts/player/planet.ts:139](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L139)*
+*Defined in [ts/player/planet.ts:139](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L139)*
 
 Adds planet object to the three.js scene.
 
@@ -335,7 +335,7 @@ ___
 
 ▸ **constructBases**(buildtexture: *`Texture`[]*, specMap: *`Texture`*): `void`
 
-*Defined in [ts/player/planet.ts:150](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L150)*
+*Defined in [ts/player/planet.ts:150](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L150)*
 
 Builds the four bases player must protect.
 
@@ -355,7 +355,7 @@ ___
 
 ▸ **constructPlanet**(planetTextures: *`Texture`[]*, specMap: *`Texture`*): `void`
 
-*Defined in [ts/player/planet.ts:180](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L180)*
+*Defined in [ts/player/planet.ts:180](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L180)*
 
 Builds the player's planet.
 
@@ -375,7 +375,7 @@ ___
 
 ▸ **constructSatellites**(): `void`
 
-*Defined in [ts/player/planet.ts:202](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L202)*
+*Defined in [ts/player/planet.ts:202](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L202)*
 
 Builds the player's four defensive satellites.
 
@@ -388,7 +388,7 @@ ___
 
 ▸ **endCycle**(): `void`
 
-*Defined in [ts/player/planet.ts:225](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L225)*
+*Defined in [ts/player/planet.ts:225](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L225)*
 
 At the end of each loop iteration, satellite regains a little energy.
 
@@ -401,7 +401,7 @@ ___
 
 ▸ **fire**(scene: *`Scene`*, point: *`Vector3`*): `void`
 
-*Defined in [ts/player/planet.ts:256](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L256)*
+*Defined in [ts/player/planet.ts:256](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L256)*
 
 If it's determined that player wanted to fire a weapon, find closest charged satellite to click point, and instruct it to launch the projectile.
 
@@ -421,7 +421,7 @@ ___
 
 ▸ **getActive**(): `boolean`
 
-*Defined in [ts/player/planet.ts:270](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L270)*
+*Defined in [ts/player/planet.ts:270](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L270)*
 
 Gets the viability of the planet, which will always be true..
 
@@ -435,7 +435,7 @@ ___
 
 ▸ **getCollisionRadius**(): `number`
 
-*Defined in [ts/player/planet.ts:277](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L277)*
+*Defined in [ts/player/planet.ts:277](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L277)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 
@@ -449,7 +449,7 @@ ___
 
 ▸ **getCurrentPosition**(): `number`[]
 
-*Defined in [ts/player/planet.ts:284](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L284)*
+*Defined in [ts/player/planet.ts:284](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L284)*
 
 Gets the current position of the planet.
 
@@ -463,7 +463,7 @@ ___
 
 ▸ **getName**(): `string`
 
-*Defined in [ts/player/planet.ts:291](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L291)*
+*Defined in [ts/player/planet.ts:291](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L291)*
 
 Gets the name of the planet.
 
@@ -477,7 +477,7 @@ ___
 
 ▸ **getPowerRegenRate**(): `number`
 
-*Defined in [ts/player/planet.ts:306](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L306)*
+*Defined in [ts/player/planet.ts:306](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L306)*
 
 Getter for recharge of planet shield rate.
 
@@ -491,7 +491,7 @@ ___
 
 ▸ **getStatus**(): [PlanetStatus](../interfaces/_ts_player_planet_.planetstatus.md)
 
-*Defined in [ts/player/planet.ts:327](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L327)*
+*Defined in [ts/player/planet.ts:327](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L327)*
 
 Getter for status of the planet's four populated quadrants. True = Alive | False = Dead.
 
@@ -505,7 +505,7 @@ ___
 
 ▸ **impact**(self: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*): `boolean`
 
-*Defined in [ts/player/planet.ts:299](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L299)*
+*Defined in [ts/player/planet.ts:299](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L299)*
 
 Called when something collides with asteroid, which destroys it.
 
@@ -525,7 +525,7 @@ ___
 
 ▸ **isPassive**(): `boolean`
 
-*Defined in [ts/player/planet.ts:343](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L343)*
+*Defined in [ts/player/planet.ts:343](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L343)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 
@@ -539,7 +539,7 @@ ___
 
 ▸ **removeFromScene**(scene: *`Scene`*): `void`
 
-*Defined in [ts/player/planet.ts:349](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L349)*
+*Defined in [ts/player/planet.ts:349](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L349)*
 
 Removes planet object from the three.js scene.
 
@@ -558,7 +558,7 @@ ___
 
 ▸ **rotate**(): `void`
 
-*Defined in [ts/player/planet.ts:363](https://github.com/WilliamRADFunk/planet-funk/blob/e35624a/src/ts/player/planet.ts#L363)*
+*Defined in [ts/player/planet.ts:363](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/player/planet.ts#L363)*
 
 Spins planet at its set rate.
 

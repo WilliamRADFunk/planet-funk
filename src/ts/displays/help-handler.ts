@@ -352,7 +352,7 @@ export class HelpHandler {
         this.drone.visible = true;
         this.headMesh.visible = true;
         this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), false, 0.02, -11.5);
-        this.saucerExample = new Saucer(this.scene, this.saucerTextures, -6, this.zSpot - 4.1, 6, this.zSpot - 4.1, 12, 0.001, -11.9, true);
+        this.saucerExample = new Saucer(this.scene, this.saucerTextures, -6, this.zSpot - 3.8, 13, this.zSpot - 3.8, 19, 0.001, -11.9, true);
         this.saucerExample.addToScene();
         this.mouse.visible = true;
         this.return.visible = true;
@@ -406,6 +406,8 @@ export class HelpHandler {
         this.buildingsDead.filter(x => x.visible = false);
         this.sections.filter(x => x.visible = false);
         this.texts.filter(x => x.visible = false);
+        this.droneExamples.filter(d => d.destroy());
+        this.droneExamples = [];
 
         if (this.planet) {
             this.planet.removeFromScene(this.scene);
@@ -423,6 +425,7 @@ export class HelpHandler {
             this.missileExample1.removeFromScene(this.scene);
             this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), false, 0.02, -11.5);
         }
+        // Saucer movement, possible drone creation, and possible drone elimination.
         this.saucerExample.endCycle();
         const saucerPos = this.saucerExample.getCurrentPosition();
         if ((saucerPos[0] >= -3 && saucerPos[0] <= -2.998) ||
@@ -434,13 +437,18 @@ export class HelpHandler {
                 saucerPos[0],
                 saucerPos[1],
                 0,
-                [saucerPos[0] - 1,
+                [saucerPos[0] - 0.6,
                 saucerPos[1]],
                 -11.6);
             this.droneExamples.push(drone);
             drone.addToScene();
         }
         this.droneExamples.forEach(d => d.endCycle(true));
+        if (saucerPos[0] > 12 && this.droneExamples.length) {
+            this.droneExamples.filter(d => d.destroy());
+            this.droneExamples = [];
+        }
+        // Planetary rotation.
         this.planet.endCycle();
         this.shields.forEach(s => s.endCycle(1));
         if (!this.shields[1].getActive() && this.shields[1].getEnergyLevel() >= 500) {
@@ -473,8 +481,29 @@ export class HelpHandler {
         this.scene.add(section);
         this.sections.push(section);
 
-        this.saucerExample = new Saucer(this.scene, this.saucerTextures, -6, this.zSpot - 4.1, 6, this.zSpot - 4.1, 12, 0.001, -11.9, true);
+        this.saucerExample = new Saucer(this.scene, this.saucerTextures, -6, this.zSpot - 3.8, 13, this.zSpot - 3.8, 19, 0.001, -11.9, true);
         this.saucerExample.addToScene();
+
+        let textGeo = new TextGeometry('Saucers Drop Drones...', this.textHeaderParams);
+        let text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-5.65, -11.4, this.zSpot - 4.8);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+
+        textGeo = new TextGeometry('Drones Orbit the Planet...', this.textHeaderParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-1.7, -11.4, this.zSpot - 4.8);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+
+        textGeo = new TextGeometry('Firing Missiles...', this.textHeaderParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(2.8, -11.4, this.zSpot - 4.8);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
     }
     /**
      * Builds the box and graphics for the 2nd row left section.
