@@ -824,7 +824,7 @@ export class HelpHandler {
         this.scene.add(text);
         this.texts.push(text);
         
-        textGeo = new TextGeometry('100,000 =', this.textpParams);
+        textGeo = new TextGeometry('50,000 =', this.textpParams);
         text = new Mesh( textGeo, this.helpMaterial );
         text.position.set(-5.1, -11.4, this.zSpot + 1.2);
         text.rotation.x = -1.5708;
@@ -842,7 +842,7 @@ export class HelpHandler {
         this.building.name = 'Help-Base-Points';
         this.scene.add(this.building);
         
-        textGeo = new TextGeometry('50,000 =', this.textpParams);
+        textGeo = new TextGeometry('25,000 =', this.textpParams);
         text = new Mesh( textGeo, this.helpMaterial );
         text.position.set(-5.1, -11.4, this.zSpot + 2);
         text.rotation.x = -1.5708;

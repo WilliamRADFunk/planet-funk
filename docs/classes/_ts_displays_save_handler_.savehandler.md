@@ -45,7 +45,7 @@
 
 **● activeMaterial**: *`number`* = 0
 
-*Defined in [ts/displays/save-handler.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L25)*
+*Defined in [ts/displays/save-handler.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L25)*
 
 Counter for which digit backing material to change opacity for.
 
@@ -56,7 +56,7 @@ ___
 
 **● barrierReturn**: *`Mesh`*
 
-*Defined in [ts/displays/save-handler.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L29)*
+*Defined in [ts/displays/save-handler.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L29)*
 
 Click surface for the Return button.
 
@@ -67,7 +67,7 @@ ___
 
 **● code**: *`Mesh`[]* =  []
 
-*Defined in [ts/displays/save-handler.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L33)*
+*Defined in [ts/displays/save-handler.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L33)*
 
 All the digits of the save code from left to right.
 
@@ -78,7 +78,7 @@ ___
 
 **● codeBackings**: *`Mesh`[]* =  []
 
-*Defined in [ts/displays/save-handler.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L37)*
+*Defined in [ts/displays/save-handler.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L37)*
 
 All the digit backings behind the save code from left to right.
 
@@ -89,7 +89,7 @@ ___
 
 **● codeMaterials**: *`MeshLambertMaterial`[]* =  []
 
-*Defined in [ts/displays/save-handler.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L41)*
+*Defined in [ts/displays/save-handler.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L41)*
 
 All the digit backing materials behind the save code from left to right.
 
@@ -100,7 +100,7 @@ ___
 
 **● digits**: *`TextGeometry`[]* =  []
 
-*Defined in [ts/displays/save-handler.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L45)*
+*Defined in [ts/displays/save-handler.ts:45](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L45)*
 
 All the digits of the save code in order (0, 1, 2, 3, ..., C, D, E, F).
 
@@ -111,7 +111,7 @@ ___
 
 **● opacityDirection**: *`number`* =  -1
 
-*Defined in [ts/displays/save-handler.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L49)*
+*Defined in [ts/displays/save-handler.ts:49](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L49)*
 
 Multiplier to decrease by current number or increase, using the sign of this variable.
 
@@ -122,7 +122,7 @@ ___
 
 **● return**: *`Mesh`*
 
-*Defined in [ts/displays/save-handler.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L53)*
+*Defined in [ts/displays/save-handler.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L53)*
 
 Controls the overall rendering of the return button display
 
@@ -133,7 +133,7 @@ ___
 
 **● returnGeometry**: *`TextGeometry`*
 
-*Defined in [ts/displays/save-handler.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L57)*
+*Defined in [ts/displays/save-handler.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L57)*
 
 Controls size and shape of the return button text
 
@@ -144,7 +144,7 @@ ___
 
 **● saveBacking**: *`Mesh`*
 
-*Defined in [ts/displays/save-handler.ts:61](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L61)*
+*Defined in [ts/displays/save-handler.ts:61](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L61)*
 
 The background section of the save screen.
 
@@ -155,7 +155,7 @@ ___
 
 **● saveFont**: *`Font`*
 
-*Defined in [ts/displays/save-handler.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L65)*
+*Defined in [ts/displays/save-handler.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L65)*
 
 Loaded font for display text.
 
@@ -166,7 +166,7 @@ ___
 
 **● saveMaterial**: *`MeshLambertMaterial`*
 
-*Defined in [ts/displays/save-handler.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L69)*
+*Defined in [ts/displays/save-handler.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L69)*
 
 Controls the color of the text display material
 
@@ -177,7 +177,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/displays/save-handler.ts:73](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L73)*
+*Defined in [ts/displays/save-handler.ts:73](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L73)*
 
 Reference to the scene, used to remove and reinstall text geometries.
 
@@ -188,7 +188,7 @@ ___
 
 **● startPos**: *[`number`, `number`, `number`]* =  [0, 0, 0]
 
-*Defined in [ts/displays/save-handler.ts:77](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L77)*
+*Defined in [ts/displays/save-handler.ts:77](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L77)*
 
 Tracks starting coordinates off which all items are based.
 
@@ -199,7 +199,7 @@ ___
 
 **● textHeaderParams**: *`TextGeometryParameters`*
 
-*Defined in [ts/displays/save-handler.ts:81](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L81)*
+*Defined in [ts/displays/save-handler.ts:81](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L81)*
 
 Since most of the text on the menu has same parameters, use one variable.
 
@@ -213,7 +213,7 @@ ___
 
 ▸ **activate**(code: *`string`[]*): `void`
 
-*Defined in [ts/displays/save-handler.ts:149](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L149)*
+*Defined in [ts/displays/save-handler.ts:149](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L149)*
 
 Turns on all save screen related graphics
 
@@ -232,7 +232,7 @@ ___
 
 ▸ **deactivate**(): `void`
 
-*Defined in [ts/displays/save-handler.ts:160](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L160)*
+*Defined in [ts/displays/save-handler.ts:160](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L160)*
 
 Turns off all save screen related graphics
 
@@ -245,7 +245,7 @@ ___
 
 ▸ **endCycle**(): `void`
 
-*Defined in [ts/displays/save-handler.ts:170](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L170)*
+*Defined in [ts/displays/save-handler.ts:170](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L170)*
 
 Creates the shimmer behind the save code.
 
@@ -258,7 +258,7 @@ ___
 
 ▸ **showSaveCode**(code: *`string`[]*): `void`
 
-*Defined in [ts/displays/save-handler.ts:194](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/displays/save-handler.ts#L194)*
+*Defined in [ts/displays/save-handler.ts:194](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/displays/save-handler.ts#L194)*
 
 Paints the screen with the save code characters.
 

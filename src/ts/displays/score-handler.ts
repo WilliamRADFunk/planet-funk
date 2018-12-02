@@ -28,6 +28,14 @@ export class ScoreHandler {
      */
     private currentScore: number = 0;
     /**
+     * Keeps track if player's points increase warrants a regenerated base.
+     */
+    private regenBase: boolean = false;
+    /**
+     * Keeps track if player's points increase warrants a regenerated satellite.
+     */
+    private regenSat: boolean = false;
+    /**
      * Reference to the scene, used to remove text in order to change it.
      */
     private scene: Scene;
@@ -56,6 +64,14 @@ export class ScoreHandler {
      */
     private scores: ScoreDigits[] = [[], [], [], [], [], [], [], [], [], []];
     /**
+     * Keeps track of player's score amount gained since last base regeneration.
+     */
+    private scoreSinceBase: number = 0;
+    /**
+     * Keeps track of player's score amount gained since last satellite regeneration.
+     */
+    private scoreSinceSatellite: number = 0;
+    /**
      * Constructor for the ScoreHandler class
      * @param scene         graphic rendering scene object. Used each iteration to redraw things contained in scene.
      * @param color         level color, grabbed from the LevelHandler.
@@ -67,6 +83,8 @@ export class ScoreHandler {
         this.scoreFont = scoreFont;
         this.currentColor = color;
         this.currentScore = gameLoadData.score;
+        this.scoreSinceBase = gameLoadData.score;
+        this.scoreSinceSatellite = gameLoadData.score;
         this.scoreMaterial = new MeshLambertMaterial( {color: color || 0x084E70} );
         this.createText();
     }
@@ -76,6 +94,17 @@ export class ScoreHandler {
      */
     addPoints(points: number): void {
         this.currentScore += points;
+        this.scoreSinceBase += points;
+        this.scoreSinceSatellite += points;
+        if (this.scoreSinceBase >= 50000) {
+            this.scoreSinceBase -= 50000;
+            this.regenBase = true;
+            this.scoreSinceSatellite = 0;
+        }
+        if (!this.regenBase && this.scoreSinceSatellite >= 25000) {
+            this.scoreSinceSatellite -= 25000;
+            this.regenSat = true;
+        }
         if (this.score && this.score.visible) {
             this.changeScore();
         }
@@ -173,6 +202,16 @@ export class ScoreHandler {
      */
     getScore(): number {
         return this.currentScore;
+    }
+    /**
+     * Returns regeneration bonuses if there are any and resets the flags.
+     * @returns bonus object containing last known regeneration rewards.
+     */
+    getBonuses(): { base: boolean; sat: boolean; } {
+        const bonus = { base: this.regenBase, sat: this.regenSat };
+        this.regenBase = false;
+        this.regenSat = false;
+        return bonus;
     }
     /**
      * Only recreate the digits with the new color

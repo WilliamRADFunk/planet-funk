@@ -153,4 +153,13 @@ export class Base implements Collidable{
     isPassive(): boolean {
         return true;
     }
+    /**
+     * Regenerates a dead base
+     */
+    regenerate(): void {
+        this.isActive = true;
+        this.building.visible = true;
+        this.buildingDead.visible = false;
+        CollisionatorSingleton.add(this);
+    }
 }

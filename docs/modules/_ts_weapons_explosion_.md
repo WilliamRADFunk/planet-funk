@@ -22,7 +22,7 @@
 
 **● index**: *`number`* = 0
 
-*Defined in [ts/weapons/explosion.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/e4c30d1/src/ts/weapons/explosion.ts#L7)*
+*Defined in [ts/weapons/explosion.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/weapons/explosion.ts#L7)*
 
 Static index to help name one explosion differenly than another.
 

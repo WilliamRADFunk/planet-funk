@@ -222,7 +222,7 @@ export class Planet implements Collidable {
     /**
      * At the end of each loop iteration, satellite regains a little energy.
      */
-    endCycle(): void {
+    endCycle(bonus?: { base: boolean; sat: boolean; }): void {
         this.rotate();
         for (let i = 0; i < this.satellites.length; i++) {
             this.satellites[i].endCycle();
@@ -243,6 +243,33 @@ export class Planet implements Collidable {
                 // Game over...Blow 'em up!
                 for (let i = 0; i < this.satellites.length; i++) {
                     this.satellites[i].impact(this.satellites[i]);
+                }
+            } else if (bonus) {
+                // Determine if any satellites or bases should be rasied from the ashes.
+                let baseRegen = bonus.base;
+                let satRegen = bonus.sat;
+                if (baseRegen) {
+                    [this.quadrant1, this.quadrant2, this.quadrant3, this.quadrant4].some( (q, i) => {
+                        if (!q) {
+                            [this.base1, this.base2, this.base3, this.base4][i].regenerate();
+                            baseRegen = false;
+                            satRegen = false;
+                            return true;
+                        }
+                    });
+                }
+                if (satRegen || baseRegen) {
+                    [
+                        this.satellite1.getActive(),
+                        this.satellite2.getActive(),
+                        this.satellite3.getActive(),
+                        this.satellite4.getActive()
+                    ].some( (s, i) => {
+                        if (!s) {
+                            [this.satellite1, this.satellite2, this.satellite3, this.satellite4][i].regenerate();
+                            return true;
+                        }
+                    });
                 }
             }
         }

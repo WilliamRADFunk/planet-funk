@@ -147,7 +147,7 @@ export class Satellite implements Collidable {
         this.satelliteContainer.add(this.satelliteBody);
         // Depending on load data, this satellite might already be dead.
         this.isActive = !!startAlive;
-        if (!startAlive) (this.satelliteBody.material as any).color.setHex(0x333333);
+        if (!startAlive) this.satelliteBodyMaterial.color = new Color(0x333333);
         this.satelliteEnergy.visible = !!startAlive;
     }
     /**
@@ -263,7 +263,7 @@ export class Satellite implements Collidable {
     impact(self: Collidable): boolean {
         if (this.isActive) {
             this.isActive = false;
-            (this.satelliteBody.material as any).color.setHex(0x333333);
+            this.satelliteBodyMaterial.color = new Color(0x333333);
             this.satelliteEnergy.visible = false;
         }
         return false;
@@ -274,6 +274,15 @@ export class Satellite implements Collidable {
      */
     isPassive(): boolean {
         return true;
+    }
+    /**
+     * Regenerates a dead satellite
+     */
+    regenerate(): void {
+        this.isActive = true;
+        this.satelliteEnergy.visible = true;
+        this.satelliteBodyMaterial.color = colorArray[this.index-1];
+        CollisionatorSingleton.add(this);
     }
     /**
      * Changes the size and color of the energy bar.

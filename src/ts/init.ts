@@ -544,7 +544,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
             noAsteroids = asteroidGenerator.endCycle(isGameLive);
             noSaucers = saucerGenerator.endCycle(isGameLive);
             noMissiles = enemyMissileGenerator.endCycle(isGameLive);
-            planet.endCycle();
+            planet.endCycle(scoreboard.getBonuses());
             shield.endCycle(planet.getPowerRegenRate());
             // Game is still live but there are no more enemy missiles or asteroids.
             // Increase the level and refresh everything.
