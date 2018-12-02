@@ -17,6 +17,7 @@ import {
     Camera} from 'three';
 
 import { CollisionatorSingleton } from './collisionator';
+import { SoundinatorSingleton } from './soundinator';
 import { Planet } from './player/planet';
 import { Shield } from './player/shield';
 import { AsteroidGenerator } from './asteroids/asteroid-generator';

@@ -34,7 +34,7 @@ Mandatory structure of the decoded game state data for save and load.
 
 **● b1**: *`number`*
 
-*Defined in [ts/models/game-load-data.ts:5](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/models/game-load-data.ts#L5)*
+*Defined in [ts/models/game-load-data.ts:5](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/models/game-load-data.ts#L5)*
 
 ___
 <a id="b2"></a>
@@ -43,7 +43,7 @@ ___
 
 **● b2**: *`number`*
 
-*Defined in [ts/models/game-load-data.ts:6](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/models/game-load-data.ts#L6)*
+*Defined in [ts/models/game-load-data.ts:6](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/models/game-load-data.ts#L6)*
 
 ___
 <a id="b3"></a>
@@ -52,7 +52,7 @@ ___
 
 **● b3**: *`number`*
 
-*Defined in [ts/models/game-load-data.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/models/game-load-data.ts#L7)*
+*Defined in [ts/models/game-load-data.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/models/game-load-data.ts#L7)*
 
 ___
 <a id="b4"></a>
@@ -61,7 +61,7 @@ ___
 
 **● b4**: *`number`*
 
-*Defined in [ts/models/game-load-data.ts:8](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/models/game-load-data.ts#L8)*
+*Defined in [ts/models/game-load-data.ts:8](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/models/game-load-data.ts#L8)*
 
 ___
 <a id="difficulty"></a>
@@ -70,7 +70,7 @@ ___
 
 **● difficulty**: *`number`*
 
-*Defined in [ts/models/game-load-data.ts:9](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/models/game-load-data.ts#L9)*
+*Defined in [ts/models/game-load-data.ts:9](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/models/game-load-data.ts#L9)*
 
 ___
 <a id="level"></a>
@@ -79,7 +79,7 @@ ___
 
 **● level**: *`number`*
 
-*Defined in [ts/models/game-load-data.ts:10](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/models/game-load-data.ts#L10)*
+*Defined in [ts/models/game-load-data.ts:10](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/models/game-load-data.ts#L10)*
 
 ___
 <a id="sat1"></a>
@@ -88,7 +88,7 @@ ___
 
 **● sat1**: *`number`*
 
-*Defined in [ts/models/game-load-data.ts:11](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/models/game-load-data.ts#L11)*
+*Defined in [ts/models/game-load-data.ts:11](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/models/game-load-data.ts#L11)*
 
 ___
 <a id="sat2"></a>
@@ -97,7 +97,7 @@ ___
 
 **● sat2**: *`number`*
 
-*Defined in [ts/models/game-load-data.ts:12](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/models/game-load-data.ts#L12)*
+*Defined in [ts/models/game-load-data.ts:12](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/models/game-load-data.ts#L12)*
 
 ___
 <a id="sat3"></a>
@@ -106,7 +106,7 @@ ___
 
 **● sat3**: *`number`*
 
-*Defined in [ts/models/game-load-data.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/models/game-load-data.ts#L13)*
+*Defined in [ts/models/game-load-data.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/models/game-load-data.ts#L13)*
 
 ___
 <a id="sat4"></a>
@@ -115,7 +115,7 @@ ___
 
 **● sat4**: *`number`*
 
-*Defined in [ts/models/game-load-data.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/models/game-load-data.ts#L14)*
+*Defined in [ts/models/game-load-data.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/models/game-load-data.ts#L14)*
 
 ___
 <a id="score"></a>
@@ -124,7 +124,7 @@ ___
 
 **● score**: *`number`*
 
-*Defined in [ts/models/game-load-data.ts:15](https://github.com/WilliamRADFunk/planet-funk/blob/a2fe6bc/src/ts/models/game-load-data.ts#L15)*
+*Defined in [ts/models/game-load-data.ts:15](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/models/game-load-data.ts#L15)*
 
 ___
 

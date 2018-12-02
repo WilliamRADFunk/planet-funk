@@ -143,6 +143,8 @@ Make sure you aren't importing a capitalized version of the name (ie. `import { 
 * ["ts/player/planet"](modules/_ts_player_planet_.md)
 * ["ts/player/satellite"](modules/_ts_player_satellite_.md)
 * ["ts/player/shield"](modules/_ts_player_shield_.md)
+* ["ts/sound"](modules/_ts_sound_.md)
+* ["ts/soundinator"](modules/_ts_soundinator_.md)
 * ["ts/utils/check-color-brightness"](modules/_ts_utils_check_color_brightness_.md)
 * ["ts/utils/convert-to-hex"](modules/_ts_utils_convert_to_hex_.md)
 * ["ts/utils/convert-to-int"](modules/_ts_utils_convert_to_int_.md)
