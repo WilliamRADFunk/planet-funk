@@ -9,6 +9,7 @@ import {
 import { Projectile } from '../weapons/projectile';
 import { Collidable } from '../collidable';
 import { CollisionatorSingleton } from '../collisionator';
+import { SoundinatorSingleton } from '../soundinator';
 /**
  * Makes instatiateing the satellite's color by index easier and cleaner to read.
  */
@@ -198,6 +199,7 @@ export class Satellite implements Collidable {
                 this.currentDistance,
                 colorArray[this.index-1]));
             CollisionatorSingleton.add(this.missiles[this.missiles.length - 1]);
+            SoundinatorSingleton.playFire();
         }
     }
     /**
@@ -265,6 +267,7 @@ export class Satellite implements Collidable {
             this.isActive = false;
             this.satelliteBodyMaterial.color = new Color(0x333333);
             this.satelliteEnergy.visible = false;
+            SoundinatorSingleton.playBoom();
         }
         return false;
     }

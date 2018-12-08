@@ -9,6 +9,7 @@ import {
 import { Collidable } from '../collidable';
 import { CollisionatorSingleton } from '../collisionator';
 import { Explosion } from '../weapons/explosion';
+import { SoundinatorSingleton } from '../soundinator';
 
 let index: number = 0;
 
@@ -125,7 +126,12 @@ export class Asteroid implements Collidable {
      */
     private createExplosion(isInert: boolean): void {
         this.explosion = new Explosion(this.scene, this.asteroid.position.x, this.asteroid.position.z, 0.2, isInert);
-        if (!isInert) CollisionatorSingleton.add(this.explosion);
+        if (!isInert) {
+            CollisionatorSingleton.add(this.explosion);
+            SoundinatorSingleton.playBoom(false);
+        } else {
+            SoundinatorSingleton.playBoom(true);
+        }
     }
     /**
      * At the end of each loop iteration, move the asteroid a little.

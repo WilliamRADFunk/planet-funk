@@ -70,7 +70,6 @@ export class Explosion implements Collidable {
         this.explosion.rotation.set(-1.5708, 0, 0);
         this.explosion.name = `explosion-${index}`;
         this.scene.add(this.explosion);
-        SoundinatorSingleton.playBoom(renderedInert);
     }
     /**
      * At the end of each loop iteration, expand or contract the explosion a little.

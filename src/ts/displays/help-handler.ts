@@ -351,8 +351,8 @@ export class HelpHandler {
         this.building.visible = true;
         this.drone.visible = true;
         this.headMesh.visible = true;
-        this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), false, 0.02, -11.5);
-        this.saucerExample = new Saucer(this.scene, this.saucerTextures, -6, this.zSpot - 3.8, 13, this.zSpot - 3.8, 19, 0.001, -11.9, true);
+        this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), true, 0.02, -11.5, 1);
+        this.saucerExample = new Saucer(this.scene, this.saucerTextures, -6, this.zSpot - 3.8, 13, this.zSpot - 3.8, 19, 0.001, -11.9, true, true);
         this.saucerExample.addToScene();
         this.mouse.visible = true;
         this.return.visible = true;
@@ -380,7 +380,7 @@ export class HelpHandler {
         this.shields.push(new Shield([-4.28, -20, 4.1], 0.6));
         this.shields[1].addToScene(this.scene);
         setTimeout(() => {
-            this.shields[1].activate();
+            this.shields[1].activate(true);
         }, 101);
     }
     /**
@@ -423,7 +423,7 @@ export class HelpHandler {
     endCycle(): void {
         if (!this.missileExample1.endCycle()) {
             this.missileExample1.removeFromScene(this.scene);
-            this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), false, 0.02, -11.5);
+            this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), true, 0.02, -11.5, 1);
         }
         // Saucer movement, possible drone creation, and possible drone elimination.
         this.saucerExample.endCycle();
@@ -450,9 +450,9 @@ export class HelpHandler {
         }
         // Planetary rotation.
         this.planet.endCycle();
-        this.shields.forEach(s => s.endCycle(1));
+        this.shields.forEach((s, i) => s.endCycle(1, true)); // Index 0, !0 = true gives sound to large shield power down.
         if (!this.shields[1].getActive() && this.shields[1].getEnergyLevel() >= 500) {
-            this.shields[1].activate();
+            this.shields[1].activate(true);
         }
     }
     /**
@@ -481,7 +481,7 @@ export class HelpHandler {
         this.scene.add(section);
         this.sections.push(section);
 
-        this.saucerExample = new Saucer(this.scene, this.saucerTextures, -6, this.zSpot - 3.8, 13, this.zSpot - 3.8, 19, 0.001, -11.9, true);
+        this.saucerExample = new Saucer(this.scene, this.saucerTextures, -6, this.zSpot - 3.8, 13, this.zSpot - 3.8, 19, 0.001, -11.9, true, true);
         this.saucerExample.addToScene();
 
         let textGeo = new TextGeometry('Saucers Drop Drones...', this.textHeaderParams);
@@ -673,7 +673,7 @@ export class HelpHandler {
         this.scene.add(text);
         this.texts.push(text);
         // The missile and its built in animation
-        this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), false, 0.02, -11.5);
+        this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), true, 0.02, -11.5, 1);
         // The square bulk of the satellite
         const satelliteBody = new Mesh(sbg, sbm);
         // The little fins on the sides of the satellite.

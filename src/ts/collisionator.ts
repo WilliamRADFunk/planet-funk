@@ -81,7 +81,6 @@ class Collisionator {
                     (posJ[1] - posI[1]) * (posJ[1] - posI[1])
                 );
                 if (radI + radJ > dist) {
-                    // console.log('Boom!', entityI.getName(), entityJ.getName());
                     if (entityI.impact(entityI, entityJ.getName()) &&
                     typeof entityI.removeFromScene === 'function') {
                         entityI.removeFromScene(scene);

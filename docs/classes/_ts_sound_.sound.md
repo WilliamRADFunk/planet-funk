@@ -10,12 +10,13 @@
 
 ### Properties
 
-* [isPlaying](_ts_sound_.sound.md#isplaying)
+* [muffledVolume](_ts_sound_.sound.md#muffledvolume)
+* [normalVolume](_ts_sound_.sound.md#normalvolume)
+* [offset](_ts_sound_.sound.md#offset)
 * [sound](_ts_sound_.sound.md#sound)
 
 ### Methods
 
-* [getIsPlaying](_ts_sound_.sound.md#getisplaying)
 * [play](_ts_sound_.sound.md#play)
 * [stop](_ts_sound_.sound.md#stop)
 
@@ -23,24 +24,46 @@
 
 ## Properties
 
-<a id="isplaying"></a>
+<a id="muffledvolume"></a>
 
-### `<Private>` isPlaying
+### `<Private>` muffledVolume
 
-**● isPlaying**: *`boolean`* = false
+**● muffledVolume**: *`number`*
 
-*Defined in [ts/sound.ts:5](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/sound.ts#L5)*
+*Defined in [ts/sound.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/sound.ts#L7)*
 
-Tracks whether or not this sound is actively playing.
+The volume to use for the sound when muffled is passed in.
+
+___
+<a id="normalvolume"></a>
+
+### `<Private>` normalVolume
+
+**● normalVolume**: *`number`*
+
+*Defined in [ts/sound.ts:11](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/sound.ts#L11)*
+
+The volume to use for the sound when conditions are normal.
+
+___
+<a id="offset"></a>
+
+### `<Private>` offset
+
+**● offset**: *`number`*
+
+*Defined in [ts/sound.ts:15](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/sound.ts#L15)*
+
+The offset that best suites the audio clip as many have dead space in the beginning.
 
 ___
 <a id="sound"></a>
 
 ### `<Private>` sound
 
-**● sound**: *`any`*
+**● sound**: *`Audio`*
 
-*Defined in [ts/sound.ts:9](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/sound.ts#L9)*
+*Defined in [ts/sound.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/sound.ts#L19)*
 
 Audio clip belonging to this sound.
 
@@ -48,29 +71,21 @@ ___
 
 ## Methods
 
-<a id="getisplaying"></a>
-
-###  getIsPlaying
-
-▸ **getIsPlaying**(): `boolean`
-
-*Defined in [ts/sound.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/sound.ts#L19)*
-
-Getter for whether sound is actively playing or not.
-
-**Returns:** `boolean`
-TRUE --> Clip is actively playing | FALSE --> Clip is not playing.
-
-___
 <a id="play"></a>
 
 ###  play
 
-▸ **play**(): `void`
+▸ **play**(muffled?: *`boolean`*): `void`
 
-*Defined in [ts/sound.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/sound.ts#L25)*
+*Defined in [ts/sound.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/sound.ts#L37)*
 
 Activate the clip.
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| `Optional` muffled | `boolean` |
 
 **Returns:** `void`
 
@@ -81,7 +96,7 @@ ___
 
 ▸ **stop**(): `void`
 
-*Defined in [ts/sound.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/sound.ts#L31)*
+*Defined in [ts/sound.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/sound.ts#L46)*
 
 Stops the clip.
 

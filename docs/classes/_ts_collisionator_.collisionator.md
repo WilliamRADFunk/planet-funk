@@ -30,7 +30,7 @@
 
 **● collisionItems**: *[Collidable](../interfaces/_ts_collidable_.collidable.md)[]* =  []
 
-*Defined in [ts/collisionator.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/collisionator.ts#L13)*
+*Defined in [ts/collisionator.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/collisionator.ts#L13)*
 
 Registered list of things that can are collidable.
 
@@ -44,7 +44,7 @@ ___
 
 ▸ **add**(collidable: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*): `void`
 
-*Defined in [ts/collisionator.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/collisionator.ts#L23)*
+*Defined in [ts/collisionator.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/collisionator.ts#L23)*
 
 Adds a collidable object to the list.
 
@@ -63,7 +63,7 @@ ___
 
 ▸ **checkForCollisions**(scene: *`Scene`*): `void`
 
-*Defined in [ts/collisionator.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/collisionator.ts#L30)*
+*Defined in [ts/collisionator.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/collisionator.ts#L30)*
 
 Check for collisions between two or more object, and signal them to impact.
 
@@ -82,7 +82,7 @@ ___
 
 ▸ **remove**(collidable: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*): `void`
 
-*Defined in [ts/collisionator.ts:101](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/collisionator.ts#L101)*
+*Defined in [ts/collisionator.ts:100](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/collisionator.ts#L100)*
 
 Removes a collidable object to the list.
 

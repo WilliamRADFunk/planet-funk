@@ -9,6 +9,7 @@ import {
 import { Collidable } from "../collidable";
 import { Explosion } from '../weapons/explosion';
 import { CollisionatorSingleton } from '../collisionator';
+import { SoundinatorSingleton } from '../soundinator';
 
 let index: number = 0;
 
@@ -34,6 +35,10 @@ export class Saucer implements Collidable {
      * True = not destroyed. False = destroyed.
      */
     private isActive: boolean = true;
+    /**
+     * Optional constructor param that determines if saucer is on help screen. If so, don't play sounds.
+     */
+    private isHelpSaucer: boolean = false;
     /**
      * Keeps track of the x,z point where saucer fired from.
      */
@@ -73,15 +78,16 @@ export class Saucer implements Collidable {
     private yPos: number;
     /**
      * Constructor for the Saucer class
-     * @param scene     graphic rendering scene object. Used each iteration to redraw things contained in scene.
-     * @param x1         origin point x of where the saucer starts.
-     * @param z1         origin point z of where the saucer starts.
-     * @param x2         final point x of where the saucer starts.
-     * @param z2         final point z of where the saucer starts.
-     * @param dist       total distance the saucer must travel.
-     * @param speedMod   speed modifier at time of saucer instantiation.
-     * @param yPos       layer level for saucer to appear.
-     * @param fireNow    optional choice not to wait to have saucer start moving.
+     * @param scene        graphic rendering scene object. Used each iteration to redraw things contained in scene.
+     * @param x1           origin point x of where the saucer starts.
+     * @param z1           origin point z of where the saucer starts.
+     * @param x2           final point x of where the saucer starts.
+     * @param z2           final point z of where the saucer starts.
+     * @param dist         total distance the saucer must travel.
+     * @param speedMod     speed modifier at time of saucer instantiation.
+     * @param yPos         layer level for saucer to appear.
+     * @param fireNow      optional choice not to wait to have saucer start moving.
+     * @param isHelpScreen lets saucer know it's a help screen iteration and not to play sound effects.
      * @hidden
      */
     constructor(
@@ -94,7 +100,8 @@ export class Saucer implements Collidable {
         dist: number,
         speedMod: number,
         yPos?: number,
-        fireNow?: boolean) {
+        fireNow?: boolean,
+        isHelpScreen?: boolean) {
         index++;
         this.yPos = yPos || 0.6;
         this.speed += (speedMod / 1000);
@@ -103,6 +110,7 @@ export class Saucer implements Collidable {
         this.endingPoint = [x2, z2];
         this.totalDistance = dist;
         this.distanceTraveled = 0;
+        this.isHelpSaucer = isHelpScreen;
         // Calculates the first (second vertices) point.
         this.calculateNextPoint();
 
@@ -157,7 +165,12 @@ export class Saucer implements Collidable {
      */
     private createExplosion(isInert: boolean): void {
         this.explosion = new Explosion(this.scene, this.saucer.position.x, this.saucer.position.z, 0.4, isInert);
-        if (!isInert) CollisionatorSingleton.add(this.explosion);
+        if (!isInert) {
+            CollisionatorSingleton.add(this.explosion);
+            SoundinatorSingleton.playBoom(false);
+        } else {
+            SoundinatorSingleton.playBoom(true);
+        }
     }
     /**
      * Call to eliminate regardless of current state.
@@ -187,6 +200,9 @@ export class Saucer implements Collidable {
         }
         if (this.waitToFire) {
             this.waitToFire--;
+            if (!this.waitToFire && !this.isHelpSaucer) {
+                SoundinatorSingleton.playSaucer();
+            }
             return true;
         }
         if (this.isActive) {
@@ -233,6 +249,7 @@ export class Saucer implements Collidable {
         if (this.isActive) {
             this.isActive = false;
             this.createExplosion(!otherThing.indexOf('Shield'));
+            SoundinatorSingleton.stopSaucer();
             return true;
         }
         return false;

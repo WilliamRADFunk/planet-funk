@@ -22,7 +22,7 @@
 
 **● index**: *`number`* = 0
 
-*Defined in [ts/enemies/saucer.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/enemies/saucer.ts#L13)*
+*Defined in [ts/enemies/saucer.ts:14](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/enemies/saucer.ts#L14)*
 
 ___
 

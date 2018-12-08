@@ -8,6 +8,7 @@ import {
     TextGeometryParameters } from 'three';
 import { GameLoadData } from '../models/game-load-data';
 import { CheckColorBrighness } from '../utils/check-color-brightness';
+import { SoundinatorSingleton } from '../soundinator';
 
 const randomColor = require('randomcolor');
 /**
@@ -207,6 +208,7 @@ export class LevelHandler {
     endGame(): void {
         this.useLevelBanner = false;
         this.isLevelAnimating = true;
+        SoundinatorSingleton.playGameOver();
     }
     /**
      * Returns the current level's color'.

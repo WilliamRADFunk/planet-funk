@@ -10,6 +10,7 @@ import {
 
 import { Collidable } from '../collidable';
 import { CollisionatorSingleton } from '../collisionator';
+import { SoundinatorSingleton } from '../soundinator';
 /**
  * Makes instatiateing the base's position by index easier and cleaner to read.
  */
@@ -143,6 +144,7 @@ export class Base implements Collidable{
             this.building.visible = false;
             this.buildingDead.visible = true;
             CollisionatorSingleton.remove(self);
+            SoundinatorSingleton.playBaseLost();
         }
         return false;
     }

@@ -22,7 +22,7 @@
 
 **● SoundinatorSingleton**: *[Soundinator](../classes/_ts_soundinator_.soundinator.md)* =  new Soundinator()
 
-*Defined in [ts/soundinator.ts:42](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/soundinator.ts#L42)*
+*Defined in [ts/soundinator.ts:191](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/soundinator.ts#L191)*
 
 ___
 

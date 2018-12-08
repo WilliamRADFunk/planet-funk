@@ -5,6 +5,7 @@ import { CollisionatorSingleton } from '../collisionator';
 import { ScoreHandler } from '../displays/score-handler';
 import { GameLoadData } from '../models/game-load-data';
 import { Drone } from '../weapons/drone';
+import { SoundinatorSingleton } from '../soundinator';
 
 const saucerStartingPositions: number[][] = [
     [-10, -3], // Left Upper
@@ -141,6 +142,7 @@ export class SaucerGenerator {
                         sPos[1] > -4 && 4 > sPos[1] &&
                         Math.random() < 0.01 && this.lastDropped <= 0) {
                         const drone = new Drone(this.scene, this.scoreboard, sPos[0], sPos[1], 10);
+                        SoundinatorSingleton.playDrone();
                         drone.addToScene();
                         CollisionatorSingleton.add(drone);
                         this.drones.push(drone);

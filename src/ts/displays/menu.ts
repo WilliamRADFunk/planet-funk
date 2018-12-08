@@ -15,6 +15,7 @@ import {
 import { HelpHandler } from './help-handler';
 import { LoadHandler } from './load-handler';
 import { GameLoadData } from '../models/game-load-data';
+import { SoundinatorSingleton } from '../soundinator';
 
 /**
  * @class
@@ -45,6 +46,14 @@ export class Menu {
      * Click surface for the Normal button.
      */
     private barrierNormal: Mesh;
+    /**
+     * Click surface for the Off button.
+     */
+    private barrierOff: Mesh;
+    /**
+     * Click surface for the On button.
+     */
+    private barrierOn: Mesh;
     /**
      * Click surface for the Start button.
      */
@@ -157,6 +166,22 @@ export class Menu {
      */
     private normalGeometry: TextGeometry;
     /**
+     * Controls the overall rendering of the off button display
+     */
+    private off: Mesh;
+    /**
+     * Controls size and shape of the off button text
+     */
+    private offGeometry: TextGeometry;
+    /**
+     * Controls the overall rendering of the on button display
+     */
+    private on: Mesh;
+    /**
+     * Controls size and shape of the on button text
+     */
+    private onGeometry: TextGeometry;
+    /**
      * The distant dim light that allows the shimmer effect to happen.
      */
     private pointLight: PointLight;
@@ -168,6 +193,10 @@ export class Menu {
      * Controls the light that give the text its shine.
      */
     private shimmer: PointLight;
+    /**
+     * Controls the overall rendering of the Sound text display
+     */
+    private sound: Mesh;
     /**
      * Controls the overall rendering of the start button display
      */
@@ -268,6 +297,20 @@ export class Menu {
         this.barrierHelp.position.set(0, 0, 2);
         this.barrierHelp.rotation.set(1.5708, 0, 0);
         this.scene.add(this.barrierHelp);
+        // Create the sound off collision layer
+        const offBarrierGeometry = new PlaneGeometry( 1, 0.8, 0, 0 );
+        this.barrierOff = new Mesh( offBarrierGeometry, this.clickMaterial );
+        this.barrierOff.name = 'Off';
+        this.barrierOff.position.set(1.2, 0, 3);
+        this.barrierOff.rotation.set(1.5708, 0, 0);
+        this.scene.add(this.barrierOff);
+        // Create the sound on collision layer
+        const onBarrierGeometry = new PlaneGeometry( 0.9, 0.8, 0, 0 );
+        this.barrierOn = new Mesh( onBarrierGeometry, this.clickMaterial );
+        this.barrierOn.name = 'On';
+        this.barrierOn.position.set(0, 0, 3);
+        this.barrierOn.rotation.set(1.5708, 0, 0);
+        this.scene.add(this.barrierOn);
         // Main Banner button text
         this.mainBannerGeometry = new TextGeometry(`Planet Funk`,
             {
@@ -329,6 +372,29 @@ export class Menu {
 
         this.helpHandler = new HelpHandler(this.scene, this.menuFont, saucerTextures, asteroidTexture, buildingTextures, specMap, planetTextures);
         this.loadHandler = new LoadHandler(this.scene, this.menuFont);
+
+        // Sound text
+        const soundGeometry = new TextGeometry(`Sound: `, this.fontDifficultyBtnParams);
+        this.sound = new Mesh( soundGeometry, this.menuMaterial );
+        this.sound.position.set(-2.3, -0.5, 3.2);
+        this.sound.rotation.x = -1.5708;
+        this.scene.add(this.sound);
+        // On button text
+        this.onGeometry = new TextGeometry(`ON`, this.fontDifficultyBtnParams);
+        this.on = new Mesh(
+            this.onGeometry,
+            SoundinatorSingleton.getMute() ? this.menuMaterial : this.menuSelectedMaterial);
+        this.on.position.set(-0.3, -0.5, 3.2);
+        this.on.rotation.x = -1.5708;
+        this.scene.add(this.on);
+        // Off button text
+        this.offGeometry = new TextGeometry(`OFF`, this.fontDifficultyBtnParams);
+        this.off = new Mesh(
+            this.offGeometry,
+            SoundinatorSingleton.getMute() ? this.menuSelectedMaterial : this.menuMaterial);
+        this.off.position.set(0.8, -0.5, 3.2);
+        this.off.rotation.x = -1.5708;
+        this.scene.add(this.off);
     }
     /**
      * Activates the specific shield in the help screen display.
@@ -434,6 +500,7 @@ export class Menu {
         } else {
             if (this.helpLight) {
                 this.scene.remove(this.helpLight);
+                this.helpLight = null;
             }
             if (this.shimmer.position.x > 20) {
                 this.shimmer.position.x = -20;
@@ -470,12 +537,17 @@ export class Menu {
         this.hardcore.visible = false;
         this.load.visible = false;
         this.help.visible = false;
+        this.sound.visible = false;
+        this.on.visible = false;
+        this.off.visible = false;
         this.barrierEasy.visible = false;
         this.barrierHard.visible = false;
         this.barrierHardcore.visible = false;
         this.barrierHelp.visible = false;
         this.barrierLoad.visible = false;
         this.barrierNormal.visible = false;
+        this.barrierOff.visible = false;
+        this.barrierOn.visible = false;
         this.barrierStart.visible = false;
     }
     /**
@@ -514,6 +586,46 @@ export class Menu {
             this.hideMenu();
             this.loadHandler.activate();
         }, 250);
+    }
+    /**
+     * Turns sound off.
+     * Changes the off menu button text when clicked to signal to user that their click worked.
+     */
+    pressedOff(): void {
+        this.scene.remove(this.off);
+        this.scene.remove(this.on);
+        // Selected off button text
+        this.off = new Mesh( this.offGeometry, this.menuSelectedMaterial );
+        this.off.position.set(0.8, -0.5, 3.2);
+        this.off.rotation.x = -1.5708;
+        this.scene.add(this.off);
+        // Selected on button text
+        this.on = new Mesh( this.onGeometry, this.menuMaterial );
+        this.on.position.set(-0.3, -0.5, 3.2);
+        this.on.rotation.x = -1.5708;
+        this.scene.add(this.on);
+        SoundinatorSingleton.playClick();
+        SoundinatorSingleton.toggleMute(true);
+    }
+    /**
+     * Turns sound on.
+     * Changes the on menu button text when clicked to signal to user that their click worked.
+     */
+    pressedOn(): void {
+        this.scene.remove(this.off);
+        this.scene.remove(this.on);
+        // Selected off button text
+        this.off = new Mesh( this.offGeometry, this.menuMaterial );
+        this.off.position.set(0.8, -0.5, 3.2);
+        this.off.rotation.x = -1.5708;
+        this.scene.add(this.off);
+        // Selected on button text
+        this.on = new Mesh( this.onGeometry, this.menuSelectedMaterial );
+        this.on.position.set(-0.3, -0.5, 3.2);
+        this.on.rotation.x = -1.5708;
+        this.scene.add(this.on);
+        SoundinatorSingleton.toggleMute(false);
+        SoundinatorSingleton.playClick();
     }
     /**
      * Changes the start menu button text when clicked to signal to user that their click worked.
@@ -577,12 +689,17 @@ export class Menu {
         this.hardcore.visible = true;
         this.load.visible = true;
         this.help.visible = true;
+        this.sound.visible = true;
+        this.on.visible = true;
+        this.off.visible = true;
         this.barrierEasy.visible = true;
         this.barrierHard.visible = true;
         this.barrierHardcore.visible = true;
         this.barrierHelp.visible = true;
         this.barrierLoad.visible = true;
         this.barrierNormal.visible = true;
+        this.barrierOff.visible = true;
+        this.barrierOn.visible = true;
         this.barrierStart.visible = true;
     }
     /**

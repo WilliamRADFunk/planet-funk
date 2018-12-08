@@ -6,6 +6,7 @@ import { CollisionatorSingleton } from '../collisionator';
 import { Projectile } from "./projectile";
 import { CheckColorBrighness } from '../utils/check-color-brightness';
 import { ScoreHandler } from "../displays/score-handler";
+import { SoundinatorSingleton } from "../soundinator";
 
 const randomColor = require('randomcolor');
 
@@ -154,7 +155,12 @@ export class Drone implements Collidable {
      */
     private createExplosion(isInert: boolean): void {
         this.explosion = new Explosion(this.scene, this.drone.position.x, this.drone.position.z, 0.2, isInert);
-        if (!isInert) CollisionatorSingleton.add(this.explosion);
+        if (!isInert) {
+            CollisionatorSingleton.add(this.explosion);
+            SoundinatorSingleton.playBoom(false);
+        } else {
+            SoundinatorSingleton.playBoom(true);
+        }
     }
     /**
      * Call to eliminate regardless of current state.

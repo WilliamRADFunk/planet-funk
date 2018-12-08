@@ -1,5 +1,9 @@
 import {
     AmbientLight,
+    Audio,
+    AudioBuffer,
+    AudioListener,
+    AudioLoader,
     CanvasRenderer,
     DoubleSide,
     Font,
@@ -40,6 +44,10 @@ const asteroidLoader = new TextureLoader();
  * The loaded texture, used for the asteroids.
  */
 let asteroidTexture: Texture;
+/**
+ * The thing that hears sound.
+ */
+const audioListener: AudioListener = new AudioListener();
 /**
  * Loads the graphics for buildings.
  */
@@ -108,6 +116,100 @@ const saucerTextures: Texture[] = [];
  */
 let sceneMenu: Scene;
 /**
+ * Sound file paths
+ */
+const soundPaths: string[] = [
+    /**
+     * Bomb Exploding Sound
+     * http://soundbible.com/1986-Bomb-Exploding.html
+     * license: Attribution 3.0
+     * Recorded by: Sound Explorer
+     */
+    'assets/audio/boom.mp3',
+    /**
+     * Click On Sound
+     * http://soundbible.com/1280-Click-On.html
+     * license: Attribution 3.0
+     * Recorded by: Mike Koenig 
+     */
+    'assets/audio/click.mp3',
+    /**
+    * Tank Firing Sound
+    * http://soundbible.com/1326-Tank-Firing.html
+    * license: Attribution 3.0
+    * Recorded by: snottyboy 
+    */
+    'assets/audio/fire.mp3',
+    /**
+    * Metroid Door Sound
+    * http://soundbible.com/1858-Metroid-Door.html
+    * license: Attribution 3.0
+    * Recorded by: Brandino480
+    */
+    'assets/audio/shield-down.mp3',
+    /**
+    * Power Up Ray Sound
+    * http://soundbible.com/1636-Power-Up-Ray.html
+    * license: Noncommercial 3.0
+    * Recorded by: Mike Koenig
+    */
+    'assets/audio/shield-up.mp3',
+    /**
+    * Strange Noise Sound
+    * http://soundbible.com/1636-Power-Up-Ray.html
+    * license: Noncommercial 3.0
+    * Recorded by: Mike Koenig
+    */
+    'assets/audio/saucer.mp3',
+    /**
+    * Beep Ping Sound
+    * http://soundbible.com/1133-Beep-Ping.html
+    * license: Attribution 3.0
+    * Recorded by: Mike Koenig
+    */
+    'assets/audio/drone.mp3',
+    /**
+    * Ta Da Sound
+    * http://soundbible.com/1003-Ta-Da.html
+    * license: Attribution 3.0
+    * Recorded by: Mike Koenig
+    */
+    'assets/audio/regen.mp3',
+    /**
+    * Gunfire In Crowd Sound
+    * http://soundbible.com/1608-Gunfire-In-Crowd.html
+    * license: Public Domain
+    * Recorded by: KevanGC
+    */
+    'assets/audio/base-lost.mp3',
+    /**
+    * Beam Me Up Scotty Sound
+    * http://soundbible.com/256-Beam-Me-Up-Scotty.html
+    * license: Personal Use Only
+    * Recorded by: N/A
+    */
+    'assets/audio/game-over.mp3'
+];
+/**
+ * Loads the audio files.
+ */
+const soundLoaders: AudioLoader[] = [
+    new AudioLoader(),
+    new AudioLoader(),
+    new AudioLoader(),
+    new AudioLoader(),
+    new AudioLoader(),
+    new AudioLoader(),
+    new AudioLoader(),
+    new AudioLoader(),
+    new AudioLoader(),
+    new AudioLoader()
+];
+/**
+ * List of loaded audio files.
+ */
+const sounds: Audio[] = [];
+/**
  * Loads the graphics for specMap.
  */
 const specMapLoader = new TextureLoader();
@@ -120,6 +222,7 @@ let specMap: Texture;
  * each fitted with their chance to check if all others are done.
  */
 const loadAssets = () => {
+    SoundinatorSingleton.addListener(audioListener);
     // Callback function to set the asteroid texture once it is finished loading.
     asteroidLoader.load( 'assets/images/asteroid.png', texture => {
         asteroidTexture = texture;
@@ -164,6 +267,22 @@ const loadAssets = () => {
         specMap = texture;
         checkAssetsLoaded();
     });
+    // Get the ball rolling on each of the sound file loads.
+    soundLoaders.forEach((loader, index) => {
+        soundLoaders[index].load(
+            soundPaths[index],
+            (soundBuffer: AudioBuffer) => {
+                const sound = (new Audio(audioListener)).setBuffer(soundBuffer);
+                sound.setLoop(false);
+                sounds[index] = sound;
+                checkAssetsLoaded();
+            },
+            (xhr: { loaded: number; total: number;}) => {
+                console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+            },
+            (error: string) => console.log(`Failed to load (${soundPaths[index].split('/').pop()}) sound file`, error)
+        );
+    });
 };
 /**
  * Checks to see if all assets are finished loaded. If so, start rendering the game.
@@ -172,7 +291,9 @@ const checkAssetsLoaded = () => {
     if (gameFont && asteroidTexture && specMap &&
         buildingTextures.length === buildingLoaders.length &&
         saucerTextures.length === saucerLoaders.length &&
-        planetTextures.length === planetLoaders.length) {
+        planetTextures.length === planetLoaders.length &&
+        sounds.filter(s => s).length === soundLoaders.length) {
+        SoundinatorSingleton.addSounds(sounds);
         loadMenu();
     }
 };
@@ -190,8 +311,6 @@ const loadMenu = () => {
     (rendererMenu as any).setClearColor(0x000000, 0);
     rendererMenu.setSize( WIDTH, HEIGHT );
     rendererMenu.autoClear = false;
-    // An all around brightish light that hits everything equally.
-    // sceneMenu.add(new AmbientLight(0xCCCCCC));
     // Render to the html container.
     const container = document.getElementById('mainview');
 	container.appendChild( (rendererMenu as any).domElement );
@@ -199,6 +318,7 @@ const loadMenu = () => {
     cameraMenu =  new OrthographicCamera( -6, 6, -6, 6, 0, 100 );
 	cameraMenu.position.set(0, -20, 0);
     cameraMenu.lookAt(sceneMenu.position);
+    cameraMenu.add(audioListener);
     /**
      * Gracefully handles a change in window size, by recalculating shape and updating cameraMenu and rendererMenu.
      */
@@ -214,7 +334,7 @@ const loadMenu = () => {
     };
     onWindowResize();
     window.addEventListener( 'resize', onWindowResize, false);
-    // Click event listener that turns shield on or off if player clicks on planet. Fire weapon otherwise.
+    // Click event listener that activates certain menu options.
     const raycaster = new Raycaster();
     document.onclick = event => {
         const mouse = new Vector2();
@@ -241,6 +361,8 @@ const loadMenu = () => {
                     container.removeChild( (rendererMenu as any).domElement );
                     loadGame(difficulty);
                 }, 750);
+                SoundinatorSingleton.playClick();
+                return;
             } else if (el.object.name === 'Load Code') {
                 setTimeout(() => {
                     isMenuMode = false;
@@ -248,27 +370,54 @@ const loadMenu = () => {
                     container.removeChild( (rendererMenu as any).domElement );
                     loadGame(menu.getDifficulty(), menu.getGameData());
                 }, 250);
+                SoundinatorSingleton.playClick();
+                return;
             } else if (el.object.name === 'Easy') {
                 menu.changeDifficulty(0);
+                SoundinatorSingleton.playClick();
+                return;
             } else if (el.object.name === 'Normal') {
                 menu.changeDifficulty(1);
+                SoundinatorSingleton.playClick();
+                return;
             } else if (el.object.name === 'Hard') {
                 menu.changeDifficulty(2);
+                SoundinatorSingleton.playClick();
+                return;
             } else if (el.object.name === 'Hardcore') {
                 menu.changeDifficulty(3);
+                SoundinatorSingleton.playClick();
+                return;
             } else if (el.object.name === 'Load') {
                 menu.pressedLoad();
+                SoundinatorSingleton.playClick();
+                return;
             } else if (el.object.name === 'Help') {
                 menu.pressedHelp();
+                SoundinatorSingleton.playClick();
+                return;
+            } else if (el.object.name === 'On') {
+                menu.pressedOn();
+                return;
+            } else if (el.object.name === 'Off') {
+                menu.pressedOff();
+                return;
             } else if (el.object.name === 'Return Help') {
                 menu.returnToMainMenu();
+                SoundinatorSingleton.playClick();
+                return;
             } else if (el.object.name === 'Return Load') {
                 menu.returnToMainMenu();
+                SoundinatorSingleton.playClick();
+                return;
             } else if (el.object.name === 'Help Shield') {
                 menu.toggleHelpShield();
+                return;
             } else if (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
                 .some(test => test === el.object.name)) {
                 menu.charEntered(el.object.name);
+                SoundinatorSingleton.playClick();
+                return;
             }
         });
     };
@@ -324,6 +473,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
     const camera =  new OrthographicCamera( -6, 6, -6, 6, 0, 100 );
 	camera.position.set(0, -20, 0);
     camera.lookAt(scene.position);
+    camera.add(audioListener);
     /**
      * Gracefully handles a change in window size, by recalculating shape and updating camera and renderer.
      */
@@ -394,6 +544,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
                 }
                 controlPanel.pauseChange();
                 launchFlag = false;
+                SoundinatorSingleton.playClick();
                 return;
             }
             if (el.object.name === 'Help Button') {
@@ -405,6 +556,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
                     helpHandler.deactivate();
                 }
                 launchFlag = false;
+                SoundinatorSingleton.playClick();
                 return;
             }
             if (el.object.name === 'Exit Button') {
@@ -413,6 +565,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
                 helpHandler.deactivate();
                 controlPanel.exitChange();
                 launchFlag = false;
+                SoundinatorSingleton.playClick();
                 return;
             }
             if (el.object.name === 'Return Help') {
@@ -421,6 +574,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
                     helpHandler.deactivate();
                 }
                 launchFlag = false;
+                SoundinatorSingleton.playClick();
                 return;
             }
             if (el.object.name === 'Return Save') {
@@ -429,6 +583,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
                     saveHandler.deactivate();
                 }
                 launchFlag = false;
+                SoundinatorSingleton.playClick();
                 return;
             }
             if (el.object.name === 'Save Button') {
@@ -440,6 +595,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
                     saveHandler.deactivate();
                 }
                 launchFlag = false;
+                SoundinatorSingleton.playClick();
                 return;
             }
             if (el.object.name === 'Help Shield') {

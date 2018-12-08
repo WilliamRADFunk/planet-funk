@@ -13,6 +13,7 @@ import { Base } from './base';
 import { Collidable } from '../collidable';
 import { CollisionatorSingleton } from '../collisionator';
 import { GameLoadData } from '../models/game-load-data';
+import { SoundinatorSingleton } from '../soundinator';
 /**
  * Simple type to represent status of all four populated areas. Cumulatively equals player's health.
  */
@@ -254,6 +255,7 @@ export class Planet implements Collidable {
                             [this.base1, this.base2, this.base3, this.base4][i].regenerate();
                             baseRegen = false;
                             satRegen = false;
+                            SoundinatorSingleton.playRegen();
                             return true;
                         }
                     });
@@ -267,6 +269,7 @@ export class Planet implements Collidable {
                     ].some( (s, i) => {
                         if (!s) {
                             [this.satellite1, this.satellite2, this.satellite3, this.satellite4][i].regenerate();
+                            SoundinatorSingleton.playRegen();
                             return true;
                         }
                     });

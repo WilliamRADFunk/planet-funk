@@ -35,7 +35,7 @@
 
 **● exitArrowMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/controls/control-exit.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/controls/control-exit.ts#L28)*
+*Defined in [ts/controls/control-exit.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-exit.ts#L28)*
 
 Material for the arrow portion of the button.
 
@@ -46,7 +46,7 @@ ___
 
 **● exitButton**: *`Mesh`*
 
-*Defined in [ts/controls/control-exit.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/controls/control-exit.ts#L24)*
+*Defined in [ts/controls/control-exit.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-exit.ts#L24)*
 
 Mesh for the exit button.
 
@@ -57,7 +57,7 @@ ___
 
 **● exitButtonBorderMaterial**: *`LineBasicMaterial`*
 
-*Defined in [ts/controls/control-exit.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/controls/control-exit.ts#L32)*
+*Defined in [ts/controls/control-exit.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-exit.ts#L32)*
 
 Controls the exit button's border material.
 
@@ -71,7 +71,7 @@ ___
 
 ▸ **activate**(): `void`
 
-*Defined in [ts/controls/control-exit.ts:114](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/controls/control-exit.ts#L114)*
+*Defined in [ts/controls/control-exit.ts:114](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-exit.ts#L114)*
 
 Makes necessary changes to exit button when exit mode is activated.
 
@@ -84,7 +84,7 @@ ___
 
 ▸ **changeColor**(color: *`Color`*): `void`
 
-*Defined in [ts/controls/control-exit.ts:121](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/controls/control-exit.ts#L121)*
+*Defined in [ts/controls/control-exit.ts:121](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-exit.ts#L121)*
 
 Changes button material to match new level color.
 
@@ -103,7 +103,7 @@ ___
 
 ▸ **changeOpacity**(opacity: *`number`*): `void`
 
-*Defined in [ts/controls/control-exit.ts:129](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/controls/control-exit.ts#L129)*
+*Defined in [ts/controls/control-exit.ts:129](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-exit.ts#L129)*
 
 Changes button opacity.
 
@@ -122,7 +122,7 @@ ___
 
 ▸ **deactivate**(): `void`
 
-*Defined in [ts/controls/control-exit.ts:136](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/controls/control-exit.ts#L136)*
+*Defined in [ts/controls/control-exit.ts:136](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-exit.ts#L136)*
 
 Makes necessary changes to exit button when exit mode is deactivated.
 
@@ -135,7 +135,7 @@ ___
 
 ▸ **hide**(): `void`
 
-*Defined in [ts/controls/control-exit.ts:143](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/controls/control-exit.ts#L143)*
+*Defined in [ts/controls/control-exit.ts:143](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-exit.ts#L143)*
 
 Hide the exit button (state related). Default is to show.
 
@@ -148,7 +148,7 @@ ___
 
 ▸ **show**(): `void`
 
-*Defined in [ts/controls/control-exit.ts:150](https://github.com/WilliamRADFunk/planet-funk/blob/b15270a/src/ts/controls/control-exit.ts#L150)*
+*Defined in [ts/controls/control-exit.ts:150](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-exit.ts#L150)*
 
 Show the exit button (state related). Default is to show.
 

@@ -192,7 +192,6 @@ export class SaveHandler {
      * @param hex digits that form game state save code.
      */
     showSaveCode(code: string[]): void {
-        console.log(code);
         code.forEach((c, i) => {
             const charIndex = (c.charCodeAt(0) < 58) ? Number(c) : (c.charCodeAt(0) - 55); // 0-9 : A-F
             const char = new Mesh( this.digits[charIndex], this.saveMaterial );

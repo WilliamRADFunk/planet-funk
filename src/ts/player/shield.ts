@@ -10,6 +10,7 @@ import {
     TextureLoader } from 'three';
 
 import { Collidable } from '../collidable';
+import { SoundinatorSingleton } from '../soundinator';
 /**
  * @class
  * Transluscent shield that helps protect player's unit (planet)
@@ -93,11 +94,13 @@ export class Shield implements Collidable {
     }
     /**
      * If shield is down, and player has enough energy, this turns the shield on.
+     * @param initial if first time activating don't play sound.
      */
-    activate(): void {
+    activate(initial?: boolean): void {
         if (!this.isActive && this.energyLevel > 349) {
             this.isActive = true;
             this.shieldMaterial.opacity = 0.65;
+            if (!initial) SoundinatorSingleton.playShieldUp();
         }
     }
     /**
@@ -108,16 +111,18 @@ export class Shield implements Collidable {
         scene.add(this.energyBars);
         scene.add(this.shield);
         setTimeout(() => {
-            this.activate();
-            this.deactivate();
+            this.activate(true);
+            this.deactivate(true);
         }, 100);
     }
     /**
      * If shield is up, this turns the shield off.
+     * @param initial if first time deactivating don't play sound.
      */
-    deactivate(): void {
+    deactivate(initial?: boolean): void {
         if (this.isActive) {
             this.shieldMaterial.opacity = 0;
+            if (!initial) SoundinatorSingleton.playShieldDown();
         }
         this.isActive = false;
     }
@@ -133,8 +138,9 @@ export class Shield implements Collidable {
      * At the end of each loop iteration, planet expends energy if the shield is up,
      * and regains it by a percentage depending on how many planet quadrant are intact.
      * @param percentRecharge 0, 0.25, 0.5, 0.75, 1 to be multipled against shield energy recharge amount
+     * @param isHelpShield TRUE --> shield is in help menu | (FALSE | NULL | Undefined) --> normal game shield
      */
-    endCycle(percentRecharge: number): void {
+    endCycle(percentRecharge: number, isHelpShield?: boolean): void {
         // Add or substrat energy depending on state of shield.
         if (!this.isActive) {
             this.energyLevel += percentRecharge;
@@ -151,7 +157,7 @@ export class Shield implements Collidable {
         this.updateEnergyBars();
         // When energy level drops to nill, lower the shield.
         if (this.energyLevel <= 0) {
-            this.deactivate();
+            this.deactivate(isHelpShield);
         }
     }
     /**

@@ -12,6 +12,7 @@ import {
 import { Collidable } from '../collidable';
 import { Explosion } from './explosion';
 import { CollisionatorSingleton } from '../collisionator';
+import { SoundinatorSingleton } from '../soundinator';
 /**
  * Static index to help name one projectile differenly than another.
  */
@@ -184,6 +185,7 @@ export class Projectile implements Collidable {
     private createExplosion(isInert: boolean): void {
         this.explosion = new Explosion(this.scene, this.headMesh.position.x, this.headMesh.position.z, 0.12, isInert, this.headY + 0.26);
         if (!isInert) CollisionatorSingleton.add(this.explosion);
+        if (!this.isEnemyMissile) SoundinatorSingleton.playBoom(false);
     }
     /**
      * Call to eliminate regardless of current state.
@@ -278,7 +280,9 @@ export class Projectile implements Collidable {
     impact(self: Collidable, otherThing: string): boolean {
         if (this.isActive) {
             this.isActive = false;
-            this.createExplosion(!otherThing.indexOf('Shield'));
+            const shieldHit = !otherThing.indexOf('Shield');
+            shieldHit ? SoundinatorSingleton.playBoom(true) : SoundinatorSingleton.playBoom(false);
+            this.createExplosion(shieldHit);
             return true;
         }
         return false;
