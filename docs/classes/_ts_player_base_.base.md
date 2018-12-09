@@ -46,7 +46,7 @@
 
 **● building**: *`Mesh`*
 
-*Defined in [ts/player/base.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L47)*
+*Defined in [ts/player/base.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L47)*
 
 Controls the overall rendering of the base
 
@@ -57,7 +57,7 @@ ___
 
 **● buildingDead**: *`Mesh`*
 
-*Defined in [ts/player/base.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L51)*
+*Defined in [ts/player/base.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L51)*
 
 Controls the overall rendering of the destroyed base
 
@@ -68,7 +68,7 @@ ___
 
 **● buildingDeadGeometry**: *`BoxGeometry`*
 
-*Defined in [ts/player/base.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L35)*
+*Defined in [ts/player/base.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L35)*
 
 Controls size and shape of the destroyed base
 
@@ -79,7 +79,7 @@ ___
 
 **● buildingDeadMaterial**: *`MeshPhongMaterial`*
 
-*Defined in [ts/player/base.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L43)*
+*Defined in [ts/player/base.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L43)*
 
 Controls the color of the destroyed base material
 
@@ -90,7 +90,7 @@ ___
 
 **● buildingGeometry**: *`BoxGeometry`*
 
-*Defined in [ts/player/base.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L31)*
+*Defined in [ts/player/base.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L31)*
 
 Controls size and shape of the base
 
@@ -101,7 +101,7 @@ ___
 
 **● buildingMaterial**: *`MeshPhongMaterial`*
 
-*Defined in [ts/player/base.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L39)*
+*Defined in [ts/player/base.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L39)*
 
 Controls the color of the base material
 
@@ -112,7 +112,7 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in [ts/player/base.ts:55](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L55)*
+*Defined in [ts/player/base.ts:55](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L55)*
 
 Flag to signal if base has been destroyed or not. True = not destroyed. False = destroyed.
 
@@ -126,7 +126,7 @@ ___
 
 ▸ **endCycle**(): `void`
 
-*Defined in [ts/player/base.ts:98](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L98)*
+*Defined in [ts/player/base.ts:98](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L98)*
 
 At the end of each loop iteration, base updates planet's known rotation.
 
@@ -139,7 +139,7 @@ ___
 
 ▸ **getActive**(): `boolean`
 
-*Defined in [ts/player/base.ts:103](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L103)*
+*Defined in [ts/player/base.ts:103](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L103)*
 
 Gets the viability of the base.
 
@@ -153,7 +153,7 @@ ___
 
 ▸ **getCollisionRadius**(): `number`
 
-*Defined in [ts/player/base.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L110)*
+*Defined in [ts/player/base.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L110)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 
@@ -167,7 +167,7 @@ ___
 
 ▸ **getCurrentPosition**(): `number`[]
 
-*Defined in [ts/player/base.ts:117](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L117)*
+*Defined in [ts/player/base.ts:117](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L117)*
 
 Gets the current position of the base.
 
@@ -181,7 +181,7 @@ ___
 
 ▸ **getMeshes**(): `Mesh`[]
 
-*Defined in [ts/player/base.ts:126](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L126)*
+*Defined in [ts/player/base.ts:126](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L126)*
 
 Provides the created mesh so it can be added to the mesh of a parent object like the planet.
 
@@ -195,7 +195,7 @@ ___
 
 ▸ **getName**(): `string`
 
-*Defined in [ts/player/base.ts:133](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L133)*
+*Defined in [ts/player/base.ts:133](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L133)*
 
 Gets the name of the base.
 
@@ -209,7 +209,7 @@ ___
 
 ▸ **impact**(self: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*): `boolean`
 
-*Defined in [ts/player/base.ts:141](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L141)*
+*Defined in [ts/player/base.ts:141](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L141)*
 
 Called when something collides with base, which destroys it.
 
@@ -229,7 +229,7 @@ ___
 
 ▸ **isPassive**(): `boolean`
 
-*Defined in [ts/player/base.ts:155](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L155)*
+*Defined in [ts/player/base.ts:155](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L155)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 
@@ -243,7 +243,7 @@ ___
 
 ▸ **regenerate**(): `void`
 
-*Defined in [ts/player/base.ts:161](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/player/base.ts#L161)*
+*Defined in [ts/player/base.ts:161](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/player/base.ts#L161)*
 
 Regenerates a dead base
 

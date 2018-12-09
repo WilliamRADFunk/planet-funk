@@ -162,6 +162,40 @@ class Soundinator {
         this.shieldUp.play();
     }
     /**
+     * Pauses all the sound clips where they are.
+     */
+    pauseSound(): void {
+        if (!this.isMute) {
+            this.boom.pause();
+            this.click.pause();
+            this.fire.pause();
+            this.shieldDown.pause();
+            this.shieldUp.pause();
+            this.saucer.pause();
+            this.drone.pause();
+            this.regen.pause();
+            this.baseLost.pause();
+            this.gameOver.pause();
+        }
+    }
+    /**
+     * Resumes all the sound clips that were paused.
+     */
+    resumeSound(): void {
+        if (!this.isMute) {
+            this.boom.resume();
+            this.click.resume();
+            this.fire.resume();
+            this.shieldDown.resume();
+            this.shieldUp.resume();
+            this.saucer.resume();
+            this.drone.resume();
+            this.regen.resume();
+            this.baseLost.resume();
+            this.gameOver.resume();
+        }
+    }
+    /**
      * Stops the saucer is coming sound.
      */
     stopSaucer(): void {

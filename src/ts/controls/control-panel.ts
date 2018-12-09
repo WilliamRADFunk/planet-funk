@@ -346,8 +346,7 @@ export class ControlPanel {
         if (this.pause) {
             this.controlPlay.show();
             this.controlPause.hide();
-            SoundinatorSingleton.toggleMute(true);
-            this.mute = true;
+            SoundinatorSingleton.pauseSound();
             return;
         }
         this.resume();
@@ -363,8 +362,7 @@ export class ControlPanel {
         this.pause = false;
         this.controlPlay.hide();
         this.controlPause.show();
-        SoundinatorSingleton.toggleMute(false);
-        this.mute = false;
+        SoundinatorSingleton.resumeSound();
     }
     /**
      * Alerts control panel that save button has been clicked by user.
