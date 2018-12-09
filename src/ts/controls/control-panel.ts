@@ -13,6 +13,9 @@ import { ControlPlay } from "./control-play";
 import { ControlHelp } from "./control-help";
 import { ControlSave } from "./control-save";
 import { ControlExit } from "./control-exit";
+import { ControlMute } from "./control-mute";
+import { ControlSound } from "./control-sound";
+import { SoundinatorSingleton } from "../soundinator";
 /**
  * A constant size / position modifier to shrink or expand the entire panel symmetrically from one variable.
  */
@@ -35,6 +38,10 @@ export class ControlPanel {
      */
     private controlHelp: ControlHelp;
     /**
+     * Controls the mute button.
+     */
+    private controlMute: ControlMute;
+    /**
      * Controls the pause button.
      */
     private controlPause: ControlPause;
@@ -47,6 +54,10 @@ export class ControlPanel {
      */
     private controlSave: ControlSave;
     /**
+     * Controls the sound button.
+     */
+    private controlSound: ControlSound;
+    /**
      * Keeps track of level's current color
      */
     private currentColor: Color;
@@ -55,13 +66,17 @@ export class ControlPanel {
      */
     private difficulty: number;
     /**
+     * Tracks state of game exiting.
+     */
+    private exit: boolean = false;
+    /**
      * Tracks state of game help menu.
      */
     private help: boolean = false;
     /**
-     * Tracks state of game exiting.
+     * Tracks state of sound muting.
      */
-    private exit: boolean = false;
+    private mute: boolean = false;
     /**
      * Line mesh for border of entire panel.
      */
@@ -110,8 +125,8 @@ export class ControlPanel {
         const panelBorderGeometry = new Geometry();
         panelBorderGeometry.vertices.push(
             new Vector3(x, 0, z),
-            new Vector3(x + (5.25 * BUTTON_SIZE), 0, z),
-            new Vector3(x + (5.25 * BUTTON_SIZE), 0, z + (1.5 * BUTTON_SIZE)),
+            new Vector3(x + (6.5625 * BUTTON_SIZE), 0, z),
+            new Vector3(x + (6.5625 * BUTTON_SIZE), 0, z + (1.5 * BUTTON_SIZE)),
             new Vector3(x, 0, z + (1.5 * BUTTON_SIZE)),
             new Vector3(x, 0, z));
         this.panelBorderMaterial = new LineBasicMaterial({
@@ -160,11 +175,28 @@ export class ControlPanel {
             this.currentColor,
             clickMaterial);
         //
+        // Mute Button
+        //
+        this.controlMute = new ControlMute(
+            this.scene,
+            [x + (3.75 * BUTTON_SIZE), z],
+            BUTTON_SIZE,
+            this.currentColor,
+            clickMaterial);
+        //
+        // Sound Button
+        //
+        this.controlSound = new ControlSound(
+            this.scene,
+            [x + (3.75 * BUTTON_SIZE), z],
+            BUTTON_SIZE,
+            this.currentColor);
+        //
         // Exit Button
         //
         this.controlExit = new ControlExit(
             this.scene,
-            [x + (3.75 * BUTTON_SIZE), 1, z],
+            [x + (5 * BUTTON_SIZE), 1, z],
             BUTTON_SIZE,
             this.currentColor,
             clickMaterial);
@@ -179,6 +211,13 @@ export class ControlPanel {
             this.controlSave.changeOpacity(0.5);
         }
         this.controlPlay.hide();
+        if (SoundinatorSingleton.getMute()) {
+            this.controlSound.hide();
+            this.mute = true;
+        } else {
+            this.controlMute.hide();
+            this.mute = false;
+        }
     }
     /**
      * At the end of each loop iteration, control panel is told to hide or not.
@@ -190,6 +229,8 @@ export class ControlPanel {
             this.controlPlay.hide();
             this.controlHelp.hide();
             this.controlSave.hide();
+            this.controlMute.hide();
+            this.controlSound.hide();
             this.controlExit.hide();
             this.panelBorder.visible = false;
             return;
@@ -200,6 +241,10 @@ export class ControlPanel {
      */
     exitChange() {
         this.exit = true;
+        if (!this.mute) {
+            SoundinatorSingleton.toggleMute(true);
+            SoundinatorSingleton.toggleMute(false);
+        }
     }
     /**
      * Alerts control panel that help button has been clicked by user.
@@ -212,6 +257,21 @@ export class ControlPanel {
         if (this.help) {
             this.controlHelp.activate();
             this.pauseChange();
+        }
+    }
+    /**
+     * Alerts control panel that mute button has been clicked by user.
+     */
+    muteChange(): void {
+        SoundinatorSingleton.toggleMute(!this.mute);
+        SoundinatorSingleton.playClick();
+        this.mute = !this.mute;
+        if (this.mute) {
+            this.controlSound.hide();
+            this.controlMute.show();
+        } else {
+            this.controlSound.show();
+            this.controlMute.hide();
         }
     }
     /**
@@ -266,6 +326,13 @@ export class ControlPanel {
         this.controlHelp.show();
         this.controlSave.changeColor(this.currentColor);
         this.controlSave.show();
+        this.controlMute.changeColor(this.currentColor);
+        this.controlSound.changeColor(this.currentColor);
+        if (this.mute) {
+            this.controlMute.show();
+        } else {
+            this.controlSound.show();
+        }
         this.controlExit.changeColor(this.currentColor);
         this.controlExit.show();
         this.panelBorder.visible = true;
@@ -279,6 +346,8 @@ export class ControlPanel {
         if (this.pause) {
             this.controlPlay.show();
             this.controlPause.hide();
+            SoundinatorSingleton.toggleMute(true);
+            this.mute = true;
             return;
         }
         this.resume();
@@ -294,6 +363,8 @@ export class ControlPanel {
         this.pause = false;
         this.controlPlay.hide();
         this.controlPause.show();
+        SoundinatorSingleton.toggleMute(false);
+        this.mute = false;
     }
     /**
      * Alerts control panel that save button has been clicked by user.

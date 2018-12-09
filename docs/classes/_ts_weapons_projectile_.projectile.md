@@ -62,7 +62,7 @@
 
 **● color**: *`Color`*
 
-*Defined in [ts/weapons/projectile.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L28)*
+*Defined in [ts/weapons/projectile.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L28)*
 
 Holds tail color.
 
@@ -73,7 +73,7 @@ ___
 
 **● currentPoint**: *`number`[]*
 
-*Defined in [ts/weapons/projectile.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L32)*
+*Defined in [ts/weapons/projectile.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L32)*
 
 Keeps track of the x,z point the missile is at currently.
 
@@ -84,7 +84,7 @@ ___
 
 **● distanceTraveled**: *`number`*
 
-*Defined in [ts/weapons/projectile.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L36)*
+*Defined in [ts/weapons/projectile.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L36)*
 
 Tracks the distance traveled thus far to update the calculateNextPoint calculation.
 
@@ -95,7 +95,7 @@ ___
 
 **● endingPoint**: *`number`[]*
 
-*Defined in [ts/weapons/projectile.ts:40](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L40)*
+*Defined in [ts/weapons/projectile.ts:40](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L40)*
 
 Keeps track of the x,z point of player's click point.
 
@@ -106,7 +106,7 @@ ___
 
 **● explosion**: *[Explosion](_ts_weapons_explosion_.explosion.md)*
 
-*Defined in [ts/weapons/projectile.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L44)*
+*Defined in [ts/weapons/projectile.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L44)*
 
 Explosion from impacted missile
 
@@ -117,7 +117,7 @@ ___
 
 **● headGeometry**: *`CircleGeometry`*
 
-*Defined in [ts/weapons/projectile.ts:48](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L48)*
+*Defined in [ts/weapons/projectile.ts:48](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L48)*
 
 Controls size and shape of the missile's glowing head.
 
@@ -128,7 +128,7 @@ ___
 
 **● headMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/weapons/projectile.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L52)*
+*Defined in [ts/weapons/projectile.ts:52](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L52)*
 
 Controls the color of the missile's glowing head material.
 
@@ -139,7 +139,7 @@ ___
 
 **● headMesh**: *`Mesh`*
 
-*Defined in [ts/weapons/projectile.ts:56](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L56)*
+*Defined in [ts/weapons/projectile.ts:56](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L56)*
 
 Controls the overall rendering of the glowing head.
 
@@ -150,7 +150,7 @@ ___
 
 **● headY**: *`number`*
 
-*Defined in [ts/weapons/projectile.ts:60](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L60)*
+*Defined in [ts/weapons/projectile.ts:60](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L60)*
 
 Allows for a variable y value in head of missile
 
@@ -161,7 +161,7 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in [ts/weapons/projectile.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L65)*
+*Defined in [ts/weapons/projectile.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L65)*
 
 Flag to signal if the missile has been destroyed. True is not destroyed. False is destroyed.
 
@@ -172,7 +172,7 @@ ___
 
 **● isCollidable**: *`boolean`* = false
 
-*Defined in [ts/weapons/projectile.ts:70](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L70)*
+*Defined in [ts/weapons/projectile.ts:70](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L70)*
 
 Flag to signal if the missile can be considered for collisions. True is collidable. False is not collidable.
 
@@ -183,7 +183,7 @@ ___
 
 **● isEnemyMissile**: *`boolean`*
 
-*Defined in [ts/weapons/projectile.ts:74](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L74)*
+*Defined in [ts/weapons/projectile.ts:74](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L74)*
 
 Flag to determine enemy allegiance of missile.
 
@@ -194,7 +194,7 @@ ___
 
 **● originalStartingPoint**: *`number`[]*
 
-*Defined in [ts/weapons/projectile.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L78)*
+*Defined in [ts/weapons/projectile.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L78)*
 
 Keeps track of the x,z point where missile fired from.
 
@@ -205,7 +205,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/weapons/projectile.ts:82](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L82)*
+*Defined in [ts/weapons/projectile.ts:82](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L82)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -216,7 +216,7 @@ ___
 
 **● speed**: *`number`* = 0.03
 
-*Defined in [ts/weapons/projectile.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L86)*
+*Defined in [ts/weapons/projectile.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L86)*
 
 The speed at which the missile travels.
 
@@ -227,7 +227,7 @@ ___
 
 **● tailGeometry**: *`Geometry`*
 
-*Defined in [ts/weapons/projectile.ts:90](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L90)*
+*Defined in [ts/weapons/projectile.ts:90](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L90)*
 
 Controls size and shape of the missile's fiery trail.
 
@@ -238,7 +238,7 @@ ___
 
 **● tailMaterial**: *`LineBasicMaterial`*
 
-*Defined in [ts/weapons/projectile.ts:94](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L94)*
+*Defined in [ts/weapons/projectile.ts:94](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L94)*
 
 Controls the color of the missile's fiery trail material.
 
@@ -249,7 +249,7 @@ ___
 
 **● tailMesh**: *`Line`*
 
-*Defined in [ts/weapons/projectile.ts:98](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L98)*
+*Defined in [ts/weapons/projectile.ts:98](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L98)*
 
 Controls the overall rendering of the missile's fiery trail.
 
@@ -260,7 +260,7 @@ ___
 
 **● tailY**: *`number`*
 
-*Defined in [ts/weapons/projectile.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L102)*
+*Defined in [ts/weapons/projectile.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L102)*
 
 Allows for a variable y value in tail of missile
 
@@ -271,7 +271,7 @@ ___
 
 **● totalDistance**: *`number`*
 
-*Defined in [ts/weapons/projectile.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L106)*
+*Defined in [ts/weapons/projectile.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L106)*
 
 The total distance from satellite to player's click point.
 
@@ -282,7 +282,7 @@ ___
 
 **● waitToFire**: *`number`* = 0
 
-*Defined in [ts/weapons/projectile.ts:111](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L111)*
+*Defined in [ts/weapons/projectile.ts:111](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L111)*
 
 The wait number of iterations before loosing the enemy missile. Prevents new level creation from throwing all missiles at once.
 
@@ -296,7 +296,7 @@ ___
 
 ▸ **calculateNextPoint**(): `void`
 
-*Defined in [ts/weapons/projectile.ts:174](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L174)*
+*Defined in [ts/weapons/projectile.ts:174](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L174)*
 
 Calculates the next point in the missile's path.
 
@@ -309,7 +309,7 @@ ___
 
 ▸ **createExplosion**(isInert: *`boolean`*): `void`
 
-*Defined in [ts/weapons/projectile.ts:185](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L185)*
+*Defined in [ts/weapons/projectile.ts:185](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L185)*
 
 Creates an explosion during collision and adds it to the collidables list.
 
@@ -328,7 +328,7 @@ ___
 
 ▸ **destroy**(): `void`
 
-*Defined in [ts/weapons/projectile.ts:194](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L194)*
+*Defined in [ts/weapons/projectile.ts:194](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L194)*
 
 Call to eliminate regardless of current state. Mainly used for non-game instantiations of this (ie. help screen animations).
 
@@ -341,7 +341,7 @@ ___
 
 ▸ **endCycle**(): `boolean`
 
-*Defined in [ts/weapons/projectile.ts:206](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L206)*
+*Defined in [ts/weapons/projectile.ts:206](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L206)*
 
 At the end of each loop iteration, move the projectile a little.
 
@@ -355,7 +355,7 @@ ___
 
 ▸ **getActive**(): `boolean`
 
-*Defined in [ts/weapons/projectile.ts:250](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L250)*
+*Defined in [ts/weapons/projectile.ts:250](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L250)*
 
 Gets the viability of the explosive blast head.
 
@@ -369,7 +369,7 @@ ___
 
 ▸ **getCollisionRadius**(): `number`
 
-*Defined in [ts/weapons/projectile.ts:257](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L257)*
+*Defined in [ts/weapons/projectile.ts:257](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L257)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 
@@ -383,7 +383,7 @@ ___
 
 ▸ **getCurrentPosition**(): `number`[]
 
-*Defined in [ts/weapons/projectile.ts:264](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L264)*
+*Defined in [ts/weapons/projectile.ts:264](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L264)*
 
 Gets the current position of the explosive blast head.
 
@@ -397,7 +397,7 @@ ___
 
 ▸ **getName**(): `string`
 
-*Defined in [ts/weapons/projectile.ts:271](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L271)*
+*Defined in [ts/weapons/projectile.ts:271](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L271)*
 
 Gets the name of the missile.
 
@@ -411,7 +411,7 @@ ___
 
 ▸ **impact**(self: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*, otherThing: *`string`*): `boolean`
 
-*Defined in [ts/weapons/projectile.ts:280](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L280)*
+*Defined in [ts/weapons/projectile.ts:280](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L280)*
 
 Called when something collides with projectile blast radius, which does nothing unless it hasn't exploded yet.
 
@@ -432,7 +432,7 @@ ___
 
 ▸ **isPassive**(): `boolean`
 
-*Defined in [ts/weapons/projectile.ts:294](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L294)*
+*Defined in [ts/weapons/projectile.ts:294](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L294)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 
@@ -446,7 +446,7 @@ ___
 
 ▸ **removeFromScene**(scene: *`Scene`*): `void`
 
-*Defined in [ts/weapons/projectile.ts:301](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/weapons/projectile.ts#L301)*
+*Defined in [ts/weapons/projectile.ts:301](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/weapons/projectile.ts#L301)*
 
 Removes missile object from the 'visible' scene by removing non-explosion parts from scene.
 

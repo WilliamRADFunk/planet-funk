@@ -30,7 +30,7 @@
 
 **● muffledVolume**: *`number`*
 
-*Defined in [ts/sound.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/sound.ts#L7)*
+*Defined in [ts/sound.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/sound.ts#L7)*
 
 The volume to use for the sound when muffled is passed in.
 
@@ -41,7 +41,7 @@ ___
 
 **● normalVolume**: *`number`*
 
-*Defined in [ts/sound.ts:11](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/sound.ts#L11)*
+*Defined in [ts/sound.ts:11](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/sound.ts#L11)*
 
 The volume to use for the sound when conditions are normal.
 
@@ -52,7 +52,7 @@ ___
 
 **● offset**: *`number`*
 
-*Defined in [ts/sound.ts:15](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/sound.ts#L15)*
+*Defined in [ts/sound.ts:15](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/sound.ts#L15)*
 
 The offset that best suites the audio clip as many have dead space in the beginning.
 
@@ -63,7 +63,7 @@ ___
 
 **● sound**: *`Audio`*
 
-*Defined in [ts/sound.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/sound.ts#L19)*
+*Defined in [ts/sound.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/sound.ts#L19)*
 
 Audio clip belonging to this sound.
 
@@ -77,7 +77,7 @@ ___
 
 ▸ **play**(muffled?: *`boolean`*): `void`
 
-*Defined in [ts/sound.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/sound.ts#L37)*
+*Defined in [ts/sound.ts:37](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/sound.ts#L37)*
 
 Activate the clip.
 
@@ -96,7 +96,7 @@ ___
 
 ▸ **stop**(): `void`
 
-*Defined in [ts/sound.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/sound.ts#L46)*
+*Defined in [ts/sound.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/sound.ts#L46)*
 
 Stops the clip.
 

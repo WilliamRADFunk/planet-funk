@@ -18,7 +18,7 @@
 
 ▸ **CheckColorBrighness**(colorHex: *`string`*): `boolean`
 
-*Defined in [ts/utils/check-color-brightness.ts:6](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/utils/check-color-brightness.ts#L6)*
+*Defined in [ts/utils/check-color-brightness.ts:6](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/utils/check-color-brightness.ts#L6)*
 
 Makes sure hex is a valid color string.
 

@@ -32,7 +32,7 @@
 
 **● playButton**: *`Mesh`*
 
-*Defined in [ts/controls/control-play.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-play.ts#L21)*
+*Defined in [ts/controls/control-play.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/controls/control-play.ts#L21)*
 
 Mesh for the play button.
 
@@ -43,7 +43,7 @@ ___
 
 **● playButtonBorderMaterial**: *`LineBasicMaterial`*
 
-*Defined in [ts/controls/control-play.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-play.ts#L25)*
+*Defined in [ts/controls/control-play.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/controls/control-play.ts#L25)*
 
 Controls the play button's border material.
 
@@ -57,7 +57,7 @@ ___
 
 ▸ **changeColor**(color: *`Color`*): `void`
 
-*Defined in [ts/controls/control-play.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-play.ts#L78)*
+*Defined in [ts/controls/control-play.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/controls/control-play.ts#L78)*
 
 Changes button material to match new level color.
 
@@ -76,7 +76,7 @@ ___
 
 ▸ **changeOpacity**(opacity: *`number`*): `void`
 
-*Defined in [ts/controls/control-play.ts:85](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-play.ts#L85)*
+*Defined in [ts/controls/control-play.ts:85](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/controls/control-play.ts#L85)*
 
 Changes button opacity.
 
@@ -95,7 +95,7 @@ ___
 
 ▸ **hide**(): `void`
 
-*Defined in [ts/controls/control-play.ts:92](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-play.ts#L92)*
+*Defined in [ts/controls/control-play.ts:92](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/controls/control-play.ts#L92)*
 
 Hide the play button (state related). Default is to show.
 
@@ -108,7 +108,7 @@ ___
 
 ▸ **show**(): `void`
 
-*Defined in [ts/controls/control-play.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/1ee2f92/src/ts/controls/control-play.ts#L99)*
+*Defined in [ts/controls/control-play.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/84f9ac1/src/ts/controls/control-play.ts#L99)*
 
 Show the play button (state related). Default is to show.
 

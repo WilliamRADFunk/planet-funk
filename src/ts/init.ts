@@ -514,7 +514,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
     const saucerGenerator = new SaucerGenerator(scene, scoreboard, saucerTextures, gameLoadData);
     const enemyMissileGenerator = new EnemyMissileGenerator(scene, scoreboard, levelHandler.getColor(), gameLoadData);
     // Create control panel in upper right corner of screen.
-    const controlPanel = new ControlPanel(scene, 3.45, -5.8, gameLoadData.difficulty, levelHandler.getColor(), gameFont);
+    const controlPanel = new ControlPanel(scene, 3.25, -5.8, gameLoadData.difficulty, levelHandler.getColor(), gameFont);
 
     // Click event listener that turns shield on or off if player clicks on planet. Fire weapon otherwise.
     const raycaster = new Raycaster();
@@ -557,6 +557,11 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
                 }
                 launchFlag = false;
                 SoundinatorSingleton.playClick();
+                return;
+            }
+            if (el.object.name === 'Mute Button') {
+                controlPanel.muteChange();
+                launchFlag = false;
                 return;
             }
             if (el.object.name === 'Exit Button') {
