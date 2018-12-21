@@ -22,7 +22,7 @@
 
 **● randomColor**: *`any`* =  require('randomcolor')
 
-*Defined in [ts/displays/level-handler.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/displays/level-handler.ts#L13)*
+*Defined in [ts/displays/level-handler.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/displays/level-handler.ts#L13)*
 
 ___
 

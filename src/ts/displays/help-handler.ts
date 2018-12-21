@@ -37,7 +37,15 @@ export class HelpHandler {
     /**
      * Controls the overall rendering of the asteroid
      */
-    private asteroid: Mesh;
+    private asteroid1: Mesh;
+    /**
+     * Controls the overall rendering of the asteroid
+     */
+    private asteroid2: Mesh;
+    /**
+     * Controls the overall rendering of the asteroid
+     */
+    private asteroid3: Mesh;
     /**
      * Click surface for the Return button.
      */
@@ -346,7 +354,9 @@ export class HelpHandler {
      * Turns on all help screen related graphics
      */
     activate(): void {
-        this.asteroid.visible = true;
+        this.asteroid1.visible = true;
+        this.asteroid2.visible = true;
+        this.asteroid3.visible = true;
         this.barrierReturn.visible = true;
         this.building.visible = true;
         this.drone.visible = true;
@@ -387,7 +397,9 @@ export class HelpHandler {
      * Turns off all help screen related graphics
      */
     deactivate(): void {
-        this.asteroid.visible = false;
+        this.asteroid1.visible = false;
+        this.asteroid2.visible = false;
+        this.asteroid3.visible = false;
         this.barrierReturn.visible = false;
         this.building.visible = false;
         this.drone.visible = false;
@@ -423,7 +435,22 @@ export class HelpHandler {
     endCycle(): void {
         if (!this.missileExample1.endCycle()) {
             this.missileExample1.removeFromScene(this.scene);
-            this.missileExample1 = new Projectile(this.scene, -2, -0.5, 1.5, -1.7, 3.6999999999999997, new Color(0x00B39F), true, 0.02, -11.5, 1);
+            this.missileExample1 = new Projectile(
+                this.scene,
+                -2,
+                -0.5,
+                1.5,
+                -1.7,
+                3.6999999999999997,
+                new Color(0x00B39F),
+                true,
+                0.02,
+                -11.5,
+                1);
+            this.asteroid3.visible = true;
+        }
+        if (this.missileExample1.getCurrentPosition()[0] >= this.asteroid3.position.x) {
+            this.asteroid3.visible = false;
         }
         // Saucer movement, possible drone creation, and possible drone elimination.
         this.saucerExample.endCycle();
@@ -541,11 +568,21 @@ export class HelpHandler {
         asteroidMaterial.map.minFilter = LinearFilter;
         asteroidMaterial.shininess = 0;
         asteroidMaterial.transparent = true;
-        this.asteroid = new Mesh(asteroidGeometry, asteroidMaterial);
-        this.asteroid.position.set(-5.3, -11.4, this.zSpot - 1.5);
-        this.asteroid.rotation.set(-1.5708, 0, 0);
-        this.asteroid.name = 'Help-Asteroid';
-        this.scene.add(this.asteroid);
+        this.asteroid1 = new Mesh(asteroidGeometry, asteroidMaterial);
+        this.asteroid1.position.set(-5.3, -11.4, this.zSpot - 1.5);
+        this.asteroid1.rotation.set(-1.5708, 0, 0);
+        this.asteroid1.name = 'Help-Asteroid1';
+        this.scene.add(this.asteroid1);
+        this.asteroid2 = new Mesh(asteroidGeometry, asteroidMaterial);
+        this.asteroid2.position.set(0, -11.4, this.zSpot - 1.3);
+        this.asteroid2.rotation.set(-1.5708, 0, 0);
+        this.asteroid2.name = 'Help-Asteroid2';
+        this.scene.add(this.asteroid2);
+        this.asteroid3 = new Mesh(asteroidGeometry, asteroidMaterial);
+        this.asteroid3.position.set(1.5, -11.05, this.zSpot - 2);
+        this.asteroid3.rotation.set(-1.5708, 0, 0);
+        this.asteroid3.name = 'Help-Asteroid3';
+        this.scene.add(this.asteroid3);
 
         const headGeometry = new CircleGeometry(0.06, 32);
         const headMaterial = new MeshBasicMaterial({
@@ -666,9 +703,16 @@ export class HelpHandler {
         this.scene.add(section);
         this.sections.push(section);
         
-        const textGeo = new TextGeometry('Left Click to Fire', this.textHeaderParams);
-        const text = new Mesh( textGeo, this.helpMaterial );
-        text.position.set(-1.6, -11.4, this.zSpot - 2.2);
+        let textGeo = new TextGeometry('Left Click to Fire', this.textHeaderParams);
+        let text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-2.2, -11.4, this.zSpot - 2.2);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+
+        textGeo = new TextGeometry('Explodes on Arrival', this.textHeaderParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-1.2, -11.4, this.zSpot - 0.35);
         text.rotation.x = -1.5708;
         this.scene.add(text);
         this.texts.push(text);

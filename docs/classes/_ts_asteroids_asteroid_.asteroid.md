@@ -54,7 +54,7 @@
 
 **● asteroid**: *`Mesh`*
 
-*Defined in [ts/asteroids/asteroid.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L32)*
+*Defined in [ts/asteroids/asteroid.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L32)*
 
 Controls the overall rendering of the asteroid
 
@@ -65,7 +65,7 @@ ___
 
 **● asteroidGeometry**: *`CircleGeometry`*
 
-*Defined in [ts/asteroids/asteroid.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L24)*
+*Defined in [ts/asteroids/asteroid.ts:24](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L24)*
 
 Controls size and shape of the asteroid
 
@@ -76,7 +76,7 @@ ___
 
 **● asteroidMaterial**: *`MeshPhongMaterial`*
 
-*Defined in [ts/asteroids/asteroid.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L28)*
+*Defined in [ts/asteroids/asteroid.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L28)*
 
 Controls the color of the asteroid material
 
@@ -87,7 +87,7 @@ ___
 
 **● currentPoint**: *`number`[]*
 
-*Defined in [ts/asteroids/asteroid.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L36)*
+*Defined in [ts/asteroids/asteroid.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L36)*
 
 Keeps track of the x,z point the asteroid is at currently.
 
@@ -98,7 +98,7 @@ ___
 
 **● distanceTraveled**: *`number`*
 
-*Defined in [ts/asteroids/asteroid.ts:40](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L40)*
+*Defined in [ts/asteroids/asteroid.ts:40](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L40)*
 
 Tracks the distance traveled thus far to update the calculateNextPoint calculation.
 
@@ -109,7 +109,7 @@ ___
 
 **● endingPoint**: *`number`[]*
 
-*Defined in [ts/asteroids/asteroid.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L44)*
+*Defined in [ts/asteroids/asteroid.ts:44](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L44)*
 
 Keeps track of the x,z point of asteroid's destination point.
 
@@ -120,7 +120,7 @@ ___
 
 **● explosion**: *[Explosion](_ts_weapons_explosion_.explosion.md)*
 
-*Defined in [ts/asteroids/asteroid.ts:48](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L48)*
+*Defined in [ts/asteroids/asteroid.ts:48](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L48)*
 
 Explosion from impacted asteroid
 
@@ -131,7 +131,7 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in [ts/asteroids/asteroid.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L53)*
+*Defined in [ts/asteroids/asteroid.ts:53](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L53)*
 
 Flag to signal if asteroid has been destroyed or not. True = not destroyed. False = destroyed.
 
@@ -142,7 +142,7 @@ ___
 
 **● originalStartingPoint**: *`number`[]*
 
-*Defined in [ts/asteroids/asteroid.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L57)*
+*Defined in [ts/asteroids/asteroid.ts:57](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L57)*
 
 Keeps track of the x,z point where asteroid fired from.
 
@@ -153,7 +153,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/asteroids/asteroid.ts:61](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L61)*
+*Defined in [ts/asteroids/asteroid.ts:61](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L61)*
 
 Reference to the scene, used to remove asteroid from rendering cycle once destroyed.
 
@@ -164,7 +164,7 @@ ___
 
 **● speed**: *`number`* = 0.002
 
-*Defined in [ts/asteroids/asteroid.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L65)*
+*Defined in [ts/asteroids/asteroid.ts:65](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L65)*
 
 The speed at which the asteroid travels.
 
@@ -175,7 +175,7 @@ ___
 
 **● totalDistance**: *`number`*
 
-*Defined in [ts/asteroids/asteroid.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L69)*
+*Defined in [ts/asteroids/asteroid.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L69)*
 
 The total distance from asteroid to planet.
 
@@ -189,7 +189,7 @@ ___
 
 ▸ **activate**(): `void`
 
-*Defined in [ts/asteroids/asteroid.ts:104](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L104)*
+*Defined in [ts/asteroids/asteroid.ts:104](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L104)*
 
 (Re)activates the asteroid, usually at beginning of new level.
 
@@ -202,7 +202,7 @@ ___
 
 ▸ **addToScene**(): `void`
 
-*Defined in [ts/asteroids/asteroid.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L110)*
+*Defined in [ts/asteroids/asteroid.ts:110](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L110)*
 
 Adds asteroid object to the three.js scene.
 
@@ -215,7 +215,7 @@ ___
 
 ▸ **calculateNextPoint**(): `void`
 
-*Defined in [ts/asteroids/asteroid.ts:116](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L116)*
+*Defined in [ts/asteroids/asteroid.ts:116](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L116)*
 
 Calculates the next point in the asteroid's path.
 
@@ -228,7 +228,7 @@ ___
 
 ▸ **createExplosion**(isInert: *`boolean`*): `void`
 
-*Defined in [ts/asteroids/asteroid.ts:127](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L127)*
+*Defined in [ts/asteroids/asteroid.ts:127](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L127)*
 
 Creates an explosion during collision and adds it to the collildables list.
 
@@ -247,7 +247,7 @@ ___
 
 ▸ **endCycle**(): `boolean`
 
-*Defined in [ts/asteroids/asteroid.ts:140](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L140)*
+*Defined in [ts/asteroids/asteroid.ts:140](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L140)*
 
 At the end of each loop iteration, move the asteroid a little.
 
@@ -261,7 +261,7 @@ ___
 
 ▸ **getActive**(): `boolean`
 
-*Defined in [ts/asteroids/asteroid.ts:158](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L158)*
+*Defined in [ts/asteroids/asteroid.ts:158](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L158)*
 
 Gets the viability of the object.
 
@@ -275,7 +275,7 @@ ___
 
 ▸ **getCollisionRadius**(): `number`
 
-*Defined in [ts/asteroids/asteroid.ts:165](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L165)*
+*Defined in [ts/asteroids/asteroid.ts:165](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L165)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 
@@ -289,7 +289,7 @@ ___
 
 ▸ **getCurrentPosition**(): `number`[]
 
-*Defined in [ts/asteroids/asteroid.ts:172](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L172)*
+*Defined in [ts/asteroids/asteroid.ts:172](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L172)*
 
 Gets the current position of the collidable object.
 
@@ -303,7 +303,7 @@ ___
 
 ▸ **getName**(): `string`
 
-*Defined in [ts/asteroids/asteroid.ts:179](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L179)*
+*Defined in [ts/asteroids/asteroid.ts:179](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L179)*
 
 Gets the name of the asteroid.
 
@@ -317,7 +317,7 @@ ___
 
 ▸ **impact**(self: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*, otherThing: *`string`*): `boolean`
 
-*Defined in [ts/asteroids/asteroid.ts:188](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L188)*
+*Defined in [ts/asteroids/asteroid.ts:188](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L188)*
 
 Called when something collides with asteroid, which destroys it.
 
@@ -338,7 +338,7 @@ ___
 
 ▸ **isPassive**(): `boolean`
 
-*Defined in [ts/asteroids/asteroid.ts:200](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L200)*
+*Defined in [ts/asteroids/asteroid.ts:200](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L200)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 
@@ -352,7 +352,7 @@ ___
 
 ▸ **removeFromScene**(scene: *`Scene`*): `void`
 
-*Defined in [ts/asteroids/asteroid.ts:207](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/asteroids/asteroid.ts#L207)*
+*Defined in [ts/asteroids/asteroid.ts:207](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/asteroids/asteroid.ts#L207)*
 
 Removes asteroid object from the 'visible' scene by sending it back to its starting location.
 

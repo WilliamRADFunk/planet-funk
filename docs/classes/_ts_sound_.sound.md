@@ -33,7 +33,7 @@
 
 **● muffledVolume**: *`number`*
 
-*Defined in [ts/sound.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/sound.ts#L7)*
+*Defined in [ts/sound.ts:7](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/sound.ts#L7)*
 
 The volume to use for the sound when muffled is passed in.
 
@@ -44,7 +44,7 @@ ___
 
 **● normalVolume**: *`number`*
 
-*Defined in [ts/sound.ts:11](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/sound.ts#L11)*
+*Defined in [ts/sound.ts:11](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/sound.ts#L11)*
 
 The volume to use for the sound when conditions are normal.
 
@@ -55,7 +55,7 @@ ___
 
 **● offset**: *`number`*
 
-*Defined in [ts/sound.ts:15](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/sound.ts#L15)*
+*Defined in [ts/sound.ts:15](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/sound.ts#L15)*
 
 The offset that best suites the audio clip as many have dead space in the beginning.
 
@@ -66,7 +66,7 @@ ___
 
 **● sound**: *`Audio`*
 
-*Defined in [ts/sound.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/sound.ts#L19)*
+*Defined in [ts/sound.ts:19](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/sound.ts#L19)*
 
 Audio clip belonging to this sound.
 
@@ -77,7 +77,7 @@ ___
 
 **● wasPlaying**: *`boolean`* = false
 
-*Defined in [ts/sound.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/sound.ts#L23)*
+*Defined in [ts/sound.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/sound.ts#L23)*
 
 Flag to track if this sound had been paused.
 
@@ -91,7 +91,7 @@ ___
 
 ▸ **pause**(): `void`
 
-*Defined in [ts/sound.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/sound.ts#L51)*
+*Defined in [ts/sound.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/sound.ts#L51)*
 
 Pauses clip if currently playing.
 
@@ -104,7 +104,7 @@ ___
 
 ▸ **play**(muffled?: *`boolean`*): `void`
 
-*Defined in [ts/sound.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/sound.ts#L41)*
+*Defined in [ts/sound.ts:41](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/sound.ts#L41)*
 
 Activate the clip.
 
@@ -123,7 +123,7 @@ ___
 
 ▸ **resume**(): `void`
 
-*Defined in [ts/sound.ts:60](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/sound.ts#L60)*
+*Defined in [ts/sound.ts:60](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/sound.ts#L60)*
 
 Pauses clip if currently playing.
 
@@ -136,7 +136,7 @@ ___
 
 ▸ **stop**(): `void`
 
-*Defined in [ts/sound.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/4d2f34e/src/ts/sound.ts#L69)*
+*Defined in [ts/sound.ts:69](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/sound.ts#L69)*
 
 Stops the clip.
 
