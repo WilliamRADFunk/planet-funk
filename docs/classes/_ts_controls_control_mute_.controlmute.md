@@ -33,7 +33,7 @@
 
 **● btnMat**: *`MeshBasicMaterial`*
 
-*Defined in [ts/controls/control-mute.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/controls/control-mute.ts#L23)*
+*Defined in [ts/controls/control-mute.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-mute.ts#L23)*
 
 Material for the speaker and x portion of the button.
 
@@ -44,7 +44,7 @@ ___
 
 **● muteButton**: *`Mesh`*
 
-*Defined in [ts/controls/control-mute.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/controls/control-mute.ts#L27)*
+*Defined in [ts/controls/control-mute.ts:27](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-mute.ts#L27)*
 
 Mesh for the mute button.
 
@@ -55,7 +55,7 @@ ___
 
 **● muteButtonBorderMaterial**: *`LineBasicMaterial`*
 
-*Defined in [ts/controls/control-mute.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/controls/control-mute.ts#L31)*
+*Defined in [ts/controls/control-mute.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-mute.ts#L31)*
 
 Controls the mute button's border material.
 
@@ -69,7 +69,7 @@ ___
 
 ▸ **changeColor**(color: *`Color`*): `void`
 
-*Defined in [ts/controls/control-mute.ts:140](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/controls/control-mute.ts#L140)*
+*Defined in [ts/controls/control-mute.ts:140](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-mute.ts#L140)*
 
 Changes button material to match new level color.
 
@@ -88,7 +88,7 @@ ___
 
 ▸ **changeOpacity**(opacity: *`number`*): `void`
 
-*Defined in [ts/controls/control-mute.ts:148](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/controls/control-mute.ts#L148)*
+*Defined in [ts/controls/control-mute.ts:148](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-mute.ts#L148)*
 
 Changes button opacity.
 
@@ -107,7 +107,7 @@ ___
 
 ▸ **hide**(): `void`
 
-*Defined in [ts/controls/control-mute.ts:156](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/controls/control-mute.ts#L156)*
+*Defined in [ts/controls/control-mute.ts:156](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-mute.ts#L156)*
 
 Hide the mute button (state related). Default is to show.
 
@@ -120,7 +120,7 @@ ___
 
 ▸ **show**(): `void`
 
-*Defined in [ts/controls/control-mute.ts:163](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/controls/control-mute.ts#L163)*
+*Defined in [ts/controls/control-mute.ts:163](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-mute.ts#L163)*
 
 Show the mute button (state related). Default is to show.
 

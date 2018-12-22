@@ -46,7 +46,7 @@
 
 **● currentExplosionScale**: *`number`* = 1
 
-*Defined in [ts/weapons/explosion.ts:17](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L17)*
+*Defined in [ts/weapons/explosion.ts:17](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L17)*
 
 Keeps track of how big explosions scale is at moment.
 
@@ -57,7 +57,7 @@ ___
 
 **● explosion**: *`Mesh`*
 
-*Defined in [ts/weapons/explosion.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L29)*
+*Defined in [ts/weapons/explosion.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L29)*
 
 Controls the overall rendering of the explosion
 
@@ -68,7 +68,7 @@ ___
 
 **● explosionGeometry**: *`CircleGeometry`*
 
-*Defined in [ts/weapons/explosion.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L21)*
+*Defined in [ts/weapons/explosion.ts:21](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L21)*
 
 Controls size and shape of the explosion
 
@@ -79,7 +79,7 @@ ___
 
 **● explosionMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/weapons/explosion.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L25)*
+*Defined in [ts/weapons/explosion.ts:25](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L25)*
 
 Controls the color of the explosion material
 
@@ -90,7 +90,7 @@ ___
 
 **● isActive**: *`boolean`* = true
 
-*Defined in [ts/weapons/explosion.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L34)*
+*Defined in [ts/weapons/explosion.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L34)*
 
 Flag to signal if explosion is in its collidable state. True = collidable. False = not collidable.
 
@@ -101,7 +101,7 @@ ___
 
 **● isExplosionGrowing**: *`boolean`* = true
 
-*Defined in [ts/weapons/explosion.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L39)*
+*Defined in [ts/weapons/explosion.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L39)*
 
 Flag to signal if the explosion is expanding/contracting. True is expanding. False is contracting..
 
@@ -112,7 +112,7 @@ ___
 
 **● radius**: *`number`*
 
-*Defined in [ts/weapons/explosion.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L43)*
+*Defined in [ts/weapons/explosion.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L43)*
 
 Starting size of the explosion. Usually the size of the thing that went boom.
 
@@ -123,7 +123,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/weapons/explosion.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L47)*
+*Defined in [ts/weapons/explosion.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L47)*
 
 Reference to the scene, used to remove projectile from rendering cycle once destroyed.
 
@@ -137,7 +137,7 @@ ___
 
 ▸ **endCycle**(): `boolean`
 
-*Defined in [ts/weapons/explosion.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L78)*
+*Defined in [ts/weapons/explosion.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L78)*
 
 At the end of each loop iteration, expand or contract the explosion a little.
 
@@ -151,7 +151,7 @@ ___
 
 ▸ **getActive**(): `boolean`
 
-*Defined in [ts/weapons/explosion.ts:101](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L101)*
+*Defined in [ts/weapons/explosion.ts:101](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L101)*
 
 Gets the viability of the object.
 
@@ -165,7 +165,7 @@ ___
 
 ▸ **getCollisionRadius**(): `number`
 
-*Defined in [ts/weapons/explosion.ts:108](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L108)*
+*Defined in [ts/weapons/explosion.ts:108](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L108)*
 
 Gets the current radius of the bounding box (circle) of the collidable.
 
@@ -179,7 +179,7 @@ ___
 
 ▸ **getCurrentPosition**(): `number`[]
 
-*Defined in [ts/weapons/explosion.ts:115](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L115)*
+*Defined in [ts/weapons/explosion.ts:115](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L115)*
 
 Gets the current position of the collidable object.
 
@@ -193,7 +193,7 @@ ___
 
 ▸ **getMesh**(): `Mesh`
 
-*Defined in [ts/weapons/explosion.ts:144](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L144)*
+*Defined in [ts/weapons/explosion.ts:144](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L144)*
 
 Returns mesh so it can be removed from scene.
 
@@ -207,7 +207,7 @@ ___
 
 ▸ **getName**(): `string`
 
-*Defined in [ts/weapons/explosion.ts:122](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L122)*
+*Defined in [ts/weapons/explosion.ts:122](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L122)*
 
 Gets the name of the explosion.
 
@@ -221,7 +221,7 @@ ___
 
 ▸ **impact**(self: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*): `boolean`
 
-*Defined in [ts/weapons/explosion.ts:130](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L130)*
+*Defined in [ts/weapons/explosion.ts:130](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L130)*
 
 Call to collidable object that it has been struck.
 
@@ -241,7 +241,7 @@ ___
 
 ▸ **isPassive**(): `boolean`
 
-*Defined in [ts/weapons/explosion.ts:137](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/weapons/explosion.ts#L137)*
+*Defined in [ts/weapons/explosion.ts:137](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/weapons/explosion.ts#L137)*
 
 States it is a passive type or not. Two passive types cannot colllide with each other.
 

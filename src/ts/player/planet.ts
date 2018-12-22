@@ -1,11 +1,19 @@
 import {
+    CircleGeometry,
     Color,
+    CylinderGeometry,
+    DoubleSide,
+    Font,
     LinearFilter,
     Mesh,
+    MeshBasicMaterial,
+    MeshLambertMaterial,
     MeshPhongMaterial,
+    Object3D,
     Scene,
     SphereGeometry,
     Texture,
+    TextGeometry,
     Vector3 } from 'three';
 
 import { Satellite } from './satellite';
@@ -61,6 +69,10 @@ export class Planet implements Collidable {
      */
     private deadPlanetTexture: Texture;
     /**
+     * Semi-transparent circular plane to let user know where they can't fire.
+     */
+    private dmz: Mesh;
+    /**
      * Controls size and shape of the planet
      */
     private funkGeometry: SphereGeometry;
@@ -72,6 +84,10 @@ export class Planet implements Collidable {
      * Controls the overall rendering of the planet
      */
     private funk: Mesh;
+    /**
+     * Local reference to the game font.
+     */
+    private gameFont: Font;
     /**
      * Load data to determine which satellites and buildings should start destroyed.
      */
@@ -125,10 +141,12 @@ export class Planet implements Collidable {
      * Constructor for the Planet class
      * @param startPosition allows creation of planet in a variable location (help screen mostly).
      * @param gameLoadData  game state to use from load data.
+     * @param gameFont  game font used across game.
      * @hidden
      */
-    constructor(startPosition: [number, number, number], gameLoadData: GameLoadData) {
+    constructor(startPosition: [number, number, number], gameLoadData: GameLoadData, gameFont: Font) {
         this.startPosition = startPosition;
+        this.gameFont = gameFont;
         if (startPosition) {
             this.gameLoadData = gameLoadData;
         }
@@ -141,6 +159,7 @@ export class Planet implements Collidable {
         this.constructPlanet(planetTextures, specMap);
         this.constructSatellites();
         this.constructBases(buildtexture, specMap);
+        this.constructDMZ();
         scene.add(this.funk);
     }
     /**
@@ -172,6 +191,107 @@ export class Planet implements Collidable {
         this.funk.add(meshes[1]);
         if (this.gameLoadData.b4) CollisionatorSingleton.add(this.base4);
         this.bases = [this.base1, this.base2, this.base3, this.base4];
+    }
+    /**
+     * Builds the DMX circle.
+     */
+    constructDMZ(helpVersion?: boolean, optionalBackingColor?: Color): Object3D {
+        const dmzGeometry = new CircleGeometry(1.4, 32, 32);
+        const dmzMaterial = new MeshBasicMaterial({
+            color: new Color(0xFF0000),
+            opacity: 0.08,
+            side: DoubleSide,
+            transparent: true});
+        this.dmz = new Mesh(dmzGeometry, dmzMaterial);
+        this.dmz.position.set(this.startPosition[0], this.startPosition[1] + 1.1, this.startPosition[2]);
+        this.dmz.rotation.set(-1.5708, 0, 0);
+        this.dmz.name = `DMZ`;
+        // Inner Black Circle
+        const blackGeometry = new CircleGeometry(1, 32, 32);
+        const blackMaterial = new MeshBasicMaterial({
+            color: optionalBackingColor || new Color(0x000000),
+            opacity: 1,
+            side: DoubleSide,
+            transparent: false});
+        const black = new Mesh(blackGeometry, blackMaterial);
+        black.position.set(this.startPosition[0], this.startPosition[1] + 1.05, this.startPosition[2]);
+        black.rotation.set(-1.5708, 0, 0);
+        black.name = 'DMZ-Black';
+        // Inner DMZ Circle
+        const innerRedGeometry = new CircleGeometry(1, 32, 32);
+        const innerRedMaterial = new MeshBasicMaterial({
+            color: new Color(0xFF0000),
+            opacity: 0.05,
+            side: DoubleSide,
+            transparent: true});
+        const innerRed = new Mesh(innerRedGeometry, innerRedMaterial);
+        innerRed.position.set(this.startPosition[0], this.startPosition[1] + 1, this.startPosition[2]);
+        innerRed.rotation.set(-1.5708, 0, 0);
+        innerRed.name = 'DMZ-Inner';
+        // Creates and places the DMZ beads in a ring around can't-shoot-area.
+        const dashedBarsBars = new Object3D();
+        dashedBarsBars.name = 'DMZ-Barrier';
+		const timeGeometry = new CylinderGeometry(0.01, 0.01, 0.001, 10, 10, false);
+        const timeMaterial = new MeshBasicMaterial({color: 0xFF0000});
+		for(let i = 0; i < 120; i++)
+		{
+			const minuteTick = new Mesh(timeGeometry, timeMaterial.clone());
+			const x_coord = 1.4 * Math.cos( i * (Math.PI / 60) );
+			const z_coord = 1.4 * Math.sin( i * (Math.PI / 60) );
+			minuteTick.position.set((x_coord + this.startPosition[0]), this.startPosition[1] + 1.01, (z_coord + this.startPosition[2]));
+			dashedBarsBars.add(minuteTick);
+        }
+        const DMZ = new Object3D();
+        DMZ.add(dashedBarsBars);
+        DMZ.add(this.dmz);
+        DMZ.add(black);
+        DMZ.add(innerRed);
+
+        const textpParams = {
+            font: this.gameFont,
+            size: 0.11,
+            height: 0.2,
+            curveSegments: 12,
+            bevelEnabled: false,
+            bevelThickness: 1,
+            bevelSize: 0.5,
+            bevelSegments: 3
+        };
+        const txtMaterial = new MeshLambertMaterial( {color: 0xFF0000, opacity: 1, transparent: true} );
+        const textGeo = new TextGeometry('DMZ', textpParams);
+
+        let text = new Mesh( textGeo, txtMaterial );
+        text.rotation.set(-1.5708, 0, -2.3562);
+        text.position.set(
+            this.startPosition[0] + (1.325 * Math.cos(13 * (Math.PI / 60))),
+            this.startPosition[1] + 0.75,
+            this.startPosition[2] + (1.325 * Math.sin(13 * (Math.PI / 60))));
+        DMZ.add(text);
+        text = new Mesh( textGeo, txtMaterial );
+        text.rotation.set(-1.5708, 0, -3.927);
+        text.position.set(
+            this.startPosition[0] + (1.325 * Math.cos(43 * (Math.PI / 60))),
+            this.startPosition[1] + 0.75,
+            this.startPosition[2] + (1.325 * Math.sin(43 * (Math.PI / 60))));
+        DMZ.add(text);
+        text = new Mesh( textGeo, txtMaterial );
+        text.rotation.set(-1.5708, 0, -5.4978);
+        text.position.set(
+            this.startPosition[0] + (1.325 * Math.cos(73 * (Math.PI / 60))),
+            this.startPosition[1] + 0.75,
+            this.startPosition[2] + (1.325 * Math.sin(73 * (Math.PI / 60))));
+        DMZ.add(text);
+        text = new Mesh( textGeo, txtMaterial );
+        text.rotation.set(-1.5708, 0, -7.0686);
+        text.position.set(
+            this.startPosition[0] + (1.325 * Math.cos(103 * (Math.PI / 60))),
+            this.startPosition[1] + 0.75,
+            this.startPosition[2] + (1.325 * Math.sin(103 * (Math.PI / 60))));
+        DMZ.add(text);
+        if (!helpVersion) {
+            this.funk.add(DMZ);
+        }
+        return DMZ;
     }
     /**
      * Builds the player's planet.

@@ -20,7 +20,8 @@ import {
     TextGeometryParameters,
     Texture,
     Vector3, 
-    SphereGeometry} from "three";
+    SphereGeometry,
+    Object3D} from "three";
 
 import { Projectile } from "../weapons/projectile";
 import { Planet } from "../player/planet";
@@ -74,6 +75,11 @@ export class HelpHandler {
      * Drone in help menu to create and hide as menu toggles. 
      */
     private droneExamples: Drone[] = [];
+    /**
+     * Contains a separate build of the planet's DMZ
+     * since help screen requires adding it separately.
+     */
+    private dmz: Object3D;
     /**
      * Saucer in help menu to create and hide as menu toggles. 
      */
@@ -377,14 +383,16 @@ export class HelpHandler {
         this.sections.filter(x => x.visible = true);
         this.texts.filter(x => x.visible = true);
 
-        this.planet = new Planet([0, -12, 2], {
+        this.planet = new Planet([0, -12.2, 2], {
             b1: 1, b2: 1, b3: 1, b4: 1,
             difficulty: 0,
             level: 1,
             sat1: 1, sat2: 1, sat3: 1, sat4: 1,
             score: 0
-        });
+        }, this.helpFont);
         this.planet.addToScene(this.scene, this.planetTextures, this.buildingTextures, this.specMap);
+        this.dmz = this.planet.constructDMZ(true, new Color(0x111111));
+        this.scene.add(this.dmz);
         this.shields.push(new Shield([0, -20, 2]));
         this.shields[0].addToScene(this.scene);
         this.shields.push(new Shield([-4.28, -20, 4.1], 0.6));
@@ -423,6 +431,9 @@ export class HelpHandler {
 
         if (this.planet) {
             this.planet.removeFromScene(this.scene);
+            this.scene.remove(this.dmz);
+            this.planet = null;
+            this.dmz = null;
         }
         if (this.shields.length) {
             this.shields.forEach(s => s.destroy(this.scene));
@@ -928,9 +939,23 @@ export class HelpHandler {
         this.scene.add(section);
         this.sections.push(section);
         
-        const textGeo = new TextGeometry('Click in Ring for Shield', this.textHeaderParams);
-        const text = new Mesh( textGeo, this.helpMaterial );
+        let textGeo = new TextGeometry('Click in Ring for Shield', this.textHeaderParams);
+        let text = new Mesh( textGeo, this.helpMaterial );
         text.position.set(-2.1, -11.4, this.zSpot + 0.5);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+
+        textGeo = new TextGeometry('Can\'t Fire...', this.textHeaderParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(-2.2, -11.4, this.zSpot + 3.3);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+
+        textGeo = new TextGeometry('in DMZ', this.textHeaderParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(1.1, -11.4, this.zSpot + 3.3);
         text.rotation.x = -1.5708;
         this.scene.add(text);
         this.texts.push(text);

@@ -490,7 +490,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
     onWindowResize();
     window.addEventListener( 'resize', onWindowResize, false);
     // Create player's planet, which will also create its four satellites.
-    const planet = new Planet([0, 0, 0], gameLoadData);
+    const planet = new Planet([0, 0, 0], gameLoadData, gameFont);
     planet.addToScene(scene, planetTextures, buildingTextures, specMap);
     CollisionatorSingleton.add(planet);
     // Create shield around the planet.

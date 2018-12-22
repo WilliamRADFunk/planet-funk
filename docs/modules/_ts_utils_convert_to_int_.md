@@ -18,7 +18,7 @@
 
 ▸ **ConvertToInt**(c: *`number`*): `number`
 
-*Defined in [ts/utils/convert-to-int.ts:6](https://github.com/WilliamRADFunk/planet-funk/blob/d9a55b9/src/ts/utils/convert-to-int.ts#L6)*
+*Defined in [ts/utils/convert-to-int.ts:6](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/utils/convert-to-int.ts#L6)*
 
 Converts the ascii character for a hexidecimal char to it's integer 0-15 equivalent.
 
