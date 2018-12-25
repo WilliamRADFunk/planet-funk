@@ -17,11 +17,9 @@ Touching screen, or clicking the left mouse button on play area will fire neares
 
 Touching screen, or clicking the left mouse button on Planet Funk will erect a temporary force field of protection if both A) one isn't already up, and B) there is enough energy in reserve. If energy is out, nothing happens. If barrier is already up, it will deactivate the barrier.</br></br>
 
-Time recharges energy for both defensive weapons and barriers.</br></br>
+Time recharges energy for both defensive weapons and barrier.</br></br>
 
 Weapons that have been struck are rendered inactive and useless.</br></br>
-
-Fewer active weapons allows the remaining weapons to charge faster.</br></br>
 
 Fewer unscathed populated areas on the planet means slower planet shield recharge rate.</br></br>
 
@@ -31,9 +29,19 @@ Fewer unscathed populated areas on the planet means slower planet shield recharg
 
 When the planet has lost all four of its populated quadrants, GAME OVER.</br></br>
 
-Score is determined by a timer, and destroyed enemy units. Every second alive adds a point to total score.</br></br>
+Score is determined by destroyed enemy units. Every enemy's death adds points to total score.</br></br>
 
-Every 100,000 points will revive a damaged weapon. If all weapons are undamaged, a decimated populated area is rebuilt. If all weapons and populated areas are intact, then it's just points.</br></br>
+Every 25,000 points will revive a damaged weapon. Every 50,000 points will revive a damaged populated area. If all populated areas are undamaged, a damaged weapon is rebuilt. If all weapons and populated areas are intact, then it's just points.</br></br>
+
+See in game help tutorial for a more visual description of how the game works.</br></br>
+
+[In Game Help Screen](src/assets/images/help-screen.jpg)
+
+***
+
+## Where It's At
+
+Game is live and playable at [Planet Funk](https://tenacious-teal.itch.io/planet-funk)
 
 ***
 
