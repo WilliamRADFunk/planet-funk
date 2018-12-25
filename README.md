@@ -35,7 +35,7 @@ Every 25,000 points will revive a damaged weapon. Every 50,000 points will reviv
 
 See in game help tutorial for a more visual description of how the game works.</br></br>
 
-![In Game Help Screen](https://github.com/WilliamRADFunk/planet-funk/src/assets/images/help-screen.jpg)
+![In Game Help Screen](https://github.com/WilliamRADFunk/planet-funk/blob/master/src/assets/images/help-screen.jpg)
 
 ***
 
