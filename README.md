@@ -1,5 +1,7 @@
 # Planet Funk
-(In Progress) A just for fun, if "Toejam &amp; Earl" and "Mission Command" had a baby, planet defense game.</br></br>
+(Complete) An arcade styled Mission Command meets Tower Defense game...in space.</br></br>
+
+![Game Play Example](https://github.com/WilliamRADFunk/planet-funk/blob/master/src/assets/images/game-play.gif)
 
 ***
 
