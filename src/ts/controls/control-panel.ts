@@ -5,8 +5,11 @@ import {
     Geometry,
     Line,
     LineBasicMaterial,
+    Mesh,
     MeshBasicMaterial,
     Scene,
+    TextGeometry,
+    TextGeometryParameters,
     Vector3 } from "three";
 import { ControlPause } from "./control-pause";
 import { ControlPlay } from "./control-play";
@@ -66,6 +69,10 @@ export class ControlPanel {
      */
     private difficulty: number;
     /**
+     * Material for the disabled button text explanation.
+     */
+    private disabledTextMaterial: MeshBasicMaterial;
+    /**
      * Tracks state of game exiting.
      */
     private exit: boolean = false;
@@ -119,6 +126,29 @@ export class ControlPanel {
             opacity: 1,
             side: DoubleSide,
             transparent: true });
+        //
+        // Disabled Button Text
+        //
+        const textParams = {
+            font: font,
+            size: (0.35 * BUTTON_SIZE),
+            height: 0.2,
+            curveSegments: 12,
+            bevelEnabled: false,
+            bevelThickness: 1,
+            bevelSize: 0.5,
+            bevelSegments: 3
+        };
+        this.disabledTextMaterial = new MeshBasicMaterial({
+            color: color,
+            opacity: 1,
+            side: DoubleSide,
+            transparent: true });
+        const disabledTextGeometry = new TextGeometry(`Disabled By Hardcore`, textParams);
+        const disabledText = new Mesh( disabledTextGeometry, this.disabledTextMaterial );
+        disabledText.position.set(x + (0.1 * BUTTON_SIZE), 0, z + (2.1 * BUTTON_SIZE));
+        disabledText.rotation.x = -1.5708;
+        disabledText.name = 'disabled button text';
         //
         // Control Panel
         //
@@ -204,6 +234,7 @@ export class ControlPanel {
         // If hardcore difficulty, play button is inaccessible.
         //
         if (difficulty === 3) {
+            this.scene.add(disabledText);
             this.buttonMaterial.opacity = 0.5;
             this.controlPause.changeOpacity(0.5);
             this.controlPlay.changeOpacity(0.5);
@@ -225,6 +256,7 @@ export class ControlPanel {
      */
     endCycle(hide?: boolean): void {
         if (hide) {
+            this.disabledTextMaterial.opacity = 0;
             this.controlPause.hide();
             this.controlPlay.hide();
             this.controlHelp.hide();
@@ -319,6 +351,11 @@ export class ControlPanel {
         this.currentColor = color;
         this.panelBorderMaterial.color = this.currentColor;
         this.buttonMaterial.color = this.currentColor;
+
+        if (this.difficulty === 3) {
+            this.disabledTextMaterial.color = color;
+            this.disabledTextMaterial.opacity = 1;
+        }
         this.controlPause.changeColor(this.currentColor);
         this.controlPause.show();
         this.controlPlay.changeColor(this.currentColor);

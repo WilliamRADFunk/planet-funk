@@ -18,7 +18,7 @@
 
 ▸ **ConvertToHex**(c: *`number`*): `number`
 
-*Defined in [ts/utils/convert-to-hex.ts:1](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/utils/convert-to-hex.ts#L1)*
+*Defined in [ts/utils/convert-to-hex.ts:1](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/utils/convert-to-hex.ts#L1)*
 
 **Parameters:**
 

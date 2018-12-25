@@ -94,7 +94,7 @@ class Collisionator {
         }
     }
     /**
-     * Removes a collidable object to the list.
+     * Removes a collidable object from the list.
      * @param collidable the object with collidable characteristics to remove to the collidables list.
      */
     remove(collidable: Collidable): void {
@@ -102,6 +102,12 @@ class Collisionator {
         if (index > -1) {
             this.collisionItems.splice(index, 1);
         }
+    }
+    /**
+     * Removes all collidable objects from the list.
+     */
+    removeAll(): void {
+        this.collisionItems = [];
     }
 }
 export const CollisionatorSingleton = new Collisionator();

@@ -651,6 +651,7 @@ const loadGame = (difficulty: number, gld?: GameLoadData) => {
         if (controlPanel.isExit()) {
             window.removeEventListener( 'resize', onWindowResize, false);
             container.removeChild( (renderer as any).domElement );
+            CollisionatorSingleton.removeAll();
             loadMenu();
             return;
         } else if (controlPanel.isHelp()) {

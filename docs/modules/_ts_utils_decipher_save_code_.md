@@ -18,7 +18,7 @@
 
 ▸ **DecipherSaveCode**(loadCode: *`string`[]*): [GameLoadData](../interfaces/_ts_models_game_load_data_.gameloaddata.md)
 
-*Defined in [ts/utils/decipher-save-code.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/utils/decipher-save-code.ts#L28)*
+*Defined in [ts/utils/decipher-save-code.ts:28](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/utils/decipher-save-code.ts#L28)*
 
 Converts 13 char player entered load code into it's equivalent game load data object.
 

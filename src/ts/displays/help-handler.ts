@@ -927,6 +927,9 @@ export class HelpHandler {
         const sectionBackingGeometryMiddle = new PlaneGeometry( 4.5, 3.2, 0, 0 );
         const sectionGlowGeometryMiddle = new PlaneGeometry( 4.7, 3.3, 0, 0 );
 
+        const greenText = new MeshLambertMaterial( {color: 0x00FF00, opacity: 1, transparent: true} );
+        const redText = new MeshLambertMaterial( {color: 0xFF0000, opacity: 1, transparent: true} );
+
         let section = new Mesh( sectionBackingGeometryMiddle, this.sectionMaterial );
         section.position.set(0, -11, this.zSpot + 1.75);
         section.rotation.set(1.5708, 0, 0);
@@ -939,9 +942,23 @@ export class HelpHandler {
         this.scene.add(section);
         this.sections.push(section);
         
-        let textGeo = new TextGeometry('Click in Ring for Shield', this.textHeaderParams);
+        let textGeo = new TextGeometry('Click in', this.textHeaderParams);
         let text = new Mesh( textGeo, this.helpMaterial );
         text.position.set(-2.1, -11.4, this.zSpot + 0.5);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+
+        textGeo = new TextGeometry('Ring', this.textHeaderParams);
+        text = new Mesh( textGeo, greenText );
+        text.position.set(-0.475, -11.4, this.zSpot + 0.5);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+
+        textGeo = new TextGeometry('for Shield', this.textHeaderParams);
+        text = new Mesh( textGeo, this.helpMaterial );
+        text.position.set(0.5, -11.4, this.zSpot + 0.5);
         text.rotation.x = -1.5708;
         this.scene.add(text);
         this.texts.push(text);
@@ -953,9 +970,16 @@ export class HelpHandler {
         this.scene.add(text);
         this.texts.push(text);
 
-        textGeo = new TextGeometry('in DMZ', this.textHeaderParams);
+        textGeo = new TextGeometry('inside', this.textHeaderParams);
         text = new Mesh( textGeo, this.helpMaterial );
-        text.position.set(1.1, -11.4, this.zSpot + 3.3);
+        text.position.set(0.4, -11.4, this.zSpot + 3.3);
+        text.rotation.x = -1.5708;
+        this.scene.add(text);
+        this.texts.push(text);
+
+        textGeo = new TextGeometry('DMZ', this.textHeaderParams);
+        text = new Mesh( textGeo, redText );
+        text.position.set(1.6, -11.4, this.zSpot + 3.3);
         text.rotation.x = -1.5708;
         this.scene.add(text);
         this.texts.push(text);

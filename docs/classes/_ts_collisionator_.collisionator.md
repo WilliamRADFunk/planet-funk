@@ -19,6 +19,7 @@
 * [add](_ts_collisionator_.collisionator.md#add)
 * [checkForCollisions](_ts_collisionator_.collisionator.md#checkforcollisions)
 * [remove](_ts_collisionator_.collisionator.md#remove)
+* [removeAll](_ts_collisionator_.collisionator.md#removeall)
 
 ---
 
@@ -30,7 +31,7 @@
 
 **● collisionItems**: *[Collidable](../interfaces/_ts_collidable_.collidable.md)[]* =  []
 
-*Defined in [ts/collisionator.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/collisionator.ts#L13)*
+*Defined in [ts/collisionator.ts:13](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/collisionator.ts#L13)*
 
 Registered list of things that can are collidable.
 
@@ -44,7 +45,7 @@ ___
 
 ▸ **add**(collidable: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*): `void`
 
-*Defined in [ts/collisionator.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/collisionator.ts#L23)*
+*Defined in [ts/collisionator.ts:23](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/collisionator.ts#L23)*
 
 Adds a collidable object to the list.
 
@@ -63,7 +64,7 @@ ___
 
 ▸ **checkForCollisions**(scene: *`Scene`*): `void`
 
-*Defined in [ts/collisionator.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/collisionator.ts#L30)*
+*Defined in [ts/collisionator.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/collisionator.ts#L30)*
 
 Check for collisions between two or more object, and signal them to impact.
 
@@ -82,15 +83,28 @@ ___
 
 ▸ **remove**(collidable: *[Collidable](../interfaces/_ts_collidable_.collidable.md)*): `void`
 
-*Defined in [ts/collisionator.ts:100](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/collisionator.ts#L100)*
+*Defined in [ts/collisionator.ts:100](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/collisionator.ts#L100)*
 
-Removes a collidable object to the list.
+Removes a collidable object from the list.
 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | collidable | [Collidable](../interfaces/_ts_collidable_.collidable.md) |  the object with collidable characteristics to remove to the collidables list. |
+
+**Returns:** `void`
+
+___
+<a id="removeall"></a>
+
+###  removeAll
+
+▸ **removeAll**(): `void`
+
+*Defined in [ts/collisionator.ts:109](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/collisionator.ts#L109)*
+
+Removes all collidable objects from the list.
 
 **Returns:** `void`
 

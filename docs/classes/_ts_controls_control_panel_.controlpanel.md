@@ -22,6 +22,7 @@
 * [controlSound](_ts_controls_control_panel_.controlpanel.md#controlsound)
 * [currentColor](_ts_controls_control_panel_.controlpanel.md#currentcolor)
 * [difficulty](_ts_controls_control_panel_.controlpanel.md#difficulty)
+* [disabledTextMaterial](_ts_controls_control_panel_.controlpanel.md#disabledtextmaterial)
 * [exit](_ts_controls_control_panel_.controlpanel.md#exit)
 * [help](_ts_controls_control_panel_.controlpanel.md#help)
 * [mute](_ts_controls_control_panel_.controlpanel.md#mute)
@@ -56,7 +57,7 @@
 
 **● buttonMaterial**: *`MeshBasicMaterial`*
 
-*Defined in [ts/controls/control-panel.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L31)*
+*Defined in [ts/controls/control-panel.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L34)*
 
 Controls the buttons material.
 
@@ -67,7 +68,7 @@ ___
 
 **● controlExit**: *[ControlExit](_ts_controls_control_exit_.controlexit.md)*
 
-*Defined in [ts/controls/control-panel.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L35)*
+*Defined in [ts/controls/control-panel.ts:38](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L38)*
 
 Controls the exit button.
 
@@ -78,7 +79,7 @@ ___
 
 **● controlHelp**: *[ControlHelp](_ts_controls_control_help_.controlhelp.md)*
 
-*Defined in [ts/controls/control-panel.ts:39](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L39)*
+*Defined in [ts/controls/control-panel.ts:42](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L42)*
 
 Controls the help button.
 
@@ -89,7 +90,7 @@ ___
 
 **● controlMute**: *[ControlMute](_ts_controls_control_mute_.controlmute.md)*
 
-*Defined in [ts/controls/control-panel.ts:43](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L43)*
+*Defined in [ts/controls/control-panel.ts:46](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L46)*
 
 Controls the mute button.
 
@@ -100,7 +101,7 @@ ___
 
 **● controlPause**: *[ControlPause](_ts_controls_control_pause_.controlpause.md)*
 
-*Defined in [ts/controls/control-panel.ts:47](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L47)*
+*Defined in [ts/controls/control-panel.ts:50](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L50)*
 
 Controls the pause button.
 
@@ -111,7 +112,7 @@ ___
 
 **● controlPlay**: *[ControlPlay](_ts_controls_control_play_.controlplay.md)*
 
-*Defined in [ts/controls/control-panel.ts:51](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L51)*
+*Defined in [ts/controls/control-panel.ts:54](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L54)*
 
 Controls the play button.
 
@@ -122,7 +123,7 @@ ___
 
 **● controlSave**: *[ControlSave](_ts_controls_control_save_.controlsave.md)*
 
-*Defined in [ts/controls/control-panel.ts:55](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L55)*
+*Defined in [ts/controls/control-panel.ts:58](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L58)*
 
 Controls the save button.
 
@@ -133,7 +134,7 @@ ___
 
 **● controlSound**: *[ControlSound](_ts_controls_control_sound_.controlsound.md)*
 
-*Defined in [ts/controls/control-panel.ts:59](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L59)*
+*Defined in [ts/controls/control-panel.ts:62](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L62)*
 
 Controls the sound button.
 
@@ -144,7 +145,7 @@ ___
 
 **● currentColor**: *`Color`*
 
-*Defined in [ts/controls/control-panel.ts:63](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L63)*
+*Defined in [ts/controls/control-panel.ts:66](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L66)*
 
 Keeps track of level's current color
 
@@ -155,9 +156,20 @@ ___
 
 **● difficulty**: *`number`*
 
-*Defined in [ts/controls/control-panel.ts:67](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L67)*
+*Defined in [ts/controls/control-panel.ts:70](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L70)*
 
 Player chosen difficulty level.
+
+___
+<a id="disabledtextmaterial"></a>
+
+### `<Private>` disabledTextMaterial
+
+**● disabledTextMaterial**: *`MeshBasicMaterial`*
+
+*Defined in [ts/controls/control-panel.ts:74](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L74)*
+
+Material for the disabled button text explanation.
 
 ___
 <a id="exit"></a>
@@ -166,7 +178,7 @@ ___
 
 **● exit**: *`boolean`* = false
 
-*Defined in [ts/controls/control-panel.ts:71](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L71)*
+*Defined in [ts/controls/control-panel.ts:78](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L78)*
 
 Tracks state of game exiting.
 
@@ -177,7 +189,7 @@ ___
 
 **● help**: *`boolean`* = false
 
-*Defined in [ts/controls/control-panel.ts:75](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L75)*
+*Defined in [ts/controls/control-panel.ts:82](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L82)*
 
 Tracks state of game help menu.
 
@@ -188,7 +200,7 @@ ___
 
 **● mute**: *`boolean`* = false
 
-*Defined in [ts/controls/control-panel.ts:79](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L79)*
+*Defined in [ts/controls/control-panel.ts:86](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L86)*
 
 Tracks state of sound muting.
 
@@ -199,7 +211,7 @@ ___
 
 **● panelBorder**: *`Line`*
 
-*Defined in [ts/controls/control-panel.ts:83](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L83)*
+*Defined in [ts/controls/control-panel.ts:90](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L90)*
 
 Line mesh for border of entire panel.
 
@@ -210,7 +222,7 @@ ___
 
 **● panelBorderMaterial**: *`LineBasicMaterial`*
 
-*Defined in [ts/controls/control-panel.ts:87](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L87)*
+*Defined in [ts/controls/control-panel.ts:94](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L94)*
 
 Controls the panel's border material.
 
@@ -221,7 +233,7 @@ ___
 
 **● pause**: *`boolean`* = false
 
-*Defined in [ts/controls/control-panel.ts:91](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L91)*
+*Defined in [ts/controls/control-panel.ts:98](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L98)*
 
 Tracks state of game pause.
 
@@ -232,7 +244,7 @@ ___
 
 **● save**: *`boolean`* = false
 
-*Defined in [ts/controls/control-panel.ts:95](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L95)*
+*Defined in [ts/controls/control-panel.ts:102](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L102)*
 
 Tracks state of game save menu.
 
@@ -243,7 +255,7 @@ ___
 
 **● scene**: *`Scene`*
 
-*Defined in [ts/controls/control-panel.ts:99](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L99)*
+*Defined in [ts/controls/control-panel.ts:106](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L106)*
 
 Reference to the scene, used to remove asteroid from rendering cycle once destroyed.
 
@@ -257,7 +269,7 @@ ___
 
 ▸ **endCycle**(hide?: *`boolean`*): `void`
 
-*Defined in [ts/controls/control-panel.ts:226](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L226)*
+*Defined in [ts/controls/control-panel.ts:257](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L257)*
 
 At the end of each loop iteration, control panel is told to hide or not.
 
@@ -276,7 +288,7 @@ ___
 
 ▸ **exitChange**(): `void`
 
-*Defined in [ts/controls/control-panel.ts:242](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L242)*
+*Defined in [ts/controls/control-panel.ts:274](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L274)*
 
 Turns exit on.
 
@@ -289,7 +301,7 @@ ___
 
 ▸ **helpChange**(newState: *`boolean`*): `void`
 
-*Defined in [ts/controls/control-panel.ts:253](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L253)*
+*Defined in [ts/controls/control-panel.ts:285](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L285)*
 
 Alerts control panel that help button has been clicked by user.
 
@@ -308,7 +320,7 @@ ___
 
 ▸ **isExit**(): `boolean`
 
-*Defined in [ts/controls/control-panel.ts:281](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L281)*
+*Defined in [ts/controls/control-panel.ts:313](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L313)*
 
 Getter for game exit state.
 
@@ -322,7 +334,7 @@ ___
 
 ▸ **isHelp**(): `boolean`
 
-*Defined in [ts/controls/control-panel.ts:288](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L288)*
+*Defined in [ts/controls/control-panel.ts:320](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L320)*
 
 Getter for game help state.
 
@@ -336,7 +348,7 @@ ___
 
 ▸ **isPaused**(): `boolean`
 
-*Defined in [ts/controls/control-panel.ts:298](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L298)*
+*Defined in [ts/controls/control-panel.ts:330](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L330)*
 
 Getter for game pause state.
 
@@ -350,7 +362,7 @@ ___
 
 ▸ **isSave**(): `boolean`
 
-*Defined in [ts/controls/control-panel.ts:308](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L308)*
+*Defined in [ts/controls/control-panel.ts:340](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L340)*
 
 Getter for game save state.
 
@@ -364,7 +376,7 @@ ___
 
 ▸ **muteChange**(): `void`
 
-*Defined in [ts/controls/control-panel.ts:265](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L265)*
+*Defined in [ts/controls/control-panel.ts:297](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L297)*
 
 Alerts control panel that mute button has been clicked by user.
 
@@ -377,7 +389,7 @@ ___
 
 ▸ **nextLevel**(color: *`Color`*): `void`
 
-*Defined in [ts/controls/control-panel.ts:318](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L318)*
+*Defined in [ts/controls/control-panel.ts:350](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L350)*
 
 Only recreate the digits with the new color
 
@@ -396,7 +408,7 @@ ___
 
 ▸ **pauseChange**(): `void`
 
-*Defined in [ts/controls/control-panel.ts:343](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L343)*
+*Defined in [ts/controls/control-panel.ts:380](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L380)*
 
 Alerts control panel that pause button has been clicked by user.
 
@@ -409,7 +421,7 @@ ___
 
 ▸ **resume**(): `void`
 
-*Defined in [ts/controls/control-panel.ts:354](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L354)*
+*Defined in [ts/controls/control-panel.ts:391](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L391)*
 
 **Returns:** `void`
 
@@ -420,7 +432,7 @@ ___
 
 ▸ **saveChange**(newState: *`boolean`*): `void`
 
-*Defined in [ts/controls/control-panel.ts:371](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/controls/control-panel.ts#L371)*
+*Defined in [ts/controls/control-panel.ts:408](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/controls/control-panel.ts#L408)*
 
 Alerts control panel that save button has been clicked by user.
 

@@ -31,7 +31,7 @@ Simple type to represent status of all four populated areas. Cumulatively equals
 
 **● quadrant1**: *`boolean`*
 
-*Defined in [ts/player/planet.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/player/planet.ts#L29)*
+*Defined in [ts/player/planet.ts:29](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/player/planet.ts#L29)*
 
 ___
 <a id="quadrant2"></a>
@@ -40,7 +40,7 @@ ___
 
 **● quadrant2**: *`boolean`*
 
-*Defined in [ts/player/planet.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/player/planet.ts#L30)*
+*Defined in [ts/player/planet.ts:30](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/player/planet.ts#L30)*
 
 ___
 <a id="quadrant3"></a>
@@ -49,7 +49,7 @@ ___
 
 **● quadrant3**: *`boolean`*
 
-*Defined in [ts/player/planet.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/player/planet.ts#L31)*
+*Defined in [ts/player/planet.ts:31](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/player/planet.ts#L31)*
 
 ___
 <a id="quadrant4"></a>
@@ -58,7 +58,7 @@ ___
 
 **● quadrant4**: *`boolean`*
 
-*Defined in [ts/player/planet.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/player/planet.ts#L32)*
+*Defined in [ts/player/planet.ts:32](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/player/planet.ts#L32)*
 
 ___
 <a id="sat1"></a>
@@ -67,7 +67,7 @@ ___
 
 **● sat1**: *`boolean`*
 
-*Defined in [ts/player/planet.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/player/planet.ts#L33)*
+*Defined in [ts/player/planet.ts:33](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/player/planet.ts#L33)*
 
 ___
 <a id="sat2"></a>
@@ -76,7 +76,7 @@ ___
 
 **● sat2**: *`boolean`*
 
-*Defined in [ts/player/planet.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/player/planet.ts#L34)*
+*Defined in [ts/player/planet.ts:34](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/player/planet.ts#L34)*
 
 ___
 <a id="sat3"></a>
@@ -85,7 +85,7 @@ ___
 
 **● sat3**: *`boolean`*
 
-*Defined in [ts/player/planet.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/player/planet.ts#L35)*
+*Defined in [ts/player/planet.ts:35](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/player/planet.ts#L35)*
 
 ___
 <a id="sat4"></a>
@@ -94,7 +94,7 @@ ___
 
 **● sat4**: *`boolean`*
 
-*Defined in [ts/player/planet.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/c8b9539/src/ts/player/planet.ts#L36)*
+*Defined in [ts/player/planet.ts:36](https://github.com/WilliamRADFunk/planet-funk/blob/0842c14/src/ts/player/planet.ts#L36)*
 
 ___
 
