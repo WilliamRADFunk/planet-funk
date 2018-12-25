@@ -204,7 +204,7 @@ export class Projectile implements Collidable {
      * @returns whether or not the projectile is done, and should be removed from satellite's list.
      */
     endCycle(): boolean {
-        if (this.waitToFire) {
+        if (this.waitToFire >= 1) {
             this.waitToFire--;
             return true;
         }

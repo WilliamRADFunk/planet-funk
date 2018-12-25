@@ -158,10 +158,10 @@ export class SaucerGenerator {
      * @returns the created saucer to be added to list at index of choice.
      */
     private makeSaucer(): Saucer {
-        const positionRand = Math.floor((Math.random() * 6) + 0);
+        const positionRand = Math.floor(Math.random() * 8);
         const isXNegative = Math.random() < 0.5 ? -1 : 1;
         const isZNegative = Math.random() < 0.5 ? -1 : 1;
-        const altRand = (Math.random() * 1.8) + 0;
+        const altRand = Math.random() * 1.8;
         let saucer;
         const saucerPos = saucerStartingPositions[positionRand];
         let saucerEnd;
@@ -174,6 +174,14 @@ export class SaucerGenerator {
             saucerEnd = saucerPos.slice();
             saucerEnd[1] = -1 * saucerPos[1];
         }
+        console.log('Saucer:', {
+            negX: isXNegative,
+            negZ: isZNegative,
+            saucerStartPosition: saucerPos,
+            saucerEndPosition: saucerEnd,
+            saucerRefernceIndex: positionRand,
+            saucerModifier: altRand
+        });
         saucer = new Saucer(this.scene, this.saucerTextures, saucerPos[0], saucerPos[1], saucerEnd[0], saucerEnd[1], 20, (this.currentLevel + this.difficulty) / 2);
         saucer.addToScene();
         CollisionatorSingleton.add(saucer);

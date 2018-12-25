@@ -156,7 +156,6 @@ export class Saucer implements Collidable {
             this.currentPoint[0] = this.originalStartingPoint[0];
             this.currentPoint[1] = this.originalStartingPoint[1];
             this.distanceTraveled = 0;
-            Math.floor((Math.random() * 750) + 1);
         }
     }
     /**
@@ -198,7 +197,7 @@ export class Saucer implements Collidable {
                 return false;
             }
         }
-        if (this.waitToFire) {
+        if (this.waitToFire >= 1) {
             this.waitToFire--;
             if (!this.waitToFire && !this.isHelpSaucer) {
                 SoundinatorSingleton.playSaucer();
